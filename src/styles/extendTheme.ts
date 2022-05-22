@@ -193,6 +193,10 @@ export default function extendTheme(themeInput?: ThemeInput): Theme {
       focusVisible: 'var(--joy-palette-primary-200)',
     },
     shadowRing: '0 0 #000',
+    /**
+     * TODO: ShadowChannel
+     * 26, 26, 26
+     */
     shadowChannel: '187 187 187',
   };
   const darkColorSystem = {
@@ -278,13 +282,13 @@ export default function extendTheme(themeInput?: ThemeInput): Theme {
     },
     /**
      * TODO: FontSizes
-     * 11
-     * 12
-     * 14
-     * 16
-     * 20
-     * 24
-     * 32
+     * 11 (0.6875rem)
+     * 12 (0.75rem)
+     * 14 (0.875rem)
+     * 16 (1rem)
+     * 20 (1.25rem)
+     * 24 (1.5rem)
+     * 32 (2rem)
      */
     fontSize: {
       xs: '0.75rem',
@@ -328,12 +332,19 @@ export default function extendTheme(themeInput?: ThemeInput): Theme {
     },
     /**
      * TODO: LineHeight
-     * 16
-     * 20
-     * 24
-     * 32
-     * 36
-     * 48
+     * 16 (1rem)
+     * 20 (1.25rem)
+     * 24 (1.5rem)
+     * 32 (2rem)
+     * 36 (2.25rem)
+     * 48 (3rem)
+     * 
+     * 1.5
+     * 1.6
+     * 1.67
+     * 1.45
+     * 1.428
+     * 1.33
      */
     lineHeight: {
       sm: 1.25,
@@ -361,7 +372,10 @@ export default function extendTheme(themeInput?: ThemeInput): Theme {
       xl: '20px',
     },
     /**
-     * TODO: identify various shadow sizes in all components
+     * TODO: Shadows
+     * sm: 0px 4px 8px rgba(26, 26, 26, 0.2)
+     * md: 0px 12px 32px rgba(26, 26, 26, 0.24)
+     * lg: 0px 24px 40px rgba(26, 26, 26, 0.16)
      */
     shadow: {
       xs: 'var(--joy-shadowRing), 0 1px 2px 0 rgba(var(--joy-shadowChannel) / 0.12)',

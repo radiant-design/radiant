@@ -1,4 +1,18 @@
 const colors = {
+  /**
+   * @see https://mdigi.tools/color-shades/#F5F8FF
+   * TODO: Bluetiful (Primary)
+   * 50: #F5F8FF
+   * 100: #b3c9ff (light)
+   * 200: #80a6ff
+   * 300: #4d82ff
+   * 400: #1a5eff
+   * 500: #0045e6 (main)
+   * 600: #0036b3
+   * 700: #002680
+   * 800: #00174d
+   * 900: #00081a (dark)
+   */
   blue: {
     50: '#F6FAFF',
     100: '#DDE9FD',
@@ -35,6 +49,20 @@ const colors = {
     800: '#393939',
     900: '#181818',
   },
+  /**
+   * @see https://mdigi.tools/color-shades/#fce9e9
+   * TODO: Red (Alert)
+   * 50: #fce9e9
+   * 100: #f5bcbc (light)
+   * 200: #ee9090
+   * 300: #e86464
+   * 400: #e13737
+   * 500: #c81e1e (main)
+   * 600: #9b1717
+   * 700: #6f1111
+   * 800: #430a0a
+   * 900: #160303 (dark)
+   */
   red: {
     50: '#FFF8F7',
     100: '#FFE2DE',
@@ -47,6 +75,20 @@ const colors = {
     800: '#5E2922',
     900: '#28110E',
   },
+  /**
+   * @see https://mdigi.tools/color-shades/#fff2e5
+   * TODO: Yellow (Warning)
+   * 50: #fff2e5
+   * 100: #ffd7b3 (light)
+   * 200: #ffbc80
+   * 300: #ffa14d
+   * 400: #ff861a
+   * 500: #e66c00 (main)
+   * 600: #b35400
+   * 700: #803c00
+   * 800: #4d2400
+   * 900: #1a0c00 (dark)
+   */
   yellow: {
     50: '#FBFAEC',
     100: '#EDEBB3',
@@ -59,6 +101,20 @@ const colors = {
     800: '#3C3B11',
     900: '#191807',
   },
+  /**
+   * @see https://mdigi.tools/color-shades/#e5fff8
+   * TODO: Green (Success)
+   * 50: #e5fff8
+   * 100: #b3ffe9 (light)
+   * 200: #80ffdb
+   * 300: #4dffcc
+   * 400: #1affbe
+   * 500: #00e6a4 (main)
+   * 600: #00b380
+   * 700: #00805b
+   * 800: #004d37
+   * 900: #001a12 (dark)
+   */
   green: {
     50: '#F5FBF7',
     100: '#D6EEDF',
@@ -71,6 +127,20 @@ const colors = {
     800: '#00431A',
     900: '#001D0B',
   },
+  /**
+   * @see https://mdigi.tools/color-shades/#fff7e5
+   * TODO: Maize Crayola (Secondary)
+   * 50: #fff7e5
+   * 100: #ffe7b3 (light)
+   * 200: #ffd680
+   * 300: #ffc64d
+   * 400: #ffc64d
+   * 500: #e69c00 (main)
+   * 600: #b37900
+   * 700: #805700
+   * 800: #4d3400
+   * 900: #1a1100 (dark)
+   */
 };
 
 export default colors;
