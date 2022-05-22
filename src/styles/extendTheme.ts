@@ -362,7 +362,8 @@ export default function extendTheme(themeInput?: ThemeInput): Theme {
       lg: '0.125em',
     },
     /**
-     * TODO: identify various radius sizes in all components
+     * TODO: identify various radius sizes
+     * No direct values available in design doc
      */
     radius: {
       xs: '4px',
