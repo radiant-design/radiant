@@ -27,7 +27,7 @@ const useUtilityClasses = (ownerState: ChipDeleteProps & { focusVisible: boolean
 };
 
 const ChipDeleteRoot = styled('button', {
-  name: 'MuiChipDelete',
+  name: 'JoyChipDelete',
   slot: 'Root',
   overridesResolver: (props, styles) => styles.root,
 })<{ ownerState: ChipDeleteProps }>(({ theme, ownerState }) => [
@@ -61,7 +61,7 @@ const chipVariantMapping = {
 const ChipDelete = React.forwardRef(function ChipDelete(inProps, ref) {
   const props = useThemeProps<typeof inProps & ChipDeleteProps>({
     props: inProps,
-    name: 'MuiChipDelete',
+    name: 'JoyChipDelete',
   });
 
   const {
@@ -95,7 +95,7 @@ const ChipDelete = React.forwardRef(function ChipDelete(inProps, ref) {
     focusVisible,
   };
 
-  const classes = useUtilityClasses(ownerState as any);
+  const classes = useUtilityClasses(ownerState);
 
   return (
     <ChipDeleteRoot

@@ -1,6 +1,5 @@
 import React from 'react';
 import { OverridableStringUnion, OverrideProps } from '@mui/types';
-// @ts-ignore
 import { UseInputParameters } from '@mui/base/InputUnstyled';
 import { InputClasses } from './inputClasses';
 import { ColorPaletteProp, VariantProp, SxProps } from '../styles/types';

@@ -32,7 +32,7 @@ const useUtilityClasses = (ownerState: IconButtonProps & { focusVisible: boolean
 };
 
 const IconButtonRoot = styled('button', {
-  name: 'MuiIconButton',
+  name: 'JoyIconButton',
   slot: 'Root',
   overridesResolver: (props, styles) => styles.root,
 })<{ ownerState: IconButtonProps }>(({ theme, ownerState }) => [
@@ -79,7 +79,7 @@ const IconButtonRoot = styled('button', {
 const IconButton = React.forwardRef(function IconButton(inProps, ref) {
   const props = useThemeProps<typeof inProps & { component?: React.ElementType }>({
     props: inProps,
-    name: 'MuiIconButton',
+    name: 'JoyIconButton',
   });
 
   const {
@@ -91,7 +91,7 @@ const IconButton = React.forwardRef(function IconButton(inProps, ref) {
     variant = 'soft',
     size = 'md',
     ...other
-  } = props as any;
+  } = props;
 
   const buttonRef = React.useRef<HTMLElement | null>(null);
   const handleRef = useForkRef(buttonRef, ref);
@@ -136,7 +136,7 @@ const IconButton = React.forwardRef(function IconButton(inProps, ref) {
       {children}
     </IconButtonRoot>
   );
-}) as unknown as ExtendIconButton<IconButtonTypeMap>;
+}) as ExtendIconButton<IconButtonTypeMap>;
 
 IconButton.propTypes /* remove-proptypes */ = {
   // ----------------------------- Warning --------------------------------
@@ -213,7 +213,7 @@ IconButton.propTypes /* remove-proptypes */ = {
    * @default 'soft'
    */
   variant: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([
-    PropTypes.oneOf(['contained', 'light', 'outlined', 'text']),
+    PropTypes.oneOf(['outlined', 'plain', 'soft', 'solid']),
     PropTypes.string,
   ]),
 } as any;

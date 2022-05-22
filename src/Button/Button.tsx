@@ -1,4 +1,5 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { unstable_capitalize as capitalize, unstable_useForkRef as useForkRef } from '@mui/utils';
 import { useButton } from '@mui/base/ButtonUnstyled';
@@ -35,7 +36,7 @@ const useUtilityClasses = (ownerState: ButtonProps & { focusVisible: boolean }) 
 };
 
 const ButtonStartIcon = styled('span', {
-  name: 'MuiButton',
+  name: 'JoyButton',
   slot: 'StartIcon',
   overridesResolver: (props, styles) => styles.startIcon,
 })<{ ownerState: ButtonProps }>({
@@ -45,7 +46,7 @@ const ButtonStartIcon = styled('span', {
 });
 
 const ButtonEndIcon = styled('span', {
-  name: 'MuiButton',
+  name: 'JoyButton',
   slot: 'EndIcon',
   overridesResolver: (props, styles) => styles.endIcon,
 })<{ ownerState: ButtonProps }>({
@@ -55,7 +56,7 @@ const ButtonEndIcon = styled('span', {
 });
 
 const ButtonRoot = styled('button', {
-  name: 'MuiButton',
+  name: 'JoyButton',
   slot: 'Root',
   overridesResolver: (props, styles) => styles.root,
 })<{ ownerState: ButtonProps }>(({ theme, ownerState }) => {
@@ -124,28 +125,19 @@ const ButtonRoot = styled('button', {
 const Button = React.forwardRef(function Button(inProps, ref) {
   const props = useThemeProps<typeof inProps & { component?: React.ElementType }>({
     props: inProps,
-    name: 'MuiButton',
+    name: 'JoyButton',
   });
 
   const {
-    // @ts-ignore
     children,
-    // @ts-ignore
     className,
-    // @ts-ignore
     action,
     component = 'button',
-    // @ts-ignore
     color = 'primary',
-    // @ts-ignore
     variant = 'solid',
-    // @ts-ignore
     size = 'md',
-    // @ts-ignore
     fullWidth = false,
-    // @ts-ignore
     startIcon: startIconProp,
-    // @ts-ignore
     endIcon: endIconProp,
     ...other
   } = props;
@@ -208,6 +200,94 @@ const Button = React.forwardRef(function Button(inProps, ref) {
       {endIcon}
     </ButtonRoot>
   );
-}) as unknown as ExtendButton<ButtonTypeMap>;
+}) as ExtendButton<ButtonTypeMap>;
+
+Button.propTypes /* remove-proptypes */ = {
+  // ----------------------------- Warning --------------------------------
+  // | These PropTypes are generated from the TypeScript type definitions |
+  // |     To update them edit TypeScript types and run "yarn proptypes"  |
+  // ----------------------------------------------------------------------
+  /**
+   * A ref for imperative actions. It currently only supports `focusVisible()` action.
+   */
+  action: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({
+      current: PropTypes.shape({
+        focusVisible: PropTypes.func.isRequired,
+      }),
+    }),
+  ]),
+  /**
+   * @ignore
+   */
+  children: PropTypes.node,
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * The color of the component. It supports those theme colors that make sense for this component.
+   * @default 'primary'
+   */
+  color: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([
+    PropTypes.oneOf(['context', 'danger', 'info', 'neutral', 'primary', 'success', 'warning']),
+    PropTypes.string,
+  ]),
+  /**
+   * The component used for the root node.
+   * Either a string to use a HTML element or a component.
+   */
+  component: PropTypes.elementType,
+  /**
+   * If `true`, the component is disabled.
+   * @default false
+   */
+  disabled: PropTypes.bool,
+  /**
+   * Element placed after the children.
+   */
+  endIcon: PropTypes.node,
+  /**
+   * @ignore
+   */
+  focusVisibleClassName: PropTypes.string,
+  /**
+   * If `true`, the button will take up the full width of its container.
+   * @default false
+   */
+  fullWidth: PropTypes.bool,
+  /**
+   * The size of the component.
+   */
+  size: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([
+    PropTypes.oneOf(['sm', 'md', 'lg']),
+    PropTypes.string,
+  ]),
+  /**
+   * Element placed before the children.
+   */
+  startIcon: PropTypes.node,
+  /**
+   * The system prop that allows defining system overrides as well as additional CSS styles.
+   */
+  sx: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])),
+    PropTypes.func,
+    PropTypes.object,
+  ]),
+  /**
+   * @default 0
+   */
+  tabIndex: PropTypes.number,
+  /**
+   * The variant to use.
+   * @default 'solid'
+   */
+  variant: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([
+    PropTypes.oneOf(['outlined', 'plain', 'soft', 'solid']),
+    PropTypes.string,
+  ]),
+} as any;
 
 export default Button;
