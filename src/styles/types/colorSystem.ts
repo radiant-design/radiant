@@ -110,6 +110,15 @@ export interface PaletteBackground {
 
 export interface ColorPalettePropOverrides {}
 
+/**
+ * !TODO: ColorPalette
+ * primary
+ * secondary
+ * neutral
+ * alert
+ * success
+ * warning
+ */
 export type DefaultColorPalette = 'primary' | 'neutral' | 'danger' | 'info' | 'success' | 'warning';
 
 export type ColorPaletteProp = OverridableStringUnion<

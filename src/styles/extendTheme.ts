@@ -276,6 +276,16 @@ export default function extendTheme(themeInput?: ThemeInput): Theme {
       light: lightColorSystem,
       dark: darkColorSystem,
     },
+    /**
+     * !TODO: FontSizes
+     * 11
+     * 12
+     * 14
+     * 16
+     * 20
+     * 24
+     * 32
+     */
     fontSize: {
       xs: '0.75rem',
       sm: '0.875rem',
@@ -289,12 +299,19 @@ export default function extendTheme(themeInput?: ThemeInput): Theme {
       xl6: '4.5rem',
     },
     fontFamily: {
-      body: '"Public Sans", var(--joy-fontFamily-fallback)',
-      display: '"Public Sans", var(--joy-fontFamily-fallback)',
+      body: '"Source Sans Pro", var(--joy-fontFamily-fallback)',
+      display: 'Poppins, var(--joy-fontFamily-fallback)',
       code: 'Source Code Pro,ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace',
       fallback:
         '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
     },
+    /**
+     * !TODO: FontWeight
+     * 400
+     * 500
+     * 600
+     * 700
+     */
     fontWeight: {
       xs: 200,
       sm: 300,
@@ -309,11 +326,25 @@ export default function extendTheme(themeInput?: ThemeInput): Theme {
         outline: '4px solid var(--joy-palette-focusVisible)',
       },
     },
+    /**
+     * !TODO: LineHeight
+     * 16
+     * 20
+     * 24
+     * 32
+     * 36
+     * 48
+     */
     lineHeight: {
       sm: 1.25,
       md: 1.5,
       lg: 1.7,
     },
+    /**
+     * !TODO: LetterSpacing
+     * normal | 0
+     * 0.4px
+     */
     letterSpacing: {
       sm: '-0.01em',
       md: '0.083em',
