@@ -111,7 +111,7 @@ export interface PaletteBackground {
 export interface ColorPalettePropOverrides {}
 
 /**
- * !TODO: ColorPalette
+ * TODO: ColorPalette
  * primary
  * secondary
  * neutral

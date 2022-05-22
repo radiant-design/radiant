@@ -277,7 +277,7 @@ export default function extendTheme(themeInput?: ThemeInput): Theme {
       dark: darkColorSystem,
     },
     /**
-     * !TODO: FontSizes
+     * TODO: FontSizes
      * 11
      * 12
      * 14
@@ -306,7 +306,7 @@ export default function extendTheme(themeInput?: ThemeInput): Theme {
         '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
     },
     /**
-     * !TODO: FontWeight
+     * TODO: FontWeight
      * 400
      * 500
      * 600
@@ -327,7 +327,7 @@ export default function extendTheme(themeInput?: ThemeInput): Theme {
       },
     },
     /**
-     * !TODO: LineHeight
+     * TODO: LineHeight
      * 16
      * 20
      * 24
@@ -341,7 +341,7 @@ export default function extendTheme(themeInput?: ThemeInput): Theme {
       lg: 1.7,
     },
     /**
-     * !TODO: LetterSpacing
+     * TODO: LetterSpacing
      * normal | 0
      * 0.4px
      */
@@ -350,6 +350,9 @@ export default function extendTheme(themeInput?: ThemeInput): Theme {
       md: '0.083em',
       lg: '0.125em',
     },
+    /**
+     * TODO: identify various radius sizes in all components
+     */
     radius: {
       xs: '4px',
       sm: '8px',
@@ -357,6 +360,9 @@ export default function extendTheme(themeInput?: ThemeInput): Theme {
       lg: '16px',
       xl: '20px',
     },
+    /**
+     * TODO: identify various shadow sizes in all components
+     */
     shadow: {
       xs: 'var(--joy-shadowRing), 0 1px 2px 0 rgba(var(--joy-shadowChannel) / 0.12)',
       sm: 'var(--joy-shadowRing), 0.3px 0.8px 1.1px rgba(var(--joy-shadowChannel) / 0.11), 0.5px 1.3px 1.8px -0.6px rgba(var(--joy-shadowChannel) / 0.18), 1.1px 2.7px 3.8px -1.2px rgba(var(--joy-shadowChannel) / 0.26)',
