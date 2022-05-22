@@ -10,7 +10,10 @@ const baseConfig: Options = {
   format: ['esm'],
   splitting: true,
   shims: false,
-  dts: true
+  dts: true,
+  plugins: [{
+    name: 'esbuild-plugin-svgr'
+  }]
 }
 
 export default defineConfig([
@@ -20,7 +23,6 @@ export default defineConfig([
     minify: false,
     sourcemap: false,
     clean: true,
-    bundle: false,
-    legacyOutput: true
+    bundle: false
   }
 ])
