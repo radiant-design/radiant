@@ -326,11 +326,13 @@ export default function extendTheme(themeInput?: ThemeInput): Theme {
      * 700
      */
     fontWeight: {
-      xs: 200,
-      sm: 300,
+      sm: 400,
       md: 500,
-      lg: 700,
-      xl: 800,
+      lg: 600,
+      xl: 700,
+
+      // TODO: remove once all occurrence are removed form component
+      xs: 200,
     },
     focus: {
       selector: '&.Mui-focusVisible, &:focus-visible',
@@ -414,46 +416,46 @@ export default function extendTheme(themeInput?: ThemeInput): Theme {
     typography: {
       h1: {
         fontFamily: 'var(--joy-fontFamily-display)',
-        fontWeight: 'var(--joy-fontWeight-lg)' as CSSProperties['fontWeight'],
-        fontSize: 'var(--joy-fontSize-xl4)',
-        lineHeight: 'var(--joy-lineHeight-sm)',
+        fontWeight: 'var(--joy-fontWeight-xl)' as CSSProperties['fontWeight'],
+        fontSize: 'var(--joy-fontSize-xl3)',
+        lineHeight: 'var(--joy-lineHeight-xl3)',
         letterSpacing: 'var(--joy-letterSpacing-sm)',
         color: 'var(--joy-palette-text-primary)',
       },
       h2: {
         fontFamily: 'var(--joy-fontFamily-display)',
         fontWeight: 'var(--joy-fontWeight-lg)' as CSSProperties['fontWeight'],
-        fontSize: 'var(--joy-fontSize-xl3)',
-        lineHeight: 'var(--joy-lineHeight-sm)',
+        fontSize: 'var(--joy-fontSize-xl2)',
+        lineHeight: 'var(--joy-lineHeight-xl2)',
         letterSpacing: 'var(--joy-letterSpacing-sm)',
         color: 'var(--joy-palette-text-primary)',
       },
       h3: {
-        fontFamily: 'var(--joy-fontFamily-body)',
-        fontWeight: 'var(--joy-fontWeight-md)' as CSSProperties['fontWeight'],
-        fontSize: 'var(--joy-fontSize-xl2)',
-        lineHeight: 'var(--joy-lineHeight-sm)',
+        fontFamily: 'var(--joy-fontFamily-display)',
+        fontWeight: 'var(--joy-fontWeight-lg)' as CSSProperties['fontWeight'],
+        fontSize: 'var(--joy-fontSize-xl)',
+        lineHeight: 'var(--joy-lineHeight-xl)',
         color: 'var(--joy-palette-text-primary)',
       },
       h4: {
-        fontFamily: 'var(--joy-fontFamily-body)',
-        fontWeight: 'var(--joy-fontWeight-md)' as CSSProperties['fontWeight'],
-        fontSize: 'var(--joy-fontSize-xl)',
-        lineHeight: 'var(--joy-lineHeight-md)',
+        fontFamily: 'var(--joy-fontFamily-display)',
+        fontWeight: 'var(--joy-fontWeight-lg)' as CSSProperties['fontWeight'],
+        fontSize: 'var(--joy-fontSize-lg)',
+        lineHeight: 'var(--joy-lineHeight-lg)',
         color: 'var(--joy-palette-text-primary)',
       },
       h5: {
-        fontFamily: 'var(--joy-fontFamily-body)',
+        fontFamily: 'var(--joy-fontFamily-display)',
         fontWeight: 'var(--joy-fontWeight-md)' as CSSProperties['fontWeight'],
-        fontSize: 'var(--joy-fontSize-lg)',
+        fontSize: 'var(--joy-fontSize-sm)',
         lineHeight: 'var(--joy-lineHeight-md)',
         color: 'var(--joy-palette-text-primary)',
       },
       h6: {
-        fontFamily: 'var(--joy-fontFamily-body)',
+        fontFamily: 'var(--joy-fontFamily-display)',
         fontWeight: 'var(--joy-fontWeight-md)' as CSSProperties['fontWeight'],
-        fontSize: 'var(--joy-fontSize-md)',
-        lineHeight: 'var(--joy-lineHeight-md)',
+        fontSize: 'var(--joy-fontSize-xs)',
+        lineHeight: 'var(--joy-lineHeight-sm)',
         color: 'var(--joy-palette-text-primary)',
       },
       body1: {
@@ -465,9 +467,22 @@ export default function extendTheme(themeInput?: ThemeInput): Theme {
       body2: {
         fontFamily: 'var(--joy-fontFamily-body)',
         fontSize: 'var(--joy-fontSize-sm)',
-        lineHeight: 'var(--joy-lineHeight-md)',
+        lineHeight: 'var(--joy-lineHeight-sm)',
         color: 'var(--joy-palette-text-secondary)',
       },
+      subtitle1: {
+        fontFamily: 'var(--joy-fontFamily-body)',
+        fontSize: 'var(--joy-fontSize-xl)',
+        lineHeight: 'var(--joy-lineHeight-xl)',
+        color: 'var(--joy-palette-text-tertiary)',
+      },
+      subtitle2: {
+        fontFamily: 'var(--joy-fontFamily-body)',
+        fontSize: 'var(--joy-fontSize-lg)',
+        lineHeight: 'var(--joy-lineHeight-lg)',
+        color: 'var(--joy-palette-text-tertiary)',
+      },
+      // TODO: remove once all occurrence are removed form component
       body3: {
         fontFamily: 'var(--joy-fontFamily-body)',
         fontSize: 'var(--joy-fontSize-xs)',
