@@ -197,7 +197,7 @@ export default function extendTheme(themeInput?: ThemeInput): Theme {
      * TODO: ShadowChannel
      * 26, 26, 26
      */
-    shadowChannel: '187 187 187',
+    shadowChannel: '26, 26, 26',
   };
   const darkColorSystem = {
     palette: {
@@ -291,13 +291,22 @@ export default function extendTheme(themeInput?: ThemeInput): Theme {
      * 32 (2rem)
      */
     fontSize: {
-      xs: '0.75rem',
-      sm: '0.875rem',
-      md: '1rem',
-      lg: '1.25rem',
-      xl: '1.5rem',
-      xl2: '1.875rem',
-      xl3: '2.25rem',
+      xs: '0.6875rem', // 11px
+      sm: '0.75rem', // 12px
+      md: '0.875rem', // 14px
+      lg: '1rem', // 16px
+      xl: '1.25rem', // 20px
+      xl2: '1.5rem', // 24px
+      xl3: '2rem', // 32px
+
+      // xs: '0.75rem',
+      // sm: '0.875rem',
+      // md: '1rem',
+      // lg: '1.25rem',
+      // xl: '1.5rem',
+      // xl2: '1.875rem',
+      // xl3: '2.25rem',
+      // TODO: remove once all occurrence are removed from component
       xl4: '3rem',
       xl5: '3.75rem',
       xl6: '4.5rem',
@@ -347,9 +356,16 @@ export default function extendTheme(themeInput?: ThemeInput): Theme {
      * 1.33
      */
     lineHeight: {
-      sm: 1.25,
-      md: 1.5,
-      lg: 1.7,
+      sm: '1rem',
+      md: '1.25rem',
+      lg: '1.5rem',
+      xl: '2rem',
+      xl2: '2.25rem',
+      xl3: '3rem'
+
+      // sm: 1.25,
+      // md: 1.5,
+      // lg: 1.7,
     },
     /**
      * TODO: LetterSpacing
@@ -357,9 +373,14 @@ export default function extendTheme(themeInput?: ThemeInput): Theme {
      * 0.4px
      */
     letterSpacing: {
-      sm: '-0.01em',
-      md: '0.083em',
-      lg: '0.125em',
+      sm: 0,
+      md: '0.4px',
+
+      // TODO: remove once all occurrence are removed form component
+      lg: '1px'
+      // sm: '-0.01em',
+      // md: '0.083em',
+      // lg: '0.125em',
     },
     /**
      * TODO: identify various radius sizes
@@ -379,10 +400,15 @@ export default function extendTheme(themeInput?: ThemeInput): Theme {
      * lg: 0px 24px 40px rgba(26, 26, 26, 0.16)
      */
     shadow: {
+     sm: '0px 4px 8px rgba(var(--joy-shadowChannel) / 0.2)',
+     md: '0px 12px 32px rgba(var(--joy-shadowChannel) / 0.24)',
+     lg: '0px 24px 40px rgba(var(--joy-shadowChannel) / 0.16)',
+
+     // TODO: remove once all occurrence are removed form component
       xs: 'var(--joy-shadowRing), 0 1px 2px 0 rgba(var(--joy-shadowChannel) / 0.12)',
-      sm: 'var(--joy-shadowRing), 0.3px 0.8px 1.1px rgba(var(--joy-shadowChannel) / 0.11), 0.5px 1.3px 1.8px -0.6px rgba(var(--joy-shadowChannel) / 0.18), 1.1px 2.7px 3.8px -1.2px rgba(var(--joy-shadowChannel) / 0.26)',
-      md: 'var(--joy-shadowRing), 0.3px 0.8px 1.1px rgba(var(--joy-shadowChannel) / 0.12), 1.1px 2.8px 3.9px -0.4px rgba(var(--joy-shadowChannel) / 0.17), 2.4px 6.1px 8.6px -0.8px rgba(var(--joy-shadowChannel) / 0.23), 5.3px 13.3px 18.8px -1.2px rgba(var(--joy-shadowChannel) / 0.29)',
-      lg: 'var(--joy-shadowRing), 0.3px 0.8px 1.1px rgba(var(--joy-shadowChannel) / 0.11), 1.8px 4.5px 6.4px -0.2px rgba(var(--joy-shadowChannel) / 0.13), 3.2px 7.9px 11.2px -0.4px rgba(var(--joy-shadowChannel) / 0.16), 4.8px 12px 17px -0.5px rgba(var(--joy-shadowChannel) / 0.19), 7px 17.5px 24.7px -0.7px rgba(var(--joy-shadowChannel) / 0.21)',
+      // sm: 'var(--joy-shadowRing), 0.3px 0.8px 1.1px rgba(var(--joy-shadowChannel) / 0.11), 0.5px 1.3px 1.8px -0.6px rgba(var(--joy-shadowChannel) / 0.18), 1.1px 2.7px 3.8px -1.2px rgba(var(--joy-shadowChannel) / 0.26)',
+      // md: 'var(--joy-shadowRing), 0.3px 0.8px 1.1px rgba(var(--joy-shadowChannel) / 0.12), 1.1px 2.8px 3.9px -0.4px rgba(var(--joy-shadowChannel) / 0.17), 2.4px 6.1px 8.6px -0.8px rgba(var(--joy-shadowChannel) / 0.23), 5.3px 13.3px 18.8px -1.2px rgba(var(--joy-shadowChannel) / 0.29)',
+      // lg: 'var(--joy-shadowRing), 0.3px 0.8px 1.1px rgba(var(--joy-shadowChannel) / 0.11), 1.8px 4.5px 6.4px -0.2px rgba(var(--joy-shadowChannel) / 0.13), 3.2px 7.9px 11.2px -0.4px rgba(var(--joy-shadowChannel) / 0.16), 4.8px 12px 17px -0.5px rgba(var(--joy-shadowChannel) / 0.19), 7px 17.5px 24.7px -0.7px rgba(var(--joy-shadowChannel) / 0.21)',
       xl: 'var(--joy-shadowRing), 0.3px 0.8px 1.1px rgba(var(--joy-shadowChannel) / 0.11), 1.8px 4.5px 6.4px -0.2px rgba(var(--joy-shadowChannel) / 0.13), 3.2px 7.9px 11.2px -0.4px rgba(var(--joy-shadowChannel) / 0.16), 4.8px 12px 17px -0.5px rgba(var(--joy-shadowChannel) / 0.19), 7px 17.5px 24.7px -0.7px rgba(var(--joy-shadowChannel) / 0.21), 10.2px 25.5px 36px -0.9px rgba(var(--joy-shadowChannel) / 0.24), 14.8px 36.8px 52.1px -1.1px rgba(var(--joy-shadowChannel) / 0.27), 21px 52.3px 74px -1.2px rgba(var(--joy-shadowChannel) / 0.29)',
     },
     typography: {
