@@ -140,7 +140,7 @@ const Button = React.forwardRef(function Button(inProps, ref) {
     startIcon: startIconProp,
     endIcon: endIconProp,
     ...other
-  } = props;
+  } = props as any;
 
   const buttonRef = React.useRef<HTMLElement | null>(null);
   const handleRef = useForkRef(buttonRef, ref);
@@ -200,7 +200,7 @@ const Button = React.forwardRef(function Button(inProps, ref) {
       {endIcon}
     </ButtonRoot>
   );
-}) as ExtendButton<ButtonTypeMap>;
+}) as unknown as ExtendButton<ButtonTypeMap>;
 
 Button.propTypes /* remove-proptypes */ = {
   // ----------------------------- Warning --------------------------------

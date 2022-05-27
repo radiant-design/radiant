@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { OverridableStringUnion, OverrideProps } from '@mui/types';
-import { UseSwitchParameters } from '@mui/base/SwitchUnstyled';
+import { UseSwitchProps } from '@mui/base/SwitchUnstyled';
 import { ColorPaletteProp, VariantProp, SxProps } from '../styles/types';
 
 export type CheckboxSlot = 'root' | 'checkbox' | 'action' | 'input' | 'label';
@@ -13,7 +13,7 @@ export interface CheckboxPropsSizeOverrides {}
 
 export interface CheckboxTypeMap<P = {}, D extends React.ElementType = 'span'> {
   props: P &
-    UseSwitchParameters & {
+    UseSwitchProps & {
       /**
        * The icon to display when the component is checked.
        * @default <CheckIcon />

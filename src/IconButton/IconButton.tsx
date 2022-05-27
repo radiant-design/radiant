@@ -91,7 +91,7 @@ const IconButton = React.forwardRef(function IconButton(inProps, ref) {
     variant = 'soft',
     size = 'md',
     ...other
-  } = props;
+  } = props as any;
 
   const buttonRef = React.useRef<HTMLElement | null>(null);
   const handleRef = useForkRef(buttonRef, ref);
@@ -136,7 +136,7 @@ const IconButton = React.forwardRef(function IconButton(inProps, ref) {
       {children}
     </IconButtonRoot>
   );
-}) as ExtendIconButton<IconButtonTypeMap>;
+}) as unknown as ExtendIconButton<IconButtonTypeMap>;
 
 IconButton.propTypes /* remove-proptypes */ = {
   // ----------------------------- Warning --------------------------------

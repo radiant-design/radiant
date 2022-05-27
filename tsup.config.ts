@@ -5,6 +5,7 @@ const baseConfig: Options = {
     'src/**/*.ts*'
   ],
   outDir: 'build',
+  treeshake: true,
   target: 'es2020',
   platform: 'browser',
   format: ['esm'],
@@ -13,7 +14,8 @@ const baseConfig: Options = {
   dts: true,
   plugins: [{
     name: 'esbuild-plugin-svgr'
-  }]
+  }],
+  onSuccess: 'node scripts/prepare.mjs'
 }
 
 export default defineConfig([

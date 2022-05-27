@@ -9,7 +9,7 @@ import switchClasses, { getSwitchUtilityClass } from './switchClasses';
 import { SwitchProps } from './SwitchProps';
 
 const useUtilityClasses = (ownerState: SwitchProps & { focusVisible: boolean }) => {
-  const { checked, disabled, focusVisible, readOnly, color, variant } = ownerState;
+  const { checked, disabled, focusVisible, readOnly, color, variant } = ownerState as any;
 
   const slots = {
     root: [
@@ -98,6 +98,7 @@ const SwitchRoot = styled('span', {
     [`&.${switchClasses.disabled}`]: {
       pointerEvents: 'none',
       color: theme.vars.palette.text.tertiary,
+      //@ts-ignore
       ...getColorVariables({ state: 'Disabled', checked: ownerState.checked }),
     },
     display: 'inline-flex',
@@ -232,7 +233,7 @@ const Switch = React.forwardRef<HTMLSpanElement, SwitchProps>(function Switch(in
     startDecorator,
     endDecorator,
     ...otherProps
-  } = props;
+  } = props as any;
 
   const useSwitchProps = {
     checked: checkedProp,

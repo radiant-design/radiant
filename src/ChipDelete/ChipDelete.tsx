@@ -95,7 +95,7 @@ const ChipDelete = React.forwardRef(function ChipDelete(inProps, ref) {
     focusVisible,
   };
 
-  const classes = useUtilityClasses(ownerState);
+  const classes = useUtilityClasses(ownerState as any);
 
   return (
     <ChipDeleteRoot
