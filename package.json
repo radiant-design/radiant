@@ -25,7 +25,8 @@
     "clean": "rimraf build",
     "lint": "eslint 'src/**/*.{ts,tsx,js,jsx}' --cache",
     "lint:fix": "yarn lint --fix",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "preinstall": "npx only-allow yarn"
   },
   "dependencies": {
     "@mui/base": "^5.0.0-alpha.82",
