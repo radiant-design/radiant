@@ -29,8 +29,8 @@ jobs:
 
       - name: Install ESLint
         run: |
-          npm install --only=dev
-          npm add @microsoft/eslint-formatter-sarif@2.1.7
+          yarn install
+          yarn add @microsoft/eslint-formatter-sarif@2.1.7
 
       - name: Run ESLint
         run: npx eslint .
