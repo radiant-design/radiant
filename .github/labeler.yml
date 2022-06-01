@@ -1,8 +1,8 @@
 component:
-- any: ['src/**/*.ts', '!src/styles/*']
+- any: ["src/**/*.ts", "!src/styles/*"]
 
 test:
-- any: ['src/**/*.spec.js']
+- any: ["src/**/*.spec.js"]
 
-dependency
-- all: ['package.json', 'yarn.lock']
+dependency:
+- all: ["package.json", "yarn.lock"]
