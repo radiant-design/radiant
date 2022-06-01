@@ -1,29 +1,41 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { unstable_capitalize as capitalize, unstable_useForkRef as useForkRef } from '@mui/utils';
-import { useButton } from '@mui/base/ButtonUnstyled';
-import composeClasses from '@mui/base/composeClasses';
-import { styled, useThemeProps } from '../styles';
-import { ExtendButton, ButtonTypeMap, ButtonProps } from './ButtonProps';
-import { getButtonUtilityClass } from './buttonClasses';
+import * as React from "react";
+import PropTypes from "prop-types";
+import clsx from "clsx";
+import {
+  unstable_capitalize as capitalize,
+  unstable_useForkRef as useForkRef,
+} from "@mui/utils";
+import { useButton } from "@mui/base/ButtonUnstyled";
+import composeClasses from "@mui/base/composeClasses";
+import { styled, useThemeProps } from "../styles";
+import { ExtendButton, ButtonTypeMap, ButtonProps } from "./ButtonProps";
+import { getButtonUtilityClass } from "./buttonClasses";
 
-const useUtilityClasses = (ownerState: ButtonProps & { focusVisible: boolean }) => {
-  const { color, disabled, focusVisible, focusVisibleClassName, fullWidth, size, variant } =
-    ownerState;
+const useUtilityClasses = (
+  ownerState: ButtonProps & { focusVisible: boolean }
+) => {
+  const {
+    color,
+    disabled,
+    focusVisible,
+    focusVisibleClassName,
+    fullWidth,
+    size,
+    variant,
+  } = ownerState;
 
   const slots = {
     root: [
-      'root',
-      disabled && 'disabled',
-      focusVisible && 'focusVisible',
-      fullWidth && 'fullWidth',
+      "root",
+      disabled && "disabled",
+      focusVisible && "focusVisible",
+      fullWidth && "fullWidth",
       variant && `variant${capitalize(variant)}`,
       color && `color${capitalize(color)}`,
       size && `size${capitalize(size)}`,
     ],
-    startIcon: ['startIcon'],
-    endIcon: ['endIcon'],
+    startIcon: ["startIcon"],
+    endIcon: ["endIcon"],
   };
 
   const composedClasses = composeClasses(slots, getButtonUtilityClass, {});
@@ -35,83 +47,87 @@ const useUtilityClasses = (ownerState: ButtonProps & { focusVisible: boolean }) 
   return composedClasses;
 };
 
-const ButtonStartIcon = styled('span', {
-  name: 'JoyButton',
-  slot: 'StartIcon',
+const ButtonStartIcon = styled("span", {
+  name: "JoyButton",
+  slot: "StartIcon",
   overridesResolver: (props, styles) => styles.startIcon,
 })<{ ownerState: ButtonProps }>({
-  display: 'inherit',
-  marginLeft: 'calc(var(--Button-gutter) * var(--Button-iconOffsetStep) * -0.25)',
-  marginRight: 'var(--Button-gap)',
+  display: "inherit",
+  marginLeft:
+    "calc(var(--Button-gutter) * var(--Button-iconOffsetStep) * -0.25)",
+  marginRight: "var(--Button-gap)",
 });
 
-const ButtonEndIcon = styled('span', {
-  name: 'JoyButton',
-  slot: 'EndIcon',
+const ButtonEndIcon = styled("span", {
+  name: "JoyButton",
+  slot: "EndIcon",
   overridesResolver: (props, styles) => styles.endIcon,
 })<{ ownerState: ButtonProps }>({
-  display: 'inherit',
-  marginLeft: 'var(--Button-gap)',
-  marginRight: 'calc(var(--Button-gutter) * var(--Button-iconOffsetStep) * -0.25)',
+  display: "inherit",
+  marginLeft: "var(--Button-gap)",
+  marginRight:
+    "calc(var(--Button-gutter) * var(--Button-iconOffsetStep) * -0.25)",
 });
 
-const ButtonRoot = styled('button', {
-  name: 'JoyButton',
-  slot: 'Root',
+const ButtonRoot = styled("button", {
+  name: "JoyButton",
+  slot: "Root",
   overridesResolver: (props, styles) => styles.root,
-})<{ ownerState: ButtonProps }>(({ theme, ownerState }) => {
+})<{ ownerState: ButtonProps }>(({ theme, ownerState }: any) => {
   return [
     {
-      ...(ownerState.size === 'sm' && {
-        '--Button-gutter': '1rem',
-        '--Icon-fontSize': '1.25rem',
+      //chnages made in --Button-gutter && --Icon-fontSize as per our components library)
+      ...(ownerState.size === "sm" && {
+        "--Button-gutter": "1rem",
+        "--Icon-fontSize": "1rem",
       }),
-      ...(ownerState.size === 'md' && {
-        '--Button-gutter': '1.5rem', // gutter is the padding-x
-        '--Icon-fontSize': '1.5rem', // control the SvgIcon font-size
+      ...(ownerState.size === "md" && {
+        "--Button-gutter": "1.5rem", // gutter is the padding-x
+        "--Icon-fontSize": "1.25rem", // control the SvgIcon font-size
       }),
-      ...(ownerState.size === 'lg' && {
-        '--Button-gutter': '2rem',
-        '--Icon-fontSize': '1.75rem',
+      ...(ownerState.size === "lg" && {
+        "--Button-gutter": "2rem",
+        "--Icon-fontSize": "1.5rem",
       }),
-      '--Button-iconOffsetStep': 2, // negative margin of the start/end icon
-      '--Button-gap': 'clamp(0.25rem, var(--Button-gutter) * 0.5, 0.5rem)', // gap between start/end icon and content [0.25rem, x, 0.5rem]
+      "--Button-iconOffsetStep": 2, // negative margin of the start/end icon
+      "--Button-gap": "clamp(0.25rem, var(--Button-gutter) * 0.5, 0.5rem)", // gap between start/end icon and content [0.25rem, x, 0.5rem]
     },
     {
-      padding: '0.25rem var(--Button-gutter)', // the padding-top, bottom act as a minimum spacing between content and root element
-      ...(ownerState.variant === 'outlined' && {
+      padding: "0.25rem var(--Button-gutter)", // the padding-top, bottom act as a minimum spacing between content and root element
+      ...(ownerState.variant === "outlined" && {
         padding:
-          'calc(0.25rem - var(--variant-outlinedBorderWidth)) calc(var(--Button-gutter) - var(--variant-outlinedBorderWidth))', // account for the border width
+          "calc(0.25rem - var(--variant-outlinedBorderWidth)) calc(var(--Button-gutter) - var(--variant-outlinedBorderWidth))", // account for the border width
       }),
-      ...(ownerState.size === 'sm' && {
-        minHeight: '2rem',
+      ...(ownerState.size === "sm" && {
+        minHeight: "2rem",
       }),
-      ...(ownerState.size === 'md' && {
-        minHeight: '2.5rem', // use min-height instead of height to make the button resilient to its content
+      ...(ownerState.size === "md" && {
+        minHeight: "2.5rem", // use min-height instead of height to make the button resilient to its content
       }),
-      ...(ownerState.size === 'lg' && {
-        minHeight: '3rem',
+      ...(ownerState.size === "lg" && {
+        minHeight: "3rem",
       }),
-      borderRadius: theme.vars.radius.sm,
-      border: 'none',
-      backgroundColor: 'transparent',
-      cursor: 'pointer',
-      display: 'inline-flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      position: 'relative',
+      borderRadius: theme.vars.radius.xs, // changes made by @kp --for tracking purpose-- will remove it later!
+      border: "none",
+      backgroundColor: "transparent",
+      cursor: "pointer",
+      display: "inline-flex",
+      alignItems: "center",
+      justifyContent: "center",
+      position: "relative",
       // TODO: discuss the transition approach in a separate PR. This value is copied from mui-material Button.
       transition:
-        'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+        "background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
       fontFamily: theme.vars.fontFamily.body,
-      fontSize: theme.vars.fontSize.md,
+      fontSize: theme.typography.h5,
       lineHeight: 1,
-      ...(ownerState.size === 'sm' && {
-        fontSize: theme.vars.fontSize.sm,
-      }),
-      ...(ownerState.size === 'lg' && theme.typography.h6),
+      // ...(ownerState.size === "sm" && {
+      //   fontSize: theme.typography.h6,
+      ...(ownerState.size === "sm" && theme.typography.h6),
+      ...(ownerState.size === "md" && theme.typography.h5),
+      ...(ownerState.size === "lg" && theme.typography.h4),
       ...(ownerState.fullWidth && {
-        width: '100%',
+        width: "100%",
       }),
       [theme.focus.selector]: theme.focus.default,
     },
@@ -123,19 +139,21 @@ const ButtonRoot = styled('button', {
 });
 
 const Button = React.forwardRef(function Button(inProps, ref) {
-  const props = useThemeProps<typeof inProps & { component?: React.ElementType }>({
+  const props = useThemeProps<
+    typeof inProps & { component?: React.ElementType }
+  >({
     props: inProps,
-    name: 'JoyButton',
+    name: "JoyButton",
   });
 
   const {
     children,
     className,
     action,
-    component = 'button',
-    color = 'primary',
-    variant = 'solid',
-    size = 'md',
+    component = "button",
+    color = "primary",
+    variant = "solid",
+    size = "sm",
     fullWidth = false,
     startIcon: startIconProp,
     endIcon: endIconProp,
@@ -160,7 +178,7 @@ const Button = React.forwardRef(function Button(inProps, ref) {
         buttonRef.current?.focus();
       },
     }),
-    [setFocusVisible],
+    [setFocusVisible]
   );
 
   const ownerState = {
@@ -231,7 +249,15 @@ Button.propTypes /* remove-proptypes */ = {
    * @default 'primary'
    */
   color: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([
-    PropTypes.oneOf(['context', 'danger', 'info', 'neutral', 'primary', 'success', 'warning']),
+    PropTypes.oneOf([
+      "context",
+      "danger",
+      "info",
+      "neutral",
+      "primary",
+      "success",
+      "warning",
+    ]),
     PropTypes.string,
   ]),
   /**
@@ -261,7 +287,7 @@ Button.propTypes /* remove-proptypes */ = {
    * The size of the component.
    */
   size: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([
-    PropTypes.oneOf(['sm', 'md', 'lg']),
+    PropTypes.oneOf(["sm", "md", "lg"]),
     PropTypes.string,
   ]),
   /**
@@ -272,7 +298,9 @@ Button.propTypes /* remove-proptypes */ = {
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
   sx: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])),
+    PropTypes.arrayOf(
+      PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])
+    ),
     PropTypes.func,
     PropTypes.object,
   ]),
@@ -285,7 +313,7 @@ Button.propTypes /* remove-proptypes */ = {
    * @default 'solid'
    */
   variant: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([
-    PropTypes.oneOf(['outlined', 'plain', 'soft', 'solid']),
+    PropTypes.oneOf(["outlined", "plain", "soft", "solid"]),
     PropTypes.string,
   ]),
 } as any;
