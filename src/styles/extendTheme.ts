@@ -146,13 +146,13 @@ export default function extendTheme(themeInput?: ThemeInput): Theme {
         plainActiveBg: `var(--joy-palette-neutral-200)`,
         plainDisabledColor: `var(--joy-palette-neutral-400)`,
 
-        outlinedColor: `var(--joy-palette-neutral-700)`,
-        outlinedBorder: `var(--joy-palette-neutral-200)`,
+        outlinedColor: `#000`, //var(--joy-palette-neutral-700)
+        outlinedBorder: `var(--joy-palette-neutral-200)`, //200
         outlinedHoverColor: `var(--joy-palette-neutral-900)`,
-        outlinedHoverBg: `var(--joy-palette-neutral-100)`,
+        outlinedHoverBg: `var(--joy-palette-neutral-50)`, //100
         outlinedHoverBorder: `var(--joy-palette-neutral-300)`,
         outlinedActiveBg: `var(--joy-palette-neutral-200)`,
-        outlinedDisabledColor: `var(--joy-palette-neutral-400)`,
+        outlinedDisabledColor: `var(--joy-palette-neutral-300)`, //400
         outlinedDisabledBorder: `var(--joy-palette-neutral-100)`,
 
         softColor: `var(--joy-palette-neutral-700)`,
@@ -164,11 +164,11 @@ export default function extendTheme(themeInput?: ThemeInput): Theme {
         softDisabledBg: `var(--joy-palette-neutral-50)`,
 
         solidColor: "#fff",
-        solidBg: `var(--joy-palette-neutral-700)`,
-        solidHoverBg: `var(--joy-palette-neutral-800)`,
+        solidBg: `var(--joy-palette-neutral-100)`, //700
+        solidHoverBg: `var(--joy-palette-neutral-600)`, //800
         solidActiveBg: `var(--joy-palette-neutral-700)`,
-        solidDisabledColor: `var(--joy-palette-neutral-50)`,
-        solidDisabledBg: `var(--joy-palette-neutral-300)`,
+        solidDisabledColor: `var(--joy-palette-neutral-300)`, //50
+        solidDisabledBg: `var(--joy-palette-neutral-100)`, //300
 
         overrideTextPrimary: `var(--joy-palette-neutral-700)`,
         overrideTextSecondary: `var(--joy-palette-neutral-500)`,

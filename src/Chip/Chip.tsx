@@ -58,7 +58,7 @@ const ChipRoot = styled("div", {
         "--Chip-delete-radius": `max(var(--Chip-radius) - var(--Chip-paddingBlock), min(var(--Chip-paddingBlock) / 2, var(--Chip-radius) / 2))`,
         "--Avatar-radius": `max(var(--Chip-radius) - var(--Chip-paddingBlock), min(var(--Chip-paddingBlock) / 2, var(--Chip-radius) / 2))`,
         ...(ownerState.size === "sm" && {
-          "--Chip-gap": "0.5rem", //0.25
+          "--Chip-gap": "0.5rem", //0.25 //gap btw cross icon and text
           "--Chip-paddingInline": "0.75rem", //0.5
           "--Chip-delete-size": "1rem",
           "--Icon-fontSize": "1rem",
@@ -180,6 +180,7 @@ const ChipEndDecorator = styled("span", {
   display: "inherit",
   marginInlineStart: "var(--Chip-gap)",
   marginInlineEnd: `calc(-1 * (var(--Chip-paddingInline) - var(--Chip-paddingBlock)))`,
+
   // set zIndex to 1 with order to stay on top of other controls, eg. Checkbox, Radio
   order: 2,
   zIndex: 1,
