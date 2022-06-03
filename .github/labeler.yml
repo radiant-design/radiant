@@ -1,5 +1,5 @@
 component:
-- any: ["src/**/*.ts", "!src/styles/*"]
+- any: ["src/**/*.tsx", "!src/styles/*"]
 
 test:
 - any: ["src/**/*.spec.js"]
