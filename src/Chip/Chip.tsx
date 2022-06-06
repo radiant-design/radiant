@@ -257,7 +257,7 @@ const Chip = React.forwardRef(function Chip(inProps, ref) {
           />
         )}
 
-        {/* label is always the first element for integrating with other controls, eg. Checkbox, Radio. Use CSS order to rearrange position */}
+        {/* label - is always the first element for integrating with other controls, eg. Checkbox, Radio. Use CSS order to rearrange position */}
         <ChipLabel
           id={id}
           {...componentsProps.label}
