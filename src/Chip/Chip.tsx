@@ -224,11 +224,7 @@ const Chip = React.forwardRef(function Chip(inProps, ref) {
 
   const ownerState = {
     ...props,
-    children,
-    className,
-    componentsProps: {},
-    startDecorator,
-    endDecorator,
+
     component,
     onClick,
     disabled,
