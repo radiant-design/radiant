@@ -1,26 +1,31 @@
-import { unstable_composeClasses as composeClasses } from '@mui/base';
-import BadgeUnstyled from '@mui/base/BadgeUnstyled';
-import { OverridableComponent } from '@mui/types';
-import { unstable_capitalize as capitalize, usePreviousProps } from '@mui/utils';
-import clsx from 'clsx';
-import PropTypes from 'prop-types';
-import * as React from 'react';
-import styled from '../styles/styled';
-import useThemeProps from '../styles/useThemeProps';
-import shouldSpreadAdditionalProps from '../utils/shouldSpreadAdditionalProps';
-import badgeClasses, { getBadgeUtilityClass } from './badgeClasses';
-import { BadgeProps, BadgeTypeMap } from './BadgeProps';
+import { unstable_composeClasses as composeClasses } from "@mui/base";
+import BadgeUnstyled from "@mui/base/BadgeUnstyled";
+import { OverridableComponent } from "@mui/types";
+import {
+  unstable_capitalize as capitalize,
+  usePreviousProps,
+} from "@mui/utils";
+import clsx from "clsx";
+import PropTypes from "prop-types";
+import * as React from "react";
+import styled from "../styles/styled";
+import useThemeProps from "../styles/useThemeProps";
+import shouldSpreadAdditionalProps from "../utils/shouldSpreadAdditionalProps";
+import badgeClasses, { getBadgeUtilityClass } from "./badgeClasses";
+import { BadgeProps, BadgeTypeMap } from "./BadgeProps";
 
 const useUtilityClasses = (ownerState: BadgeProps) => {
   const { color, variant, size, anchorOrigin, invisible } = ownerState;
 
   const slots = {
-    root: ['root'],
+    root: ["root"],
     badge: [
-      'badge',
-      invisible && 'invisible',
+      "badge",
+      invisible && "invisible",
       anchorOrigin &&
-        `anchorOrigin${capitalize(anchorOrigin.vertical)}${capitalize(anchorOrigin.horizontal)}`,
+        `anchorOrigin${capitalize(anchorOrigin.vertical)}${capitalize(
+          anchorOrigin.horizontal
+        )}`,
       variant && `variant${capitalize(variant)}`,
       color && `color${capitalize(color)}`,
       size && `size${capitalize(size)}`,
@@ -30,47 +35,47 @@ const useUtilityClasses = (ownerState: BadgeProps) => {
   return composeClasses(slots, getBadgeUtilityClass, {});
 };
 
-const BadgeRoot = styled('span', {
-  name: 'JoyBadge',
-  slot: 'Root',
+const BadgeRoot = styled("span", {
+  name: "JoyBadge",
+  slot: "Root",
   overridesResolver: (props, styles) => styles.root,
 })<{ ownerState: BadgeProps }>(({ theme, ownerState }) => ({
-  ...(ownerState.size === 'sm' && {
-    '--Badge-minHeight': '0.5rem',
+  ...(ownerState.size === "sm" && {
+    "--Badge-minHeight": "1.25rem", //0.5
     ...(ownerState.badgeContent && {
-      '--Badge-minHeight': '1rem',
+      "--Badge-minHeight": "1.25rem", //1
     }),
-    '--Badge-paddingX': '0.25rem',
-    fontSize: theme.vars.fontSize.xs,
+    "--Badge-paddingX": "0.25rem", //0.25
+    fontSize: theme.vars.fontSize.sm, //xs
   }),
-  ...(ownerState.size === 'md' && {
-    '--Badge-minHeight': '0.75rem',
+  ...(ownerState.size === "md" && {
+    "--Badge-minHeight": "1.5rem", //0.75
     ...(ownerState.badgeContent && {
-      '--Badge-minHeight': '1.25rem',
+      "--Badge-minHeight": "1.5rem", //1.25
     }),
-    '--Badge-paddingX': '0.375rem',
-    fontSize: theme.vars.fontSize.sm,
+    "--Badge-paddingX": "0.5rem", //0.375
+    fontSize: theme.vars.fontSize.md, //sm
   }),
-  ...(ownerState.size === 'lg' && {
-    '--Badge-minHeight': '1rem',
+  ...(ownerState.size === "lg" && {
+    "--Badge-minHeight": "2rem", //1
     ...(ownerState.badgeContent && {
-      '--Badge-minHeight': '1.5rem',
+      "--Badge-minHeight": "2rem", //1.5
     }),
-    '--Badge-paddingX': '0.5rem',
-    fontSize: theme.vars.fontSize.md,
+    "--Badge-paddingX": "0.75rem", //0.5
+    fontSize: theme.vars.fontSize.lg, //,md
   }),
-  '--Badge-ringSize': '2px',
-  '--Badge-ring': `0 0 0 var(--Badge-ringSize) var(--Badge-ringColor, ${theme.vars.palette.background.body})`,
-  position: 'relative',
-  display: 'inline-flex',
+  "--Badge-ringSize": "2px",
+  "--Badge-ring": `0 0 0 var(--Badge-ringSize) var(--Badge-ringColor, ${theme.vars.palette.background.body})`,
+  position: "relative",
+  display: "inline-flex",
   // For correct alignment with the text.
-  verticalAlign: 'middle',
+  verticalAlign: "middle",
   flexShrink: 0,
 }));
 
-const BadgeBadge = styled('span', {
-  name: 'JoyBadge',
-  slot: 'Badge',
+const BadgeBadge = styled("span", {
+  name: "JoyBadge",
+  slot: "Badge",
   overridesResolver: (props, styles) => styles.badge,
 })<{ ownerState: BadgeProps }>(({ theme, ownerState }) => {
   const inset = {
@@ -80,8 +85,8 @@ const BadgeBadge = styled('span', {
     right: ownerState.badgeInset,
   };
 
-  if (typeof ownerState.badgeInset === 'string') {
-    const insetValues = ownerState.badgeInset.split(' ');
+  if (typeof ownerState.badgeInset === "string") {
+    const insetValues = ownerState.badgeInset.split(" ");
     if (insetValues.length > 1) {
       inset.top = insetValues[0];
       inset.right = insetValues[1];
@@ -100,43 +105,51 @@ const BadgeBadge = styled('span', {
     }
   }
   const translateY =
-    ownerState.anchorOrigin?.vertical === 'top' ? 'translateY(-50%)' : 'translateY(50%)';
+    ownerState.anchorOrigin?.vertical === "top"
+      ? "translateY(-50%)"
+      : "translateY(50%)";
   const translateX =
-    ownerState.anchorOrigin?.horizontal === 'left' ? 'translateX(-50%)' : 'translateX(50%)';
-  const transformOriginY = ownerState.anchorOrigin?.vertical === 'top' ? '0%' : '100%';
-  const transformOriginX = ownerState.anchorOrigin?.horizontal === 'left' ? '0%' : '100%';
+    ownerState.anchorOrigin?.horizontal === "left"
+      ? "translateX(-50%)"
+      : "translateX(50%)";
+  const transformOriginY =
+    ownerState.anchorOrigin?.vertical === "top" ? "0%" : "100%";
+  const transformOriginX =
+    ownerState.anchorOrigin?.horizontal === "left" ? "0%" : "100%";
   return [
     {
-      display: 'inline-flex',
-      flexWrap: 'wrap',
-      justifyContent: 'center',
-      alignContent: 'center',
-      alignItems: 'center',
-      position: 'absolute',
-      boxSizing: 'border-box',
-      boxShadow: 'var(--Badge-ring)',
+      display: "inline-flex",
+      flexWrap: "wrap",
+      justifyContent: "center",
+      alignContent: "center",
+      alignItems: "center",
+      position: "absolute",
+      boxSizing: "border-box",
+      boxShadow: "var(--Badge-ring)",
       fontFamily: theme.vars.fontFamily.body,
       fontWeight: theme.vars.fontWeight.md,
       lineHeight: 1,
       padding:
-        'calc(var(--Badge-paddingX) / 2 - var(--variant-outlinedBorderWidth, 0px)) calc(var(--Badge-paddingX) - var(--variant-outlinedBorderWidth, 0px))',
-      minHeight: 'var(--Badge-minHeight)',
-      minWidth: 'var(--Badge-minHeight)',
-      borderRadius: 'var(--Badge-radius, var(--Badge-minHeight))',
+        "calc(var(--Badge-paddingX) / 2 - var(--variant-outlinedBorderWidth, 0px)) calc(var(--Badge-paddingX) - var(--variant-outlinedBorderWidth, 0px))",
+      minHeight: "var(--Badge-minHeight)",
+      minWidth: "var(--Badge-minHeight)",
+      borderRadius: "var(--Badge-radius, var(--Badge-minHeight))",
       zIndex: 1,
-      transition: 'transform 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
-      ...(ownerState.variant === 'outlined' && {
+      transition: "transform 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+      ...(ownerState.variant === "outlined" && {
         backgroundColor: theme.vars.palette.background.body,
       }),
-      [ownerState.anchorOrigin!.vertical]: inset[ownerState.anchorOrigin!.vertical],
-      [ownerState.anchorOrigin!.horizontal]: inset[ownerState.anchorOrigin!.horizontal],
+      [ownerState.anchorOrigin!.vertical]:
+        inset[ownerState.anchorOrigin!.vertical],
+      [ownerState.anchorOrigin!.horizontal]:
+        inset[ownerState.anchorOrigin!.horizontal],
       transform: `scale(1) ${translateX} ${translateY}`,
       transformOrigin: `${transformOriginX} ${transformOriginY}`,
       [`&.${badgeClasses.invisible}`]: {
         transform: `scale(0) ${translateX} ${translateY}`,
       },
       ...(ownerState.invisible && {
-        transition: 'transform 195ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+        transition: "transform 195ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
       }),
     },
     theme.variants[ownerState.variant!]?.[ownerState.color!],
@@ -144,24 +157,27 @@ const BadgeBadge = styled('span', {
 });
 
 const Badge = React.forwardRef(function Badge(inProps, ref) {
-  const props = useThemeProps<typeof inProps & BadgeProps>({ props: inProps, name: 'JoyBadge' });
+  const props = useThemeProps<typeof inProps & BadgeProps>({
+    props: inProps,
+    name: "JoyBadge",
+  });
   const {
     anchorOrigin: anchorOriginProp = {
-      vertical: 'top',
-      horizontal: 'right',
+      vertical: "top",
+      horizontal: "right",
     },
     badgeInset: badgeInsetProp = 0,
     className,
-    component = 'span',
+    component = "span",
     components = {},
     componentsProps = {},
-    size: sizeProp = 'md',
-    color: colorProp = 'primary',
+    size: sizeProp = "md",
+    color: colorProp = "primary",
     invisible: invisibleProp = false,
     max,
-    badgeContent: badgeContentProp = '',
+    badgeContent: badgeContentProp = "",
     showZero = false,
-    variant: variantProp = 'solid',
+    variant: variantProp = "solid",
     ...other
   } = props;
 
@@ -189,14 +205,22 @@ const Badge = React.forwardRef(function Badge(inProps, ref) {
     variant = variantProp,
     badgeInset = badgeInsetProp,
   }: {
-    size?: BadgeProps['size'];
-    color?: BadgeProps['color'];
-    anchorOrigin?: BadgeProps['anchorOrigin'];
-    variant?: BadgeProps['variant'];
-    badgeInset?: BadgeProps['badgeInset'];
+    size?: BadgeProps["size"];
+    color?: BadgeProps["color"];
+    anchorOrigin?: BadgeProps["anchorOrigin"];
+    variant?: BadgeProps["variant"];
+    badgeInset?: BadgeProps["badgeInset"];
   } = invisible ? prevProps : props;
 
-  const ownerState = { ...props, anchorOrigin, badgeInset, variant, invisible, color, size };
+  const ownerState = {
+    ...props,
+    anchorOrigin,
+    badgeInset,
+    variant,
+    invisible,
+    color,
+    size,
+  };
   const classes = useUtilityClasses(ownerState);
   const displayValue =
     max !== undefined && badgeContentProp && Number(badgeContentProp) > max
@@ -262,8 +286,8 @@ Badge.propTypes /* remove-proptypes */ = {
    * }
    */
   anchorOrigin: PropTypes.shape({
-    horizontal: PropTypes.oneOf(['left', 'right']).isRequired,
-    vertical: PropTypes.oneOf(['bottom', 'top']).isRequired,
+    horizontal: PropTypes.oneOf(["left", "right"]).isRequired,
+    vertical: PropTypes.oneOf(["bottom", "top"]).isRequired,
   }),
   /**
    * The content rendered within the badge.
@@ -287,7 +311,14 @@ Badge.propTypes /* remove-proptypes */ = {
    * @default 'primary'
    */
   color: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([
-    PropTypes.oneOf(['danger', 'info', 'neutral', 'primary', 'success', 'warning']),
+    PropTypes.oneOf([
+      "danger",
+      "info",
+      "neutral",
+      "primary",
+      "success",
+      "warning",
+    ]),
     PropTypes.string,
   ]),
   /**
@@ -331,12 +362,14 @@ Badge.propTypes /* remove-proptypes */ = {
    * The size of the component.
    * @default 'md'
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  size: PropTypes.oneOf(["sm", "md", "lg"]),
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
   sx: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])),
+    PropTypes.arrayOf(
+      PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])
+    ),
     PropTypes.func,
     PropTypes.object,
   ]),
@@ -345,7 +378,7 @@ Badge.propTypes /* remove-proptypes */ = {
    * @default 'solid'
    */
   variant: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([
-    PropTypes.oneOf(['outlined', 'plain', 'soft', 'solid']),
+    PropTypes.oneOf(["outlined", "plain", "soft", "solid"]),
     PropTypes.string,
   ]),
 } as any;
