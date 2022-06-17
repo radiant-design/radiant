@@ -144,7 +144,7 @@ export default function extendTheme(themeInput?: ThemeInput): Theme {
         plainHoverColor: `var(--joy-palette-neutral-900)`,
         plainHoverBg: `var(--joy-palette-neutral-100)`,
         plainActiveBg: `var(--joy-palette-neutral-200)`,
-        plainDisabledColor: `var(--joy-palette-neutral-400)`,
+        plainDisabledColor: `var(--joy-palette-neutral-300)`, //400
 
         outlinedColor: `#000`, //var(--joy-palette-neutral-700)
         outlinedBorder: `var(--joy-palette-neutral-200)`, //200
