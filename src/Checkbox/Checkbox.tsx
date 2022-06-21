@@ -1,99 +1,123 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { OverridableComponent } from '@mui/types';
-import { unstable_useId as useId, unstable_capitalize as capitalize } from '@mui/utils';
-import { unstable_composeClasses as composeClasses } from '@mui/base';
-import { useSwitch } from '@mui/base/SwitchUnstyled';
-import { styled, useThemeProps } from '../styles';
-import { getCheckboxUtilityClass } from './checkboxClasses';
-import { CheckboxProps, CheckboxTypeMap } from './CheckboxProps';
-import CheckIcon from '../internal/svg-icons/Check';
-import IndeterminateIcon from '../internal/svg-icons/HorizontalRule';
-import { TypographyContext } from '../Typography/Typography';
+import * as React from "react";
+import PropTypes from "prop-types";
+import clsx from "clsx";
+import { OverridableComponent } from "@mui/types";
+import {
+  unstable_useId as useId,
+  unstable_capitalize as capitalize,
+} from "@mui/utils";
+import { unstable_composeClasses as composeClasses } from "@mui/base";
+import { useSwitch } from "@mui/base/SwitchUnstyled";
+import { styled, useThemeProps } from "../styles";
+import { getCheckboxUtilityClass } from "./checkboxClasses";
+import { CheckboxProps, CheckboxTypeMap } from "./CheckboxProps";
+import CheckIcon from "../internal/svg-icons/Check";
+import IndeterminateIcon from "../internal/svg-icons/HorizontalRule";
+import { TypographyContext } from "../Typography/Typography";
 
-const useUtilityClasses = (ownerState: CheckboxProps & { focusVisible: boolean }) => {
-  const { checked, disabled, disableIcon, focusVisible, color, variant, size } = ownerState;
+const useUtilityClasses = (
+  ownerState: CheckboxProps & { focusVisible: boolean }
+) => {
+  const { checked, disabled, disableIcon, focusVisible, color, variant, size } =
+    ownerState;
 
   const slots = {
     root: [
-      'root',
-      checked && 'checked',
-      disabled && 'disabled',
-      focusVisible && 'focusVisible',
+      "root",
+      checked && "checked",
+      disabled && "disabled",
+      focusVisible && "focusVisible",
       variant && `variant${capitalize(variant)}`,
       color && `color${capitalize(color)}`,
       size && `size${capitalize(size)}`,
     ],
-    checkbox: ['checkbox', disabled && 'disabled'], // disabled class is necessary for displaying global variant
-    action: ['action', disableIcon && disabled && 'disabled', focusVisible && 'focusVisible'], // add disabled class to action element for displaying global variant
-    input: ['input'],
-    label: ['label'],
+    checkbox: ["checkbox", disabled && "disabled"], // disabled class is necessary for displaying global variant
+    action: [
+      "action",
+      disableIcon && disabled && "disabled",
+      focusVisible && "focusVisible",
+    ], // add disabled class to action element for displaying global variant
+    input: ["input"],
+    label: ["label"],
   };
 
   return composeClasses(slots, getCheckboxUtilityClass, {});
 };
 
-const CheckboxRoot = styled('span', {
-  name: 'JoyCheckbox',
-  slot: 'Root',
+const CheckboxRoot = styled("span", {
+  name: "JoyCheckbox",
+  slot: "Root",
   overridesResolver: (props, styles) => styles.root,
 })<{ ownerState: CheckboxProps }>(({ ownerState, theme }) => ({
-  '--Icon-fontSize': 'var(--Checkbox-size)',
-  ...(ownerState.size === 'sm' && {
-    '--Checkbox-size': '1rem',
-    '--Checkbox-gap': '0.375rem',
+  "--Icon-fontSize": "var(--Checkbox-size)",
+  ...(ownerState.size === "sm" && {
+    "--Checkbox-size": "0.75rem", //1
+    "--Checkbox-gap": "0.25rem", //0.375
     fontSize: theme.vars.fontSize.sm,
   }),
-  ...(ownerState.size === 'md' && {
-    '--Checkbox-size': '1.25rem',
-    '--Checkbox-gap': '0.5rem',
+  ...(ownerState.size === "md" && {
+    "--Checkbox-size": "1rem", //1.25
+    "--Checkbox-gap": "0.5rem",
     fontSize: theme.vars.fontSize.md,
   }),
-  ...(ownerState.size === 'lg' && {
-    '--Checkbox-size': '1.5rem',
-    '--Checkbox-gap': '0.625rem',
+  ...(ownerState.size === "lg" && {
+    "--Checkbox-size": "1.25rem", //1.5
+    "--Checkbox-gap": "0.75rem", //0.625
     fontSize: theme.vars.fontSize.lg,
   }),
   ...(ownerState.label &&
     !ownerState.disableIcon && {
       // add some space at the end to not have focus overlapping the label
-      paddingInlineEnd: 'var(--Checkbox-gap)',
+      paddingInlineEnd: "0rem",
     }),
-  position: ownerState.overlay ? 'initial' : 'relative',
-  display: 'inline-flex',
+  position: ownerState.overlay ? "initial" : "relative",
+  display: "inline-flex",
   fontFamily: theme.vars.fontFamily.body,
-  lineHeight: 'var(--Checkbox-size)', // prevent label from having larger height than the checkbox
-  '&.Mui-disabled': {
+  lineHeight: "var(--Checkbox-size)", // prevent label from having larger height than the checkbox
+  "&.Mui-disabled": {
     color: theme.vars.palette[ownerState.color!]?.plainDisabledColor,
   },
   ...(ownerState.disableIcon && {
-    color: theme.vars.palette[ownerState.color!]?.[`${ownerState.variant!}Color`],
-    '&.Mui-disabled': {
-      color: theme.vars.palette[ownerState.color!]?.[`${ownerState.variant!}DisabledColor`],
+    color:
+      theme.vars.palette[ownerState.color!]?.[`${ownerState.variant!}Color`],
+    "&.Mui-disabled": {
+      color:
+        theme.vars.palette[ownerState.color!]?.[
+          `${ownerState.variant!}DisabledColor`
+        ],
     },
   }),
 }));
 
-const CheckboxCheckbox = styled('span', {
-  name: 'JoyCheckbox',
-  slot: 'Checkbox',
+const CheckboxCheckbox = styled("span", {
+  name: "JoyCheckbox",
+  slot: "Checkbox",
   overridesResolver: (props, styles) => styles.checkbox,
 })<{ ownerState: CheckboxProps }>(({ theme, ownerState }) => [
   {
-    boxSizing: 'border-box',
+    boxSizing: "border-box",
     borderRadius: theme.vars.radius.xs,
-    width: 'var(--Checkbox-size)',
-    height: 'var(--Checkbox-size)',
-    display: 'inline-flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: "var(--Checkbox-size)",
+    height: "var(--Checkbox-size)",
+    display: "inline-flex",
+    justifyContent: "center",
+    alignItems: "center",
     flexShrink: 0,
+    "&:hover": {
+      borderColor: theme.palette.primary[500] + " !important",
+    },
+    "&.Mui-disabled": {
+      color:
+        theme.vars.palette[ownerState.color!]?.plainDisabledColor +
+        " !important",
+      borderColor:
+        theme.vars.palette[ownerState.color!]?.plainActiveBg + " !important",
+    },
     // TODO: discuss the transition approach in a separate PR. This value is copied from mui-material Button.
     transition:
-      'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+      "background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
     ...(ownerState.disableIcon && {
-      display: 'contents',
+      display: "contents",
     }),
   },
   ...(!ownerState.disableIcon
@@ -106,16 +130,16 @@ const CheckboxCheckbox = styled('span', {
     : []),
 ]);
 
-const CheckboxAction = styled('span', {
-  name: 'JoyCheckbox',
-  slot: 'Action',
+const CheckboxAction = styled("span", {
+  name: "JoyCheckbox",
+  slot: "Action",
   overridesResolver: (props, styles) => styles.action,
 })<{ ownerState: CheckboxProps }>(({ theme, ownerState }) => [
   {
     borderRadius: `var(--Checkbox-action-radius, ${
-      ownerState.overlay ? 'var(--internal-action-radius, inherit)' : 'inherit'
+      ownerState.overlay ? "var(--internal-action-radius, inherit)" : "inherit"
     })`,
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     left: 0,
     bottom: 0,
@@ -123,7 +147,7 @@ const CheckboxAction = styled('span', {
     zIndex: 1, // The action element usually cover the area of nearest positioned parent
     // TODO: discuss the transition approach in a separate PR. This value is copied from mui-material Button.
     transition:
-      'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+      "background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
     [theme.focus.selector]: theme.focus.default,
   },
   ...(ownerState.disableIcon
@@ -136,22 +160,22 @@ const CheckboxAction = styled('span', {
     : []),
 ]);
 
-const CheckboxInput = styled('input', {
-  name: 'JoyCheckbox',
-  slot: 'Input',
+const CheckboxInput = styled("input", {
+  name: "JoyCheckbox",
+  slot: "Input",
   overridesResolver: (props, styles) => styles.input,
 })<{ ownerState: CheckboxProps }>(() => ({
   margin: 0,
   opacity: 0,
-  position: 'absolute',
-  width: '100%',
-  height: '100%',
-  cursor: 'pointer',
+  position: "absolute",
+  width: "100%",
+  height: "100%",
+  cursor: "pointer",
 }));
 
-const CheckboxLabel = styled('label', {
-  name: 'JoyCheckbox',
-  slot: 'Label',
+const CheckboxLabel = styled("label", {
+  name: "JoyCheckbox",
+  slot: "Label",
   overridesResolver: (props, styles) => styles.label,
 })<{ ownerState: CheckboxProps }>(({ ownerState }) => ({
   flex: 1,
@@ -159,10 +183,10 @@ const CheckboxLabel = styled('label', {
   ...(ownerState.disableIcon
     ? {
         zIndex: 1, // label should stay on top of the action.
-        pointerEvents: 'none', // makes hover ineffect.
+        pointerEvents: "none", // makes hover ineffect.
       }
     : {
-        marginInlineStart: 'var(--Checkbox-gap)',
+        marginInlineStart: "var(--Checkbox-gap)",
       }),
 }));
 
@@ -170,9 +194,11 @@ const defaultCheckedIcon = <CheckIcon />;
 const defaultIndeterminateIcon = <IndeterminateIcon />;
 
 const Checkbox = React.forwardRef(function Checkbox(inProps, ref) {
-  const props = useThemeProps<typeof inProps & { component?: React.ElementType }>({
+  const props = useThemeProps<
+    typeof inProps & { component?: React.ElementType }
+  >({
     props: inProps,
-    name: 'JoyCheckbox',
+    name: "JoyCheckbox",
   });
 
   const {
@@ -198,7 +224,7 @@ const Checkbox = React.forwardRef(function Checkbox(inProps, ref) {
     required,
     color,
     variant,
-    size = 'md',
+    size = "md",
     ...otherProps
   } = props;
   const id = useId(idOverride);
@@ -213,13 +239,14 @@ const Checkbox = React.forwardRef(function Checkbox(inProps, ref) {
     onFocusVisible,
   };
 
-  const { getInputProps, checked, disabled, focusVisible } = useSwitch(useCheckboxProps);
+  const { getInputProps, checked, disabled, focusVisible } =
+    useSwitch(useCheckboxProps);
 
   const isCheckboxActive = checked || indeterminate;
-  const activeColor = color || 'primary';
-  const inactiveColor = color || 'neutral';
-  const activeVariant = variant || 'solid';
-  const inactiveVariant = variant || 'outlined';
+  const activeColor = color || "primary";
+  const inactiveColor = color || "neutral";
+  const activeVariant = variant || "solid";
+  const inactiveVariant = variant || "outlined";
 
   const ownerState = {
     ...props,
@@ -309,7 +336,7 @@ Checkbox.propTypes /* remove-proptypes */ = {
    * @default 'neutral'
    */
   color: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([
-    PropTypes.oneOf(['danger', 'info', 'primary', 'success', 'warning']),
+    PropTypes.oneOf(["danger", "info", "primary", "success", "warning"]),
     PropTypes.string,
   ]),
   /**
@@ -401,14 +428,16 @@ Checkbox.propTypes /* remove-proptypes */ = {
    * @default 'md'
    */
   size: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([
-    PropTypes.oneOf(['sm', 'md', 'lg']),
+    PropTypes.oneOf(["sm", "md", "lg"]),
     PropTypes.string,
   ]),
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
   sx: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])),
+    PropTypes.arrayOf(
+      PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])
+    ),
     PropTypes.func,
     PropTypes.object,
   ]),
@@ -421,7 +450,7 @@ Checkbox.propTypes /* remove-proptypes */ = {
    * @default 'solid'
    */
   variant: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([
-    PropTypes.oneOf(['outlined', 'plain', 'soft', 'solid']),
+    PropTypes.oneOf(["outlined", "plain", "soft", "solid"]),
     PropTypes.string,
   ]),
 } as any;

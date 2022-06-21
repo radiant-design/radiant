@@ -1,10 +1,12 @@
-import * as React from 'react';
-import createSvgIcon from '../../utils/createSvgIcon';
+import * as React from "react";
+import createSvgIcon from "../../utils/createSvgIcon";
 
 /**
  * @ignore - internal component.
  */
 export default createSvgIcon(
   <path d="M9 16.17 5.53 12.7a.9959.9959 0 0 0-1.41 0c-.39.39-.39 1.02 0 1.41l4.18 4.18c.39.39 1.02.39 1.41 0L20.29 7.71c.39-.39.39-1.02 0-1.41a.9959.9959 0 0 0-1.41 0L9 16.17z" />,
-  'Check',
+  "Check"
 );
+//<path d="M0 4C0 1.79086 1.79086 0 4 0H12C14.2091 0 16 1.79086 16 4V12C16 14.2091 14.2091 16 12 16H4C1.79086 16 0 14.2091 0 12V4Z" fill="#2C63E5"/>
+//<path fill-rule="evenodd" clip-rule="evenodd" d="M7.05953 10.4044L4.2682 7.69065C4.09246 7.51979 3.80754 7.51979 3.6318 7.69065C3.45607 7.8615 3.45607 8.13851 3.6318 8.30936L6.7818 11.3719C6.97256 11.5573 7.28716 11.539 7.45384 11.3328L12.4038 5.20781C12.5574 5.01782 12.5234 4.74278 12.328 4.5935C12.1326 4.44422 11.8497 4.47723 11.6961 4.66722L7.05953 10.4044Z" fill="white"/>
