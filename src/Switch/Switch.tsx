@@ -55,6 +55,10 @@ const switchColorVariables =
         ownerState.variant === "solid"
           ? theme.vars.palette[color!]?.plainColor
           : "#fff",
+      "--Switch-thumb-hover-color":
+        ownerState.variant === "solid"
+          ? theme.vars.palette[color!]?.plainHoverBg
+          : "#fff",
     };
   };
 
@@ -202,8 +206,10 @@ const SwitchThumb = styled("span", {
   // boxShadow: "var(--Switch-thumb-shadow)",
   color: "var(--Switch-thumb-color)",
   backgroundColor: "#fff", // var(--Switch-thumb-background)
+
   "&:hover": {
-    border: `5px solid ${theme.palette.primary[100]} !important`,
+    // border: `5px solid ${theme.palette.primary[100]} !important`,
+    border: "5px solid var(--Switch-thumb-hover-color) !important",
   },
   [`&.${switchClasses.checked}`]: {
     left: "calc(50% + var(--Switch-track-width) / 2 - var(--Switch-thumb-width) / 2 - var(--Switch-thumb-offset))",
