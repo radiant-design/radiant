@@ -201,9 +201,9 @@ const SwitchThumb = styled("span", {
   borderRadius: "var(--Switch-thumb-radius)",
   // boxShadow: "var(--Switch-thumb-shadow)",
   color: "var(--Switch-thumb-color)",
-  backgroundColor: "var(--Switch-thumb-background)",
+  backgroundColor: "#fff", // var(--Switch-thumb-background)
   "&:hover": {
-    border: `5px solid ${theme.palette.primary[100]}`,
+    border: `5px solid ${theme.palette.primary[100]} !important`,
   },
   [`&.${switchClasses.checked}`]: {
     left: "calc(50% + var(--Switch-track-width) / 2 - var(--Switch-thumb-width) / 2 - var(--Switch-thumb-offset))",
