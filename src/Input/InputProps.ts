@@ -1,10 +1,10 @@
-import React from 'react';
-import { OverridableStringUnion, OverrideProps } from '@mui/types';
-import { UseInputParameters } from '@mui/base/InputUnstyled';
-import { InputClasses } from './inputClasses';
-import { ColorPaletteProp, VariantProp, SxProps } from '../styles/types';
+import React from "react";
+import { OverridableStringUnion, OverrideProps } from "@mui/types";
+import { UseInputParameters } from "@mui/base/InputUnstyled";
+import { InputClasses } from "./inputClasses";
+import { ColorPaletteProp, VariantProp, SxProps } from "../styles/types";
 
-export type InputSlot = 'root' | 'input' | 'startDecorator' | 'endDecorator';
+export type InputSlot = "root" | "input" | "startDecorator" | "endDecorator";
 
 export interface InputPropsVariantOverrides {}
 
@@ -12,12 +12,12 @@ export interface InputPropsColorOverrides {}
 
 export interface InputPropsSizeOverrides {}
 
-export interface InputTypeMap<P = {}, D extends React.ElementType = 'div'> {
+export interface InputTypeMap<P = {}, D extends React.ElementType = "div"> {
   props: P &
-    Omit<UseInputParameters, 'inputRef'> & {
-      'aria-describedby'?: string;
-      'aria-label'?: string;
-      'aria-labelledby'?: string;
+    Omit<UseInputParameters, "inputRef"> & {
+      "aria-describedby"?: string;
+      "aria-label"?: string;
+      "aria-labelledby"?: string;
       /**
        * This prop helps users to fill forms faster, especially on mobile devices.
        * The name can be confusing, as it's more like an autofill.
@@ -40,7 +40,10 @@ export interface InputTypeMap<P = {}, D extends React.ElementType = 'div'> {
        * The color of the component. It supports those theme colors that make sense for this component.
        * @default 'neutral'
        */
-      color?: OverridableStringUnion<ColorPaletteProp, InputPropsColorOverrides>;
+      color?: OverridableStringUnion<
+        ColorPaletteProp,
+        InputPropsColorOverrides
+      >;
       /**
        * The components used for each slot inside the InputBase.
        * Either a string to use a HTML element or a component.
@@ -54,8 +57,8 @@ export interface InputTypeMap<P = {}, D extends React.ElementType = 'div'> {
        * @default {}
        */
       componentsProps?: {
-        root?: React.ComponentPropsWithRef<'div'>;
-        input?: React.ComponentPropsWithRef<'input'>;
+        root?: React.ComponentPropsWithRef<"div">;
+        input?: React.ComponentPropsWithRef<"input">;
       };
       /**
        * Trailing adornment for this input.
@@ -93,7 +96,10 @@ export interface InputTypeMap<P = {}, D extends React.ElementType = 'div'> {
        * The size of the component.
        * @default 'md'
        */
-      size?: OverridableStringUnion<'sm' | 'md' | 'lg', InputPropsSizeOverrides>;
+      size?: OverridableStringUnion<
+        "sm" | "md" | "lg",
+        InputPropsSizeOverrides
+      >;
       /**
        * The system prop that allows defining system overrides as well as additional CSS styles.
        */
@@ -117,10 +123,10 @@ export interface InputTypeMap<P = {}, D extends React.ElementType = 'div'> {
 }
 
 export type InputProps<
-  D extends React.ElementType = InputTypeMap['defaultComponent'],
+  D extends React.ElementType = InputTypeMap["defaultComponent"],
   P = {
     component?: React.ElementType;
-  },
+  }
 > = OverrideProps<InputTypeMap<P, D>, D>;
 
 export default InputProps;

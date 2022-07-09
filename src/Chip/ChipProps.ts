@@ -1,29 +1,34 @@
-import * as React from 'react';
-import { OverridableStringUnion, OverrideProps } from '@mui/types';
-import { ColorPaletteProp, VariantProp, SxProps } from '../styles/types';
+import * as React from "react";
+import { OverridableStringUnion, OverrideProps } from "@mui/types";
+import { ColorPaletteProp, VariantProp, SxProps } from "../styles/types";
 
-export type ChipSlot = 'root' | 'label' | 'action' | 'startDecorator' | 'endDecorator';
+export type ChipSlot =
+  | "root"
+  | "label"
+  | "action"
+  | "startDecorator"
+  | "endDecorator";
 
 export interface ChipPropsColorOverrides {}
 export interface ChipPropsSizeOverrides {}
 export interface ChipPropsVariantOverrides {}
 
-export interface ChipTypeMap<P = {}, D extends React.ElementType = 'div'> {
+export interface ChipTypeMap<P = {}, D extends React.ElementType = "div"> {
   props: P & {
     /**
      * The props used for each slot inside the Input.
      * @default {}
      */
     componentsProps?: {
-      root?: JSX.IntrinsicElements['div'];
-      label?: JSX.IntrinsicElements['span'];
+      root?: JSX.IntrinsicElements["div"];
+      label?: JSX.IntrinsicElements["span"];
       action?: React.HTMLAttributes<HTMLElement> & {
         href?: string;
         component?: React.ElementType;
         ref?: React.Ref<HTMLElement>;
       };
-      startDecorator?: JSX.IntrinsicElements['span'];
-      endDecorator?: JSX.IntrinsicElements['span'];
+      startDecorator?: JSX.IntrinsicElements["span"];
+      endDecorator?: JSX.IntrinsicElements["span"];
     };
     /**
      * The content of the component.
@@ -48,7 +53,7 @@ export interface ChipTypeMap<P = {}, D extends React.ElementType = 'div'> {
      * It accepts theme values between 'sm' and 'lg'.
      * @default 'md'
      */
-    size?: OverridableStringUnion<'sm' | 'md' | 'lg', ChipPropsSizeOverrides>;
+    size?: OverridableStringUnion<"sm" | "md" | "lg", ChipPropsSizeOverrides>;
     /**
      * Element placed before the children.
      */
@@ -67,6 +72,6 @@ export interface ChipTypeMap<P = {}, D extends React.ElementType = 'div'> {
 }
 
 export type ChipProps<
-  D extends React.ElementType = ChipTypeMap['defaultComponent'],
-  P = { component?: React.ElementType },
+  D extends React.ElementType = ChipTypeMap["defaultComponent"],
+  P = { component?: React.ElementType }
 > = OverrideProps<ChipTypeMap<P, D>, D>;

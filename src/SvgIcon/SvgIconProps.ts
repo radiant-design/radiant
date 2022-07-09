@@ -1,15 +1,15 @@
-import { OverridableStringUnion, OverrideProps } from '@mui/types';
-import * as React from 'react';
-import { ColorPaletteProp, FontSize, SxProps } from '../styles/types';
-import { SvgIconClasses } from './svgIconClasses';
+import { OverridableStringUnion, OverrideProps } from "@mui/types";
+import * as React from "react";
+import { ColorPaletteProp, FontSize, SxProps } from "../styles/types";
+import { SvgIconClasses } from "./svgIconClasses";
 
-export type SvgIconSlot = 'root';
+export type SvgIconSlot = "root";
 
 export interface SvgIconPropsSizeOverrides {}
 
 export interface SvgIconPropsColorOverrides {}
 
-export interface SvgIconTypeMap<P = {}, D extends React.ElementType = 'svg'> {
+export interface SvgIconTypeMap<P = {}, D extends React.ElementType = "svg"> {
   props: P & {
     /**
      * Node passed into the SVG element.
@@ -24,12 +24,18 @@ export interface SvgIconTypeMap<P = {}, D extends React.ElementType = 'svg'> {
      * You can use the `htmlColor` prop to apply a color attribute to the SVG element.
      * @default 'inherit'
      */
-    color?: OverridableStringUnion<'inherit' | ColorPaletteProp, SvgIconPropsSizeOverrides>;
+    color?: OverridableStringUnion<
+      "inherit" | ColorPaletteProp,
+      SvgIconPropsSizeOverrides
+    >;
     /**
      * The fontSize applied to the icon. Defaults to 1rem, but can be configure to inherit font size.
      * @default 'xl'
      */
-    fontSize?: OverridableStringUnion<'inherit' | keyof FontSize, SvgIconPropsSizeOverrides>;
+    fontSize?: OverridableStringUnion<
+      "inherit" | keyof FontSize,
+      SvgIconPropsSizeOverrides
+    >;
     /**
      * Applies a color attribute to the SVG element.
      */
@@ -71,8 +77,8 @@ export interface SvgIconTypeMap<P = {}, D extends React.ElementType = 'svg'> {
 }
 
 export type SvgIconProps<
-  D extends React.ElementType = SvgIconTypeMap['defaultComponent'],
+  D extends React.ElementType = SvgIconTypeMap["defaultComponent"],
   P = {
     component?: React.ElementType;
-  },
+  }
 > = OverrideProps<SvgIconTypeMap<P, D>, D>;

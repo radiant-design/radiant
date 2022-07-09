@@ -1,4 +1,4 @@
-import { generateUtilityClass, generateUtilityClasses } from '@mui/base';
+import { generateUtilityClass, generateUtilityClasses } from "../className";
 
 export interface CardOverflowClasses {
   /** Styles applied to the root element. */
@@ -28,21 +28,24 @@ export interface CardOverflowClasses {
 export type CardOverflowClassKey = keyof CardOverflowClasses;
 
 export function getCardOverflowUtilityClass(slot: string): string {
-  return generateUtilityClass('JoyCardOverflow', slot);
+  return generateUtilityClass("JoyCardOverflow", slot);
 }
 
-const aspectRatioClasses: CardOverflowClasses = generateUtilityClasses('JoyCardOverflow', [
-  'root',
-  'colorPrimary',
-  'colorNeutral',
-  'colorDanger',
-  'colorInfo',
-  'colorSuccess',
-  'colorWarning',
-  'variantPlain',
-  'variantOutlined',
-  'variantSoft',
-  'variantSolid',
-]);
+const aspectRatioClasses: CardOverflowClasses = generateUtilityClasses(
+  "JoyCardOverflow",
+  [
+    "root",
+    "colorPrimary",
+    "colorNeutral",
+    "colorDanger",
+    "colorInfo",
+    "colorSuccess",
+    "colorWarning",
+    "variantPlain",
+    "variantOutlined",
+    "variantSoft",
+    "variantSolid",
+  ]
+);
 
 export default aspectRatioClasses;

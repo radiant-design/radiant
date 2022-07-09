@@ -1,4 +1,4 @@
-import { generateUtilityClass, generateUtilityClasses } from '@mui/base';
+import { generateUtilityClass, generateUtilityClasses } from "../className";
 
 export interface ListItemDecoratorClasses {
   /** Styles applied to the root element. */
@@ -8,12 +8,10 @@ export interface ListItemDecoratorClasses {
 export type ListItemDecoratorClassKey = keyof ListItemDecoratorClasses;
 
 export function getListItemDecoratorUtilityClass(slot: string): string {
-  return generateUtilityClass('JoyListItemDecorator', slot);
+  return generateUtilityClass("JoyListItemDecorator", slot);
 }
 
-const listItemDecoratorClasses: ListItemDecoratorClasses = generateUtilityClasses(
-  'JoyListItemDecorator',
-  ['root'],
-);
+const listItemDecoratorClasses: ListItemDecoratorClasses =
+  generateUtilityClasses("JoyListItemDecorator", ["root"]);
 
 export default listItemDecoratorClasses;

@@ -1,49 +1,52 @@
-import { unstable_composeClasses as composeClasses } from '@mui/base';
-import { OverridableComponent } from '@mui/types';
-import { unstable_capitalize as capitalize } from '@mui/utils';
-import clsx from 'clsx';
-import PropTypes from 'prop-types';
-import * as React from 'react';
-import { useThemeProps } from '../styles';
-import { resolveSxValue } from '../styles/styleUtils';
-import styled from '../styles/styled';
-import { getSheetUtilityClass } from './sheetClasses';
-import { SheetProps, SheetTypeMap } from './SheetProps';
+import { unstable_composeClasses as composeClasses } from "@mui/base";
+import { OverridableComponent } from "@mui/types";
+import { unstable_capitalize as capitalize } from "@mui/utils";
+import clsx from "clsx";
+import PropTypes from "prop-types";
+import * as React from "react";
+import { useThemeProps } from "../styles";
+import styled from "../styles/styled";
+import { resolveSxValue } from "../styles/styleUtils";
+import { getSheetUtilityClass } from "./sheetClasses";
+import { SheetProps, SheetTypeMap } from "./SheetProps";
 
 const useUtilityClasses = (ownerState: SheetProps) => {
-  const { elevation, variant, color } = ownerState;
+  const { variant, color } = ownerState;
 
   const slots = {
     root: [
-      'root',
+      "root",
       variant && `variant${capitalize(variant)}`,
       color && `color${capitalize(color)}`,
-      elevation && `elevation${capitalize(elevation)}`,
     ],
   };
 
   return composeClasses(slots, getSheetUtilityClass, {});
 };
 
-const SheetRoot = styled('div', {
-  name: 'JoySheet',
-  slot: 'Root',
+const SheetRoot = styled("div", {
+  name: "JoySheet",
+  slot: "Root",
   overridesResolver: (props, styles) => styles.root,
 })<{ ownerState: SheetProps }>(({ theme, ownerState }) => {
   const variantStyle = theme.variants[ownerState.variant!]?.[ownerState.color!];
+  const childRadius = resolveSxValue({ theme, ownerState }, "borderRadius");
   return [
     {
-      '--List-item-stickyBackground':
+      "--List-item-stickyBackground":
         variantStyle?.backgroundColor ||
         variantStyle?.background ||
         theme.vars.palette.background.body, // for sticky List
-      '--internal-action-radius': resolveSxValue({ theme, ownerState }, 'borderRadius'),
+      // minus the sheet's border width to have consistent radius between sheet and children
+      ...(childRadius !== undefined && {
+        "--List-radius": `calc(${childRadius} - var(--variant-borderWidth, 0px))`,
+        "--internal-action-radius": `calc(${childRadius} - var(--variant-borderWidth, 0px))`,
+      }),
       // TODO: discuss the theme transition.
       // This value is copied from mui-material Sheet.
-      transition: 'box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
-      boxShadow: theme.vars.shadow[ownerState.elevation!],
+      transition: "box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
       backgroundColor: theme.vars.palette.background.body,
-      position: 'relative',
+      position: "relative",
     },
     variantStyle,
   ];
@@ -52,15 +55,14 @@ const SheetRoot = styled('div', {
 const Sheet = React.forwardRef(function Sheet(inProps, ref) {
   const props = useThemeProps<typeof inProps & SheetProps>({
     props: inProps,
-    name: 'JoySheet',
+    name: "JoySheet",
   });
 
   const {
     className,
-    color = 'neutral',
-    component = 'div',
-    variant = 'plain',
-    elevation,
+    color = "neutral",
+    component = "div",
+    variant = "plain",
     ...other
   } = props;
 
@@ -68,7 +70,6 @@ const Sheet = React.forwardRef(function Sheet(inProps, ref) {
     ...props,
     color,
     component,
-    elevation,
     variant,
   };
 
@@ -103,7 +104,14 @@ Sheet.propTypes /* remove-proptypes */ = {
    * @default 'neutral'
    */
   color: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([
-    PropTypes.oneOf(['danger', 'info', 'neutral', 'primary', 'success', 'warning']),
+    PropTypes.oneOf([
+      "danger",
+      "info",
+      "neutral",
+      "primary",
+      "success",
+      "warning",
+    ]),
     PropTypes.string,
   ]),
   /**
@@ -112,18 +120,12 @@ Sheet.propTypes /* remove-proptypes */ = {
    */
   component: PropTypes.elementType,
   /**
-   * Shadow depth, corresponds to the `theme.shadow` scale.
-   * It accepts theme values between 'xs' and 'xl'.
-   */
-  elevation: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([
-    PropTypes.oneOf(['lg', 'md', 'sm', 'xl', 'xs']),
-    PropTypes.string,
-  ]),
-  /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
   sx: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])),
+    PropTypes.arrayOf(
+      PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])
+    ),
     PropTypes.func,
     PropTypes.object,
   ]),
@@ -132,7 +134,7 @@ Sheet.propTypes /* remove-proptypes */ = {
    * @default 'plain'
    */
   variant: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([
-    PropTypes.oneOf(['outlined', 'plain', 'soft', 'solid']),
+    PropTypes.oneOf(["outlined", "plain", "soft", "solid"]),
     PropTypes.string,
   ]),
 } as any;

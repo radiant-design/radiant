@@ -1,10 +1,16 @@
-import { generateUtilityClass, generateUtilityClasses } from '@mui/base';
+import { generateUtilityClass, generateUtilityClasses } from "../className";
 
 export interface CheckboxClasses {
   /** Styles applied to the root element. */
   root: string;
+  /** Styles applied to the checkbox element. */
+  checkbox: string;
+  /** Styles applied to the action element. */
+  action: string;
   /** Styles applied to the input element. */
   input: string;
+  /** Styles applied to the label element. */
+  label: string;
   /** State class applied to the input component's `checked` class. */
   checked: string;
   /** State class applied to the input component's disabled class. */
@@ -42,28 +48,31 @@ export interface CheckboxClasses {
 export type CheckboxClassKey = keyof CheckboxClasses;
 
 export function getCheckboxUtilityClass(slot: string): string {
-  return generateUtilityClass('JoyCheckbox', slot);
+  return generateUtilityClass("JoyCheckbox", slot);
 }
 
-const checkboxClasses: CheckboxClasses = generateUtilityClasses('JoyCheckbox', [
-  'root',
-  'input',
-  'checked',
-  'disabled',
-  'focusVisible',
-  'indeterminate',
-  'colorPrimary',
-  'colorDanger',
-  'colorInfo',
-  'colorNeutral',
-  'colorSuccess',
-  'colorWarning',
-  'sizeSm',
-  'sizeMd',
-  'sizeLg',
-  'variantOutlined',
-  'variantSoft',
-  'variantSolid',
+const checkboxClasses: CheckboxClasses = generateUtilityClasses("JoyCheckbox", [
+  "root",
+  "checkbox",
+  "action",
+  "input",
+  "label",
+  "checked",
+  "disabled",
+  "focusVisible",
+  "indeterminate",
+  "colorPrimary",
+  "colorDanger",
+  "colorInfo",
+  "colorNeutral",
+  "colorSuccess",
+  "colorWarning",
+  "sizeSm",
+  "sizeMd",
+  "sizeLg",
+  "variantOutlined",
+  "variantSoft",
+  "variantSolid",
 ]);
 
 export default checkboxClasses;

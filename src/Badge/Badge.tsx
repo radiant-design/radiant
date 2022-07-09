@@ -41,28 +41,28 @@ const BadgeRoot = styled("span", {
   overridesResolver: (props, styles) => styles.root,
 })<{ ownerState: BadgeProps }>(({ theme, ownerState }) => ({
   ...(ownerState.size === "sm" && {
-    "--Badge-minHeight": "1.25rem", //0.5
+    "--Badge-minHeight": "0.5rem",
     ...(ownerState.badgeContent && {
-      "--Badge-minHeight": "1.25rem", //1
+      "--Badge-minHeight": "1rem",
     }),
-    "--Badge-paddingX": "0.25rem", //0.25
-    fontSize: theme.vars.fontSize.sm, //xs
+    "--Badge-paddingX": "0.25rem",
+    fontSize: theme.vars.fontSize.xs,
   }),
   ...(ownerState.size === "md" && {
-    "--Badge-minHeight": "1.5rem", //0.75
+    "--Badge-minHeight": "0.75rem",
     ...(ownerState.badgeContent && {
-      "--Badge-minHeight": "1.5rem", //1.25
+      "--Badge-minHeight": "1.25rem",
     }),
-    "--Badge-paddingX": "0.5rem", //0.375
-    fontSize: theme.vars.fontSize.md, //sm
+    "--Badge-paddingX": "0.375rem",
+    fontSize: theme.vars.fontSize.sm,
   }),
   ...(ownerState.size === "lg" && {
-    "--Badge-minHeight": "2rem", //1
+    "--Badge-minHeight": "1rem",
     ...(ownerState.badgeContent && {
-      "--Badge-minHeight": "2rem", //1.5
+      "--Badge-minHeight": "1.5rem",
     }),
-    "--Badge-paddingX": "0.75rem", //0.5
-    fontSize: theme.vars.fontSize.lg, //,md
+    "--Badge-paddingX": "0.5rem",
+    fontSize: theme.vars.fontSize.md,
   }),
   "--Badge-ringSize": "2px",
   "--Badge-ring": `0 0 0 var(--Badge-ringSize) var(--Badge-ringColor, ${theme.vars.palette.background.body})`,
@@ -130,7 +130,7 @@ const BadgeBadge = styled("span", {
       fontWeight: theme.vars.fontWeight.md,
       lineHeight: 1,
       padding:
-        "calc(var(--Badge-paddingX) / 2 - var(--variant-outlinedBorderWidth, 0px)) calc(var(--Badge-paddingX) - var(--variant-outlinedBorderWidth, 0px))",
+        "calc(var(--Badge-paddingX) / 2 - var(--variant-borderWidth)) calc(var(--Badge-paddingX) - var(--variant-borderWidth))",
       minHeight: "var(--Badge-minHeight)",
       minWidth: "var(--Badge-minHeight)",
       borderRadius: "var(--Badge-radius, var(--Badge-minHeight))",
@@ -240,7 +240,7 @@ const Badge = React.forwardRef(function Badge(inProps, ref) {
         Badge: BadgeBadge,
         ...components,
       }}
-      className={clsx(className, classes.root, componentsProps.root?.className)}
+      className={clsx(className, classes.root)}
       componentsProps={{
         root: {
           ...componentsProps.root,
@@ -257,7 +257,7 @@ const Badge = React.forwardRef(function Badge(inProps, ref) {
         },
         badge: {
           ...componentsProps.badge,
-          className: clsx(classes.badge, componentsProps.badge?.className),
+          className: clsx(classes.badge),
           ...(shouldSpreadAdditionalProps(components.Badge) && {
             ownerState: {
               anchorOrigin,
@@ -340,8 +340,8 @@ Badge.propTypes /* remove-proptypes */ = {
    * @default {}
    */
   componentsProps: PropTypes.shape({
-    badge: PropTypes.object,
-    root: PropTypes.object,
+    badge: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+    root: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   }),
   /**
    * If `true`, the badge is invisible.

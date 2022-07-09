@@ -1,4 +1,4 @@
-import { generateUtilityClass, generateUtilityClasses } from '@mui/base';
+import { generateUtilityClass, generateUtilityClasses } from "../className";
 
 export interface ListDividerClasses {
   /** Styles applied to the root element. */
@@ -14,14 +14,12 @@ export interface ListDividerClasses {
 export type ListDividerClassKey = keyof ListDividerClasses;
 
 export function getListDividerUtilityClass(slot: string): string {
-  return generateUtilityClass('JoyListDivider', slot);
+  return generateUtilityClass("JoyListDivider", slot);
 }
 
-const listDividerClasses: ListDividerClasses = generateUtilityClasses('JoyListDivider', [
-  'root',
-  'insetGutter',
-  'insetStartDecorator',
-  'insetStartContent',
-]);
+const listDividerClasses: ListDividerClasses = generateUtilityClasses(
+  "JoyListDivider",
+  ["root", "insetGutter", "insetStartDecorator", "insetStartContent"]
+);
 
 export default listDividerClasses;

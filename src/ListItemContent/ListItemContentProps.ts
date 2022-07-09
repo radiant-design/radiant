@@ -1,11 +1,14 @@
-import * as React from 'react';
-import { OverrideProps } from '@mui/types';
-import { SxProps } from '../styles/types';
-import { ListItemContentClasses } from './listItemContentClasses';
+import * as React from "react";
+import { OverrideProps } from "@mui/types";
+import { SxProps } from "../styles/types";
+import { ListItemContentClasses } from "./listItemContentClasses";
 
-export type ListItemContentSlot = 'root';
+export type ListItemContentSlot = "root";
 
-export interface ListItemContentTypeMap<P = {}, D extends React.ElementType = 'div'> {
+export interface ListItemContentTypeMap<
+  P = {},
+  D extends React.ElementType = "div"
+> {
   props: P & {
     /**
      * The content of the component.
@@ -24,8 +27,8 @@ export interface ListItemContentTypeMap<P = {}, D extends React.ElementType = 'd
 }
 
 export type ListItemContentProps<
-  D extends React.ElementType = ListItemContentTypeMap['defaultComponent'],
+  D extends React.ElementType = ListItemContentTypeMap["defaultComponent"],
   P = {
     component?: React.ElementType;
-  },
+  }
 > = OverrideProps<ListItemContentTypeMap<P, D>, D>;

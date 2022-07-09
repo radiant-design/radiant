@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
 import {
   OverridableComponent,
   OverridableStringUnion,
   OverridableTypeMap,
   OverrideProps,
-} from '@mui/types';
-import { ColorPaletteProp, VariantProp, SxProps } from '../styles/types';
+} from "@mui/types";
+import { ColorPaletteProp, VariantProp, SxProps } from "../styles/types";
 
-export type ButtonSlot = 'root' | 'startIcon' | 'endIcon';
+export type ButtonSlot = "root" | "startIcon" | "endIcon";
 
 export interface ButtonPropsVariantOverrides {}
 
@@ -15,7 +15,7 @@ export interface ButtonPropsColorOverrides {}
 
 export interface ButtonPropsSizeOverrides {}
 
-export interface ButtonTypeMap<P = {}, D extends React.ElementType = 'button'> {
+export interface ButtonTypeMap<P = {}, D extends React.ElementType = "button"> {
   props: P & {
     /**
      * A ref for imperative actions. It currently only supports `focusVisible()` action.
@@ -54,7 +54,7 @@ export interface ButtonTypeMap<P = {}, D extends React.ElementType = 'button'> {
     /**
      * The size of the component.
      */
-    size?: OverridableStringUnion<'sm' | 'md' | 'lg', ButtonPropsSizeOverrides>;
+    size?: OverridableStringUnion<"sm" | "md" | "lg", ButtonPropsSizeOverrides>;
     /**
      * Element placed before the children.
      */
@@ -66,7 +66,7 @@ export interface ButtonTypeMap<P = {}, D extends React.ElementType = 'button'> {
     /**
      * @default 0
      */
-    tabIndex?: NonNullable<React.HTMLAttributes<any>['tabIndex']>;
+    tabIndex?: NonNullable<React.HTMLAttributes<any>["tabIndex"]>;
     /**
      * The variant to use.
      * @default 'solid'
@@ -77,18 +77,18 @@ export interface ButtonTypeMap<P = {}, D extends React.ElementType = 'button'> {
 }
 
 export interface ExtendButtonTypeMap<M extends OverridableTypeMap> {
-  props: M['props'] & ButtonTypeMap['props'];
-  defaultComponent: M['defaultComponent'];
+  props: M["props"] & ButtonTypeMap["props"];
+  defaultComponent: M["defaultComponent"];
 }
 
 export type ButtonProps<
-  D extends React.ElementType = ButtonTypeMap['defaultComponent'],
+  D extends React.ElementType = ButtonTypeMap["defaultComponent"],
   P = {
     component?: React.ElementType;
-  },
+  }
 > = OverrideProps<ButtonTypeMap<P, D>, D>;
 
 export type ExtendButton<M extends OverridableTypeMap> = ((
-  props: OverrideProps<ExtendButtonTypeMap<M>, 'a'>,
+  props: OverrideProps<ExtendButtonTypeMap<M>, "a">
 ) => JSX.Element) &
   OverridableComponent<ExtendButtonTypeMap<M>>;

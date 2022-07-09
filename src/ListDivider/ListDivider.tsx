@@ -1,59 +1,67 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { unstable_capitalize as capitalize } from '@mui/utils';
-import { OverridableComponent } from '@mui/types';
-import composeClasses from '@mui/base/composeClasses';
-import { styled, useThemeProps } from '../styles';
-import { ListDividerProps, ListDividerTypeMap } from './ListDividerProps';
-import { getListDividerUtilityClass } from './listDividerClasses';
-import RowListContext from '../List/RowListContext';
+import * as React from "react";
+import PropTypes from "prop-types";
+import clsx from "clsx";
+import { unstable_capitalize as capitalize } from "@mui/utils";
+import { OverridableComponent } from "@mui/types";
+import composeClasses from "@mui/base/composeClasses";
+import { styled, useThemeProps } from "../styles";
+import { ListDividerProps, ListDividerTypeMap } from "./ListDividerProps";
+import { getListDividerUtilityClass } from "./listDividerClasses";
+import RowListContext from "../List/RowListContext";
 
 const useUtilityClasses = (ownerState: ListDividerProps) => {
   const slots = {
-    root: ['root', ownerState.inset && `inset${capitalize(ownerState.inset)}`],
+    root: ["root", ownerState.inset && `inset${capitalize(ownerState.inset)}`],
   };
 
   return composeClasses(slots, getListDividerUtilityClass, {});
 };
 
-const ListDividerRoot = styled('li', {
-  name: 'JoyListDivider',
-  slot: 'Root',
+const ListDividerRoot = styled("li", {
+  name: "JoyListDivider",
+  slot: "Root",
   overridesResolver: (props, styles) => styles.root,
-})<{ ownerState: ListDividerProps & { row: boolean } }>(({ theme, ownerState }) => ({
-  border: 'none', // reset the border for `hr` tag
+})<{
+  ownerState: ListDividerProps & { row: boolean; "data-first-child"?: boolean };
+}>(({ theme, ownerState }) => ({
+  border: "none", // reset the border for `hr` tag
   ...(ownerState.row && {
-    '--List-divider-marginX': 'calc(var(--List-gap) + var(--List-divider-gap))',
-    borderRight: '1px solid',
-    margin: '0px var(--List-divider-marginX)',
+    "--List-divider-marginX": "calc(var(--List-gap) + var(--List-divider-gap))",
+    borderInlineStart: "1px solid",
+    marginBlock: 0,
+    marginInline: "var(--List-divider-marginX)",
   }),
   ...(!ownerState.row && {
-    '--List-divider-marginY': 'calc(var(--List-gap) + var(--List-divider-gap))',
     // by default, the divider line is stretched from edge-to-edge of the List
     // spacing between ListItem can be controlled by `--List-divider-gap` on the List
-    margin: 'var(--List-divider-marginY) calc(-1 * var(--List-padding))',
-    ...(ownerState.inset === 'gutter' && {
-      margin: 'var(--List-divider-marginY)',
-      marginRight: 'var(--List-item-paddingRight)',
-      marginLeft: 'var(--List-item-paddingLeft)',
+    ...(ownerState["data-first-child"] === undefined && {
+      marginBlockStart: "calc(var(--List-gap) + var(--List-divider-gap))",
     }),
-    ...(ownerState.inset === 'startDecorator' && {
-      marginLeft: 'var(--List-item-paddingLeft)',
+    marginBlockEnd: "var(--List-divider-gap)",
+    marginInline: "calc(-1 * var(--List-padding))",
+    ...(ownerState.inset === "gutter" && {
+      marginInlineStart: "var(--List-item-paddingLeft)",
+      marginInlineEnd: "var(--List-item-paddingRight)",
     }),
-    ...(ownerState.inset === 'startContent' && {
-      marginLeft: 'calc(var(--List-item-paddingLeft) + var(--List-decorator-width))',
+    ...(ownerState.inset === "startDecorator" && {
+      marginInlineStart: "var(--List-item-paddingLeft)",
     }),
-    borderBottom: '1px solid',
+    ...(ownerState.inset === "startContent" && {
+      marginInlineStart:
+        "calc(var(--List-item-paddingLeft) + var(--List-decorator-width))",
+    }),
+    borderBlockEnd: "1px solid",
   }),
   borderColor: theme.vars.palette.divider,
-  listStyle: 'none',
+  listStyle: "none",
 }));
 
 const ListDivider = React.forwardRef(function ListDivider(inProps, ref) {
-  const props = useThemeProps<typeof inProps & { component?: React.ElementType }>({
+  const props = useThemeProps<
+    typeof inProps & { component?: React.ElementType }
+  >({
     props: inProps,
-    name: 'JoyListDivider',
+    name: "JoyListDivider",
   });
 
   const row = React.useContext(RowListContext);
@@ -75,7 +83,7 @@ const ListDivider = React.forwardRef(function ListDivider(inProps, ref) {
       className={clsx(classes.root, className)}
       ownerState={ownerState}
       role="separator"
-      aria-orientation={row ? 'horizontal' : 'vertical'}
+      aria-orientation={row ? "horizontal" : "vertical"}
       {...other}
     >
       {children}
@@ -110,14 +118,16 @@ ListDivider.propTypes /* remove-proptypes */ = {
    * This prop has no effect on the divider if the nearest parent List has `row` prop set to `true`.
    */
   inset: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([
-    PropTypes.oneOf(['gutter', 'startDecorator', 'startContent']),
+    PropTypes.oneOf(["gutter", "startDecorator", "startContent"]),
     PropTypes.string,
   ]),
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
   sx: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])),
+    PropTypes.arrayOf(
+      PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])
+    ),
     PropTypes.func,
     PropTypes.object,
   ]),

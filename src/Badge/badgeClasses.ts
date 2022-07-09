@@ -1,4 +1,4 @@
-import { generateUtilityClass, generateUtilityClasses } from '@mui/base';
+import { generateUtilityClass, generateUtilityClasses } from "../className";
 
 export interface BadgeClasses {
   /** Class name applied to the root element. */
@@ -48,31 +48,31 @@ export interface BadgeClasses {
 export type BadgeClassKey = keyof BadgeClasses;
 
 export function getBadgeUtilityClass(slot: string): string {
-  return generateUtilityClass('JoyBadge', slot);
+  return generateUtilityClass("JoyBadge", slot);
 }
 
-const badgeClasses: BadgeClasses = generateUtilityClasses('JoyBadge', [
-  'root',
-  'badge',
-  'anchorOriginTopRight',
-  'anchorOriginBottomRight',
-  'anchorOriginTopLeft',
-  'anchorOriginBottomLeft',
-  'colorPrimary',
-  'colorDanger',
-  'colorInfo',
-  'colorNeutral',
-  'colorSuccess',
-  'colorWarning',
-  'invisible',
-  'locationInside',
-  'locationOutside',
-  'sizeSm',
-  'sizeMd',
-  'sizeLg',
-  'variantOutlined',
-  'variantSoft',
-  'variantSolid',
+const badgeClasses: BadgeClasses = generateUtilityClasses("JoyBadge", [
+  "root",
+  "badge",
+  "anchorOriginTopRight",
+  "anchorOriginBottomRight",
+  "anchorOriginTopLeft",
+  "anchorOriginBottomLeft",
+  "colorPrimary",
+  "colorDanger",
+  "colorInfo",
+  "colorNeutral",
+  "colorSuccess",
+  "colorWarning",
+  "invisible",
+  "locationInside",
+  "locationOutside",
+  "sizeSm",
+  "sizeMd",
+  "sizeLg",
+  "variantOutlined",
+  "variantSoft",
+  "variantSolid",
 ]);
 
 export default badgeClasses;

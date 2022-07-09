@@ -1,4 +1,4 @@
-import { generateUtilityClass, generateUtilityClasses } from '@mui/base';
+import { generateUtilityClass, generateUtilityClasses } from "../className";
 
 export interface SvgIconClasses {
   /** Styles applied to the root element. */
@@ -44,29 +44,29 @@ export interface SvgIconClasses {
 export type SvgIconClassKey = keyof SvgIconClasses;
 
 export function getSvgIconUtilityClass(slot: string): string {
-  return generateUtilityClass('JoySvgIcon', slot);
+  return generateUtilityClass("JoySvgIcon", slot);
 }
 
-const svgIconClasses: SvgIconClasses = generateUtilityClasses('JoySvgIcon', [
-  'root',
-  'colorInherit',
-  'colorPrimary',
-  'colorNeutral',
-  'colorDanger',
-  'colorInfo',
-  'colorSuccess',
-  'colorWarning',
-  'fontSizeInherit',
-  'fontSizeXs',
-  'fontSizeSm',
-  'fontSizeMd',
-  'fontSizeLg',
-  'fontSizeXl',
-  'fontSizeXl2',
-  'fontSizeXl3',
-  'fontSizeXl4',
-  'fontSizeXl5',
-  'fontSizeXl6',
+const svgIconClasses: SvgIconClasses = generateUtilityClasses("JoySvgIcon", [
+  "root",
+  "colorInherit",
+  "colorPrimary",
+  "colorNeutral",
+  "colorDanger",
+  "colorInfo",
+  "colorSuccess",
+  "colorWarning",
+  "fontSizeInherit",
+  "fontSizeXs",
+  "fontSizeSm",
+  "fontSizeMd",
+  "fontSizeLg",
+  "fontSizeXl",
+  "fontSizeXl2",
+  "fontSizeXl3",
+  "fontSizeXl4",
+  "fontSizeXl5",
+  "fontSizeXl6",
 ]);
 
 export default svgIconClasses;

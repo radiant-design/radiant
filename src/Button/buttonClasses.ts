@@ -1,4 +1,4 @@
-import { generateUtilityClass, generateUtilityClasses } from '@mui/base';
+import { generateUtilityClass, generateUtilityClasses } from "../className";
 
 export interface ButtonClasses {
   /** Styles applied to the root element. */
@@ -44,29 +44,29 @@ export interface ButtonClasses {
 export type ButtonClassKey = keyof ButtonClasses;
 
 export function getButtonUtilityClass(slot: string): string {
-  return generateUtilityClass('JoyButton', slot);
+  return generateUtilityClass("JoyButton", slot);
 }
 
-const buttonClasses: ButtonClasses = generateUtilityClasses('JoyButton', [
-  'root',
-  'colorPrimary',
-  'colorNeutral',
-  'colorDanger',
-  'colorInfo',
-  'colorSuccess',
-  'colorWarning',
-  'variantPlain',
-  'variantOutlined',
-  'variantSoft',
-  'variantSolid',
-  'focusVisible',
-  'disabled',
-  'sizeSm',
-  'sizeMd',
-  'sizeLg',
-  'fullWidth',
-  'startIcon',
-  'endIcon',
+const buttonClasses: ButtonClasses = generateUtilityClasses("JoyButton", [
+  "root",
+  "colorPrimary",
+  "colorNeutral",
+  "colorDanger",
+  "colorInfo",
+  "colorSuccess",
+  "colorWarning",
+  "variantPlain",
+  "variantOutlined",
+  "variantSoft",
+  "variantSolid",
+  "focusVisible",
+  "disabled",
+  "sizeSm",
+  "sizeMd",
+  "sizeLg",
+  "fullWidth",
+  "startIcon",
+  "endIcon",
 ]);
 
 export default buttonClasses;

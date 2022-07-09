@@ -1,4 +1,4 @@
-import { generateUtilityClass, generateUtilityClasses } from '@mui/base';
+import { generateUtilityClass, generateUtilityClasses } from "../className";
 
 export interface LinkClasses {
   /** Styles applied to the root element. */
@@ -60,38 +60,38 @@ export interface LinkClasses {
 export type LinkClassKey = keyof LinkClasses;
 
 export function getLinkUtilityClass(slot: string): string {
-  return generateUtilityClass('JoyLink', slot);
+  return generateUtilityClass("JoyLink", slot);
 }
 
-const linkClasses: LinkClasses = generateUtilityClasses('JoyLink', [
-  'root',
-  'disabled',
-  'focusVisible',
-  'colorPrimary',
-  'colorNeutral',
-  'colorDanger',
-  'colorInfo',
-  'colorSuccess',
-  'colorWarning',
-  'focusVisible',
-  'variantPlain',
-  'variantOutlined',
-  'variantSoft',
-  'variantSolid',
-  'underlineNone',
-  'underlineHover',
-  'underlineAlways',
-  'h1',
-  'h2',
-  'h3',
-  'h4',
-  'h5',
-  'h6',
-  'body1',
-  'body2',
-  'body3',
-  'startDecorator',
-  'endDecorator',
+const linkClasses: LinkClasses = generateUtilityClasses("JoyLink", [
+  "root",
+  "disabled",
+  "focusVisible",
+  "colorPrimary",
+  "colorNeutral",
+  "colorDanger",
+  "colorInfo",
+  "colorSuccess",
+  "colorWarning",
+  "focusVisible",
+  "variantPlain",
+  "variantOutlined",
+  "variantSoft",
+  "variantSolid",
+  "underlineNone",
+  "underlineHover",
+  "underlineAlways",
+  "h1",
+  "h2",
+  "h3",
+  "h4",
+  "h5",
+  "h6",
+  "body1",
+  "body2",
+  "body3",
+  "startDecorator",
+  "endDecorator",
 ]);
 
 export default linkClasses;

@@ -1,55 +1,50 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { OverridableComponent } from '@mui/types';
-import { unstable_useControlled as useControlled, unstable_useId as useId } from '@mui/utils';
-import { unstable_composeClasses as composeClasses } from '@mui/base';
-import { styled, useThemeProps } from '../styles';
-import { getRadioGroupUtilityClass } from './radioGroupClasses';
-import radioClasses from '../Radio/radioClasses';
-import { RadioGroupProps, RadioGroupTypeMap } from './RadioGroupProps';
-import RadioGroupContext from './RadioGroupContext';
+import * as React from "react";
+import PropTypes from "prop-types";
+import clsx from "clsx";
+import { OverridableComponent } from "@mui/types";
+import {
+  unstable_useControlled as useControlled,
+  unstable_useId as useId,
+} from "@mui/utils";
+import { unstable_composeClasses as composeClasses } from "@mui/base";
+import { styled, useThemeProps } from "../styles";
+import { getRadioGroupUtilityClass } from "./radioGroupClasses";
+import { RadioGroupProps, RadioGroupTypeMap } from "./RadioGroupProps";
+import RadioGroupContext from "./RadioGroupContext";
 
 const useUtilityClasses = (ownerState: RadioGroupProps) => {
   const { row } = ownerState;
   const slots = {
-    root: ['root', row && 'row'],
+    root: ["root", row && "row"],
   };
 
   return composeClasses(slots, getRadioGroupUtilityClass, {});
 };
 
-const RadioGroupRoot = styled('div', {
-  name: 'JoyRadioGroup',
-  slot: 'Root',
+const RadioGroupRoot = styled("div", {
+  name: "JoyRadioGroup",
+  slot: "Root",
   overridesResolver: (props, styles) => styles.root,
 })<{ ownerState: RadioGroupProps }>(({ ownerState }) => ({
-  ...(ownerState.size === 'sm' && {
-    '--RadioGroup-gap': '0.5rem',
+  ...(ownerState.size === "sm" && {
+    "--RadioGroup-gap": "0.625rem",
   }),
-  ...(ownerState.size === 'md' && {
-    '--RadioGroup-gap': '0.75rem',
+  ...(ownerState.size === "md" && {
+    "--RadioGroup-gap": "0.875rem",
   }),
-  ...(ownerState.size === 'lg' && {
-    '--RadioGroup-gap': '1rem',
+  ...(ownerState.size === "lg" && {
+    "--RadioGroup-gap": "1.25rem",
   }),
-  display: 'flex',
-  flexDirection: ownerState.row ? 'row' : 'column',
-  [`.${radioClasses.root} + .${radioClasses.root}`]: {
-    ...(ownerState.row
-      ? {
-          marginLeft: 'var(--RadioGroup-gap)',
-        }
-      : {
-          marginTop: 'var(--RadioGroup-gap)',
-        }),
-  },
+  display: "flex",
+  flexDirection: ownerState.row ? "row" : "column",
 }));
 
 const RadioGroup = React.forwardRef(function RadioGroup(inProps, ref) {
-  const props = useThemeProps<typeof inProps & { component?: React.ElementType }>({
+  const props = useThemeProps<
+    typeof inProps & { component?: React.ElementType }
+  >({
     props: inProps,
-    name: 'JoyRadioGroup',
+    name: "JoyRadioGroup",
   });
 
   const {
@@ -64,7 +59,7 @@ const RadioGroup = React.forwardRef(function RadioGroup(inProps, ref) {
     onChange,
     color,
     variant,
-    size = 'md',
+    size = "md",
     row = false,
     ...otherProps
   } = props;
@@ -72,7 +67,7 @@ const RadioGroup = React.forwardRef(function RadioGroup(inProps, ref) {
   const [value, setValueState] = useControlled({
     controlled: valueProp,
     default: defaultValue,
-    name: 'RadioGroup',
+    name: "RadioGroup",
   });
 
   const ownerState = {
@@ -95,7 +90,17 @@ const RadioGroup = React.forwardRef(function RadioGroup(inProps, ref) {
 
   return (
     <RadioGroupContext.Provider
-      value={{ color, disableIcon, overlay, size, variant, name, value, onChange: handleChange }}
+      value={{
+        color,
+        disableIcon,
+        overlay,
+        row,
+        size,
+        variant,
+        name,
+        value,
+        onChange: handleChange,
+      }}
     >
       <RadioGroupRoot
         ref={ref}
@@ -105,7 +110,15 @@ const RadioGroup = React.forwardRef(function RadioGroup(inProps, ref) {
         ownerState={ownerState}
         className={clsx(classes.root, className)}
       >
-        {children}
+        {React.Children.map(children, (child, index) =>
+          React.isValidElement(child)
+            ? React.cloneElement(child, {
+                // to let Radio knows when to apply margin(Inline|Block)Start
+                ...(index === 0 && { "data-first-child": "" }),
+                "data-parent": "RadioGroup",
+              })
+            : child
+        )}
       </RadioGroupRoot>
     </RadioGroupContext.Provider>
   );
@@ -128,7 +141,7 @@ RadioGroup.propTypes /* remove-proptypes */ = {
    * The color of the component. It supports those theme colors that make sense for this component.
    */
   color: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([
-    PropTypes.oneOf(['danger', 'info', 'primary', 'success', 'warning']),
+    PropTypes.oneOf(["danger", "info", "primary", "success", "warning"]),
     PropTypes.string,
   ]),
   /**
@@ -145,7 +158,8 @@ RadioGroup.propTypes /* remove-proptypes */ = {
    */
   disableIcon: PropTypes.bool,
   /**
-   * The `name` attribute of the input.
+   * The name used to reference the value of the control.
+   * If you don't provide this prop, it falls back to a randomly generated name.
    */
   name: PropTypes.string,
   /**
@@ -169,14 +183,16 @@ RadioGroup.propTypes /* remove-proptypes */ = {
    * @default 'md'
    */
   size: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([
-    PropTypes.oneOf(['sm', 'md', 'lg']),
+    PropTypes.oneOf(["sm", "md", "lg"]),
     PropTypes.string,
   ]),
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
   sx: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])),
+    PropTypes.arrayOf(
+      PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])
+    ),
     PropTypes.func,
     PropTypes.object,
   ]),
@@ -188,7 +204,7 @@ RadioGroup.propTypes /* remove-proptypes */ = {
    * The variant to use.
    */
   variant: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([
-    PropTypes.oneOf(['outlined', 'plain', 'soft', 'solid']),
+    PropTypes.oneOf(["outlined", "plain", "soft", "solid"]),
     PropTypes.string,
   ]),
 } as any;

@@ -21,13 +21,13 @@ import {
   borderLeftColor,
   palette,
   typographyVariant,
-} from '@mui/system';
-import { Theme, SxProps } from './types';
+} from "@mui/system";
+import { Theme, SxProps } from "./types";
 
 // The default system themeKey is shape
 const borderRadius = style({
-  prop: 'borderRadius',
-  themeKey: 'radius',
+  prop: "borderRadius",
+  themeKey: "radius",
 });
 
 const borders = compose(
@@ -41,42 +41,42 @@ const borders = compose(
   borderRightColor,
   borderBottomColor,
   borderLeftColor,
-  borderRadius,
+  borderRadius
 );
 
 // The default system themeKey is shadows
 const boxShadow = style({
-  prop: 'boxShadow',
-  themeKey: 'shadow',
+  prop: "boxShadow",
+  themeKey: "shadow",
 });
 
 // The default system themeKey is typography
 export const fontFamily = style({
-  prop: 'fontFamily',
-  themeKey: 'fontFamily',
+  prop: "fontFamily",
+  themeKey: "fontFamily",
 });
 
 // The default system themeKey is typography
 export const fontSize = style({
-  prop: 'fontSize',
-  themeKey: 'fontSize',
+  prop: "fontSize",
+  themeKey: "fontSize",
 });
 
 // The default system themeKey is typography
 export const fontWeight = style({
-  prop: 'fontWeight',
-  themeKey: 'fontWeight',
+  prop: "fontWeight",
+  themeKey: "fontWeight",
 });
 
 // The default system themeKey is typography
 export const letterSpacing = style({
-  prop: 'letterSpacing',
-  themeKey: 'letterSpacing',
+  prop: "letterSpacing",
+  themeKey: "letterSpacing",
 });
 
 export const lineHeight = style({
-  prop: 'lineHeight',
-  themeKey: 'lineHeight',
+  prop: "lineHeight",
+  themeKey: "lineHeight",
 });
 
 const typography = compose(
@@ -85,7 +85,7 @@ const typography = compose(
   fontSize,
   fontWeight,
   letterSpacing,
-  lineHeight,
+  lineHeight
 );
 
 const styleFunctionMapping = {
@@ -103,7 +103,7 @@ const styleFunctionMapping = {
 
 const styleFunctionSx = unstable_createStyleFunctionSx(styleFunctionMapping);
 
-styleFunctionSx.filterProps = ['sx'];
+styleFunctionSx.filterProps = ["sx"];
 
 export const sx = (styles: SxProps) => {
   return ({ theme }: { theme: Theme }) =>

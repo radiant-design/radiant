@@ -1,19 +1,25 @@
-import * as React from 'react';
-import { OverridableStringUnion, OverrideProps } from '@mui/types';
-import { ColorPaletteProp, VariantProp, SxProps } from '../styles/types';
+import * as React from "react";
+import { OverridableStringUnion, OverrideProps } from "@mui/types";
+import { ColorPaletteProp, VariantProp, SxProps } from "../styles/types";
 
-export type AspectRatioSlot = 'root' | 'content';
+export type AspectRatioSlot = "root" | "content";
 
 export interface AspectRatioPropsColorOverrides {}
 export interface AspectRatioPropsVariantOverrides {}
 
-export interface AspectRatioTypeMap<P = {}, D extends React.ElementType = 'div'> {
+export interface AspectRatioTypeMap<
+  P = {},
+  D extends React.ElementType = "div"
+> {
   props: P & {
     /**
      * The color of the component. It supports those theme colors that make sense for this component.
      * @default 'neutral'
      */
-    color?: OverridableStringUnion<ColorPaletteProp, AspectRatioPropsColorOverrides>;
+    color?: OverridableStringUnion<
+      ColorPaletteProp,
+      AspectRatioPropsColorOverrides
+    >;
     /**
      * Used to render icon or text elements inside the AspectRatio if `src` is not set.
      * This can be an element, or just a string.
@@ -37,7 +43,7 @@ export interface AspectRatioTypeMap<P = {}, D extends React.ElementType = 'div'>
     /**
      * The CSS object-fit value of the first-child.
      */
-    objectFit?: React.CSSProperties['objectFit'];
+    objectFit?: React.CSSProperties["objectFit"];
     /**
      * The aspect-ratio of the element. The current implementation uses padding instead of the CSS aspect-ratio due to browser support.
      * https://caniuse.com/?search=aspect-ratio
@@ -52,12 +58,15 @@ export interface AspectRatioTypeMap<P = {}, D extends React.ElementType = 'div'>
      * The variant to use.
      * @default 'soft'
      */
-    variant?: OverridableStringUnion<VariantProp, AspectRatioPropsVariantOverrides>;
+    variant?: OverridableStringUnion<
+      VariantProp,
+      AspectRatioPropsVariantOverrides
+    >;
   };
   defaultComponent: D;
 }
 
 export type AspectRatioProps<
-  D extends React.ElementType = AspectRatioTypeMap['defaultComponent'],
-  P = { component?: React.ElementType },
+  D extends React.ElementType = AspectRatioTypeMap["defaultComponent"],
+  P = { component?: React.ElementType }
 > = OverrideProps<AspectRatioTypeMap<P, D>, D>;

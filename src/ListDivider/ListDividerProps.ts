@@ -1,13 +1,16 @@
-import * as React from 'react';
-import { OverridableStringUnion, OverrideProps } from '@mui/types';
-import { SxProps } from '../styles/types';
-import { ListDividerClasses } from './listDividerClasses';
+import * as React from "react";
+import { OverridableStringUnion, OverrideProps } from "@mui/types";
+import { SxProps } from "../styles/types";
+import { ListDividerClasses } from "./listDividerClasses";
 
-export type ListDividerSlot = 'root';
+export type ListDividerSlot = "root";
 
 export interface ListDividerInsetOverrides {}
 
-export interface ListDividerTypeMap<P = {}, D extends React.ElementType = 'li'> {
+export interface ListDividerTypeMap<
+  P = {},
+  D extends React.ElementType = "li"
+> {
   props: P & {
     /**
      * The content of the component.
@@ -22,7 +25,7 @@ export interface ListDividerTypeMap<P = {}, D extends React.ElementType = 'li'> 
      * This prop has no effect on the divider if the nearest parent List has `row` prop set to `true`.
      */
     inset?: OverridableStringUnion<
-      'gutter' | 'startDecorator' | 'startContent',
+      "gutter" | "startDecorator" | "startContent",
       ListDividerInsetOverrides
     >;
     /**
@@ -34,8 +37,8 @@ export interface ListDividerTypeMap<P = {}, D extends React.ElementType = 'li'> 
 }
 
 export type ListDividerProps<
-  D extends React.ElementType = ListDividerTypeMap['defaultComponent'],
+  D extends React.ElementType = ListDividerTypeMap["defaultComponent"],
   P = {
     component?: React.ElementType;
-  },
+  }
 > = OverrideProps<ListDividerTypeMap<P, D>, D>;

@@ -1,14 +1,14 @@
-import * as React from 'react';
-import { OverridableStringUnion, OverrideProps } from '@mui/types';
-import { ColorPaletteProp, VariantProp, SxProps } from '../styles/types';
+import * as React from "react";
+import { OverridableStringUnion, OverrideProps } from "@mui/types";
+import { ColorPaletteProp, VariantProp, SxProps } from "../styles/types";
 
-export type AvatarSlot = 'root' | 'img' | 'fallback';
+export type AvatarSlot = "root" | "img" | "fallback";
 
 export interface AvatarPropsColorOverrides {}
 export interface AvatarPropsVariantOverrides {}
 export interface AvatarPropsSizeOverrides {}
 
-export interface AvatarTypeMap<P = {}, D extends React.ElementType = 'div'> {
+export interface AvatarTypeMap<P = {}, D extends React.ElementType = "div"> {
   props: P & {
     /**
      * Used in combination with `src` or `srcSet` to
@@ -37,7 +37,7 @@ export interface AvatarTypeMap<P = {}, D extends React.ElementType = 'div'> {
      * It accepts theme values between 'sm' and 'lg'.
      * @default 'md'
      */
-    size?: OverridableStringUnion<'sm' | 'md' | 'lg', AvatarPropsSizeOverrides>;
+    size?: OverridableStringUnion<"sm" | "md" | "lg", AvatarPropsSizeOverrides>;
     /**
      * The `src` attribute for the `img` element.
      */
@@ -61,6 +61,6 @@ export interface AvatarTypeMap<P = {}, D extends React.ElementType = 'div'> {
 }
 
 export type AvatarProps<
-  D extends React.ElementType = AvatarTypeMap['defaultComponent'],
-  P = { component?: React.ElementType },
+  D extends React.ElementType = AvatarTypeMap["defaultComponent"],
+  P = { component?: React.ElementType }
 > = OverrideProps<AvatarTypeMap<P, D>, D>;

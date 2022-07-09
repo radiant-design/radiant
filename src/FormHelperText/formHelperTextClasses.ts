@@ -1,4 +1,4 @@
-import { generateUtilityClass, generateUtilityClasses } from '@mui/base';
+import { generateUtilityClass, generateUtilityClasses } from "../className";
 
 export interface FormHelperTextClasses {
   /** Styles applied to the root element. */
@@ -10,12 +10,12 @@ export interface FormHelperTextClasses {
 export type FormHelperTextClassKey = keyof FormHelperTextClasses;
 
 export function getFormHelperTextUtilityClass(slot: string): string {
-  return generateUtilityClass('JoyFormHelperText', slot);
+  return generateUtilityClass("JoyFormHelperText", slot);
 }
 
-const formHelperTextClasses: FormHelperTextClasses = generateUtilityClasses('JoyFormHelperText', [
-  'root',
-  'asterisk',
-]);
+const formHelperTextClasses: FormHelperTextClasses = generateUtilityClasses(
+  "JoyFormHelperText",
+  ["root", "asterisk"]
+);
 
 export default formHelperTextClasses;

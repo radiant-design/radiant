@@ -1,4 +1,4 @@
-import { generateUtilityClass, generateUtilityClasses } from '@mui/base';
+import { generateUtilityClass, generateUtilityClasses } from "../className";
 
 export interface AvatarGroupClasses {
   /** Styles applied to the root element. */
@@ -8,9 +8,12 @@ export interface AvatarGroupClasses {
 export type AvatarGroupClassKey = keyof AvatarGroupClasses;
 
 export function getAvatarGroupUtilityClass(slot: string): string {
-  return generateUtilityClass('JoyAvatarGroup', slot);
+  return generateUtilityClass("JoyAvatarGroup", slot);
 }
 
-const avatarGroupClasses: AvatarGroupClasses = generateUtilityClasses('JoyAvatarGroup', ['root']);
+const avatarGroupClasses: AvatarGroupClasses = generateUtilityClasses(
+  "JoyAvatarGroup",
+  ["root"]
+);
 
 export default avatarGroupClasses;

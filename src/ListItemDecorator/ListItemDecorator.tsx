@@ -1,36 +1,44 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { OverridableComponent } from '@mui/types';
-import composeClasses from '@mui/base/composeClasses';
-import { styled, useThemeProps } from '../styles';
-import { ListItemDecoratorProps, ListItemDecoratorTypeMap } from './ListItemDecoratorProps';
-import { getListItemDecoratorUtilityClass } from './listItemDecoratorClasses';
+import * as React from "react";
+import PropTypes from "prop-types";
+import clsx from "clsx";
+import { OverridableComponent } from "@mui/types";
+import composeClasses from "@mui/base/composeClasses";
+import { styled, useThemeProps } from "../styles";
+import {
+  ListItemDecoratorProps,
+  ListItemDecoratorTypeMap,
+} from "./ListItemDecoratorProps";
+import { getListItemDecoratorUtilityClass } from "./listItemDecoratorClasses";
 
 const useUtilityClasses = () => {
   const slots = {
-    root: ['root'],
+    root: ["root"],
   };
 
   return composeClasses(slots, getListItemDecoratorUtilityClass, {});
 };
 
-const ListItemDecoratorRoot = styled('span', {
-  name: 'JoyListItemDecorator',
-  slot: 'Root',
+const ListItemDecoratorRoot = styled("span", {
+  name: "JoyListItemDecorator",
+  slot: "Root",
   overridesResolver: (props, styles) => styles.root,
 })<{ ownerState: ListItemDecoratorProps }>({
-  boxSizing: 'border-box',
-  display: 'inline-flex',
-  alignItems: 'center',
+  boxSizing: "border-box",
+  display: "inline-flex",
+  alignItems: "center",
   color: `var(--List-decorator-color)`,
-  minWidth: 'var(--List-decorator-width)',
+  minInlineSize: "var(--List-decorator-width)",
 });
 
-const ListItemDecorator = React.forwardRef(function ListItemDecorator(inProps, ref) {
-  const props = useThemeProps<typeof inProps & { component?: React.ElementType }>({
+const ListItemDecorator = React.forwardRef(function ListItemDecorator(
+  inProps,
+  ref
+) {
+  const props = useThemeProps<
+    typeof inProps & { component?: React.ElementType }
+  >({
     props: inProps,
-    name: 'JoyListItemDecorator',
+    name: "JoyListItemDecorator",
   });
 
   const { component, className, children, ...other } = props;
@@ -80,7 +88,9 @@ ListItemDecorator.propTypes /* remove-proptypes */ = {
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
   sx: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])),
+    PropTypes.arrayOf(
+      PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])
+    ),
     PropTypes.func,
     PropTypes.object,
   ]),

@@ -1,10 +1,10 @@
-import { OverrideProps } from '@mui/types';
-import * as React from 'react';
-import { SxProps } from '../styles/types';
+import { OverrideProps } from "@mui/types";
+import * as React from "react";
+import { SxProps } from "../styles/types";
 
-export type CardCoverSlot = 'root';
+export type CardCoverSlot = "root";
 
-export interface CardCoverTypeMap<P = {}, D extends React.ElementType = 'div'> {
+export interface CardCoverTypeMap<P = {}, D extends React.ElementType = "div"> {
   props: P & {
     /**
      * Used to render icon or text elements inside the CardCover if `src` is not set.
@@ -20,6 +20,6 @@ export interface CardCoverTypeMap<P = {}, D extends React.ElementType = 'div'> {
 }
 
 export type CardCoverProps<
-  D extends React.ElementType = CardCoverTypeMap['defaultComponent'],
-  P = { component?: React.ElementType },
+  D extends React.ElementType = CardCoverTypeMap["defaultComponent"],
+  P = { component?: React.ElementType }
 > = OverrideProps<CardCoverTypeMap<P, D>, D>;

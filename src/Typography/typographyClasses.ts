@@ -1,4 +1,4 @@
-import { generateUtilityClass, generateUtilityClasses } from '@mui/base';
+import { generateUtilityClass, generateUtilityClasses } from "../className";
 
 export interface TypographyClasses {
   /** Styles applied to the root element. */
@@ -29,29 +29,62 @@ export interface TypographyClasses {
   startDecorator: string;
   /** Styles applied to the endDecorator element */
   endDecorator: string;
+  /** Styles applied to the root element if `color="primary"`. */
+  colorPrimary: string;
+  /** Styles applied to the root element if `color="neutral"`. */
+  colorNeutral: string;
+  /** Styles applied to the root element if `color="danger"`. */
+  colorDanger: string;
+  /** Styles applied to the root element if `color="info"`. */
+  colorInfo: string;
+  /** Styles applied to the root element if `color="success"`. */
+  colorSuccess: string;
+  /** Styles applied to the root element if `color="warning"`. */
+  colorWarning: string;
+  /** Styles applied to the root element if `variant="plain"`. */
+  variantPlain: string;
+  /** Styles applied to the root element if `variant="outlined"`. */
+  variantOutlined: string;
+  /** Styles applied to the root element if `variant="soft"`. */
+  variantSoft: string;
+  /** Styles applied to the root element if `variant="solid"`. */
+  variantSolid: string;
 }
 
 export type TypographyClassKey = keyof TypographyClasses;
 
 export function getTypographyUtilityClass(slot: string): string {
-  return generateUtilityClass('JoyTypography', slot);
+  return generateUtilityClass("JoyTypography", slot);
 }
 
-const typographyClasses: TypographyClasses = generateUtilityClasses('JoyTypography', [
-  'root',
-  'h1',
-  'h2',
-  'h3',
-  'h4',
-  'h5',
-  'h6',
-  'body1',
-  'body2',
-  'body3',
-  'noWrap',
-  'gutterBottom',
-  'startDecorator',
-  'endDecorator',
-]);
+const typographyClasses: TypographyClasses = generateUtilityClasses(
+  "JoyTypography",
+  [
+    "root",
+    "h1",
+    "h2",
+    "h3",
+    "h4",
+    "h5",
+    "h6",
+    "body1",
+    "body2",
+    "body3",
+    "noWrap",
+    "gutterBottom",
+    "startDecorator",
+    "endDecorator",
+    "colorPrimary",
+    "colorNeutral",
+    "colorDanger",
+    "colorInfo",
+    "colorSuccess",
+    "colorWarning",
+    "variantPlain",
+    "variantOutlined",
+    "variantSoft",
+    "variantSolid",
+  ]
+);
 
 export default typographyClasses;

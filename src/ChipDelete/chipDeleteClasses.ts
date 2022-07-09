@@ -1,8 +1,12 @@
-import { generateUtilityClass, generateUtilityClasses } from '@mui/base';
+import { generateUtilityClass, generateUtilityClasses } from "../className";
 
 export interface ChipDeleteClasses {
   /** Styles applied to the root element. */
   root: string;
+  /** State class applied to the root element if `disabled={true}`. */
+  disabled: string;
+  /** State class applied to the root element if keyboard focused. */
+  focusVisible: string;
   /** Styles applied to the root element if `color="primary"`. */
   colorPrimary: string;
   /** Styles applied to the root element if `color="neutral"`. */
@@ -26,21 +30,26 @@ export interface ChipDeleteClasses {
 }
 
 export function getChipDeleteUtilityClass(slot: string): string {
-  return generateUtilityClass('JoyChipDelete', slot);
+  return generateUtilityClass("JoyChipDelete", slot);
 }
 
-const chipDeleteClasses: ChipDeleteClasses = generateUtilityClasses('JoyChipDelete', [
-  'root',
-  'colorPrimary',
-  'colorNeutral',
-  'colorDanger',
-  'colorInfo',
-  'colorSuccess',
-  'colorWarning',
-  'variantPlain',
-  'variantSolid',
-  'variantSoft',
-  'variantOutlined',
-]);
+const chipDeleteClasses: ChipDeleteClasses = generateUtilityClasses(
+  "JoyChipDelete",
+  [
+    "root",
+    "disabled",
+    "focusVisible",
+    "colorPrimary",
+    "colorNeutral",
+    "colorDanger",
+    "colorInfo",
+    "colorSuccess",
+    "colorWarning",
+    "variantPlain",
+    "variantSolid",
+    "variantSoft",
+    "variantOutlined",
+  ]
+);
 
 export default chipDeleteClasses;

@@ -3,12 +3,12 @@ import {
   Spacing,
   SxProps as SystemSxProps,
   SystemProps as SystemSystemProps,
-} from '@mui/system';
-import { DefaultColorScheme, ExtendedColorScheme } from './colorScheme';
-import { ColorSystem } from './colorSystem';
-import { Focus } from './focus';
-import { Shadow } from './shadow';
-import { Radius } from './radius';
+} from "@mui/system";
+import { DefaultColorScheme, ExtendedColorScheme } from "./colorScheme";
+import { ColorSystem } from "./colorSystem";
+import { Focus } from "./focus";
+import { Shadow } from "./shadow";
+import { Radius } from "./radius";
 import {
   FontFamily,
   FontSize,
@@ -16,8 +16,8 @@ import {
   LineHeight,
   LetterSpacing,
   TypographySystem,
-} from './typography';
-import { Variants } from './variants';
+} from "./typography";
+import { Variants } from "./variants";
 
 type Split<T, K extends keyof T = keyof T> = K extends string | number
   ? { [k in K]: Exclude<T[K], undefined> }
@@ -35,9 +35,9 @@ type ConcatDeep<T> = T extends Record<string | number, infer V>
 
 type NormalizeVars<T> = ConcatDeep<Split<T>>;
 
-export interface RuntimeColorSystem extends Omit<ColorSystem, 'palette'> {
-  palette: ColorSystem['palette'] & {
-    mode: 'light' | 'dark';
+export interface RuntimeColorSystem extends Omit<ColorSystem, "palette"> {
+  palette: ColorSystem["palette"] & {
+    mode: "light" | "dark";
     colorScheme: DefaultColorScheme | ExtendedColorScheme;
   };
 }
@@ -63,11 +63,14 @@ export interface Theme extends ThemeScales, RuntimeColorSystem {
   variants: Variants;
   spacing: Spacing;
   breakpoints: Breakpoints;
-  prefix: string;
+  cssVarPrefix: string;
   vars: ThemeVars;
   getCssVar: <CustomVar extends string = never>(
     field: ThemeCSSVar | CustomVar,
     ...vars: (ThemeCSSVar | CustomVar)[]
+  ) => string;
+  getColorSchemeSelector: (
+    colorScheme: DefaultColorScheme | ExtendedColorScheme
   ) => string;
 }
 

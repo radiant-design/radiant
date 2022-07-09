@@ -1,33 +1,33 @@
-import * as React from 'react';
-import { OverrideProps } from '@mui/types';
-import { FormHelperTextProps } from '../FormHelperText/FormHelperTextProps';
-import { FormLabelProps } from '../FormLabel/FormLabelProps';
-import { InputProps } from '../Input/InputProps';
+import * as React from "react";
+import { OverrideProps } from "@mui/types";
+import { FormHelperTextProps } from "../FormHelperText/FormHelperTextProps";
+import { FormLabelProps } from "../FormLabel/FormLabelProps";
+import { InputProps } from "../Input/InputProps";
 
-export type TextFieldSlot = 'root';
+export type TextFieldSlot = "root";
 
 type InputRootKeys =
-  | 'autoComplete'
-  | 'autoFocus'
-  | 'disabled'
-  | 'error'
-  | 'required'
-  | 'fullWidth'
-  | 'placeholder'
-  | 'defaultValue'
-  | 'value'
-  | 'onChange'
-  | 'onFocus'
-  | 'onBlur'
-  | 'type'
-  | 'variant'
-  | 'color'
-  | 'size'
-  | 'startDecorator'
-  | 'endDecorator'
-  | 'sx';
+  | "autoComplete"
+  | "autoFocus"
+  | "disabled"
+  | "error"
+  | "required"
+  | "fullWidth"
+  | "placeholder"
+  | "defaultValue"
+  | "value"
+  | "onChange"
+  | "onFocus"
+  | "onBlur"
+  | "type"
+  | "variant"
+  | "color"
+  | "size"
+  | "startDecorator"
+  | "endDecorator"
+  | "sx";
 
-export interface TextFieldTypeMap<P = {}, D extends React.ElementType = 'div'> {
+export interface TextFieldTypeMap<P = {}, D extends React.ElementType = "div"> {
   props: P &
     Pick<InputProps, InputRootKeys> & {
       components?: {
@@ -37,7 +37,7 @@ export interface TextFieldTypeMap<P = {}, D extends React.ElementType = 'div'> {
         HelperText?: React.ElementType;
       };
       componentsProps?: {
-        root?: React.ComponentPropsWithRef<'div'>;
+        root?: React.ComponentPropsWithRef<"div">;
         label?: FormLabelProps;
         input?: Omit<InputProps, InputRootKeys>;
         helperText?: FormHelperTextProps;
@@ -68,8 +68,8 @@ export interface TextFieldTypeMap<P = {}, D extends React.ElementType = 'div'> {
 }
 
 export type TextFieldProps<
-  D extends React.ElementType = TextFieldTypeMap['defaultComponent'],
+  D extends React.ElementType = TextFieldTypeMap["defaultComponent"],
   P = {
     component?: React.ElementType;
-  },
+  }
 > = OverrideProps<TextFieldTypeMap<P, D>, D>;

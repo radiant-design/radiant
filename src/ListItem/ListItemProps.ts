@@ -1,21 +1,24 @@
-import * as React from 'react';
-import { OverridableStringUnion, OverrideProps } from '@mui/types';
-import { ColorPaletteProp, VariantProp, SxProps } from '../styles/types';
-import { ListItemClasses } from './listItemClasses';
+import * as React from "react";
+import { OverridableStringUnion, OverrideProps } from "@mui/types";
+import { ColorPaletteProp, VariantProp, SxProps } from "../styles/types";
+import { ListItemClasses } from "./listItemClasses";
 
-export type ListItemSlot = 'root' | 'startAction' | 'endAction';
+export type ListItemSlot = "root" | "startAction" | "endAction";
 
 export interface ListItemPropsVariantOverrides {}
 
 export interface ListItemPropsColorOverrides {}
 
-export interface ListItemTypeMap<P = {}, D extends React.ElementType = 'li'> {
+export interface ListItemTypeMap<P = {}, D extends React.ElementType = "li"> {
   props: P & {
     /**
      * The color of the component. It supports those theme colors that make sense for this component.
      * @default 'neutral'
      */
-    color?: OverridableStringUnion<ColorPaletteProp, ListItemPropsColorOverrides>;
+    color?: OverridableStringUnion<
+      ColorPaletteProp,
+      ListItemPropsColorOverrides
+    >;
     /**
      * The content of the component.
      */
@@ -46,7 +49,10 @@ export interface ListItemTypeMap<P = {}, D extends React.ElementType = 'li'> {
      * The variant to use.
      * @default 'plain'
      */
-    variant?: OverridableStringUnion<VariantProp, ListItemPropsVariantOverrides>;
+    variant?: OverridableStringUnion<
+      VariantProp,
+      ListItemPropsVariantOverrides
+    >;
     /**
      * The system prop that allows defining system overrides as well as additional CSS styles.
      */
@@ -56,8 +62,8 @@ export interface ListItemTypeMap<P = {}, D extends React.ElementType = 'li'> {
 }
 
 export type ListItemProps<
-  D extends React.ElementType = ListItemTypeMap['defaultComponent'],
+  D extends React.ElementType = ListItemTypeMap["defaultComponent"],
   P = {
     component?: React.ElementType;
-  },
+  }
 > = OverrideProps<ListItemTypeMap<P, D>, D>;

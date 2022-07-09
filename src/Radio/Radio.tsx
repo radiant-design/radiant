@@ -1,40 +1,50 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { OverridableComponent } from '@mui/types';
-import { unstable_capitalize as capitalize, unstable_useId as useId } from '@mui/utils';
-import { unstable_composeClasses as composeClasses } from '@mui/base';
-import { useSwitch } from '@mui/base/SwitchUnstyled';
-import { styled, useThemeProps } from '../styles';
-import { getRadioUtilityClass } from './radioClasses';
-import { RadioProps, RadioTypeMap } from './RadioProps';
-import RadioGroupContext from '../RadioGroup/RadioGroupContext';
-import { TypographyContext } from '../Typography/Typography';
+import * as React from "react";
+import PropTypes from "prop-types";
+import clsx from "clsx";
+import { OverridableComponent } from "@mui/types";
+import {
+  unstable_capitalize as capitalize,
+  unstable_useId as useId,
+} from "@mui/utils";
+import { unstable_composeClasses as composeClasses } from "@mui/base";
+import { useSwitch } from "@mui/base/SwitchUnstyled";
+import { styled, useThemeProps } from "../styles";
+import radioClasses, { getRadioUtilityClass } from "./radioClasses";
+import { RadioProps, RadioTypeMap } from "./RadioProps";
+import RadioGroupContext from "../RadioGroup/RadioGroupContext";
+import { TypographyContext } from "../Typography/Typography";
 
-const useUtilityClasses = (ownerState: RadioProps & { focusVisible: boolean }) => {
-  const { checked, disabled, disableIcon, focusVisible, color, variant, size } = ownerState;
+const useUtilityClasses = (
+  ownerState: RadioProps & { focusVisible: boolean }
+) => {
+  const { checked, disabled, disableIcon, focusVisible, color, variant, size } =
+    ownerState;
 
   const slots = {
     root: [
-      'root',
-      checked && 'checked',
-      disabled && 'disabled',
-      focusVisible && 'focusVisible',
+      "root",
+      checked && "checked",
+      disabled && "disabled",
+      focusVisible && "focusVisible",
       variant && `variant${capitalize(variant)}`,
       color && `color${capitalize(color)}`,
       size && `size${capitalize(size)}`,
     ],
-    radio: ['radio', disabled && 'disabled'], // disabled class is necessary for displaying global variant
-    action: ['action', disableIcon && disabled && 'disabled', focusVisible && 'focusVisible'], // add disabled class to action element for displaying global variant
-    input: ['input'],
-    label: ['label'],
+    radio: ["radio", disabled && "disabled"], // disabled class is necessary for displaying global variant
+    action: [
+      "action",
+      disableIcon && disabled && "disabled",
+      focusVisible && "focusVisible",
+    ], // add disabled class to action element for displaying global variant
+    input: ["input"],
+    label: ["label"],
   };
 
   return composeClasses(slots, getRadioUtilityClass, {});
 };
 
 function areEqualValues(a: unknown, b: unknown) {
-  if (typeof b === 'object' && b !== null) {
+  if (typeof b === "object" && b !== null) {
     return a === b;
   }
 
@@ -42,95 +52,122 @@ function areEqualValues(a: unknown, b: unknown) {
   return String(a) === String(b);
 }
 
-const RadioRoot = styled('span', {
-  name: 'JoyRadio',
-  slot: 'Root',
+const RadioRoot = styled("span", {
+  name: "JoyRadio",
+  slot: "Root",
   overridesResolver: (props, styles) => styles.root,
-})<{ ownerState: RadioProps }>(({ ownerState, theme }) => {
+})<{
+  ownerState: RadioProps & {
+    "data-first-child"?: string;
+    "data-parent"?: string;
+    row?: boolean;
+  };
+}>(({ ownerState, theme }) => {
   return [
     {
-      '--Icon-fontSize': 'var(--Radio-size)',
-      ...(ownerState.size === 'sm' && {
-        '--Radio-size': '1rem',
-        '--Radio-gap': '0.375rem',
+      "--Icon-fontSize": "var(--Radio-size)",
+      ...(ownerState.size === "sm" && {
+        "--Radio-size": "1rem",
+        "--Radio-gap": "0.375rem",
         fontSize: theme.vars.fontSize.sm,
       }),
-      ...(ownerState.size === 'md' && {
-        '--Radio-size': '1.25rem',
-        '--Radio-gap': '0.5rem',
+      ...(ownerState.size === "md" && {
+        "--Radio-size": "1.25rem",
+        "--Radio-gap": "0.5rem",
         fontSize: theme.vars.fontSize.md,
       }),
-      ...(ownerState.size === 'lg' && {
-        '--Radio-size': '1.5rem',
-        '--Radio-gap': '0.625rem',
+      ...(ownerState.size === "lg" && {
+        "--Radio-size": "1.5rem",
+        "--Radio-gap": "0.625rem",
         fontSize: theme.vars.fontSize.lg,
       }),
-      ...(ownerState.label &&
-        !ownerState.disableIcon && {
-          // add some space at the end to not have focus overlapping the label
-          paddingInlineEnd: 'var(--Radio-gap)',
-        }),
-      position: ownerState.overlay ? 'initial' : 'relative',
-      display: 'inline-flex',
-      boxSizing: 'border-box',
+      position: ownerState.overlay ? "initial" : "relative",
+      display: "inline-flex",
+      boxSizing: "border-box",
       minWidth: 0,
       fontFamily: theme.vars.fontFamily.body,
-      lineHeight: 'var(--Radio-size)', // prevent label from having larger height than the checkbox
-      '&.Mui-disabled': {
+      lineHeight: "var(--Radio-size)", // prevent label from having larger height than the checkbox
+      [`&.${radioClasses.disabled}`]: {
         color: theme.vars.palette[ownerState.color!]?.plainDisabledColor,
       },
       ...(ownerState.disableIcon && {
-        color: theme.vars.palette[ownerState.color!]?.[`${ownerState.variant!}Color`],
-        '&.Mui-disabled': {
-          color: theme.vars.palette[ownerState.color!]?.[`${ownerState.variant!}DisabledColor`],
+        color:
+          theme.vars.palette[ownerState.color!]?.[
+            `${ownerState.variant!}Color`
+          ],
+        [`&.${radioClasses.disabled}`]: {
+          color:
+            theme.vars.palette[ownerState.color!]?.[
+              `${ownerState.variant!}DisabledColor`
+            ],
         },
       }),
+      ...(ownerState["data-parent"] === "RadioGroup" &&
+        ownerState["data-first-child"] === undefined && {
+          marginInlineStart: ownerState.row
+            ? "var(--RadioGroup-gap)"
+            : undefined,
+          marginBlockStart: ownerState.row
+            ? undefined
+            : "var(--RadioGroup-gap)",
+        }),
     },
   ];
 });
 
-const RadioRadio = styled('span', {
-  name: 'JoyRadio',
-  slot: 'Radio',
+const RadioRadio = styled("span", {
+  name: "JoyRadio",
+  slot: "Radio",
   overridesResolver: (props, styles) => styles.radio,
 })<{ ownerState: RadioProps }>(({ ownerState, theme }) => [
   {
     margin: 0,
-    boxSizing: 'border-box',
-    width: 'var(--Radio-size)',
-    height: 'var(--Radio-size)',
-    borderRadius: 'var(--Radio-size)',
-    display: 'inline-flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+    boxSizing: "border-box",
+    width: "var(--Radio-size)",
+    height: "var(--Radio-size)",
+    borderRadius: "var(--Radio-size)",
+    display: "inline-flex",
+    justifyContent: "center",
+    alignItems: "center",
     flexShrink: 0,
     // TODO: discuss the transition approach in a separate PR. This value is copied from mui-material Button.
     transition:
-      'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+      "background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
     ...(ownerState.disableIcon && {
-      display: 'contents',
+      display: "contents",
     }),
   },
   ...(!ownerState.disableIcon
     ? [
         theme.variants[ownerState.variant!]?.[ownerState.color!],
-        theme.variants[`${ownerState.variant!}Hover`]?.[ownerState.color!],
-        theme.variants[`${ownerState.variant!}Active`]?.[ownerState.color!],
-        theme.variants[`${ownerState.variant!}Disabled`]?.[ownerState.color!],
+        {
+          "&:hover":
+            theme.variants[`${ownerState.variant!}Hover`]?.[ownerState.color!],
+        },
+        {
+          "&:active":
+            theme.variants[`${ownerState.variant!}Active`]?.[ownerState.color!],
+        },
+        {
+          [`&.${radioClasses.disabled}`]:
+            theme.variants[`${ownerState.variant!}Disabled`]?.[
+              ownerState.color!
+            ],
+        },
       ]
     : []),
 ]);
 
-const RadioAction = styled('span', {
-  name: 'JoyRadio',
-  slot: 'Action',
+const RadioAction = styled("span", {
+  name: "JoyRadio",
+  slot: "Action",
   overridesResolver: (props, styles) => styles.action,
 })<{ ownerState: RadioProps }>(({ theme, ownerState }) => [
   {
-    position: 'absolute',
+    position: "absolute",
     borderRadius: `var(--Radio-action-radius, ${
-      // Automatic radius adjustment when composing with ListItem
-      ownerState.overlay ? 'var(--internal-action-radius, inherit)' : 'inherit'
+      // Automatic radius adjustment when composing with ListItem or Sheet
+      ownerState.overlay ? "var(--internal-action-radius, inherit)" : "inherit"
     })`,
     top: 0,
     left: 0,
@@ -139,35 +176,46 @@ const RadioAction = styled('span', {
     zIndex: 1, // The action element usually cover the area of nearest positioned parent
     // TODO: discuss the transition approach in a separate PR. This value is copied from mui-material Button.
     transition:
-      'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+      "background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
     [theme.focus.selector]: theme.focus.default,
   },
   ...(ownerState.disableIcon
     ? [
         theme.variants[ownerState.variant!]?.[ownerState.color!],
-        theme.variants[`${ownerState.variant!}Hover`]?.[ownerState.color!],
-        theme.variants[`${ownerState.variant!}Active`]?.[ownerState.color!],
-        theme.variants[`${ownerState.variant!}Disabled`]?.[ownerState.color!],
+        {
+          "&:hover":
+            theme.variants[`${ownerState.variant!}Hover`]?.[ownerState.color!],
+        },
+        {
+          "&:active":
+            theme.variants[`${ownerState.variant!}Active`]?.[ownerState.color!],
+        },
+        {
+          [`&.${radioClasses.disabled}`]:
+            theme.variants[`${ownerState.variant!}Disabled`]?.[
+              ownerState.color!
+            ],
+        },
       ]
     : []),
 ]);
 
-const RadioInput = styled('input', {
-  name: 'JoyRadio',
-  slot: 'Input',
+const RadioInput = styled("input", {
+  name: "JoyRadio",
+  slot: "Input",
   overridesResolver: (props, styles) => styles.input,
 })<{ ownerState: RadioProps }>(() => ({
   margin: 0,
   opacity: 0,
-  position: 'absolute',
-  height: '100%',
-  width: '100%',
-  cursor: 'pointer',
+  position: "absolute",
+  height: "100%",
+  width: "100%",
+  cursor: "pointer",
 }));
 
-const RadioLabel = styled('label', {
-  name: 'JoyRadio',
-  slot: 'Label',
+const RadioLabel = styled("label", {
+  name: "JoyRadio",
+  slot: "Label",
   overridesResolver: (props, styles) => styles.label,
 })<{ ownerState: RadioProps }>(({ ownerState }) => ({
   flex: 1,
@@ -175,35 +223,37 @@ const RadioLabel = styled('label', {
   ...(ownerState.disableIcon
     ? {
         zIndex: 1, // label should stay on top of the action.
-        pointerEvents: 'none', // makes hover ineffect.
+        pointerEvents: "none", // makes hover ineffect.
       }
     : {
-        marginInlineStart: 'var(--Radio-gap)',
+        marginInlineStart: "var(--Radio-gap)",
       }),
 }));
 
 /**
  * internal component
  */
-const RadioIcon = styled('span', {
-  name: 'JoyRadio',
-  slot: 'Icon',
+const RadioIcon = styled("span", {
+  name: "JoyRadio",
+  slot: "Icon",
   overridesResolver: (props, styles) => styles.icon,
 })<{ ownerState: RadioProps }>(({ ownerState }) => ({
-  width: '50%',
-  height: '50%',
-  borderRadius: 'inherit',
-  color: 'inherit',
-  backgroundColor: 'currentColor',
+  width: "50%",
+  height: "50%",
+  borderRadius: "inherit",
+  color: "inherit",
+  backgroundColor: "currentColor",
   // TODO: discuss the transition approach in a separate PR. This value is copied from mui-material Button.
-  transition: 'transform 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
-  transform: ownerState.checked ? 'scale(1)' : 'scale(0)',
+  transition: "transform 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+  transform: ownerState.checked ? "scale(1)" : "scale(0)",
 }));
 
 const Radio = React.forwardRef(function Radio(inProps, ref) {
-  const props = useThemeProps<typeof inProps & { component?: React.ElementType }>({
+  const props = useThemeProps<
+    typeof inProps & { component?: React.ElementType }
+  >({
     props: inProps,
-    name: 'JoyRadio',
+    name: "JoyRadio",
   });
 
   const {
@@ -225,8 +275,8 @@ const Radio = React.forwardRef(function Radio(inProps, ref) {
     onFocusVisible,
     required,
     color: colorProp,
-    variant: variantProp = 'outlined',
-    size: sizeProp = 'md',
+    variant: variantProp = "outlined",
+    size: sizeProp = "md",
     uncheckedIcon,
     value,
     ...otherProps
@@ -234,16 +284,17 @@ const Radio = React.forwardRef(function Radio(inProps, ref) {
   const id = useId(idOverride);
   const radioGroup = React.useContext(RadioGroupContext);
   const color = inProps.color || radioGroup.color || colorProp;
-  const activeColor = color || 'primary';
-  const inactiveColor = color || 'neutral';
+  const activeColor = color || "primary";
+  const inactiveColor = color || "neutral";
   const variant = inProps.variant || radioGroup.variant || variantProp;
   const size = inProps.size || radioGroup.size || sizeProp;
   const name = inProps.name || radioGroup.name || nameProp;
-  const disableIcon = inProps.disableIcon || radioGroup.disableIcon || disableIconProp;
+  const disableIcon =
+    inProps.disableIcon || radioGroup.disableIcon || disableIconProp;
   const overlay = inProps.overlay || radioGroup.overlay || overlayProp;
 
   const radioChecked =
-    typeof checkedProp === 'undefined' && !!value
+    typeof checkedProp === "undefined" && !!value
       ? areEqualValues(radioGroup.value, value)
       : checkedProp;
   const useRadioProps = {
@@ -256,7 +307,8 @@ const Radio = React.forwardRef(function Radio(inProps, ref) {
     onFocusVisible,
   };
 
-  const { getInputProps, checked, disabled, focusVisible } = useSwitch(useRadioProps);
+  const { getInputProps, checked, disabled, focusVisible } =
+    useSwitch(useRadioProps);
 
   const ownerState = {
     ...props,
@@ -268,6 +320,7 @@ const Radio = React.forwardRef(function Radio(inProps, ref) {
     size,
     disableIcon,
     overlay,
+    row: radioGroup.row,
   };
 
   const classes = useUtilityClasses(ownerState);
@@ -287,7 +340,9 @@ const Radio = React.forwardRef(function Radio(inProps, ref) {
       >
         {checked && !disableIcon && checkedIcon}
         {!checked && !disableIcon && uncheckedIcon}
-        {!checkedIcon && !uncheckedIcon && !disableIcon && <RadioIcon ownerState={ownerState} />}
+        {!checkedIcon && !uncheckedIcon && !disableIcon && (
+          <RadioIcon ownerState={ownerState} />
+        )}
         <RadioAction
           {...componentsProps?.action}
           ownerState={ownerState}
@@ -295,7 +350,10 @@ const Radio = React.forwardRef(function Radio(inProps, ref) {
         >
           <RadioInput
             ownerState={ownerState}
-            {...getInputProps({ ...componentsProps.input, onChange: radioGroup.onChange })}
+            {...getInputProps({
+              ...componentsProps.input,
+              onChange: radioGroup.onChange,
+            })}
             type="radio"
             id={id}
             name={name}
@@ -345,7 +403,7 @@ Radio.propTypes /* remove-proptypes */ = {
    * @default 'neutral'
    */
   color: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([
-    PropTypes.oneOf(['danger', 'info', 'primary', 'success', 'warning']),
+    PropTypes.oneOf(["danger", "info", "primary", "success", "warning"]),
     PropTypes.string,
   ]),
   /**
@@ -424,14 +482,16 @@ Radio.propTypes /* remove-proptypes */ = {
    * @default 'md'
    */
   size: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([
-    PropTypes.oneOf(['sm', 'md', 'lg']),
+    PropTypes.oneOf(["sm", "md", "lg"]),
     PropTypes.string,
   ]),
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
   sx: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])),
+    PropTypes.arrayOf(
+      PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])
+    ),
     PropTypes.func,
     PropTypes.object,
   ]),
@@ -448,7 +508,7 @@ Radio.propTypes /* remove-proptypes */ = {
    * @default 'outlined'
    */
   variant: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([
-    PropTypes.oneOf(['outlined', 'plain', 'soft', 'solid']),
+    PropTypes.oneOf(["outlined", "plain", "soft", "solid"]),
     PropTypes.string,
   ]),
 } as any;

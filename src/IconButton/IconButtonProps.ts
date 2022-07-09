@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
 import {
   OverridableComponent,
   OverridableStringUnion,
   OverridableTypeMap,
   OverrideProps,
-} from '@mui/types';
-import { ColorPaletteProp, VariantProp, SxProps } from '../styles/types';
+} from "@mui/types";
+import { ColorPaletteProp, VariantProp, SxProps } from "../styles/types";
 
-export type IconButtonSlot = 'root';
+export type IconButtonSlot = "root";
 
 export interface IconButtonPropsVariantOverrides {}
 
@@ -15,7 +15,10 @@ export interface IconButtonPropsColorOverrides {}
 
 export interface IconButtonPropsSizeOverrides {}
 
-export interface IconButtonTypeMap<P = {}, D extends React.ElementType = 'button'> {
+export interface IconButtonTypeMap<
+  P = {},
+  D extends React.ElementType = "button"
+> {
   props: P & {
     /**
      * A ref for imperative actions. It currently only supports `focusVisible()` action.
@@ -27,7 +30,10 @@ export interface IconButtonTypeMap<P = {}, D extends React.ElementType = 'button
      * The color of the component. It supports those theme colors that make sense for this component.
      * @default 'primary'
      */
-    color?: OverridableStringUnion<ColorPaletteProp, IconButtonPropsColorOverrides>;
+    color?: OverridableStringUnion<
+      ColorPaletteProp,
+      IconButtonPropsColorOverrides
+    >;
     /**
      * If `true`, the component is disabled.
      * @default false
@@ -45,7 +51,10 @@ export interface IconButtonTypeMap<P = {}, D extends React.ElementType = 'button
     /**
      * The size of the component.
      */
-    size?: OverridableStringUnion<'sm' | 'md' | 'lg', IconButtonPropsSizeOverrides>;
+    size?: OverridableStringUnion<
+      "sm" | "md" | "lg",
+      IconButtonPropsSizeOverrides
+    >;
     /**
      * The system prop that allows defining system overrides as well as additional CSS styles.
      */
@@ -53,29 +62,32 @@ export interface IconButtonTypeMap<P = {}, D extends React.ElementType = 'button
     /**
      * @default 0
      */
-    tabIndex?: NonNullable<React.HTMLAttributes<any>['tabIndex']>;
+    tabIndex?: NonNullable<React.HTMLAttributes<any>["tabIndex"]>;
     /**
      * The variant to use.
      * @default 'soft'
      */
-    variant?: OverridableStringUnion<VariantProp, IconButtonPropsVariantOverrides>;
+    variant?: OverridableStringUnion<
+      VariantProp,
+      IconButtonPropsVariantOverrides
+    >;
   };
   defaultComponent: D;
 }
 
 export interface ExtendIconButtonTypeMap<M extends OverridableTypeMap> {
-  props: M['props'] & IconButtonTypeMap['props'];
-  defaultComponent: M['defaultComponent'];
+  props: M["props"] & IconButtonTypeMap["props"];
+  defaultComponent: M["defaultComponent"];
 }
 
 export type IconButtonProps<
-  D extends React.ElementType = IconButtonTypeMap['defaultComponent'],
+  D extends React.ElementType = IconButtonTypeMap["defaultComponent"],
   P = {
     component?: React.ElementType;
-  },
+  }
 > = OverrideProps<IconButtonTypeMap<P, D>, D>;
 
 export type ExtendIconButton<M extends OverridableTypeMap> = ((
-  props: OverrideProps<ExtendIconButtonTypeMap<M>, 'a'>,
+  props: OverrideProps<ExtendIconButtonTypeMap<M>, "a">
 ) => JSX.Element) &
   OverridableComponent<ExtendIconButtonTypeMap<M>>;

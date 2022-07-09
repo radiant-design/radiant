@@ -1,4 +1,4 @@
-import { Theme, SxProps } from './types';
+import { Theme, SxProps } from "./types";
 
 /**
  * internal utility
@@ -7,33 +7,34 @@ import { Theme, SxProps } from './types';
 export const resolveSxValue = (
   { theme, ownerState }: { theme: Theme; ownerState: { sx?: SxProps } },
   key: string,
-  defaultValue?: string | number,
+  defaultValue?: string | number
 ) => {
   let parsedValue;
   let sxObject: Record<string, any> = {};
   function resolveSx(sxProp: SxProps) {
-    if (typeof sxProp === 'function') {
+    if (typeof sxProp === "function") {
       const result = sxProp(theme);
       resolveSx(result);
     } else if (Array.isArray(sxProp)) {
       sxProp.forEach((sxItem) => {
-        if (typeof sxItem !== 'boolean') {
+        if (typeof sxItem !== "boolean") {
           resolveSx(sxItem);
         }
       });
-    } else if (typeof sxProp === 'object') {
+    } else if (typeof sxProp === "object") {
       sxObject = { ...sxObject, ...sxProp };
     }
   }
   if (ownerState.sx) {
     resolveSx(ownerState.sx);
     const value = sxObject[key];
-    if (typeof value === 'string' || typeof value === 'number') {
-      if (key === 'borderRadius') {
-        if (typeof value === 'number') {
+    if (typeof value === "string" || typeof value === "number") {
+      if (key === "borderRadius") {
+        if (typeof value === "number") {
           return `${value}px`;
         }
-        parsedValue = theme.vars?.radius[value as keyof typeof theme.vars.radius] || value;
+        parsedValue =
+          theme.vars?.radius[value as keyof typeof theme.vars.radius] || value;
       }
     }
   }
