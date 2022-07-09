@@ -87,30 +87,30 @@ export default function extendTheme(themeOptions?: CssVarsThemeOptions): Theme {
   const createLightModeVariantVariables = (color: ColorPaletteProp) => ({
     plainColor: getCssVar(`palette-${color}-600`),
     plainHoverBg: getCssVar(`palette-${color}-100`),
-    plainActiveBg: getCssVar(`palette-${color}-200`),
-    plainDisabledColor: getCssVar(`palette-${color}-200`),
+    plainActiveBg: `#A1A1A1`, //getCssVar(`palette-${color}-200`),
+    plainDisabledColor: `#A1A1A1`, // getCssVar(`palette-${color}-200`),
 
     outlinedColor: getCssVar(`palette-${color}-500`),
-    outlinedBorder: getCssVar(`palette-${color}-200`),
-    outlinedHoverBg: getCssVar(`palette-${color}-100`),
-    outlinedHoverBorder: getCssVar(`palette-${color}-300`),
+    outlinedBorder: getCssVar(`palette-${color}-500`), //200
+    outlinedHoverBg: getCssVar(`palette-${color}-50`), //100
+    outlinedHoverBorder: getCssVar(`palette-${color}-500`), //300
     outlinedActiveBg: getCssVar(`palette-${color}-200`),
-    outlinedDisabledColor: getCssVar(`palette-${color}-100`),
-    outlinedDisabledBorder: getCssVar(`palette-${color}-100`),
+    outlinedDisabledColor: `#A1A1A1`, // getCssVar(`palette-${color}-100`),
+    outlinedDisabledBorder: `#A1A1A1`, // getCssVar(`palette-${color}-100`),
 
-    softColor: getCssVar(`palette-${color}-600`),
+    softColor: getCssVar(`palette-${color}-700`), //600
     softBg: getCssVar(`palette-${color}-100`),
     softHoverBg: getCssVar(`palette-${color}-200`),
     softActiveBg: getCssVar(`palette-${color}-300`),
-    softDisabledColor: getCssVar(`palette-${color}-300`),
-    softDisabledBg: getCssVar(`palette-${color}-50`),
+    softDisabledColor: `#A1A1A1`, // getCssVar(`palette-${color}-300`),
+    softDisabledBg: `#A1A1A1`, // getCssVar(`palette-${color}-50`),
 
     solidColor: "#fff",
     solidBg: getCssVar(`palette-${color}-500`),
     solidHoverBg: getCssVar(`palette-${color}-600`),
-    solidActiveBg: getCssVar(`palette-${color}-700`),
-    solidDisabledColor: `#fff`,
-    solidDisabledBg: getCssVar(`palette-${color}-200`),
+    solidActiveBg: getCssVar(`palette-${color}-800`), //700
+    solidDisabledColor: `#A1A1A1`, // `#fff`,
+    solidDisabledBg: `#F2F2F2`, // getCssVar(`palette-${color}-200`),
 
     overrideTextPrimary: getCssVar(`palette-${color}-700`),
     overrideTextSecondary: getCssVar(`palette-${color}-500`),
@@ -158,35 +158,35 @@ export default function extendTheme(themeOptions?: CssVarsThemeOptions): Theme {
       },
       neutral: {
         ...colors.grey,
-        plainColor: getCssVar(`palette-neutral-800`),
+        plainColor: getCssVar(`palette-neutral-700`), //800
         plainHoverColor: getCssVar(`palette-neutral-900`),
         plainHoverBg: getCssVar(`palette-neutral-100`),
         plainActiveBg: getCssVar(`palette-neutral-200`),
         plainDisabledColor: getCssVar(`palette-neutral-300`),
 
-        outlinedColor: getCssVar(`palette-neutral-800`),
+        outlinedColor: `#000`, // getCssVar(`palette-neutral-800`),
         outlinedBorder: getCssVar(`palette-neutral-200`),
         outlinedHoverColor: getCssVar(`palette-neutral-900`),
-        outlinedHoverBg: getCssVar(`palette-neutral-100`),
+        outlinedHoverBg: getCssVar(`palette-neutral-50`), //100
         outlinedHoverBorder: getCssVar(`palette-neutral-300`),
         outlinedActiveBg: getCssVar(`palette-neutral-200`),
         outlinedDisabledColor: getCssVar(`palette-neutral-300`),
         outlinedDisabledBorder: getCssVar(`palette-neutral-100`),
 
-        softColor: getCssVar(`palette-neutral-800`),
+        softColor: getCssVar(`palette-neutral-700`), //800
         softBg: getCssVar(`palette-neutral-100`),
         softHoverColor: getCssVar(`palette-neutral-900`),
         softHoverBg: getCssVar(`palette-neutral-200`),
         softActiveBg: getCssVar(`palette-neutral-300`),
-        softDisabledColor: getCssVar(`palette-neutral-300`),
+        softDisabledColor: getCssVar(`palette-neutral-500`), //300
         softDisabledBg: getCssVar(`palette-neutral-50`),
 
         solidColor: getCssVar(`palette-common-white`),
-        solidBg: getCssVar(`palette-neutral-600`),
+        solidBg: getCssVar(`palette-neutral-100`), //600
         solidHoverBg: getCssVar(`palette-neutral-700`),
         solidActiveBg: getCssVar(`palette-neutral-800`),
         solidDisabledColor: getCssVar(`palette-neutral-300`),
-        solidDisabledBg: getCssVar(`palette-neutral-50`),
+        solidDisabledBg: getCssVar(`palette-neutral-100`), //50
 
         overrideTextPrimary: getCssVar(`palette-neutral-700`),
         overrideTextSecondary: getCssVar(`palette-neutral-500`),
@@ -241,7 +241,11 @@ export default function extendTheme(themeOptions?: CssVarsThemeOptions): Theme {
       focusVisible: getCssVar("palette-primary-200"),
     },
     shadowRing: "0 0 #000",
-    shadowChannel: "187 187 187",
+    /**
+     * TODO: ShadowChannel
+     * 26, 26, 26
+     */
+    shadowChannel: "26, 26, 26", // "187 187 187",
   };
   const darkColorSystem = {
     palette: {
@@ -342,34 +346,66 @@ export default function extendTheme(themeOptions?: CssVarsThemeOptions): Theme {
       light: lightColorSystem,
       dark: darkColorSystem,
     },
+    /**
+     * TODO: FontSizes
+     * 11 (0.6875rem)
+     * 12 (0.75rem)
+     * 14 (0.875rem)
+     * 16 (1rem)
+     * 20 (1.25rem)
+     * 24 (1.5rem)
+     * 32 (2rem)
+     */
     fontSize: {
+      xs: "0.6875rem", // 11px
+      sm: "0.75rem", // 12px
+      md: "0.875rem", // 14px
+      lg: "1rem", // 16px
+      xl: "1.25rem", // 20px
+      xl2: "1.5rem", // 24px
+      xl3: "2rem", // 32px
+
+      // xs: "0.75rem",
+      // sm: "0.875rem",
+      // md: "1rem",
+      // lg: "1.125rem",
+      // xl: "1.25rem",
+      // xl2: "1.5rem",
+      // xl3: "1.875rem",
+      // TODO: remove once all occurrence are removed from component
       xs3: "0.5rem",
       xs2: "0.625rem",
-      xs: "0.75rem",
-      sm: "0.875rem",
-      md: "1rem",
-      lg: "1.125rem",
-      xl: "1.25rem",
-      xl2: "1.5rem",
-      xl3: "1.875rem",
       xl4: "2.25rem",
       xl5: "3rem",
       xl6: "3.75rem",
       xl7: "4.5rem",
     },
     fontFamily: {
-      body: `"Public Sans", ${getCssVar("fontFamily-fallback")}`,
-      display: `"Public Sans", ${getCssVar("fontFamily-fallback")}`,
+      body: `"Source Sans Pro", ${getCssVar("fontFamily-fallback")}`,
+      display: `"Poppins", ${getCssVar("fontFamily-fallback")}`,
       code: "Source Code Pro,ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace",
       fallback:
         '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
     },
+    /**
+     * TODO: FontWeight
+     * 400
+     * 500
+     * 600
+     * 700
+     */
     fontWeight: {
-      xs: 200,
-      sm: 300,
+      sm: 400,
       md: 500,
       lg: 600,
       xl: 700,
+
+      // sm: 300,
+      // md: 500,
+      // lg: 600,
+      // xl: 700,
+      // TODO: remove once all occurrence are removed form component
+      xs: 200,
       xl2: 800,
       xl3: 900,
     },
@@ -384,13 +420,27 @@ export default function extendTheme(themeOptions?: CssVarsThemeOptions): Theme {
       },
     },
     lineHeight: {
-      sm: 1.25,
-      md: 1.5,
-      lg: 1.7,
+      // sm: 1.25,
+      // md: 1.5,
+      // lg: 1.7,
+      sm: "1rem",
+      md: "1.25rem",
+      lg: "1.5rem",
+      xl: "2rem",
+      xl2: "2.25rem",
+      xl3: "3rem",
     },
+    /**
+     * TODO: LetterSpacing
+     * normal | 0
+     * 0.4px
+     */
     letterSpacing: {
-      sm: "-0.01em",
-      md: "0.083em",
+      sm: 0,
+      md: "0.4px",
+      // sm: "-0.01em",
+      // md: "0.083em",
+      // TODO: remove once all occurrence are removed form component
       lg: "0.125em",
     },
     radius: {
@@ -400,10 +450,13 @@ export default function extendTheme(themeOptions?: CssVarsThemeOptions): Theme {
       lg: "16px",
       xl: "20px",
     },
+    /**
+     * TODO: Shadows
+     * sm: 0px 4px 8px rgba(26, 26, 26, 0.2)
+     * md: 0px 12px 32px rgba(26, 26, 26, 0.24)
+     * lg: 0px 24px 40px rgba(26, 26, 26, 0.16)
+     */
     shadow: {
-      xs: `${getCssVar("shadowRing")}, 0 1px 2px 0 rgba(${getCssVar(
-        "shadowChannel"
-      )} / 0.12)`,
       sm: `${getCssVar("shadowRing")}, 0.3px 0.8px 1.1px rgba(${getCssVar(
         "shadowChannel"
       )} / 0.11), 0.5px 1.3px 1.8px -0.6px rgba(${getCssVar(
@@ -431,6 +484,12 @@ export default function extendTheme(themeOptions?: CssVarsThemeOptions): Theme {
       )} / 0.19), 7px 17.5px 24.7px -0.7px rgba(${getCssVar(
         "shadowChannel"
       )} / 0.21)`,
+
+      // TODO: remove once all occurrence are removed form component
+      xs: `${getCssVar("shadowRing")}, 0 1px 2px 0 rgba(${getCssVar(
+        "shadowChannel"
+      )} / 0.12)`,
+
       xl: `${getCssVar("shadowRing")}, 0.3px 0.8px 1.1px rgba(${getCssVar(
         "shadowChannel"
       )} / 0.11), 1.8px 4.5px 6.4px -0.2px rgba(${getCssVar(
@@ -450,6 +509,76 @@ export default function extendTheme(themeOptions?: CssVarsThemeOptions): Theme {
       )} / 0.29)`,
     },
     typography: {
+      h1: {
+        fontFamily: getCssVar("fontFamily-display"),
+        fontWeight: getCssVar("fontWeight-xl"), //lg
+        fontSize: getCssVar("fontSize-xl3"), //xl5
+        lineHeight: getCssVar("lineHeight-xl3"), //sm
+        letterSpacing: getCssVar("letterSpacing-sm"),
+        color: getCssVar("palette-text-primary"),
+      },
+      h2: {
+        fontFamily: getCssVar("fontFamily-display"),
+        fontWeight: getCssVar("fontWeight-lg"),
+        fontSize: getCssVar("fontSize-xl2"), //xl4
+        lineHeight: getCssVar("lineHeight-xl2"), //sm
+        letterSpacing: getCssVar("letterSpacing-sm"),
+        color: getCssVar("palette-text-primary"),
+      },
+      h3: {
+        fontFamily: getCssVar("fontFamily-body"),
+        fontWeight: getCssVar("fontWeight-lg"), //md
+        fontSize: getCssVar("fontSize-xl"), //xl3
+        lineHeight: getCssVar("lineHeight-xl"), //sm
+        color: getCssVar("palette-text-primary"),
+      },
+      h4: {
+        fontFamily: getCssVar("fontFamily-body"),
+        fontWeight: getCssVar("fontWeight-lg"), //md
+        fontSize: getCssVar("fontSize-lg"), //xl2
+        lineHeight: getCssVar("lineHeight-lg"), //md
+        color: getCssVar("palette-text-primary"),
+      },
+      h5: {
+        fontFamily: getCssVar("fontFamily-body"),
+        fontWeight: getCssVar("fontWeight-md"),
+        fontSize: getCssVar("fontSize-sm"), //xl
+        lineHeight: getCssVar("lineHeight-md"),
+        color: getCssVar("palette-text-primary"),
+      },
+      h6: {
+        fontFamily: getCssVar("fontFamily-body"),
+        fontWeight: getCssVar("fontWeight-md"),
+        fontSize: getCssVar("fontSize-sm"), //lg
+        lineHeight: getCssVar("lineHeight-sm"), //md
+        color: getCssVar("palette-text-primary"),
+      },
+      body1: {
+        fontFamily: getCssVar("fontFamily-body"),
+        fontSize: getCssVar("fontSize-md"),
+        lineHeight: getCssVar("lineHeight-md"),
+        color: getCssVar("palette-text-primary"),
+      },
+      body2: {
+        fontFamily: getCssVar("fontFamily-body"),
+        fontSize: getCssVar("fontSize-sm"),
+        lineHeight: getCssVar("lineHeight-md"),
+        color: getCssVar("palette-text-secondary"),
+      },
+      subtitle1: {
+        fontFamily: getCssVar("fontFamily-body"),
+        fontSize: getCssVar("fontSize-xl"),
+        lineHeight: getCssVar("lineHeight-xl"),
+        color: getCssVar("palette-text-tertiary"),
+      },
+      subtitle2: {
+        fontFamily: getCssVar("fontFamily-body"),
+        fontSize: getCssVar("fontSize-lg"),
+        lineHeight: getCssVar("lineHeight-lg"),
+        color: getCssVar("palette-text-tertiary"),
+      },
+      // TODO: remove once all occurrence are removed form component
+
       display1: {
         fontFamily: getCssVar("fontFamily-display"),
         fontWeight: getCssVar("fontWeight-xl"),
@@ -465,62 +594,6 @@ export default function extendTheme(themeOptions?: CssVarsThemeOptions): Theme {
         lineHeight: getCssVar("lineHeight-sm"),
         letterSpacing: getCssVar("letterSpacing-sm"),
         color: getCssVar("palette-text-primary"),
-      },
-      h1: {
-        fontFamily: getCssVar("fontFamily-display"),
-        fontWeight: getCssVar("fontWeight-lg"),
-        fontSize: getCssVar("fontSize-xl5"),
-        lineHeight: getCssVar("lineHeight-sm"),
-        letterSpacing: getCssVar("letterSpacing-sm"),
-        color: getCssVar("palette-text-primary"),
-      },
-      h2: {
-        fontFamily: getCssVar("fontFamily-display"),
-        fontWeight: getCssVar("fontWeight-lg"),
-        fontSize: getCssVar("fontSize-xl4"),
-        lineHeight: getCssVar("lineHeight-sm"),
-        letterSpacing: getCssVar("letterSpacing-sm"),
-        color: getCssVar("palette-text-primary"),
-      },
-      h3: {
-        fontFamily: getCssVar("fontFamily-body"),
-        fontWeight: getCssVar("fontWeight-md"),
-        fontSize: getCssVar("fontSize-xl3"),
-        lineHeight: getCssVar("lineHeight-sm"),
-        color: getCssVar("palette-text-primary"),
-      },
-      h4: {
-        fontFamily: getCssVar("fontFamily-body"),
-        fontWeight: getCssVar("fontWeight-md"),
-        fontSize: getCssVar("fontSize-xl2"),
-        lineHeight: getCssVar("lineHeight-md"),
-        color: getCssVar("palette-text-primary"),
-      },
-      h5: {
-        fontFamily: getCssVar("fontFamily-body"),
-        fontWeight: getCssVar("fontWeight-md"),
-        fontSize: getCssVar("fontSize-xl"),
-        lineHeight: getCssVar("lineHeight-md"),
-        color: getCssVar("palette-text-primary"),
-      },
-      h6: {
-        fontFamily: getCssVar("fontFamily-body"),
-        fontWeight: getCssVar("fontWeight-md"),
-        fontSize: getCssVar("fontSize-lg"),
-        lineHeight: getCssVar("lineHeight-md"),
-        color: getCssVar("palette-text-primary"),
-      },
-      body1: {
-        fontFamily: getCssVar("fontFamily-body"),
-        fontSize: getCssVar("fontSize-md"),
-        lineHeight: getCssVar("lineHeight-md"),
-        color: getCssVar("palette-text-primary"),
-      },
-      body2: {
-        fontFamily: getCssVar("fontFamily-body"),
-        fontSize: getCssVar("fontSize-sm"),
-        lineHeight: getCssVar("lineHeight-md"),
-        color: getCssVar("palette-text-secondary"),
       },
       body3: {
         fontFamily: getCssVar("fontFamily-body"),

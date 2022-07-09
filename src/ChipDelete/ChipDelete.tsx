@@ -51,6 +51,7 @@ const ChipDeleteRoot = styled("button", {
     display: "inline-flex",
     justifyContent: "center",
     alignItems: "center",
+    cursor: "pointer",
     zIndex: 1, // overflow above sibling button or anchor
     border: "none", // reset user agent stylesheet
     background: "none", // reset user agent stylesheet
@@ -58,14 +59,14 @@ const ChipDeleteRoot = styled("button", {
     [theme.focus.selector]: theme.focus.default,
   },
   theme.variants[ownerState.variant!]?.[ownerState.color!],
-  {
-    "&:hover":
-      theme.variants[`${ownerState.variant!}Hover`]?.[ownerState.color!],
-  },
-  {
-    "&:active":
-      theme.variants[`${ownerState.variant!}Active`]?.[ownerState.color!],
-  },
+  // {
+  //   "&:hover":
+  //     theme.variants[`${ownerState.variant!}Hover`]?.[ownerState.color!],
+  // },
+  // {
+  //   "&:active":
+  //     theme.variants[`${ownerState.variant!}Active`]?.[ownerState.color!],
+  // },
   {
     [`&.${chipDeleteClasses.disabled}`]:
       theme.variants[`${ownerState.variant!}Disabled`]?.[ownerState.color!],

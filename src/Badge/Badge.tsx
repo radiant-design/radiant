@@ -41,30 +41,30 @@ const BadgeRoot = styled("span", {
   overridesResolver: (props, styles) => styles.root,
 })<{ ownerState: BadgeProps }>(({ theme, ownerState }) => ({
   ...(ownerState.size === "sm" && {
-    "--Badge-minHeight": "0.5rem",
+    "--Badge-minHeight": "1.25rem", //0.5
     ...(ownerState.badgeContent && {
-      "--Badge-minHeight": "1rem",
+      "--Badge-minHeight": "1.25rem", //1
     }),
-    "--Badge-paddingX": "0.25rem",
-    fontSize: theme.vars.fontSize.xs,
+    "--Badge-paddingX": "0.25rem", //0.25
+    fontSize: theme.vars.fontSize.sm, //xs
   }),
   ...(ownerState.size === "md" && {
-    "--Badge-minHeight": "0.75rem",
+    "--Badge-minHeight": "1.5rem", //0.75
     ...(ownerState.badgeContent && {
-      "--Badge-minHeight": "1.25rem",
+      "--Badge-minHeight": "1.5rem", //1.25
     }),
-    "--Badge-paddingX": "0.375rem",
-    fontSize: theme.vars.fontSize.sm,
+    "--Badge-paddingX": "0.5rem", //0.375
+    fontSize: theme.vars.fontSize.md, //sm
   }),
   ...(ownerState.size === "lg" && {
-    "--Badge-minHeight": "1rem",
+    "--Badge-minHeight": "2rem", //1
     ...(ownerState.badgeContent && {
-      "--Badge-minHeight": "1.5rem",
+      "--Badge-minHeight": "2rem", //1.5
     }),
-    "--Badge-paddingX": "0.5rem",
-    fontSize: theme.vars.fontSize.md,
+    "--Badge-paddingX": "0.75rem", //0.5
+    fontSize: theme.vars.fontSize.lg, //,md
   }),
-  "--Badge-ringSize": "2px",
+  "--Badge-ringSize": "0px", //2
   "--Badge-ring": `0 0 0 var(--Badge-ringSize) var(--Badge-ringColor, ${theme.vars.palette.background.body})`,
   position: "relative",
   display: "inline-flex",

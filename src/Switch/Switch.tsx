@@ -41,7 +41,11 @@ const switchColorVariables =
     return {
       "--Switch-track-background":
         theme.vars.palette[color!]?.[`${variant!}${data.state || ""}Bg`],
-      "--Switch-track-color": theme.vars.palette[color!]?.[`${variant!}Color`],
+      // "--Switch-track-color": theme.vars.palette[color!]?.[`${variant!}Color`],
+      "--Switch-track-color":
+        ownerState.variant === "solid"
+          ? "#fff"
+          : theme.vars.palette[color!]?.plainColor,
       "--Switch-track-borderColor":
         variant === "outlined"
           ? theme.vars.palette[color!]?.[`${variant!}${data.state || ""}Border`]
@@ -49,6 +53,10 @@ const switchColorVariables =
       "--Switch-thumb-background":
         theme.vars.palette[color!]?.[`${variant!}${data.state || ""}Color`],
       "--Switch-thumb-color": theme.vars.palette[color!]?.[`${variant!}Bg`],
+      "--Switch-thumb-hover-color": theme.vars.palette[color!]?.plainHoverBg,
+      // ownerState.variant === "solid"
+      //   ? theme.vars.palette[color!]?.plainHoverBg
+      //   : theme.vars.palette[color!]?.plainHoverBg, ///"#fff",
     };
   };
 
@@ -69,23 +77,23 @@ const SwitchRoot = styled("span", {
         ? "none"
         : "0 0 0 1px var(--Switch-track-background)", // create border-like if the thumb is bigger than the track
     ...(ownerState.size === "sm" && {
-      "--Switch-track-width": "40px",
-      "--Switch-track-height": "20px",
+      "--Switch-track-width": "28px", //40
+      "--Switch-track-height": "16px", //20
       "--Switch-thumb-size": "12px",
       "--Switch-gap": "6px",
       fontSize: theme.vars.fontSize.sm,
     }),
     ...(ownerState.size === "md" && {
-      "--Switch-track-width": "48px",
-      "--Switch-track-height": "24px",
+      "--Switch-track-width": "36px", //48
+      "--Switch-track-height": "20px", //24
       "--Switch-thumb-size": "16px",
       "--Switch-gap": "8px",
       fontSize: theme.vars.fontSize.md,
     }),
     ...(ownerState.size === "lg" && {
-      "--Switch-track-width": "64px",
-      "--Switch-track-height": "32px",
-      "--Switch-thumb-size": "24px",
+      "--Switch-track-width": "44px", //64
+      "--Switch-track-height": "24px", //32
+      "--Switch-thumb-size": "20px", //24
       "--Switch-gap": "12px",
     }),
     "--internal-paddingBlock": `max((var(--Switch-track-height) - 2 * var(--variant-borderWidth) - var(--Switch-thumb-size)) / 2, 0px)`,
@@ -93,14 +101,17 @@ const SwitchRoot = styled("span", {
     "--Switch-thumb-width": "var(--Switch-thumb-size)",
     "--Switch-thumb-offset": `max((var(--Switch-track-height) - var(--Switch-thumb-size)) / 2, 0px)`,
     ...getColorVariables(),
-    "&:hover": {
-      ...getColorVariables({ state: "Hover" }),
+    // "&:hover": {
+    //   ...getColorVariables({ state: "Hover" }),
+    // },
+    "&:hover span span": {
+      border: "5px solid var(--Switch-thumb-hover-color) !important",
     },
     [`&.${switchClasses.checked}`]: {
       ...getColorVariables(),
-      "&:hover": {
-        ...getColorVariables({ state: "Hover" }),
-      },
+      // "&:hover": {
+      //   ...getColorVariables({ state: "Hover" }),
+      // },
     },
     [`&.${switchClasses.disabled}`]: {
       pointerEvents: "none",
@@ -160,19 +171,22 @@ const SwitchTrack = styled("span", {
     justifyContent: "space-between",
     alignItems: "center",
     boxSizing: "border-box",
+    "&:hover span": {
+      border: "5px solid var(--Switch-thumb-hover-color) !important",
+    },
     border: "var(--variant-borderWidth) solid",
     borderColor: "var(--Switch-track-borderColor)",
     backgroundColor: "var(--Switch-track-background)",
     borderRadius: "var(--Switch-track-radius)",
     fontFamily: theme.vars.fontFamily.body,
     ...(ownerState.size === "sm" && {
-      fontSize: theme.vars.fontSize.xs,
+      fontSize: theme.vars.fontSize.sm, //xs
     }),
     ...(ownerState.size === "md" && {
-      fontSize: theme.vars.fontSize.sm,
+      fontSize: theme.vars.fontSize.md, //sm
     }),
     ...(ownerState.size === "lg" && {
-      fontSize: theme.vars.fontSize.md,
+      fontSize: theme.vars.fontSize.lg, //md
     }),
   })
 );
@@ -194,9 +208,10 @@ const SwitchThumb = styled("span", {
   width: "var(--Switch-thumb-width)",
   height: "var(--Switch-thumb-size)",
   borderRadius: "var(--Switch-thumb-radius)",
-  boxShadow: "var(--Switch-thumb-shadow)",
+  // boxShadow: "var(--Switch-thumb-shadow)",
   color: "var(--Switch-thumb-color)",
-  backgroundColor: "var(--Switch-thumb-background)",
+  backgroundColor: "#fff", // "var(--Switch-thumb-background)",
+
   [`&.${switchClasses.checked}`]: {
     left: "calc(50% + var(--Switch-track-width) / 2 - var(--Switch-thumb-width) / 2 - var(--Switch-thumb-offset))",
   },

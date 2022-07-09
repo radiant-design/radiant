@@ -76,30 +76,30 @@ const ButtonRoot = styled("button", {
     {
       "--Icon-margin": "initial", // reset the icon's margin.
       ...(ownerState.size === "sm" && {
-        "--Icon-fontSize": "1.25rem",
-        "--Button-gap": "0.375rem",
+        "--Icon-fontSize": "1rem", //1.25
+        "--Button-gap": "0.25rem", //0.375
         minHeight: "var(--Button-minHeight, 2rem)",
-        fontSize: theme.vars.fontSize.sm,
+        fontSize: theme.vars.fontSize.xs, //sm -->since xs is 11px
         paddingBlock: "2px",
-        paddingInline: "0.75rem",
+        paddingInline: "1rem", //0.75
       }),
       ...(ownerState.size === "md" && {
-        "--Icon-fontSize": "1.5rem", // control the SvgIcon font-size
-        "--Button-gap": "0.5rem",
+        "--Icon-fontSize": "1.25rem", // 1.5 // control the SvgIcon font-size
+        "--Button-gap": "0.25rem", //0.5
         minHeight: "var(--Button-minHeight, 2.5rem)", // use min-height instead of height to make the button resilient to its content
-        fontSize: theme.vars.fontSize.sm,
+        fontSize: theme.vars.fontSize.sm, //sm -- 12px
         paddingBlock: "0.25rem", // the padding-block act as a minimum spacing between content and root element
-        paddingInline: "1rem",
+        paddingInline: "1.5rem", //1
       }),
       ...(ownerState.size === "lg" && {
-        "--Icon-fontSize": "1.75rem",
-        "--Button-gap": "0.75rem",
-        minHeight: "var(--Button-minHeight, 3rem)",
-        fontSize: theme.vars.fontSize.md,
+        "--Icon-fontSize": "1.5rem", //1.75
+        "--Button-gap": "0.5rem", //0.75
+        minHeight: "var(--Button-minHeight, 3rem)", //48px
+        fontSize: theme.vars.fontSize.lg, //md
         paddingBlock: "0.375rem",
-        paddingInline: "1.5rem",
+        paddingInline: "2rem", //1.5
       }),
-      borderRadius: `var(--Button-radius, ${theme.vars.radius.sm})`, // to be controlled by other components, eg. Input
+      borderRadius: `var(--Button-radius, ${theme.vars.radius.xs})`, //sm // to be controlled by other components, eg. Input
       margin: `var(--Button-margin)`, // to be controlled by other components, eg. Input
       border: "none",
       backgroundColor: "transparent",
@@ -112,8 +112,11 @@ const ButtonRoot = styled("button", {
       // TODO: discuss the transition approach in a separate PR. This value is copied from mui-material Button.
       transition:
         "background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
-      fontFamily: theme.vars.fontFamily.body,
-      fontWeight: theme.vars.fontWeight.md,
+      fontFamily: theme.vars.fontFamily.display, //body
+      fontWeight:
+        ownerState.size === "lg"
+          ? theme.vars.fontWeight.lg
+          : theme.vars.fontWeight.md, //theme.vars.fontWeight.md
       lineHeight: 1,
       ...(ownerState.fullWidth && {
         width: "100%",
@@ -135,7 +138,7 @@ const ButtonRoot = styled("button", {
     },
   ];
 });
-//@ts-ignore
+
 const Button = React.forwardRef(function Button(inProps, ref) {
   const props = useThemeProps<
     typeof inProps & { component?: React.ElementType }
@@ -156,7 +159,7 @@ const Button = React.forwardRef(function Button(inProps, ref) {
     startIcon: startIconProp,
     endIcon: endIconProp,
     ...other
-  } = props;
+  } = props as any;
 
   const buttonRef = React.useRef<HTMLElement | null>(null);
   const handleRef = useForkRef(buttonRef, ref);
@@ -216,7 +219,7 @@ const Button = React.forwardRef(function Button(inProps, ref) {
       {endIcon}
     </ButtonRoot>
   );
-}) as ExtendButton<ButtonTypeMap>;
+}) as unknown as ExtendButton<ButtonTypeMap>;
 
 Button.propTypes /* remove-proptypes */ = {
   // ----------------------------- Warning --------------------------------

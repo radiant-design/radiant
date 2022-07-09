@@ -64,24 +64,24 @@ const ChipRoot = styled("div", {
         "--Icon-margin": "initial", // reset the icon's margin.
         "--internal-action-radius": "var(--Chip-radius)", // to be used with Radio or Checkbox
         ...(ownerState.size === "sm" && {
-          "--Chip-gap": "0.25rem",
-          "--Chip-paddingInline": "0.5rem",
+          "--Chip-gap": "0.25rem", //0.25 //gap btw cross icon and text
+          "--Chip-paddingInline": "0.75rem", //0.5
           "--Chip-decorator-childHeight":
             "calc(min(1.5rem, var(--Chip-minHeight)) - 2 * var(--variant-borderWidth))",
-          "--Icon-fontSize": "0.875rem",
-          "--Chip-minHeight": "1.5rem",
-          fontSize: theme.vars.fontSize.xs,
+          "--Icon-fontSize": "1rem", //0.875
+          "--Chip-minHeight": "2rem", //1.5
+          fontSize: theme.vars.fontSize.sm, //xs
         }),
         ...(ownerState.size === "md" && {
-          "--Chip-gap": "0.375rem",
-          "--Chip-paddingInline": "0.75rem",
+          "--Chip-gap": "0.25rem", //0.375
+          "--Chip-paddingInline": "1rem", //0.75
           "--Chip-decorator-childHeight": "min(1.5rem, var(--Chip-minHeight))",
-          "--Icon-fontSize": "1.125rem",
-          "--Chip-minHeight": "2rem",
-          fontSize: theme.vars.fontSize.sm,
+          "--Icon-fontSize": "1rem", //1.125
+          "--Chip-minHeight": "2.5rem", //2rem
+          fontSize: theme.vars.fontSize.md, //sm
         }),
         ...(ownerState.size === "lg" && {
-          "--Chip-gap": "0.5rem",
+          "--Chip-gap": "0rem",
           "--Chip-paddingInline": "1rem",
           "--Chip-decorator-childHeight": "min(2rem, var(--Chip-minHeight))",
           "--Icon-fontSize": "1.25rem",
