@@ -40,25 +40,25 @@ const InputRoot = styled("div", {
 })<{ ownerState: InputProps & InputUnstyledOwnerState }>(
   ({ theme, ownerState }) => [
     {
-      "--Input-radius": theme.vars.radius.sm, // radius is used by the decorator children
-      "--Input-gap": "0.5rem",
+      "--Input-radius": theme.vars.radius.xs, //sm radius is used by the decorator children
+      "--Input-gap": "1rem", //0.5
       "--Input-placeholderOpacity": 0.5,
-      "--Input-focusedThickness": "calc(var(--variant-borderWidth, 1px) + 1px)",
+      "--Input-focusedThickness": "0.5px", //"calc(var(--variant-borderWidth, 1px) + 1px)",
       "--Input-focusedHighlight":
         theme.vars.palette[
           ownerState.color === "neutral" ? "primary" : ownerState.color!
         ]?.[500],
       ...(ownerState.size === "sm" && {
         "--Input-minHeight": "2rem",
-        "--Input-paddingInline": "0.5rem",
+        "--Input-paddingInline": "1rem", //0.5
         "--Input-decorator-childHeight": "min(1.5rem, var(--Input-minHeight))",
-        "--Icon-fontSize": "1.25rem",
+        "--Icon-fontSize": "1rem", //1.25
       }),
       ...(ownerState.size === "md" && {
         "--Input-minHeight": "2.5rem",
-        "--Input-paddingInline": "0.75rem", // gutter is the padding-x
+        "--Input-paddingInline": "1rem", //0.75 gutter is the padding-x
         "--Input-decorator-childHeight": "min(2rem, var(--Input-minHeight))",
-        "--Icon-fontSize": "1.5rem",
+        "--Icon-fontSize": "1.25rem", //1.5
       }),
       ...(ownerState.size === "lg" && {
         "--Input-minHeight": "3rem",
@@ -93,9 +93,9 @@ const InputRoot = styled("div", {
       borderRadius: "var(--Input-radius)",
       fontFamily: theme.vars.fontFamily.body,
       fontSize: theme.vars.fontSize.md,
-      ...(ownerState.size === "sm" && {
-        fontSize: theme.vars.fontSize.sm,
-      }),
+      // ...(ownerState.size === "sm" && {
+      //   fontSize: theme.vars.fontSize.md,
+      // }),
       // TODO: discuss the transition approach in a separate PR. This value is copied from mui-material Button.
       transition:
         "background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
@@ -115,10 +115,10 @@ const InputRoot = styled("div", {
       },
     },
     theme.variants[`${ownerState.variant!}`]?.[ownerState.color!],
-    {
-      "&:hover":
-        theme.variants[`${ownerState.variant!}Hover`]?.[ownerState.color!],
-    },
+    // {
+    //   "&:hover":
+    //     theme.variants[`${ownerState.variant!}Hover`]?.[ownerState.color!],
+    // },
     {
       [`&.${inputClasses.disabled}`]:
         theme.variants[`${ownerState.variant!}Disabled`]?.[ownerState.color!],
@@ -130,6 +130,9 @@ const InputRoot = styled("div", {
           boxShadow: `inset 0 0 0 var(--Input-focusedThickness) var(--Input-focusedHighlight)`,
         },
       },
+    },
+    ownerState.disabled && {
+      backgroundColor: theme.vars.palette.neutral[50],
     },
     {
       // override pointer cursor from variantHover
@@ -150,10 +153,10 @@ const InputInput = styled("input", {
     padding: 0, // remove the native input padding
     flex: 1,
     alignSelf: "stretch",
-    color: "inherit",
+    color: "#1A1A1A",
     backgroundColor: "transparent",
-    fontFamily: "inherit",
-    fontSize: "inherit",
+    fontFamily: theme.vars.fontFamily.body, //"inherit",
+    fontSize: "0.875rem", //inherit
     "&:-webkit-autofill": {
       WebkitBackgroundClip: "text", // remove autofill background
       WebkitTextFillColor:
@@ -161,19 +164,19 @@ const InputInput = styled("input", {
     },
     "&::-webkit-input-placeholder": {
       opacity: "var(--Input-placeholderOpacity)",
-      color: "inherit",
+      color: "#666666", //must be changed to a variable once the color is added to the theme
     },
     "&::-moz-placeholder": {
       opacity: "var(--Input-placeholderOpacity)",
-      color: "inherit",
+      color: "#666666", //must be changed to a variable once the color is added to the theme
     }, // Firefox 19+
     "&:-ms-input-placeholder": {
       opacity: "var(--Input-placeholderOpacity)",
-      color: "inherit",
+      color: "#666666", //must be changed to a variable once the color is added to the theme
     }, // IE11
     "&::-ms-input-placeholder": {
       opacity: "var(--Input-placeholderOpacity)",
-      color: "inherit",
+      color: "#666666", //must be changed to a variable once the color is added to the theme
     }, // Edge
   })
 );
@@ -192,11 +195,11 @@ const InputStartDecorator = styled("span", {
     display: "inherit",
     alignItems: "center",
     marginInlineEnd: "var(--Input-gap)",
-    color: theme.vars.palette.text.tertiary,
-    ...(ownerState.focused && {
-      color:
-        theme.vars.palette[ownerState.color!]?.[`${ownerState.variant!}Color`],
-    }),
+    // color: theme.vars.palette.text.tertiary,
+    // ...(ownerState.focused && {
+    //   color:
+    //     theme.vars.palette[ownerState.color!]?.[`${ownerState.variant!}Color`],
+    // }),
   })
 );
 
@@ -213,8 +216,8 @@ const InputEndDecorator = styled("span", {
     display: "inherit",
     alignItems: "center",
     marginInlineStart: "var(--Input-gap)",
-    color:
-      theme.vars.palette[ownerState.color!]?.[`${ownerState.variant!}Color`],
+    // color:
+    //   theme.vars.palette[ownerState.color!]?.[`${ownerState.variant!}Color`],
   })
 );
 
