@@ -67,18 +67,19 @@ const RadioRoot = styled("span", {
     {
       "--Icon-fontSize": "var(--Radio-size)",
       ...(ownerState.size === "sm" && {
-        "--Radio-size": "1rem",
-        "--Radio-gap": "0.375rem",
+        "--Radio-size": "0.75rem", //1
+        "--Radio-gap": "0.25rem", //0.375
         fontSize: theme.vars.fontSize.sm,
       }),
       ...(ownerState.size === "md" && {
-        "--Radio-size": "1.25rem",
+        "--Radio-size": "1rem", //1.25
         "--Radio-gap": "0.5rem",
         fontSize: theme.vars.fontSize.md,
       }),
+
       ...(ownerState.size === "lg" && {
-        "--Radio-size": "1.5rem",
-        "--Radio-gap": "0.625rem",
+        "--Radio-size": "1.25rem", //1.5
+        "--Radio-gap": "0.75rem", //0.625
         fontSize: theme.vars.fontSize.lg,
       }),
       position: ownerState.overlay ? "initial" : "relative",
@@ -86,6 +87,11 @@ const RadioRoot = styled("span", {
       boxSizing: "border-box",
       minWidth: 0,
       fontFamily: theme.vars.fontFamily.body,
+      "&:active span": {
+        borderColor:
+          theme.vars.palette[ownerState.color!]?.solidBg + " !important",
+      },
+
       lineHeight: "var(--Radio-size)", // prevent label from having larger height than the checkbox
       [`&.${radioClasses.disabled}`]: {
         color: theme.vars.palette[ownerState.color!]?.plainDisabledColor,
@@ -126,6 +132,15 @@ const RadioRadio = styled("span", {
     width: "var(--Radio-size)",
     height: "var(--Radio-size)",
     borderRadius: "var(--Radio-size)",
+    borderColor:
+      ownerState.checked && !ownerState.disabled && !ownerState.disableIcon
+        ? theme.vars.palette[ownerState.color!]?.solidBg + " !important"
+        : theme.vars.palette[ownerState.color!]?.plainActiveBg + " !important",
+    "&:hover": {
+      borderColor:
+        theme.vars.palette[ownerState.color!]?.solidBg + " !important",
+    },
+
     display: "inline-flex",
     justifyContent: "center",
     alignItems: "center",

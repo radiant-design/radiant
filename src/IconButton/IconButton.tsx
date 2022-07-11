@@ -58,28 +58,32 @@ const IconButtonRoot = styled("button", {
     {
       "--Icon-margin": "initial", // reset the icon's margin.
       ...(ownerState.size === "sm" && {
-        "--Icon-fontSize": "1.25rem",
+        "--Icon-fontSize": "1rem", //1.25
         minWidth: "var(--IconButton-size, 2rem)", // use min-width instead of height to make the button resilient to its content
         minHeight: "var(--IconButton-size, 2rem)", // use min-height instead of height to make the button resilient to its content
-        fontSize: theme.vars.fontSize.sm,
+        fontSize: theme.vars.fontSize.xs, //sm
       }),
       ...(ownerState.size === "md" && {
-        "--Icon-fontSize": "1.5rem", // control the SvgIcon font-size
+        "--Icon-fontSize": "1.25rem", //1.5 control the SvgIcon font-size
         minWidth: "var(--IconButton-size, 2.5rem)",
         minHeight: "var(--IconButton-size, 2.5rem)",
-        fontSize: theme.vars.fontSize.md,
+        fontSize: theme.vars.fontSize.sm, //md
       }),
       ...(ownerState.size === "lg" && {
-        "--Icon-fontSize": "1.75rem",
+        "--Icon-fontSize": "1.5rem", //1.75
         minWidth: "var(--IconButton-size, 3rem)",
         minHeight: "var(--IconButton-size, 3rem)",
         fontSize: theme.vars.fontSize.lg,
       }),
+      "&.JoyIconButton-root.Joy-disabled": {
+        pointerEvents: "all",
+        cursor: "not-allowed !important",
+      },
       padding: 0,
       fontFamily: theme.vars.fontFamily.body,
       fontWeight: theme.vars.fontWeight.md,
       margin: `var(--IconButton-margin)`, // to be controlled by other components, eg. Input
-      borderRadius: `var(--IconButton-radius, ${theme.vars.radius.sm})`, // to be controlled by other components, eg. Input
+      borderRadius: `var(--IconButton-radius, ${theme.vars.radius.xs})`, //sm // to be controlled by other components, eg. Input
       border: "none",
       backgroundColor: "transparent",
       display: "inline-flex",
@@ -106,7 +110,7 @@ const IconButtonRoot = styled("button", {
     },
   ]
 );
-//@ts-ignore
+
 const IconButton = React.forwardRef(function IconButton(inProps, ref) {
   const props = useThemeProps<
     typeof inProps & { component?: React.ElementType }
@@ -121,10 +125,10 @@ const IconButton = React.forwardRef(function IconButton(inProps, ref) {
     action,
     component = "button",
     color = "primary",
-    variant = "soft",
-    size = "md",
+    variant = "solid",
+    size = "sm",
     ...other
-  } = props;
+  } = props as any;
 
   const buttonRef = React.useRef<HTMLElement | null>(null);
   const handleRef = useForkRef(buttonRef, ref);
@@ -153,7 +157,7 @@ const IconButton = React.forwardRef(function IconButton(inProps, ref) {
     color,
     variant,
     size,
-    instanceSize: inProps.size,
+    instanceSize: inProps,
     focusVisible,
   };
 
@@ -170,7 +174,7 @@ const IconButton = React.forwardRef(function IconButton(inProps, ref) {
       {children}
     </IconButtonRoot>
   );
-}) as ExtendIconButton<IconButtonTypeMap>;
+}) as unknown as ExtendIconButton<IconButtonTypeMap>;
 
 IconButton.propTypes /* remove-proptypes */ = {
   // ----------------------------- Warning --------------------------------
