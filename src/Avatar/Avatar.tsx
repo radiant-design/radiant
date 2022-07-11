@@ -1,104 +1,111 @@
-import * as React from 'react';
-import clsx from 'clsx';
-import PropTypes from 'prop-types';
-import { unstable_composeClasses as composeClasses } from '@mui/base';
-import { OverridableComponent } from '@mui/types';
-import { unstable_capitalize as capitalize } from '@mui/utils';
-import { useThemeProps } from '../styles';
-import styled from '../styles/styled';
-import Person from '../internal/svg-icons/Person';
-import { getAvatarUtilityClass } from './avatarClasses';
-import { AvatarProps, AvatarTypeMap } from './AvatarProps';
-import { AvatarGroupContext } from '../AvatarGroup/AvatarGroup';
+import * as React from "react";
+import clsx from "clsx";
+import PropTypes from "prop-types";
+import { unstable_composeClasses as composeClasses } from "@mui/base";
+import { OverridableComponent } from "@mui/types";
+import { unstable_capitalize as capitalize } from "@mui/utils";
+import { useThemeProps } from "../styles";
+import styled from "../styles/styled";
+import Person from "../internal/svg-icons/Person";
+import { getAvatarUtilityClass } from "./avatarClasses";
+import { AvatarProps, AvatarTypeMap } from "./AvatarProps";
+import { AvatarGroupContext } from "../AvatarGroup/AvatarGroup";
 
 const useUtilityClasses = (ownerState: AvatarProps) => {
   const { size, variant, color, src, srcSet } = ownerState;
 
   const slots = {
     root: [
-      'root',
+      "root",
       variant && `variant${capitalize(variant)}`,
       color && `color${capitalize(color)}`,
       size && `size${capitalize(size)}`,
     ],
-    img: [(src || srcSet) && 'img'],
-    fallback: ['fallback'],
+    img: [(src || srcSet) && "img"],
+    fallback: ["fallback"],
   };
 
   return composeClasses(slots, getAvatarUtilityClass, {});
 };
 
-const AvatarRoot = styled('div', {
-  name: 'JoyAvatar',
-  slot: 'Root',
+const AvatarRoot = styled("div", {
+  name: "JoyAvatar",
+  slot: "Root",
   overridesResolver: (props, styles) => styles.root,
 })<{ ownerState: AvatarProps }>(({ theme, ownerState }) => {
   return [
     {
-      ...(ownerState.size === 'sm' && {
+      ...(ownerState.size === "sm" && {
         width: `var(--Avatar-size, 2rem)`,
         height: `var(--Avatar-size, 2rem)`,
         fontSize: theme.vars.fontSize.sm,
       }),
-      ...(ownerState.size === 'md' && {
+      ...(ownerState.size === "md" && {
         width: `var(--Avatar-size, 2.5rem)`,
         height: `var(--Avatar-size, 2.5rem)`,
         fontSize: theme.vars.fontSize.md,
       }),
-      ...(ownerState.size === 'lg' && {
+      ...(ownerState.size === "lg" && {
         width: `var(--Avatar-size, 3rem)`,
         height: `var(--Avatar-size, 3rem)`,
         fontSize: theme.vars.fontSize.lg,
       }),
-      marginInlineStart: 'var(--Avatar-marginInlineStart)',
+      marginInlineStart: "var(--Avatar-marginInlineStart)",
       boxShadow: `var(--Avatar-ring)`,
       fontFamily: theme.vars.fontFamily.body,
       fontWeight: theme.vars.fontWeight.md,
-      position: 'relative',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
+      position: "relative",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
       flexShrink: 0,
       lineHeight: 1,
-      borderRadius: 'var(--Avatar-radius, 50%)',
-      userSelect: 'none',
+      overflow: "hidden",
+      borderRadius: "var(--Avatar-radius, 50%)",
+      userSelect: "none",
     },
     theme.variants[ownerState.variant!]?.[ownerState.color!],
   ];
 });
 
-const AvatarImg = styled('img', {
-  name: 'JoyAvatar',
-  slot: 'Img',
+const AvatarImg = styled("img", {
+  name: "JoyAvatar",
+  slot: "Img",
   overridesResolver: (props, styles) => styles.img,
-})<{ ownerState: AvatarProps }>(({ ownerState }) => ({
-  width: '100%',
-  height: '100%',
-  textAlign: 'center',
+})<{ ownerState: AvatarProps }>({
+  width: "100%",
+  height: "100%",
+  textAlign: "center",
   // Handle non-square image. The property isn't supported by IE11.
-  objectFit: 'cover',
+  objectFit: "cover",
   // Hide alt text.
-  color: 'transparent',
+  color: "transparent",
   // Hide the image broken icon, only works on Chrome.
   textIndent: 10000,
-  borderRadius:
-    ownerState.variant === 'outlined'
-      ? `calc(var(--Avatar-radius, 50%) - var(--variant-outlinedBorderWidth, 0px))`
-      : 'var(--Avatar-radius, 50%)',
-}));
-
-const AvatarFallback = styled(Person, {
-  name: 'JoyAvatar',
-  slot: 'Fallback',
-  overridesResolver: (props, styles) => styles.fallback,
-})<{ ownerState: AvatarProps }>({
-  width: '64%',
-  height: '64%',
 });
 
-type UseLoadedProps = { src?: string; srcSet?: string; crossOrigin?: any; referrerPolicy?: any };
+const AvatarFallback = styled(Person, {
+  name: "JoyAvatar",
+  slot: "Fallback",
+  overridesResolver: (props, styles) => styles.fallback,
+})<{ ownerState: AvatarProps }>({
+  width: "64%",
+  height: "64%",
+});
 
-function useLoaded({ crossOrigin, referrerPolicy, src, srcSet }: UseLoadedProps) {
+type UseLoadedProps = {
+  src?: string;
+  srcSet?: string;
+  crossOrigin?: any;
+  referrerPolicy?: any;
+};
+
+function useLoaded({
+  crossOrigin,
+  referrerPolicy,
+  src,
+  srcSet,
+}: UseLoadedProps) {
   const [loaded, setLoaded] = React.useState<string | boolean>(false);
 
   React.useEffect(() => {
@@ -114,13 +121,13 @@ function useLoaded({ crossOrigin, referrerPolicy, src, srcSet }: UseLoadedProps)
       if (!active) {
         return;
       }
-      setLoaded('loaded');
+      setLoaded("loaded");
     };
     image.onerror = () => {
       if (!active) {
         return;
       }
-      setLoaded('error');
+      setLoaded("error");
     };
     image.crossOrigin = crossOrigin;
     image.referrerPolicy = referrerPolicy;
@@ -142,7 +149,7 @@ function useLoaded({ crossOrigin, referrerPolicy, src, srcSet }: UseLoadedProps)
 const Avatar = React.forwardRef(function Avatar(inProps, ref) {
   const props = useThemeProps<typeof inProps & AvatarProps>({
     props: inProps,
-    name: 'JoyAvatar',
+    name: "JoyAvatar",
   });
 
   const groupContext = React.useContext(AvatarGroupContext);
@@ -150,10 +157,10 @@ const Avatar = React.forwardRef(function Avatar(inProps, ref) {
   const {
     alt,
     className,
-    color: colorProp = 'neutral',
-    component = 'div',
-    size: sizeProp = 'md',
-    variant: variantProp = 'soft',
+    color: colorProp = "neutral",
+    component = "div",
+    size: sizeProp = "md",
+    variant: variantProp = "soft",
     imgProps,
     src,
     srcSet,
@@ -169,7 +176,7 @@ const Avatar = React.forwardRef(function Avatar(inProps, ref) {
   // Use a hook instead of onError on the img element to support server-side rendering.
   const loaded = useLoaded({ ...imgProps, src, srcSet });
   const hasImg = src || srcSet;
-  const hasImgNotFailing = hasImg && loaded !== 'error';
+  const hasImgNotFailing = hasImg && loaded !== "error";
 
   const ownerState = {
     ...props,
@@ -198,7 +205,9 @@ const Avatar = React.forwardRef(function Avatar(inProps, ref) {
   } else if (hasImg && alt) {
     children = alt[0];
   } else {
-    children = <AvatarFallback className={classes.fallback} ownerState={ownerState} />;
+    children = (
+      <AvatarFallback className={classes.fallback} ownerState={ownerState} />
+    );
   }
 
   return (
@@ -238,7 +247,14 @@ Avatar.propTypes /* remove-proptypes */ = {
    * @default 'neutral'
    */
   color: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([
-    PropTypes.oneOf(['danger', 'info', 'neutral', 'primary', 'success', 'warning']),
+    PropTypes.oneOf([
+      "danger",
+      "info",
+      "neutral",
+      "primary",
+      "success",
+      "warning",
+    ]),
     PropTypes.string,
   ]),
   /**
@@ -257,7 +273,7 @@ Avatar.propTypes /* remove-proptypes */ = {
    * @default 'md'
    */
   size: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([
-    PropTypes.oneOf(['lg', 'md', 'sm']),
+    PropTypes.oneOf(["lg", "md", "sm"]),
     PropTypes.string,
   ]),
   /**
@@ -273,7 +289,9 @@ Avatar.propTypes /* remove-proptypes */ = {
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
   sx: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])),
+    PropTypes.arrayOf(
+      PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])
+    ),
     PropTypes.func,
     PropTypes.object,
   ]),
@@ -282,7 +300,7 @@ Avatar.propTypes /* remove-proptypes */ = {
    * @default 'soft'
    */
   variant: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([
-    PropTypes.oneOf(['outlined', 'plain', 'soft', 'solid']),
+    PropTypes.oneOf(["outlined", "plain", "soft", "solid"]),
     PropTypes.string,
   ]),
 } as any;

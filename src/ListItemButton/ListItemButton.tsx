@@ -1,34 +1,51 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { unstable_capitalize as capitalize, unstable_useForkRef as useForkRef } from '@mui/utils';
-import composeClasses from '@mui/base/composeClasses';
-import { useButton } from '@mui/base/ButtonUnstyled';
-import { styled, useThemeProps } from '../styles';
+import * as React from "react";
+import PropTypes from "prop-types";
+import clsx from "clsx";
+import {
+  unstable_capitalize as capitalize,
+  unstable_useForkRef as useForkRef,
+} from "@mui/utils";
+import composeClasses from "@mui/base/composeClasses";
+import { useButton } from "@mui/base/ButtonUnstyled";
+import { styled, useThemeProps } from "../styles";
 import {
   ListItemButtonProps,
   ExtendListItemButton,
   ListItemButtonTypeMap,
-} from './ListItemButtonProps';
-import listItemButtonClasses, { getListItemButtonUtilityClass } from './listItemButtonClasses';
-import listItemClasses from '../ListItem/listItemClasses';
-import RowListContext from '../List/RowListContext';
+} from "./ListItemButtonProps";
+import listItemButtonClasses, {
+  getListItemButtonUtilityClass,
+} from "./listItemButtonClasses";
+import RowListContext from "../List/RowListContext";
 
-const useUtilityClasses = (ownerState: ListItemButtonProps & { focusVisible: boolean }) => {
-  const { color, disabled, focusVisible, focusVisibleClassName, selected, variant } = ownerState;
+const useUtilityClasses = (
+  ownerState: ListItemButtonProps & { focusVisible: boolean }
+) => {
+  const {
+    color,
+    disabled,
+    focusVisible,
+    focusVisibleClassName,
+    selected,
+    variant,
+  } = ownerState;
 
   const slots = {
     root: [
-      'root',
-      disabled && 'disabled',
-      focusVisible && 'focusVisible',
+      "root",
+      disabled && "disabled",
+      focusVisible && "focusVisible",
       color && `color${capitalize(color)}`,
-      selected && 'selected',
+      selected && "selected",
       variant && `variant${capitalize(variant)}`,
     ],
   };
 
-  const composedClasses = composeClasses(slots, getListItemButtonUtilityClass, {});
+  const composedClasses = composeClasses(
+    slots,
+    getListItemButtonUtilityClass,
+    {}
+  );
 
   if (focusVisible && focusVisibleClassName) {
     composedClasses.root += ` ${focusVisibleClassName}`;
@@ -37,74 +54,75 @@ const useUtilityClasses = (ownerState: ListItemButtonProps & { focusVisible: boo
   return composedClasses;
 };
 
-const ListItemButtonRoot = styled('div', {
-  name: 'JoyListItemButton',
-  slot: 'Root',
+const ListItemButtonRoot = styled("div", {
+  name: "JoyListItemButton",
+  slot: "Root",
   overridesResolver: (props, styles) => styles.root,
-})<{ ownerState: ListItemButtonProps & { row: boolean } }>(({ theme, ownerState }) => [
+})<{
+  ownerState: ListItemButtonProps & {
+    row: boolean;
+    "data-first-child"?: string;
+  };
+}>(({ theme, ownerState }) => [
   {
     ...(ownerState.selected && {
-      '--List-decorator-color': 'initial',
+      "--List-decorator-color": "initial",
     }),
-    boxSizing: 'border-box',
-    display: 'flex',
-    alignItems: 'center',
-    textAlign: 'initial',
-    textDecoration: 'initial', // reset native anchor tag
+    boxSizing: "border-box",
+    display: "flex",
+    alignItems: "center",
+    textAlign: "initial",
+    textDecoration: "initial", // reset native anchor tag
     // In some cases, ListItemButton is a child of ListItem so the margin needs to be controlled by the ListItem. The value is negative to account for the ListItem's padding
-    margin: 'var(--List-itemButton-margin)',
-    padding: 'var(--List-item-paddingY)',
-    paddingLeft:
-      'calc(var(--List-item-paddingLeft) + var(--List-item-startActionWidth, var(--internal-startActionWidth, 0px)))', // --internal variable makes it possible to customize the actionWidth from the top List
-    paddingRight:
-      'calc(var(--List-item-paddingRight) + var(--List-item-endActionWidth, var(--internal-endActionWidth, 0px)))', // --internal variable makes it possible to customize the actionWidth from the top List
-    minHeight: 'var(--List-item-minHeight)',
-    border: 'none',
-    borderRadius: 'var(--List-item-radius)',
-    flex: ownerState.row ? 'none' : 1,
-    minWidth: 0,
+    marginInline: "var(--List-itemButton-marginInline)",
+    marginBlock: "var(--List-itemButton-marginBlock)",
+    ...(ownerState["data-first-child"] === undefined && {
+      marginInlineStart: ownerState.row ? "var(--List-gap)" : undefined,
+      marginBlockStart: ownerState.row ? undefined : "var(--List-gap)",
+    }),
+    // account for the border width
+    paddingBlock:
+      "calc(var(--List-item-paddingY) - var(--variant-borderWidth))",
+    paddingInlineStart:
+      "calc(var(--List-item-paddingLeft) + var(--List-item-startActionWidth, var(--internal-startActionWidth, 0px)) - var(--variant-borderWidth))", // --internal variable makes it possible to customize the actionWidth from the top List
+    paddingInlineEnd:
+      "calc(var(--List-item-paddingRight) + var(--List-item-endActionWidth, var(--internal-endActionWidth, 0px)) - var(--variant-borderWidth))", // --internal variable makes it possible to customize the actionWidth from the top List
+    minBlockSize: "var(--List-item-minHeight)",
+    border: "none",
+    borderRadius: "var(--List-item-radius)",
+    flex: ownerState.row ? "none" : 1,
+    minInlineSize: 0,
     // TODO: discuss the transition approach in a separate PR. This value is copied from mui-material Button.
     transition:
-      'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
-    fontSize: 'var(--List-item-fontSize)',
+      "background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+    fontSize: "var(--List-item-fontSize)",
     fontFamily: theme.vars.fontFamily.body,
     ...(ownerState.selected && {
       fontWeight: theme.vars.fontWeight.md,
     }),
-    // Can't use :last-child or :first-child selector because ListItemButton can be inside ListItem with start/end action
-    // We want to be specific on what siblings the gap should be added.
-    [`& + .${listItemButtonClasses.root}`]: ownerState.row
-      ? { marginLeft: 'var(--List-gap)' }
-      : {
-          marginTop: 'var(--List-gap)',
-        },
-    [`& + .${listItemClasses.root}`]: ownerState.row
-      ? { marginLeft: 'var(--List-gap)' }
-      : {
-          marginTop: 'var(--List-gap)',
-        },
-  },
-  {
-    ...(ownerState.variant === 'outlined' && {
-      // account for the border width
-      padding: 'calc(var(--List-item-paddingY) - var(--variant-outlinedBorderWidth))',
-      paddingLeft:
-        'calc(var(--List-item-paddingLeft) + var(--List-item-startActionWidth, var(--internal-startActionWidth, 0px)) - var(--variant-outlinedBorderWidth))', // --internal variable makes it possible to customize the actionWidth from the top List
-      paddingRight:
-        'calc(var(--List-item-paddingRight) + var(--List-item-endActionWidth, var(--internal-endActionWidth, 0px)) - var(--variant-outlinedBorderWidth))', // --internal variable makes it possible to customize the actionWidth from the top List
-    }),
     [theme.focus.selector]: theme.focus.default,
   },
   theme.variants[ownerState.variant!]?.[ownerState.color!],
-  theme.variants[`${ownerState.variant!}Hover`]?.[ownerState.color!],
-  theme.variants[`${ownerState.variant!}Active`]?.[ownerState.color!],
-  theme.variants[`${ownerState.variant!}Disabled`]?.[ownerState.color!],
+  {
+    "&:hover":
+      theme.variants[`${ownerState.variant!}Hover`]?.[ownerState.color!],
+  },
+  {
+    "&:active":
+      theme.variants[`${ownerState.variant!}Active`]?.[ownerState.color!],
+  },
+  {
+    [`&.${listItemButtonClasses.disabled}`]:
+      theme.variants[`${ownerState.variant!}Disabled`]?.[ownerState.color!],
+  },
 ]);
-
+//@ts-ignore
 const ListItemButton = React.forwardRef(function ListItemButton(inProps, ref) {
-  const props = useThemeProps<typeof inProps & { component?: React.ElementType }>({
+  const props = useThemeProps<
+    typeof inProps & { component?: React.ElementType }
+  >({
     props: inProps,
-    name: 'JoyListItemButton',
+    name: "JoyListItemButton",
   });
 
   const row = React.useContext(RowListContext);
@@ -114,12 +132,12 @@ const ListItemButton = React.forwardRef(function ListItemButton(inProps, ref) {
     className,
     action,
     role,
-    component = 'div',
+    component = "div",
     selected = false,
-    color = selected ? 'primary' : 'neutral',
-    variant = 'plain',
+    color = selected ? "primary" : "neutral",
+    variant = "plain",
     ...other
-  } = props as any;
+  } = props;
 
   const buttonRef = React.useRef<HTMLElement | null>(null);
   const handleRef = useForkRef(buttonRef, ref);
@@ -137,7 +155,7 @@ const ListItemButton = React.forwardRef(function ListItemButton(inProps, ref) {
         buttonRef.current?.focus();
       },
     }),
-    [setFocusVisible],
+    [setFocusVisible]
   );
 
   const ownerState = {
@@ -166,7 +184,7 @@ const ListItemButton = React.forwardRef(function ListItemButton(inProps, ref) {
       {children}
     </ListItemButtonRoot>
   );
-}) as unknown as ExtendListItemButton<ListItemButtonTypeMap>;
+}) as ExtendListItemButton<ListItemButtonTypeMap>;
 
 ListItemButton.propTypes /* remove-proptypes */ = {
   // ----------------------------- Warning --------------------------------
@@ -207,7 +225,14 @@ ListItemButton.propTypes /* remove-proptypes */ = {
    * @default 'neutral'
    */
   color: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([
-    PropTypes.oneOf(['context', 'danger', 'info', 'neutral', 'primary', 'success', 'warning']),
+    PropTypes.oneOf([
+      "danger",
+      "info",
+      "neutral",
+      "primary",
+      "success",
+      "warning",
+    ]),
     PropTypes.string,
   ]),
   /**
@@ -232,7 +257,7 @@ ListItemButton.propTypes /* remove-proptypes */ = {
   /**
    * The empty space on the side(s) of the separator.
    */
-  inset: PropTypes.oneOf(['gutter', 'leftGutter', 'startAdornment']),
+  inset: PropTypes.oneOf(["gutter", "leftGutter", "startAdornment"]),
   /**
    * @ignore
    */
@@ -246,7 +271,9 @@ ListItemButton.propTypes /* remove-proptypes */ = {
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
   sx: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])),
+    PropTypes.arrayOf(
+      PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])
+    ),
     PropTypes.func,
     PropTypes.object,
   ]),
@@ -259,7 +286,7 @@ ListItemButton.propTypes /* remove-proptypes */ = {
    * @default 'plain'
    */
   variant: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([
-    PropTypes.oneOf(['outlined', 'plain', 'soft', 'solid']),
+    PropTypes.oneOf(["outlined", "plain", "soft", "solid"]),
     PropTypes.string,
   ]),
 } as any;

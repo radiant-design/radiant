@@ -1,28 +1,28 @@
-import * as React from 'react';
-import clsx from 'clsx';
-import PropTypes from 'prop-types';
-import { unstable_composeClasses as composeClasses } from '@mui/base';
-import { OverridableComponent } from '@mui/types';
-import { useThemeProps } from '../styles';
-import styled from '../styles/styled';
-import { getCardContentUtilityClass } from './cardContentClasses';
-import { CardContentProps, CardContentTypeMap } from './CardContentProps';
+import * as React from "react";
+import clsx from "clsx";
+import PropTypes from "prop-types";
+import { unstable_composeClasses as composeClasses } from "@mui/base";
+import { OverridableComponent } from "@mui/types";
+import { useThemeProps } from "../styles";
+import styled from "../styles/styled";
+import { getCardContentUtilityClass } from "./cardContentClasses";
+import { CardContentProps, CardContentTypeMap } from "./CardContentProps";
 
 const useUtilityClasses = () => {
   const slots = {
-    root: ['root'],
+    root: ["root"],
   };
 
   return composeClasses(slots, getCardContentUtilityClass, {});
 };
 
-const CardContentRoot = styled('div', {
-  name: 'JoyCardContent',
-  slot: 'Root',
+const CardContentRoot = styled("div", {
+  name: "JoyCardContent",
+  slot: "Root",
   overridesResolver: (props, styles) => styles.root,
 })<{ ownerState: CardContentProps }>({
-  display: 'flex',
-  flexDirection: 'column',
+  display: "flex",
+  flexDirection: "column",
   flexGrow: 1,
   zIndex: 1,
 });
@@ -30,10 +30,10 @@ const CardContentRoot = styled('div', {
 const CardContent = React.forwardRef(function CardContent(inProps, ref) {
   const props = useThemeProps<typeof inProps & CardContentProps>({
     props: inProps,
-    name: 'JoyCardContent',
+    name: "JoyCardContent",
   });
 
-  const { className, component = 'div', children, ...other } = props;
+  const { className, component = "div", children, ...other } = props;
 
   const ownerState = {
     ...props,
@@ -78,7 +78,9 @@ CardContent.propTypes /* remove-proptypes */ = {
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
   sx: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])),
+    PropTypes.arrayOf(
+      PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])
+    ),
     PropTypes.func,
     PropTypes.object,
   ]),

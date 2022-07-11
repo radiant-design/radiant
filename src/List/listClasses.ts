@@ -1,10 +1,10 @@
-import { generateUtilityClass, generateUtilityClasses } from '@mui/base';
+import { generateUtilityClass, generateUtilityClasses } from "../className";
 
 export interface ListClasses {
   /** Styles applied to the root element. */
   root: string;
   /** Styles applied to the root element if wrapped with nested context. */
-  nested: string;
+  nesting: string;
   /** Styles applied to the root element if `row` is true. */
   row: string;
   /** Styles applied to the root element if `size="sm"`. */
@@ -18,16 +18,16 @@ export interface ListClasses {
 export type ListClassKey = keyof ListClasses;
 
 export function getListUtilityClass(slot: string): string {
-  return generateUtilityClass('JoyList', slot);
+  return generateUtilityClass("JoyList", slot);
 }
 
-const listClasses: ListClasses = generateUtilityClasses('JoyList', [
-  'root',
-  'nested',
-  'row',
-  'sizeSm',
-  'sizeMd',
-  'sizeLg',
+const listClasses: ListClasses = generateUtilityClasses("JoyList", [
+  "root",
+  "nesting",
+  "row",
+  "sizeSm",
+  "sizeMd",
+  "sizeLg",
 ]);
 
 export default listClasses;

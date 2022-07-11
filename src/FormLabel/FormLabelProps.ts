@@ -1,10 +1,13 @@
-import * as React from 'react';
-import { OverrideProps } from '@mui/types';
-import { SxProps } from '../styles/types';
+import * as React from "react";
+import { OverrideProps } from "@mui/types";
+import { SxProps } from "../styles/types";
 
-export type FormLabelSlot = 'root' | 'asterisk' | 'separator';
+export type FormLabelSlot = "root" | "asterisk" | "separator";
 
-export interface FormLabelTypeMap<P = {}, D extends React.ElementType = 'label'> {
+export interface FormLabelTypeMap<
+  P = {},
+  D extends React.ElementType = "label"
+> {
   props: P & {
     /**
      * The content of the component.
@@ -23,8 +26,8 @@ export interface FormLabelTypeMap<P = {}, D extends React.ElementType = 'label'>
 }
 
 export type FormLabelProps<
-  D extends React.ElementType = FormLabelTypeMap['defaultComponent'],
+  D extends React.ElementType = FormLabelTypeMap["defaultComponent"],
   P = {
     component?: React.ElementType;
-  },
+  }
 > = OverrideProps<FormLabelTypeMap<P, D>, D>;

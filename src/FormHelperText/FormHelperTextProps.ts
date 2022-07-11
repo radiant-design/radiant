@@ -1,11 +1,14 @@
-import * as React from 'react';
-import { OverrideProps } from '@mui/types';
-import { SxProps } from '../styles/types';
-import { FormHelperTextClasses } from './formHelperTextClasses';
+import * as React from "react";
+import { OverrideProps } from "@mui/types";
+import { SxProps } from "../styles/types";
+import { FormHelperTextClasses } from "./formHelperTextClasses";
 
-export type FormHelperTextSlot = 'root';
+export type FormHelperTextSlot = "root";
 
-export interface FormHelperTextTypeMap<P = {}, D extends React.ElementType = 'p'> {
+export interface FormHelperTextTypeMap<
+  P = {},
+  D extends React.ElementType = "p"
+> {
   props: P & {
     /**
      * The content of the component.
@@ -24,8 +27,8 @@ export interface FormHelperTextTypeMap<P = {}, D extends React.ElementType = 'p'
 }
 
 export type FormHelperTextProps<
-  D extends React.ElementType = FormHelperTextTypeMap['defaultComponent'],
+  D extends React.ElementType = FormHelperTextTypeMap["defaultComponent"],
   P = {
     component?: React.ElementType;
-  },
+  }
 > = OverrideProps<FormHelperTextTypeMap<P, D>, D>;

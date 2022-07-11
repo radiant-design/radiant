@@ -12,7 +12,7 @@ const useUtilityClasses = (
   ownerState: SwitchProps & { focusVisible: boolean }
 ) => {
   const { checked, disabled, focusVisible, readOnly, color, variant } =
-    ownerState as any;
+    ownerState;
 
   const slots = {
     root: [
@@ -35,12 +35,13 @@ const useUtilityClasses = (
 
 const switchColorVariables =
   ({ theme, ownerState }: { theme: Theme; ownerState: SwitchProps }) =>
-  (data: { state?: "Hover" | "Disabled"; checked?: boolean } = {}) => {
+  (data: { state?: "Hover" | "Disabled" } = {}) => {
     const variant = ownerState.variant;
     const color = ownerState.color;
     return {
       "--Switch-track-background":
         theme.vars.palette[color!]?.[`${variant!}${data.state || ""}Bg`],
+      // "--Switch-track-color": theme.vars.palette[color!]?.[`${variant!}Color`],
       "--Switch-track-color":
         ownerState.variant === "solid"
           ? "#fff"
@@ -51,14 +52,11 @@ const switchColorVariables =
           : "currentColor",
       "--Switch-thumb-background":
         theme.vars.palette[color!]?.[`${variant!}${data.state || ""}Color`],
-      "--Switch-thumb-color":
-        ownerState.variant === "solid"
-          ? theme.vars.palette[color!]?.plainColor
-          : "#fff",
-      "--Switch-thumb-hover-color":
-        ownerState.variant === "solid"
-          ? theme.vars.palette[color!]?.plainHoverBg
-          : "#fff",
+      "--Switch-thumb-color": theme.vars.palette[color!]?.[`${variant!}Bg`],
+      "--Switch-thumb-hover-color": theme.vars.palette[color!]?.plainHoverBg,
+      // ownerState.variant === "solid"
+      //   ? theme.vars.palette[color!]?.plainHoverBg
+      //   : theme.vars.palette[color!]?.plainHoverBg, ///"#fff",
     };
   };
 
@@ -69,8 +67,10 @@ const SwitchRoot = styled("span", {
 })<{ ownerState: SwitchProps }>(({ theme, ownerState }) => {
   const getColorVariables = switchColorVariables({ theme, ownerState });
   return {
-    ...(ownerState.variant === "outlined" &&
-      theme.variants.outlined[ownerState.color!]),
+    "--variant-borderWidth":
+      theme.variants[ownerState.variant!]?.[ownerState.color!]?.[
+        "--variant-borderWidth"
+      ],
     "--Switch-track-radius": theme.vars.radius.lg,
     "--Switch-thumb-shadow":
       ownerState.variant === "soft"
@@ -80,41 +80,43 @@ const SwitchRoot = styled("span", {
       "--Switch-track-width": "28px", //40
       "--Switch-track-height": "16px", //20
       "--Switch-thumb-size": "12px",
-      "--Switch-decorator-paddingX": "4px",
+      "--Switch-gap": "6px",
       fontSize: theme.vars.fontSize.sm,
     }),
     ...(ownerState.size === "md" && {
       "--Switch-track-width": "36px", //48
       "--Switch-track-height": "20px", //24
       "--Switch-thumb-size": "16px",
-      "--Switch-decorator-paddingX": "8px",
+      "--Switch-gap": "8px",
       fontSize: theme.vars.fontSize.md,
     }),
     ...(ownerState.size === "lg" && {
       "--Switch-track-width": "44px", //64
       "--Switch-track-height": "24px", //32
       "--Switch-thumb-size": "20px", //24
-      "--Switch-decorator-paddingX": "12px",
+      "--Switch-gap": "12px",
     }),
-    "--Switch-thumb-radius": "calc(var(--Switch-track-radius) - 2px)",
+    "--internal-paddingBlock": `max((var(--Switch-track-height) - 2 * var(--variant-borderWidth) - var(--Switch-thumb-size)) / 2, 0px)`,
+    "--Switch-thumb-radius": `max((var(--Switch-track-radius) - var(--variant-borderWidth)) - var(--internal-paddingBlock), min(var(--internal-paddingBlock) / 2, (var(--Switch-track-radius) - var(--variant-borderWidth)) / 2))`,
     "--Switch-thumb-width": "var(--Switch-thumb-size)",
-    "--Switch-thumb-offset":
-      "max((var(--Switch-track-height) - var(--Switch-thumb-size)) / 2, 0px)",
+    "--Switch-thumb-offset": `max((var(--Switch-track-height) - var(--Switch-thumb-size)) / 2, 0px)`,
     ...getColorVariables(),
     // "&:hover": {
     //   ...getColorVariables({ state: "Hover" }),
     // },
+    "&:hover span span": {
+      border: "5px solid var(--Switch-thumb-hover-color) !important",
+    },
     [`&.${switchClasses.checked}`]: {
-      ...getColorVariables({ checked: true }),
+      ...getColorVariables(),
       // "&:hover": {
-      //   ...getColorVariables({ checked: true, state: "Hover" }),
+      //   ...getColorVariables({ state: "Hover" }),
       // },
     },
     [`&.${switchClasses.disabled}`]: {
       pointerEvents: "none",
       color: theme.vars.palette.text.tertiary,
-      //@ts-ignore
-      ...getColorVariables({ state: "Disabled", checked: ownerState.checked }),
+      ...getColorVariables({ state: "Disabled" }),
     },
     display: "inline-flex",
     alignItems: "center",
@@ -169,13 +171,16 @@ const SwitchTrack = styled("span", {
     justifyContent: "space-between",
     alignItems: "center",
     boxSizing: "border-box",
-    border: "var(--variant-outlinedBorderWidth, 0px) solid",
+    "&:hover span": {
+      border: "5px solid var(--Switch-thumb-hover-color) !important",
+    },
+    border: "var(--variant-borderWidth) solid",
     borderColor: "var(--Switch-track-borderColor)",
     backgroundColor: "var(--Switch-track-background)",
     borderRadius: "var(--Switch-track-radius)",
     fontFamily: theme.vars.fontFamily.body,
     ...(ownerState.size === "sm" && {
-      fontSize: theme.vars.fontSize.sm, //sx
+      fontSize: theme.vars.fontSize.sm, //xs
     }),
     ...(ownerState.size === "md" && {
       fontSize: theme.vars.fontSize.md, //sm
@@ -190,7 +195,7 @@ const SwitchThumb = styled("span", {
   name: "JoySwitch",
   slot: "Thumb",
   overridesResolver: (props, styles) => styles.thumb,
-})<{ ownerState: SwitchProps }>(({ theme }) => ({
+})<{ ownerState: SwitchProps }>({
   "--Icon-fontSize": "calc(var(--Switch-thumb-size) * 0.75)",
   transition: "left 0.2s",
   display: "inline-flex",
@@ -205,16 +210,12 @@ const SwitchThumb = styled("span", {
   borderRadius: "var(--Switch-thumb-radius)",
   // boxShadow: "var(--Switch-thumb-shadow)",
   color: "var(--Switch-thumb-color)",
-  backgroundColor: "#fff", // var(--Switch-thumb-background)
+  backgroundColor: "#fff", // "var(--Switch-thumb-background)",
 
-  "&:hover": {
-    // border: `5px solid ${theme.palette.primary[100]} !important`,
-    border: "5px solid var(--Switch-thumb-hover-color) !important",
-  },
   [`&.${switchClasses.checked}`]: {
     left: "calc(50% + var(--Switch-track-width) / 2 - var(--Switch-thumb-width) / 2 - var(--Switch-thumb-offset))",
   },
-}));
+});
 
 const SwitchStartDecorator = styled("span", {
   name: "JoySwitch",
@@ -222,7 +223,7 @@ const SwitchStartDecorator = styled("span", {
   overridesResolver: (props, styles) => styles.startDecorator,
 })<{ ownerState: SwitchProps }>({
   display: "inline-flex",
-  padding: "0px var(--Switch-decorator-paddingX)",
+  marginInlineEnd: "var(--Switch-gap)",
 });
 
 const SwitchEndDecorator = styled("span", {
@@ -231,7 +232,7 @@ const SwitchEndDecorator = styled("span", {
   overridesResolver: (props, styles) => styles.endDecorator,
 })<{ ownerState: SwitchProps }>({
   display: "inline-flex",
-  padding: "0px var(--Switch-decorator-paddingX)",
+  marginInlineStart: "var(--Switch-gap)",
 });
 
 const Switch = React.forwardRef<HTMLSpanElement, SwitchProps>(function Switch(
@@ -252,13 +253,14 @@ const Switch = React.forwardRef<HTMLSpanElement, SwitchProps>(function Switch(
     onFocusVisible,
     readOnly: readOnlyProp,
     required,
+    id,
     color,
     variant = "solid",
     size = "md",
     startDecorator,
     endDecorator,
     ...otherProps
-  } = props as any;
+  } = props;
 
   const useSwitchProps = {
     checked: checkedProp,
@@ -276,6 +278,7 @@ const Switch = React.forwardRef<HTMLSpanElement, SwitchProps>(function Switch(
 
   const ownerState = {
     ...props,
+    id,
     checked,
     disabled,
     focusVisible,
@@ -329,6 +332,7 @@ const Switch = React.forwardRef<HTMLSpanElement, SwitchProps>(function Switch(
         className={clsx(classes.action, componentsProps.action?.className)}
       >
         <SwitchInput
+          id={id}
           {...componentsProps.input}
           ownerState={ownerState}
           {...getInputProps()}

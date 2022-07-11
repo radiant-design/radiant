@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { OverridableStringUnion } from '@mui/types';
-import { UseSwitchProps } from '@mui/base/SwitchUnstyled';
-import { ColorPaletteProp, VariantProp, SxProps } from '../styles/types';
+import * as React from "react";
+import { OverridableStringUnion } from "@mui/types";
+import { UseSwitchParameters } from "@mui/base/SwitchUnstyled";
+import { ColorPaletteProp, VariantProp, SxProps } from "../styles/types";
 
-export type SwitchSlot = 'root' | 'action' | 'input' | 'track' | 'thumb';
+export type SwitchSlot = "root" | "action" | "input" | "track" | "thumb";
 
 export interface SwitchPropsVariantOverrides {}
 
@@ -11,7 +11,7 @@ export interface SwitchPropsColorOverrides {}
 
 export interface SwitchPropsSizeOverrides {}
 
-interface SwitchOwnerState extends UseSwitchProps {
+interface SwitchOwnerState extends UseSwitchParameters {
   /**
    * The color of the component. It supports those theme colors that make sense for this component.
    * @default 'neutral'
@@ -21,7 +21,7 @@ interface SwitchOwnerState extends UseSwitchProps {
    * The size of the component.
    * @default 'md'
    */
-  size?: OverridableStringUnion<'sm' | 'md' | 'lg', SwitchPropsSizeOverrides>;
+  size?: OverridableStringUnion<"sm" | "md" | "lg", SwitchPropsSizeOverrides>;
   /**
    * The variant to use.
    * @default 'solid'
@@ -56,11 +56,15 @@ export interface SwitchProps
   /**
    * The element that appears at the end of the switch.
    */
-  endDecorator?: React.ReactNode | ((ownerState: SwitchOwnerState) => React.ReactNode);
+  endDecorator?:
+    | React.ReactNode
+    | ((ownerState: SwitchOwnerState) => React.ReactNode);
   /**
    * The element that appears at the end of the switch.
    */
-  startDecorator?: React.ReactNode | ((ownerState: SwitchOwnerState) => React.ReactNode);
+  startDecorator?:
+    | React.ReactNode
+    | ((ownerState: SwitchOwnerState) => React.ReactNode);
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */

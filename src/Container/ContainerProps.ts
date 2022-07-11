@@ -1,11 +1,11 @@
-import * as React from 'react';
-import { OverrideProps } from '@mui/types';
-import { Breakpoint } from '@mui/system';
-import { SxProps } from '../styles/types';
+import * as React from "react";
+import { OverrideProps } from "@mui/types";
+import { Breakpoint } from "@mui/system";
+import { SxProps } from "../styles/types";
 
-export type ContainerSlot = 'root';
+export type ContainerSlot = "root";
 
-export interface ContainerTypeMap<P = {}, D extends React.ElementType = 'div'> {
+export interface ContainerTypeMap<P = {}, D extends React.ElementType = "div"> {
   props: P & {
     children?: React.ReactNode;
     /**
@@ -37,6 +37,6 @@ export interface ContainerTypeMap<P = {}, D extends React.ElementType = 'div'> {
 }
 
 export type ContainerProps<
-  D extends React.ElementType = ContainerTypeMap['defaultComponent'],
-  P = {},
+  D extends React.ElementType = ContainerTypeMap["defaultComponent"],
+  P = {}
 > = OverrideProps<ContainerTypeMap<P, D>, D>;

@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { OverridableStringUnion, OverrideProps } from '@mui/types';
-import { UseSwitchProps } from '@mui/base/SwitchUnstyled';
-import { ColorPaletteProp, VariantProp, SxProps } from '../styles/types';
+import * as React from "react";
+import { OverridableStringUnion, OverrideProps } from "@mui/types";
+import { UseSwitchParameters } from "@mui/base/SwitchUnstyled";
+import { ColorPaletteProp, VariantProp, SxProps } from "../styles/types";
 
-export type RadioSlot = 'root' | 'radio' | 'action' | 'input' | 'label';
+export type RadioSlot = "root" | "radio" | "action" | "input" | "label";
 
 export interface RadioPropsVariantOverrides {}
 
@@ -11,9 +11,9 @@ export interface RadioPropsColorOverrides {}
 
 export interface RadioPropsSizeOverrides {}
 
-export interface RadioTypeMap<P = {}, D extends React.ElementType = 'span'> {
+export interface RadioTypeMap<P = {}, D extends React.ElementType = "span"> {
   props: P &
-    UseSwitchProps & {
+    UseSwitchParameters & {
       /**
        * The icon to display when the component is checked.
        */
@@ -32,17 +32,20 @@ export interface RadioTypeMap<P = {}, D extends React.ElementType = 'span'> {
        * @default {}
        */
       componentsProps?: {
-        root?: React.ComponentPropsWithRef<'span'>;
-        radio?: React.ComponentPropsWithRef<'span'>;
-        action?: React.ComponentPropsWithRef<'span'>;
-        input?: React.ComponentPropsWithRef<'input'>;
-        label?: React.ComponentPropsWithRef<'label'>;
+        root?: React.ComponentPropsWithRef<"span">;
+        radio?: React.ComponentPropsWithRef<"span">;
+        action?: React.ComponentPropsWithRef<"span">;
+        input?: React.ComponentPropsWithRef<"input">;
+        label?: React.ComponentPropsWithRef<"label">;
       };
       /**
        * The color of the component. It supports those theme colors that make sense for this component.
        * @default 'neutral'
        */
-      color?: OverridableStringUnion<ColorPaletteProp, RadioPropsColorOverrides>;
+      color?: OverridableStringUnion<
+        ColorPaletteProp,
+        RadioPropsColorOverrides
+      >;
       /**
        * If `true`, the checked icon is removed and the selected variant is applied on the `action` element instead.
        * @default false
@@ -66,7 +69,10 @@ export interface RadioTypeMap<P = {}, D extends React.ElementType = 'span'> {
        * The size of the component.
        * @default 'md'
        */
-      size?: OverridableStringUnion<'sm' | 'md' | 'lg', RadioPropsSizeOverrides>;
+      size?: OverridableStringUnion<
+        "sm" | "md" | "lg",
+        RadioPropsSizeOverrides
+      >;
       /**
        * The system prop that allows defining system overrides as well as additional CSS styles.
        */
@@ -89,8 +95,8 @@ export interface RadioTypeMap<P = {}, D extends React.ElementType = 'span'> {
 }
 
 export type RadioProps<
-  D extends React.ElementType = RadioTypeMap['defaultComponent'],
+  D extends React.ElementType = RadioTypeMap["defaultComponent"],
   P = {
     component?: React.ElementType;
-  },
+  }
 > = OverrideProps<RadioTypeMap<P, D>, D>;

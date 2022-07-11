@@ -1,50 +1,62 @@
-import * as React from 'react';
-import clsx from 'clsx';
-import PropTypes from 'prop-types';
-import { unstable_composeClasses as composeClasses } from '@mui/base';
-import { OverridableComponent } from '@mui/types';
-import { useThemeProps } from '../styles';
-import styled from '../styles/styled';
-import { getCardCoverUtilityClass } from './cardCoverClasses';
-import { CardCoverProps, CardCoverTypeMap } from './CardCoverProps';
+import * as React from "react";
+import clsx from "clsx";
+import PropTypes from "prop-types";
+import { unstable_composeClasses as composeClasses } from "@mui/base";
+import { OverridableComponent } from "@mui/types";
+import { useThemeProps } from "../styles";
+import styled from "../styles/styled";
+import { getCardCoverUtilityClass } from "./cardCoverClasses";
+import { CardCoverProps, CardCoverTypeMap } from "./CardCoverProps";
 
 const useUtilityClasses = () => {
   const slots = {
-    root: ['root'],
+    root: ["root"],
   };
 
   return composeClasses(slots, getCardCoverUtilityClass, {});
 };
 
-const CardCoverRoot = styled('div', {
-  name: 'JoyCardCover',
-  slot: 'Root',
+const CardCoverRoot = styled("div", {
+  name: "JoyCardCover",
+  slot: "Root",
   overridesResolver: (props, styles) => styles.root,
 })<{ ownerState: CardCoverProps }>({
-  position: 'absolute',
+  position: "absolute",
   zIndex: 0,
   top: 0,
   left: 0,
-  width: '100%',
-  height: '100%',
-  borderRadius: 'var(--CardCover-radius)',
+  width: "100%",
+  height: "100%",
+  borderRadius: "var(--CardCover-radius)",
   // use data-attribute instead of :first-child to support zero config SSR (emotion)
-  '& > [data-first-child]': {
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover',
-    boxSizing: 'border-box',
-    borderRadius: 'var(--CardCover-radius)',
+  // use nested selector for integrating with nextjs image `fill` layout (spans are inserted on top of the img)
+  "& [data-first-child]": {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    boxSizing: "border-box",
+    borderRadius: "var(--CardCover-radius)",
+    margin: 0,
+    padding: 0,
+    "& > img": {
+      // support art-direction that uses <picture><img /></picture>
+      width: "100%",
+      height: "100%",
+      objectFit: "cover",
+    },
   },
 });
 
 const CardCover = React.forwardRef(function CardCover(inProps, ref) {
   const props = useThemeProps<typeof inProps & CardCoverProps>({
     props: inProps,
-    name: 'JoyCardCover',
+    name: "JoyCardCover",
   });
 
-  const { className, component = 'div', children, ...other } = props;
+  const { className, component = "div", children, ...other } = props;
 
   const ownerState = {
     ...props,
@@ -63,8 +75,8 @@ const CardCover = React.forwardRef(function CardCover(inProps, ref) {
     >
       {React.Children.map(children, (child, index) =>
         index === 0 && React.isValidElement(child)
-          ? React.cloneElement(child, { 'data-first-child': '' })
-          : child,
+          ? React.cloneElement(child, { "data-first-child": "" })
+          : child
       )}
     </CardCoverRoot>
   );
@@ -93,7 +105,9 @@ CardCover.propTypes /* remove-proptypes */ = {
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
   sx: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])),
+    PropTypes.arrayOf(
+      PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])
+    ),
     PropTypes.func,
     PropTypes.object,
   ]),

@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { ExtendBadgeUnstyledTypeMap } from '@mui/base/BadgeUnstyled';
-import { OverridableStringUnion, OverrideProps } from '@mui/types';
-import { ColorPaletteProp, VariantProp, SxProps } from '../styles/types';
+import * as React from "react";
+import { ExtendBadgeUnstyledTypeMap } from "@mui/base/BadgeUnstyled";
+import { OverridableStringUnion, OverrideProps } from "@mui/types";
+import { ColorPaletteProp, VariantProp, SxProps } from "../styles/types";
 
-export type BadgeSlot = 'root' | 'badge';
+export type BadgeSlot = "root" | "badge";
 
 export interface BadgePropsVariantOverrides {}
 
@@ -12,13 +12,13 @@ export interface BadgePropsColorOverrides {}
 export interface BadgePropsSizeOverrides {}
 
 export interface BadgeOrigin {
-  vertical: 'top' | 'bottom';
-  horizontal: 'left' | 'right';
+  vertical: "top" | "bottom";
+  horizontal: "left" | "right";
 }
 
 export type BadgeTypeMap<
-  D extends React.ElementType = 'span',
-  P = {},
+  D extends React.ElementType = "span",
+  P = {}
 > = ExtendBadgeUnstyledTypeMap<{
   props: P & {
     /**
@@ -43,7 +43,7 @@ export type BadgeTypeMap<
      * The size of the component.
      * @default 'md'
      */
-    size?: OverridableStringUnion<'sm' | 'md' | 'lg', BadgePropsSizeOverrides>;
+    size?: OverridableStringUnion<"sm" | "md" | "lg", BadgePropsSizeOverrides>;
     /**
      * The system prop that allows defining system overrides as well as additional CSS styles.
      */
@@ -58,6 +58,6 @@ export type BadgeTypeMap<
 }>;
 
 export type BadgeProps<
-  D extends React.ElementType = BadgeTypeMap['defaultComponent'],
-  P = { component?: React.ElementType },
+  D extends React.ElementType = BadgeTypeMap["defaultComponent"],
+  P = { component?: React.ElementType }
 > = OverrideProps<BadgeTypeMap<D, P>, D>;

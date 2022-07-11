@@ -1,13 +1,13 @@
-import * as React from 'react';
-import { OverridableStringUnion, OverrideProps } from '@mui/types';
-import { SxProps } from '../styles/types';
-import { ListClasses } from './listClasses';
+import * as React from "react";
+import { OverridableStringUnion, OverrideProps } from "@mui/types";
+import { SxProps } from "../styles/types";
+import { ListClasses } from "./listClasses";
 
-export type ListSlot = 'root';
+export type ListSlot = "root";
 
 export interface ListPropsSizeOverrides {}
 
-export interface ListTypeMap<P = {}, D extends React.ElementType = 'ul'> {
+export interface ListTypeMap<P = {}, D extends React.ElementType = "ul"> {
   props: P & {
     /**
      * The content of the component.
@@ -24,7 +24,7 @@ export interface ListTypeMap<P = {}, D extends React.ElementType = 'ul'> {
     /**
      * The size of the component (affect other nested list* components).
      */
-    size?: OverridableStringUnion<'sm' | 'md' | 'lg', ListPropsSizeOverrides>;
+    size?: OverridableStringUnion<"sm" | "md" | "lg", ListPropsSizeOverrides>;
     /**
      * The system prop that allows defining system overrides as well as additional CSS styles.
      */
@@ -34,8 +34,8 @@ export interface ListTypeMap<P = {}, D extends React.ElementType = 'ul'> {
 }
 
 export type ListProps<
-  D extends React.ElementType = ListTypeMap['defaultComponent'],
+  D extends React.ElementType = ListTypeMap["defaultComponent"],
   P = {
     component?: React.ElementType;
-  },
+  }
 > = OverrideProps<ListTypeMap<P, D>, D>;

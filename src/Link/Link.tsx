@@ -1,91 +1,94 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { unstable_composeClasses as composeClasses } from '@mui/base';
-import { OverridableComponent } from '@mui/types';
+import * as React from "react";
+import PropTypes from "prop-types";
+import clsx from "clsx";
+import { unstable_composeClasses as composeClasses } from "@mui/base";
+import { OverridableComponent } from "@mui/types";
 import {
   unstable_capitalize as capitalize,
   unstable_useForkRef as useForkRef,
   unstable_useIsFocusVisible as useIsFocusVisible,
-} from '@mui/utils';
-import { unstable_extendSxProp as extendSxProp } from '@mui/system';
-import styled from '../styles/styled';
-import useThemeProps from '../styles/useThemeProps';
-import { getLinkUtilityClass } from './linkClasses';
-import { LinkProps, LinkTypeMap } from './LinkProps';
-import { TypographyContext } from '../Typography/Typography';
+} from "@mui/utils";
+import { unstable_extendSxProp as extendSxProp } from "@mui/system";
+import styled from "../styles/styled";
+import useThemeProps from "../styles/useThemeProps";
+import linkClasses, { getLinkUtilityClass } from "./linkClasses";
+import { LinkProps, LinkTypeMap } from "./LinkProps";
+import { TypographyContext } from "../Typography/Typography";
 
 const useUtilityClasses = (ownerState: LinkProps) => {
-  const { level, color, variant, underline, focusVisible, disabled } = ownerState;
+  const { level, color, variant, underline, focusVisible, disabled } =
+    ownerState;
 
   const slots = {
     root: [
-      'root',
+      "root",
       color && `color${capitalize(color)}`,
-      disabled && 'disabled',
-      focusVisible && 'focusVisible',
+      disabled && "disabled",
+      focusVisible && "focusVisible",
       level,
       underline && `underline${capitalize(underline)}`,
       variant && `variant${capitalize(variant)}`,
     ],
-    startDecorator: ['startDecorator'],
-    endDecorator: ['endDecorator'],
+    startDecorator: ["startDecorator"],
+    endDecorator: ["endDecorator"],
   };
 
   return composeClasses(slots, getLinkUtilityClass, {});
 };
 
-const StartDecorator = styled('span', {
-  name: 'JoyLink',
-  slot: 'StartDecorator',
+const StartDecorator = styled("span", {
+  name: "JoyLink",
+  slot: "StartDecorator",
   overridesResolver: (props, styles) => styles.startDecorator,
 })<{ ownerState: LinkProps }>({
-  display: 'inline-flex',
-  marginInlineEnd: 'min(var(--Link-gap, 0.25em), 0.5rem)',
+  display: "inline-flex",
+  marginInlineEnd: "min(var(--Link-gap, 0.25em), 0.5rem)",
 });
 
-const EndDecorator = styled('span', {
-  name: 'JoyLink',
-  slot: 'endDecorator',
+const EndDecorator = styled("span", {
+  name: "JoyLink",
+  slot: "endDecorator",
   overridesResolver: (props, styles) => styles.endDecorator,
 })<{ ownerState: LinkProps }>({
-  display: 'inline-flex',
-  marginInlineStart: 'min(var(--Link-gap, 0.25em), 0.5rem)',
+  display: "inline-flex",
+  marginInlineStart: "min(var(--Link-gap, 0.25em), 0.5rem)",
 });
 
-const LinkRoot = styled('a', {
-  name: 'JoyLink',
-  slot: 'Root',
+const LinkRoot = styled("a", {
+  name: "JoyLink",
+  slot: "Root",
   overridesResolver: (props, styles) => styles.root,
 })<{ ownerState: LinkProps }>(({ theme, ownerState }) => {
   return [
     {
-      '--Icon-fontSize': '1.25em',
-      ...(ownerState.level && ownerState.level !== 'inherit' && theme.typography[ownerState.level]),
-      ...(ownerState.level === 'inherit' && {
-        fontSize: 'inherit',
-        fontFamily: 'inherit',
-        lineHeight: 'inherit',
+      "--Icon-fontSize": "1.25em",
+      ...(ownerState.level &&
+        ownerState.level !== "inherit" &&
+        theme.typography[ownerState.level]),
+      ...(ownerState.level === "inherit" && {
+        fontSize: "inherit",
+        fontFamily: "inherit",
+        lineHeight: "inherit",
       }),
-      ...(ownerState.underline === 'none' && {
-        textDecoration: 'none',
+      ...(ownerState.underline === "none" && {
+        textDecoration: "none",
       }),
-      ...(ownerState.underline === 'hover' && {
-        textDecoration: 'none',
-        '&:hover': {
-          textDecorationLine: 'underline',
+      ...(ownerState.underline === "hover" && {
+        textDecoration: "none",
+        "&:hover": {
+          textDecorationLine: "underline",
         },
       }),
-      ...(ownerState.underline === 'always' && {
-        textDecoration: 'underline',
+      ...(ownerState.underline === "always" && {
+        textDecoration: "underline",
       }),
       ...(ownerState.startDecorator && {
-        verticalAlign: 'bottom', // to make the link align with the parent's content
+        verticalAlign: "bottom", // to make the link align with the parent's content
       }),
-      display: 'inline-flex',
-      alignItems: 'center',
-      WebkitTapHighlightColor: 'transparent',
-      backgroundColor: 'transparent', // Reset default value
+      display: "inline-flex",
+      alignItems: "center",
+      WebkitTapHighlightColor: "transparent",
+      backgroundColor: "transparent", // Reset default value
       // We disable the focus ring for mouse, touch and keyboard users.
       outline: 0,
       border: 0,
@@ -97,80 +100,93 @@ const LinkRoot = styled('a', {
       } / var(--Link-underlineOpacity, 0.72))`,
       ...(ownerState.variant
         ? {
-            paddingInline: '0.25em', // better than left, right because it also works with writing mode.
-            marginInline: '-0.25em',
+            paddingInline: "0.25em", // better than left, right because it also works with writing mode.
+            marginInline: "-0.25em",
           }
         : {
-            color: theme.vars.palette[ownerState.color!]?.plainColor,
-            cursor: 'pointer',
-            '&.Mui-disabled': {
-              pointerEvents: 'none',
-              color: theme.vars.palette[ownerState.color!]?.plainDisabledColor,
+            color: `rgba(${
+              theme.vars.palette[ownerState.color!]?.mainChannel
+            } / 1)`,
+            cursor: "pointer",
+            [`&.${linkClasses.disabled}`]: {
+              pointerEvents: "none",
+              color: `rgba(${
+                theme.vars.palette[ownerState.color!]?.mainChannel
+              } / 0.6)`,
             },
           }),
-      userSelect: 'none',
-      MozAppearance: 'none', // Reset
-      WebkitAppearance: 'none', // Reset
-      '&::-moz-focus-inner': {
-        borderStyle: 'none', // Remove Firefox dotted outline.
+      userSelect: "none",
+      MozAppearance: "none", // Reset
+      WebkitAppearance: "none", // Reset
+      "&::-moz-focus-inner": {
+        borderStyle: "none", // Remove Firefox dotted outline.
       },
       ...(ownerState.overlay
         ? {
-            position: 'initial',
-            '&::after': {
+            position: "initial",
+            "&::after": {
               content: '""',
-              display: 'block',
-              position: 'absolute',
+              display: "block",
+              position: "absolute",
               top: 0,
               left: 0,
               bottom: 0,
               right: 0,
-              borderRadius: `var(--Link-overlayRadius, var(--internal-action-radius, inherit))`,
-              margin: `var(--Link-overlayMargin)`,
+              borderRadius: `var(--internal-action-radius, inherit)`,
+              margin: `var(--internal-action-margin)`,
             },
             [`${theme.focus.selector}`]: {
-              '&::after': theme.focus.default,
+              "&::after": theme.focus.default,
             },
           }
         : {
-            position: 'relative',
+            position: "relative",
             [theme.focus.selector]: theme.focus.default,
           }),
     },
-    ownerState.variant && theme.variants[ownerState.variant]?.[ownerState.color!],
-    ownerState.variant && theme.variants[`${ownerState.variant}Hover`]?.[ownerState.color!],
-    ownerState.variant && theme.variants[`${ownerState.variant}Active`]?.[ownerState.color!],
-    ownerState.variant && theme.variants[`${ownerState.variant}Disabled`]?.[ownerState.color!],
+    ownerState.variant && {
+      ...theme.variants[ownerState.variant]?.[ownerState.color!],
+      "&:hover":
+        theme.variants[`${ownerState.variant}Hover`]?.[ownerState.color!],
+      "&:active":
+        theme.variants[`${ownerState.variant}Active`]?.[ownerState.color!],
+      [`&.${linkClasses.disabled}`]:
+        theme.variants[`${ownerState.variant}Disabled`]?.[ownerState.color!],
+    },
   ];
 });
 
 const Link = React.forwardRef(function Link(inProps, ref) {
-  const { color = 'primary', ...themeProps } = useThemeProps<typeof inProps & LinkProps>({
+  const {
+    color = "primary",
+    textColor,
+    ...themeProps
+  } = useThemeProps<typeof inProps & LinkProps>({
     props: inProps,
-    name: 'JoyLink',
+    name: "JoyLink",
   });
 
   const nested = React.useContext(TypographyContext);
 
-  const props = extendSxProp(themeProps) as LinkProps;
+  const props = extendSxProp({ ...themeProps, color: textColor }) as LinkProps;
 
   const {
     className,
-    component = 'a',
+    component = "a",
     children,
     disabled = false,
     onBlur,
     onFocus,
-    level: levelProp = 'body1',
+    level: levelProp = "body1",
     overlay = false,
-    underline = 'hover',
+    underline = "hover",
     variant,
     endDecorator,
     startDecorator,
     ...other
   } = props;
 
-  const level = nested ? inProps.level || 'inherit' : levelProp;
+  const level = nested ? inProps.level || "inherit" : levelProp;
 
   const {
     isFocusVisibleRef,
@@ -179,7 +195,10 @@ const Link = React.forwardRef(function Link(inProps, ref) {
     ref: focusVisibleRef,
   } = useIsFocusVisible();
   const [focusVisible, setFocusVisible] = React.useState<boolean>(false);
-  const handleRef = useForkRef(ref, focusVisibleRef) as React.Ref<HTMLAnchorElement>;
+  const handleRef = useForkRef(
+    ref,
+    focusVisibleRef
+  ) as React.Ref<HTMLAnchorElement>;
   const handleBlur = (event: React.FocusEvent<HTMLAnchorElement>) => {
     handleBlurVisible(event);
     if (isFocusVisibleRef.current === false) {
@@ -225,7 +244,10 @@ const Link = React.forwardRef(function Link(inProps, ref) {
       {...other}
     >
       {startDecorator && (
-        <StartDecorator ownerState={ownerState} className={classes.startDecorator}>
+        <StartDecorator
+          ownerState={ownerState}
+          className={classes.startDecorator}
+        >
           {startDecorator}
         </StartDecorator>
       )}
@@ -258,7 +280,14 @@ Link.propTypes /* remove-proptypes */ = {
    * @default 'primary'
    */
   color: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([
-    PropTypes.oneOf(['context', 'danger', 'info', 'neutral', 'primary', 'success', 'warning']),
+    PropTypes.oneOf([
+      "danger",
+      "info",
+      "neutral",
+      "primary",
+      "success",
+      "warning",
+    ]),
     PropTypes.string,
   ]),
   /**
@@ -280,7 +309,18 @@ Link.propTypes /* remove-proptypes */ = {
    * @default 'body1'
    */
   level: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([
-    PropTypes.oneOf(['body1', 'body2', 'body3', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'inherit']),
+    PropTypes.oneOf([
+      "body1",
+      "body2",
+      "body3",
+      "h1",
+      "h2",
+      "h3",
+      "h4",
+      "h5",
+      "h6",
+      "inherit",
+    ]),
     PropTypes.string,
   ]),
   /**
@@ -305,21 +345,27 @@ Link.propTypes /* remove-proptypes */ = {
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
   sx: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])),
+    PropTypes.arrayOf(
+      PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])
+    ),
     PropTypes.func,
     PropTypes.object,
   ]),
   /**
+   * The system color.
+   */
+  textColor: PropTypes /* @typescript-to-proptypes-ignore */.any,
+  /**
    * Controls when the link should have an underline.
    * @default 'hover'
    */
-  underline: PropTypes.oneOf(['always', 'hover', 'none']),
+  underline: PropTypes.oneOf(["always", "hover", "none"]),
   /**
    * Applies the theme link styles.
    * @default 'plain'
    */
   variant: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([
-    PropTypes.oneOf(['outlined', 'plain', 'soft', 'solid']),
+    PropTypes.oneOf(["outlined", "plain", "soft", "solid"]),
     PropTypes.string,
   ]),
 } as any;

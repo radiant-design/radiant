@@ -1,11 +1,14 @@
-import * as React from 'react';
-import { OverrideProps } from '@mui/types';
-import { SxProps } from '../styles/types';
-import { ListItemDecoratorClasses } from './listItemDecoratorClasses';
+import * as React from "react";
+import { OverrideProps } from "@mui/types";
+import { SxProps } from "../styles/types";
+import { ListItemDecoratorClasses } from "./listItemDecoratorClasses";
 
-export type ListItemDecoratorSlot = 'root';
+export type ListItemDecoratorSlot = "root";
 
-export interface ListItemDecoratorTypeMap<P = {}, D extends React.ElementType = 'span'> {
+export interface ListItemDecoratorTypeMap<
+  P = {},
+  D extends React.ElementType = "span"
+> {
   props: P & {
     /**
      * The content of the component.
@@ -24,8 +27,8 @@ export interface ListItemDecoratorTypeMap<P = {}, D extends React.ElementType = 
 }
 
 export type ListItemDecoratorProps<
-  D extends React.ElementType = ListItemDecoratorTypeMap['defaultComponent'],
+  D extends React.ElementType = ListItemDecoratorTypeMap["defaultComponent"],
   P = {
     component?: React.ElementType;
-  },
+  }
 > = OverrideProps<ListItemDecoratorTypeMap<P, D>, D>;

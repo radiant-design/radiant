@@ -1,45 +1,70 @@
-import { GlobalStateSlot } from '@mui/base';
-import { CSSInterpolation } from '@mui/system';
-import { AspectRatioProps, AspectRatioSlot } from '../AspectRatio/AspectRatioProps';
-import { AvatarProps, AvatarSlot } from '../Avatar/AvatarProps';
-import { AvatarGroupProps, AvatarGroupSlot } from '../AvatarGroup/AvatarGroupProps';
-import { BadgeProps, BadgeSlot } from '../Badge/BadgeProps';
-import { BoxProps, BoxSlot } from '../Box/BoxProps';
-import { ButtonProps, ButtonSlot } from '../Button/ButtonProps';
-import { CardProps, CardSlot } from '../Card/CardProps';
-import { CardContentProps, CardContentSlot } from '../CardContent/CardContentProps';
-import { CardCoverProps, CardCoverSlot } from '../CardCover/CardCoverProps';
-import { CardOverflowProps, CardOverflowSlot } from '../CardOverflow/CardOverflowProps';
-import { CheckboxProps, CheckboxSlot } from '../Checkbox/CheckboxProps';
-import { ContainerProps, ContainerSlot } from '../Container/ContainerProps';
-import { FormHelperTextProps, FormHelperTextSlot } from '../FormHelperText/FormHelperTextProps';
-import { FormLabelProps, FormLabelSlot } from '../FormLabel/FormLabelProps';
-import { IconButtonProps, IconButtonSlot } from '../IconButton/IconButtonProps';
-import { InputProps, InputSlot } from '../Input/InputProps';
-import { LinkProps, LinkSlot } from '../Link/LinkProps';
-import { ListProps, ListSlot } from '../List/ListProps';
-import { ListDividerProps, ListDividerSlot } from '../ListDivider/ListDividerProps';
-import { ListItemProps, ListItemSlot } from '../ListItem/ListItemProps';
-import { ListItemButtonProps, ListItemButtonSlot } from '../ListItemButton/ListItemButtonProps';
-import { ListItemContentProps, ListItemContentSlot } from '../ListItemContent/ListItemContentProps';
+import { GlobalStateSlot } from "@mui/base";
+import { CSSInterpolation } from "@mui/system";
+import {
+  AspectRatioProps,
+  AspectRatioSlot,
+} from "../AspectRatio/AspectRatioProps";
+import { AvatarProps, AvatarSlot } from "../Avatar/AvatarProps";
+import {
+  AvatarGroupProps,
+  AvatarGroupSlot,
+} from "../AvatarGroup/AvatarGroupProps";
+import { BadgeProps, BadgeSlot } from "../Badge/BadgeProps";
+import { BoxProps, BoxSlot } from "../Box/BoxProps";
+import { ButtonProps, ButtonSlot } from "../Button/ButtonProps";
+import { CardProps, CardSlot } from "../Card/CardProps";
+import {
+  CardContentProps,
+  CardContentSlot,
+} from "../CardContent/CardContentProps";
+import { CardCoverProps, CardCoverSlot } from "../CardCover/CardCoverProps";
+import {
+  CardOverflowProps,
+  CardOverflowSlot,
+} from "../CardOverflow/CardOverflowProps";
+import { CheckboxProps, CheckboxSlot } from "../Checkbox/CheckboxProps";
+import { ContainerProps, ContainerSlot } from "../Container/ContainerProps";
+import {
+  FormHelperTextProps,
+  FormHelperTextSlot,
+} from "../FormHelperText/FormHelperTextProps";
+import { FormLabelProps, FormLabelSlot } from "../FormLabel/FormLabelProps";
+import { IconButtonProps, IconButtonSlot } from "../IconButton/IconButtonProps";
+import { InputProps, InputSlot } from "../Input/InputProps";
+import { LinkProps, LinkSlot } from "../Link/LinkProps";
+import { ListProps, ListSlot } from "../List/ListProps";
+import {
+  ListDividerProps,
+  ListDividerSlot,
+} from "../ListDivider/ListDividerProps";
+import { ListItemProps, ListItemSlot } from "../ListItem/ListItemProps";
+import {
+  ListItemButtonProps,
+  ListItemButtonSlot,
+} from "../ListItemButton/ListItemButtonProps";
+import {
+  ListItemContentProps,
+  ListItemContentSlot,
+} from "../ListItemContent/ListItemContentProps";
 import {
   ListItemDecoratorProps,
   ListItemDecoratorSlot,
-} from '../ListItemDecorator/ListItemDecoratorProps';
-import { SheetProps, SheetSlot } from '../Sheet/SheetProps';
-import { SvgIconProps, SvgIconSlot } from '../SvgIcon/SvgIconProps';
-import { SwitchProps, SwitchSlot } from '../Switch/SwitchProps';
-import { TextFieldProps, TextFieldSlot } from '../TextField/TextFieldProps';
-import { TypographyProps, TypographySlot } from '../Typography/TypographyProps';
-import { ChipProps, ChipSlot } from '../Chip/ChipProps';
-import { ChipDeleteProps, ChipDeleteSlot } from '../ChipDelete/ChipDeleteProps';
-import { RadioProps, RadioSlot } from '../Radio/RadioProps';
-import { RadioGroupProps, RadioGroupSlot } from '../RadioGroup/RadioGroupProps';
+} from "../ListItemDecorator/ListItemDecoratorProps";
+import { SheetProps, SheetSlot } from "../Sheet/SheetProps";
+import { SvgIconProps, SvgIconSlot } from "../SvgIcon/SvgIconProps";
+import { SwitchProps, SwitchSlot } from "../Switch/SwitchProps";
+import { TextFieldProps, TextFieldSlot } from "../TextField/TextFieldProps";
+import { TypographyProps, TypographySlot } from "../Typography/TypographyProps";
+import { ChipProps, ChipSlot } from "../Chip/ChipProps";
+import { ChipDeleteProps, ChipDeleteSlot } from "../ChipDelete/ChipDeleteProps";
+import { SliderProps, SliderSlot } from "../Slider/SliderProps";
+import { RadioProps, RadioSlot } from "../Radio/RadioProps";
+import { RadioGroupProps, RadioGroupSlot } from "../RadioGroup/RadioGroupProps";
 
 export type OverridesStyleRules<
   ClassKey extends string = string,
   ComponentProps = Record<string, unknown>,
-  Theme = unknown,
+  Theme = unknown
 > = Partial<
   Record<
     Exclude<ClassKey, GlobalStateSlot>,
@@ -50,7 +75,7 @@ export type OverridesStyleRules<
         props: {
           ownerState: ComponentProps & Record<string, unknown>;
           theme: Theme;
-        } & Record<string, unknown>,
+        } & Record<string, unknown>
       ) => CSSInterpolation)
   >
 >;
@@ -58,7 +83,11 @@ export interface Components<Theme = unknown> {
   // alphabetical order
   JoyAspectRatio?: {
     defaultProps?: Partial<AspectRatioProps>;
-    styleOverrides?: OverridesStyleRules<AspectRatioSlot, AspectRatioProps, Theme>;
+    styleOverrides?: OverridesStyleRules<
+      AspectRatioSlot,
+      AspectRatioProps,
+      Theme
+    >;
   };
   JoyAvatar?: {
     defaultProps?: Partial<AvatarProps>;
@@ -66,7 +95,11 @@ export interface Components<Theme = unknown> {
   };
   JoyAvatarGroup?: {
     defaultProps?: Partial<AvatarGroupProps>;
-    styleOverrides?: OverridesStyleRules<AvatarGroupSlot, AvatarGroupProps, Theme>;
+    styleOverrides?: OverridesStyleRules<
+      AvatarGroupSlot,
+      AvatarGroupProps,
+      Theme
+    >;
   };
   JoyBadge?: {
     defaultProps?: Partial<BadgeProps>;
@@ -86,7 +119,11 @@ export interface Components<Theme = unknown> {
   };
   JoyCardContent?: {
     defaultProps?: Partial<CardContentProps>;
-    styleOverrides?: OverridesStyleRules<CardContentSlot, CardContentProps, Theme>;
+    styleOverrides?: OverridesStyleRules<
+      CardContentSlot,
+      CardContentProps,
+      Theme
+    >;
   };
   JoyCardCover?: {
     defaultProps?: Partial<CardCoverProps>;
@@ -94,7 +131,11 @@ export interface Components<Theme = unknown> {
   };
   JoyCardOverflow?: {
     defaultProps?: Partial<CardOverflowProps>;
-    styleOverrides?: OverridesStyleRules<CardOverflowSlot, CardOverflowProps, Theme>;
+    styleOverrides?: OverridesStyleRules<
+      CardOverflowSlot,
+      CardOverflowProps,
+      Theme
+    >;
   };
   JoyCheckbox?: {
     defaultProps?: Partial<CheckboxProps>;
@@ -106,7 +147,11 @@ export interface Components<Theme = unknown> {
   };
   JoyChipDelete?: {
     defaultProps?: Partial<ChipDeleteProps>;
-    styleOverrides?: OverridesStyleRules<ChipDeleteSlot, ChipDeleteProps, Theme>;
+    styleOverrides?: OverridesStyleRules<
+      ChipDeleteSlot,
+      ChipDeleteProps,
+      Theme
+    >;
   };
   JoyContainer?: {
     defaultProps?: Partial<ContainerProps>;
@@ -114,7 +159,11 @@ export interface Components<Theme = unknown> {
   };
   JoyFormHelperText?: {
     defaultProps?: Partial<FormHelperTextProps>;
-    styleOverrides?: OverridesStyleRules<FormHelperTextSlot, FormHelperTextProps, Theme>;
+    styleOverrides?: OverridesStyleRules<
+      FormHelperTextSlot,
+      FormHelperTextProps,
+      Theme
+    >;
   };
   JoyFormLabel?: {
     defaultProps?: Partial<FormLabelProps>;
@@ -122,7 +171,11 @@ export interface Components<Theme = unknown> {
   };
   JoyIconButton?: {
     defaultProps?: Partial<IconButtonProps>;
-    styleOverrides?: OverridesStyleRules<IconButtonSlot, IconButtonProps, Theme>;
+    styleOverrides?: OverridesStyleRules<
+      IconButtonSlot,
+      IconButtonProps,
+      Theme
+    >;
   };
   JoyInput?: {
     defaultProps?: Partial<InputProps>;
@@ -138,7 +191,11 @@ export interface Components<Theme = unknown> {
   };
   JoyListDivider?: {
     defaultProps: Partial<ListDividerProps>;
-    styleOverrides?: OverridesStyleRules<ListDividerSlot, ListDividerProps, Theme>;
+    styleOverrides?: OverridesStyleRules<
+      ListDividerSlot,
+      ListDividerProps,
+      Theme
+    >;
   };
   JoyListItem?: {
     defaultProps: Partial<ListItemProps>;
@@ -146,15 +203,27 @@ export interface Components<Theme = unknown> {
   };
   JoyListItemButton?: {
     defaultProps: Partial<ListItemButtonProps>;
-    styleOverrides?: OverridesStyleRules<ListItemButtonSlot, ListItemButtonProps, Theme>;
+    styleOverrides?: OverridesStyleRules<
+      ListItemButtonSlot,
+      ListItemButtonProps,
+      Theme
+    >;
   };
   JoyListItemContent?: {
     defaultProps: Partial<ListItemContentProps>;
-    styleOverrides?: OverridesStyleRules<ListItemContentSlot, ListItemContentProps, Theme>;
+    styleOverrides?: OverridesStyleRules<
+      ListItemContentSlot,
+      ListItemContentProps,
+      Theme
+    >;
   };
   JoyListItemDecorator?: {
     defaultProps: Partial<ListItemDecoratorProps>;
-    styleOverrides?: OverridesStyleRules<ListItemDecoratorSlot, ListItemDecoratorProps, Theme>;
+    styleOverrides?: OverridesStyleRules<
+      ListItemDecoratorSlot,
+      ListItemDecoratorProps,
+      Theme
+    >;
   };
   JoyRadio?: {
     defaultProps?: Partial<RadioProps>;
@@ -162,7 +231,11 @@ export interface Components<Theme = unknown> {
   };
   JoyRadioGroup?: {
     defaultProps?: Partial<RadioGroupProps>;
-    styleOverrides?: OverridesStyleRules<RadioGroupSlot, RadioGroupProps, Theme>;
+    styleOverrides?: OverridesStyleRules<
+      RadioGroupSlot,
+      RadioGroupProps,
+      Theme
+    >;
   };
   JoySheet?: {
     defaultProps?: Partial<SheetProps>;
@@ -181,12 +254,20 @@ export interface Components<Theme = unknown> {
     defaultProps?: Partial<SvgIconProps>;
     styleOverrides?: OverridesStyleRules<SvgIconSlot, SvgIconProps, Theme>;
   };
+  JoySlider?: {
+    defaultProps?: Partial<SliderProps>;
+    styleOverrides?: OverridesStyleRules<SliderSlot, SliderProps, Theme>;
+  };
   JoyTextField?: {
     defaultProps?: Partial<TextFieldProps>;
     styleOverrides?: OverridesStyleRules<TextFieldSlot, TextFieldProps, Theme>;
   };
   JoyTypography?: {
     defaultProps?: Partial<TypographyProps>;
-    styleOverrides?: OverridesStyleRules<TypographySlot, TypographyProps, Theme>;
+    styleOverrides?: OverridesStyleRules<
+      TypographySlot,
+      TypographyProps,
+      Theme
+    >;
   };
 }

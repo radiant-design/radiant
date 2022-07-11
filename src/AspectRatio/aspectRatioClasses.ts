@@ -1,4 +1,4 @@
-import { generateUtilityClass, generateUtilityClasses } from '@mui/base';
+import { generateUtilityClass, generateUtilityClasses } from "../className";
 
 export interface AspectRatioClasses {
   /** Styles applied to the root element. */
@@ -30,22 +30,25 @@ export interface AspectRatioClasses {
 export type AspectRatioClassKey = keyof AspectRatioClasses;
 
 export function getAspectRatioUtilityClass(slot: string): string {
-  return generateUtilityClass('JoyAspectRatio', slot);
+  return generateUtilityClass("JoyAspectRatio", slot);
 }
 
-const aspectRatioClasses: AspectRatioClasses = generateUtilityClasses('JoyAspectRatio', [
-  'root',
-  'content',
-  'colorPrimary',
-  'colorNeutral',
-  'colorDanger',
-  'colorInfo',
-  'colorSuccess',
-  'colorWarning',
-  'variantPlain',
-  'variantOutlined',
-  'variantSoft',
-  'variantSolid',
-]);
+const aspectRatioClasses: AspectRatioClasses = generateUtilityClasses(
+  "JoyAspectRatio",
+  [
+    "root",
+    "content",
+    "colorPrimary",
+    "colorNeutral",
+    "colorDanger",
+    "colorInfo",
+    "colorSuccess",
+    "colorWarning",
+    "variantPlain",
+    "variantOutlined",
+    "variantSoft",
+    "variantSolid",
+  ]
+);
 
 export default aspectRatioClasses;

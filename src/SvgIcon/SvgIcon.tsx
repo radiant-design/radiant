@@ -1,20 +1,20 @@
-import { unstable_composeClasses as composeClasses } from '@mui/base';
-import { OverridableComponent } from '@mui/types';
-import { unstable_capitalize as capitalize } from '@mui/utils';
-import clsx from 'clsx';
-import PropTypes from 'prop-types';
-import * as React from 'react';
-import styled from '../styles/styled';
-import useThemeProps from '../styles/useThemeProps';
-import { getSvgIconUtilityClass } from './svgIconClasses';
-import { SvgIconProps, SvgIconTypeMap } from './SvgIconProps';
+import { unstable_composeClasses as composeClasses } from "@mui/base";
+import { OverridableComponent } from "@mui/types";
+import { unstable_capitalize as capitalize } from "@mui/utils";
+import clsx from "clsx";
+import PropTypes from "prop-types";
+import * as React from "react";
+import styled from "../styles/styled";
+import useThemeProps from "../styles/useThemeProps";
+import { getSvgIconUtilityClass } from "./svgIconClasses";
+import { SvgIconProps, SvgIconTypeMap } from "./SvgIconProps";
 
 const useUtilityClasses = (ownerState: SvgIconProps) => {
   const { color, fontSize, classes } = ownerState;
 
   const slots = {
     root: [
-      'root',
+      "root",
       color && `color${capitalize(color)}`,
       fontSize && `fontSize${capitalize(fontSize)}`,
     ],
@@ -23,52 +23,55 @@ const useUtilityClasses = (ownerState: SvgIconProps) => {
   return composeClasses(slots, getSvgIconUtilityClass, classes);
 };
 
-const SvgIconRoot = styled('svg', {
-  name: 'JoySvgIcon',
-  slot: 'Root',
+const SvgIconRoot = styled("svg", {
+  name: "JoySvgIcon",
+  slot: "Root",
   overridesResolver: (props, styles) => styles.root,
-})<{ ownerState: SvgIconProps & { instanceFontSize: SvgIconProps['fontSize'] } }>(
-  ({ theme, ownerState }) => {
-    return {
-      ...(ownerState.instanceFontSize &&
-        ownerState.instanceFontSize !== 'inherit' && {
-          '--Icon-fontSize': theme.vars.fontSize[ownerState.instanceFontSize],
-        }),
-      userSelect: 'none',
-      width: '1em',
-      height: '1em',
-      display: 'inline-block',
-      fill: 'currentColor',
-      flexShrink: 0,
-      transition: 'fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
-      ...(ownerState.fontSize &&
-        ownerState.fontSize !== 'inherit' && {
-          fontSize: `var(--Icon-fontSize, ${theme.fontSize[ownerState.fontSize]})`,
-        }),
-      color:
-        ownerState.color !== 'inherit' && theme.vars.palette[ownerState.color!]
-          ? theme.vars.palette[ownerState.color!].plainColor
-          : 'var(--Icon-color)',
-    };
-  },
-);
+})<{
+  ownerState: SvgIconProps & { instanceFontSize: SvgIconProps["fontSize"] };
+}>(({ theme, ownerState }) => {
+  return {
+    ...(ownerState.instanceFontSize &&
+      ownerState.instanceFontSize !== "inherit" && {
+        "--Icon-fontSize": theme.vars.fontSize[ownerState.instanceFontSize],
+      }),
+    userSelect: "none",
+    margin: "var(--Icon-margin)",
+    width: "1em",
+    height: "1em",
+    display: "inline-block",
+    fill: "currentColor",
+    flexShrink: 0,
+    transition: "fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+    ...(ownerState.fontSize &&
+      ownerState.fontSize !== "inherit" && {
+        fontSize: `var(--Icon-fontSize, ${
+          theme.fontSize[ownerState.fontSize]
+        })`,
+      }),
+    color:
+      ownerState.color !== "inherit" && theme.vars.palette[ownerState.color!]
+        ? theme.vars.palette[ownerState.color!].plainColor
+        : "var(--Icon-color)",
+  };
+});
 
 const SvgIcon = React.forwardRef(function SvgIcon(inProps, ref) {
   const props = useThemeProps<typeof inProps & SvgIconProps>({
     props: inProps,
-    name: 'JoySvgIcon',
+    name: "JoySvgIcon",
   });
 
   const {
     children,
     className,
-    color = 'inherit',
-    component = 'svg',
-    fontSize = 'xl',
+    color = "inherit",
+    component = "svg",
+    fontSize = "xl",
     htmlColor,
     inheritViewBox = false,
     titleAccess,
-    viewBox = '0 0 24 24',
+    viewBox = "0 0 24 24",
     ...other
   } = props;
 
@@ -92,7 +95,7 @@ const SvgIcon = React.forwardRef(function SvgIcon(inProps, ref) {
       focusable="false"
       color={htmlColor}
       aria-hidden={titleAccess ? undefined : true}
-      role={titleAccess ? 'img' : undefined}
+      role={titleAccess ? "img" : undefined}
       ref={ref}
       {...other}
       {...(!inheritViewBox && { viewBox })}
@@ -126,7 +129,15 @@ SvgIcon.propTypes /* remove-proptypes */ = {
    * @default 'inherit'
    */
   color: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([
-    PropTypes.oneOf(['danger', 'info', 'inherit', 'neutral', 'primary', 'success', 'warning']),
+    PropTypes.oneOf([
+      "danger",
+      "info",
+      "inherit",
+      "neutral",
+      "primary",
+      "success",
+      "warning",
+    ]),
     PropTypes.string,
   ]),
   /**
@@ -139,17 +150,20 @@ SvgIcon.propTypes /* remove-proptypes */ = {
    * @default 'xl'
    */
   fontSize: PropTypes.oneOf([
-    'inherit',
-    'lg',
-    'md',
-    'sm',
-    'xl',
-    'xl2',
-    'xl3',
-    'xl4',
-    'xl5',
-    'xl6',
-    'xs',
+    "inherit",
+    "lg",
+    "md",
+    "sm",
+    "xl",
+    "xl2",
+    "xl3",
+    "xl4",
+    "xl5",
+    "xl6",
+    "xl7",
+    "xs",
+    "xs2",
+    "xs3",
   ]),
   /**
    * Applies a color attribute to the SVG element.
@@ -173,7 +187,9 @@ SvgIcon.propTypes /* remove-proptypes */ = {
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
   sx: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])),
+    PropTypes.arrayOf(
+      PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])
+    ),
     PropTypes.func,
     PropTypes.object,
   ]),

@@ -1,24 +1,27 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { OverridableComponent } from '@mui/types';
-import { unstable_useId as useId, unstable_capitalize as capitalize } from '@mui/utils';
-import composeClasses from '@mui/base/composeClasses';
-import FormLabel from '../FormLabel';
-import FormHelperText from '../FormHelperText';
-import JoyInput from '../Input';
-import { styled, useThemeProps } from '../styles';
-import { TextFieldProps, TextFieldTypeMap } from './TextFieldProps';
-import textFieldClasses, { getTextFieldUtilityClass } from './textFieldClasses';
+import * as React from "react";
+import PropTypes from "prop-types";
+import clsx from "clsx";
+import { OverridableComponent } from "@mui/types";
+import {
+  unstable_useId as useId,
+  unstable_capitalize as capitalize,
+} from "@mui/utils";
+import composeClasses from "@mui/base/composeClasses";
+import FormLabel from "../FormLabel";
+import FormHelperText from "../FormHelperText";
+import JoyInput from "../Input";
+import { styled, useThemeProps } from "../styles";
+import { TextFieldProps, TextFieldTypeMap } from "./TextFieldProps";
+import textFieldClasses, { getTextFieldUtilityClass } from "./textFieldClasses";
 
 const useUtilityClasses = (ownerState: TextFieldProps) => {
   const { error, disabled, variant, size, color, fullWidth } = ownerState;
   const slots = {
     root: [
-      'root',
-      error && 'error',
-      disabled && 'disabled',
-      fullWidth && 'fullWidth',
+      "root",
+      error && "error",
+      disabled && "disabled",
+      fullWidth && "fullWidth",
       variant && `variant${capitalize(variant)}`,
       size && `size${capitalize(size)}`,
       color && `color${capitalize(color)}`,
@@ -28,37 +31,41 @@ const useUtilityClasses = (ownerState: TextFieldProps) => {
   return composeClasses(slots, getTextFieldUtilityClass, {});
 };
 
-const TextFieldRoot = styled('div', {
-  name: 'JoyTextField',
-  slot: 'Root',
+const TextFieldRoot = styled("div", {
+  name: "JoyTextField",
+  slot: "Root",
   overridesResolver: (props, styles) => styles.root,
 })<{ ownerState: TextFieldProps }>(({ theme, ownerState }) => ({
-  '--FormLabel-margin': '0 0 0.25rem 0',
-  '--FormHelperText-margin': '0.25rem 0 0 0',
-  '--FormLabel-asterisk-color': theme.vars.palette.danger[500],
-  '--FormHelperText-color': theme.vars.palette[ownerState.color!]?.[500],
-  ...(ownerState.size === 'sm' && {
-    '--FormHelperText-fontSize': theme.vars.fontSize.xs,
-    '--FormLabel-fontSize': theme.vars.fontSize.xs,
+  "--FormLabel-margin": "0 0 0.25rem 0",
+  "--FormHelperText-margin": "0.25rem 0 0 0",
+  "--FormLabel-asterisk-color": theme.vars.palette.danger[500],
+  "--FormHelperText-color": theme.vars.palette[ownerState.color!]?.[500],
+  ...(ownerState.size === "sm" && {
+    "--FormHelperText-fontSize": theme.vars.fontSize.xs,
+    "--FormLabel-fontSize": theme.vars.fontSize.xs,
   }),
   [`&.${textFieldClasses.error}`]: {
-    '--FormHelperText-color': theme.vars.palette.danger[500],
+    "--FormHelperText-color": theme.vars.palette.danger[500],
   },
   [`&.${textFieldClasses.disabled}`]: {
-    '--FormLabel-color': theme.vars.palette[ownerState.color || 'neutral']?.plainDisabledColor,
-    '--FormHelperText-color': theme.vars.palette[ownerState.color || 'neutral']?.plainDisabledColor,
+    "--FormLabel-color":
+      theme.vars.palette[ownerState.color || "neutral"]?.plainDisabledColor,
+    "--FormHelperText-color":
+      theme.vars.palette[ownerState.color || "neutral"]?.plainDisabledColor,
   },
-  display: 'flex',
-  flexDirection: 'column',
+  display: "flex",
+  flexDirection: "column",
   ...(ownerState.fullWidth && {
-    width: '100%',
+    width: "100%",
   }),
 }));
 
 const TextField = React.forwardRef(function TextField(inProps, ref) {
-  const props = useThemeProps<typeof inProps & { component?: React.ElementType }>({
+  const props = useThemeProps<
+    typeof inProps & { component?: React.ElementType }
+  >({
     props: inProps,
-    name: 'JoyTextField',
+    name: "JoyTextField",
   });
 
   const {
@@ -83,10 +90,10 @@ const TextField = React.forwardRef(function TextField(inProps, ref) {
     disabled = false,
     error = false,
     required = false,
-    size = 'md',
-    variant = 'outlined',
+    size = "md",
+    variant = "outlined",
     fullWidth = false,
-    type = 'text',
+    type = "text",
     startDecorator,
     endDecorator,
     ...other
@@ -204,7 +211,14 @@ TextField.propTypes /* remove-proptypes */ = {
    * @default 'neutral'
    */
   color: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([
-    PropTypes.oneOf(['danger', 'info', 'neutral', 'primary', 'success', 'warning']),
+    PropTypes.oneOf([
+      "danger",
+      "info",
+      "neutral",
+      "primary",
+      "success",
+      "warning",
+    ]),
     PropTypes.string,
   ]),
   /**
@@ -296,7 +310,7 @@ TextField.propTypes /* remove-proptypes */ = {
    * @default 'md'
    */
   size: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([
-    PropTypes.oneOf(['sm', 'md', 'lg']),
+    PropTypes.oneOf(["sm", "md", "lg"]),
     PropTypes.string,
   ]),
   /**
@@ -317,7 +331,7 @@ TextField.propTypes /* remove-proptypes */ = {
    * @default 'outlined'
    */
   variant: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([
-    PropTypes.oneOf(['outlined', 'plain', 'soft', 'solid']),
+    PropTypes.oneOf(["outlined", "plain", "soft", "solid"]),
     PropTypes.string,
   ]),
 } as any;

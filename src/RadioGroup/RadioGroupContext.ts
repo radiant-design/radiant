@@ -1,13 +1,15 @@
-import * as React from 'react';
-import { RadioProps } from '../Radio/RadioProps';
+import * as React from "react";
+import { RadioProps } from "../Radio/RadioProps";
 
 const RadioGroupContext = React.createContext<
-  Pick<RadioProps, 'color' | 'size' | 'variant' | 'disableIcon' | 'overlay'> & {
+  Pick<RadioProps, "color" | "size" | "variant" | "disableIcon" | "overlay"> & {
+    row?: boolean;
     name?: string;
     value?: unknown;
     onChange?: React.ChangeEventHandler<HTMLInputElement>;
   }
 >({
+  row: undefined,
   variant: undefined,
   size: undefined,
   color: undefined,
@@ -18,8 +20,8 @@ const RadioGroupContext = React.createContext<
   overlay: undefined,
 });
 
-if (process.env.NODE_ENV !== 'production') {
-  RadioGroupContext.displayName = 'RadioGroupContext';
+if (process.env.NODE_ENV !== "production") {
+  RadioGroupContext.displayName = "RadioGroupContext";
 }
 
 export default RadioGroupContext;

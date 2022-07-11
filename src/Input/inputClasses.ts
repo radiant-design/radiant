@@ -1,4 +1,4 @@
-import { generateUtilityClass, generateUtilityClasses } from '@mui/base';
+import { generateUtilityClass, generateUtilityClasses } from "../className";
 
 export interface InputClasses {
   /** Styles applied to the root element. */
@@ -48,33 +48,33 @@ export interface InputClasses {
 export type InputClassKey = keyof InputClasses;
 
 export function getInputUtilityClass(slot: string): string {
-  return generateUtilityClass('JoyInput', slot);
+  return generateUtilityClass("JoyInput", slot);
 }
 
-const inputClasses: InputClasses = generateUtilityClasses('JoyInput', [
-  'root',
-  'input',
-  'formControl',
-  'focused',
-  'disabled',
-  'error',
-  'adornedStart',
-  'adornedEnd',
-  'colorPrimary',
-  'colorNeutral',
-  'colorDanger',
-  'colorInfo',
-  'colorSuccess',
-  'colorWarning',
-  'sizeSm',
-  'sizeMd',
-  'sizeLg',
-  'variantPlain',
-  'variantOutlined',
-  'variantSoft',
-  'fullWidth',
-  'startDecorator',
-  'endDecorator',
+const inputClasses: InputClasses = generateUtilityClasses("JoyInput", [
+  "root",
+  "input",
+  "formControl",
+  "focused",
+  "disabled",
+  "error",
+  "adornedStart",
+  "adornedEnd",
+  "colorPrimary",
+  "colorNeutral",
+  "colorDanger",
+  "colorInfo",
+  "colorSuccess",
+  "colorWarning",
+  "sizeSm",
+  "sizeMd",
+  "sizeLg",
+  "variantPlain",
+  "variantOutlined",
+  "variantSoft",
+  "fullWidth",
+  "startDecorator",
+  "endDecorator",
 ]);
 
 export default inputClasses;

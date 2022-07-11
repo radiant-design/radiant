@@ -1,20 +1,23 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   OverridableComponent,
   OverridableStringUnion,
   OverridableTypeMap,
   OverrideProps,
-} from '@mui/types';
-import { ColorPaletteProp, VariantProp, SxProps } from '../styles/types';
-import { ListItemButtonClasses } from './listItemButtonClasses';
+} from "@mui/types";
+import { ColorPaletteProp, VariantProp, SxProps } from "../styles/types";
+import { ListItemButtonClasses } from "./listItemButtonClasses";
 
-export type ListItemButtonSlot = 'root';
+export type ListItemButtonSlot = "root";
 
 export interface ListItemButtonPropsVariantOverrides {}
 
 export interface ListItemButtonPropsColorOverrides {}
 
-export interface ListItemButtonTypeMap<P = {}, D extends React.ElementType = 'div'> {
+export interface ListItemButtonTypeMap<
+  P = {},
+  D extends React.ElementType = "div"
+> {
   props: P & {
     /**
      * A ref for imperative actions. It currently only supports `focusVisible()` action.
@@ -32,7 +35,10 @@ export interface ListItemButtonTypeMap<P = {}, D extends React.ElementType = 'di
      * The color of the component. It supports those theme colors that make sense for this component.
      * @default 'neutral'
      */
-    color?: OverridableStringUnion<ColorPaletteProp, ListItemButtonPropsColorOverrides>;
+    color?: OverridableStringUnion<
+      ColorPaletteProp,
+      ListItemButtonPropsColorOverrides
+    >;
     /**
      * The content of the component.
      */
@@ -58,7 +64,7 @@ export interface ListItemButtonTypeMap<P = {}, D extends React.ElementType = 'di
     /**
      * The empty space on the side(s) of the separator.
      */
-    inset?: 'gutter' | 'leftGutter' | 'startAdornment';
+    inset?: "gutter" | "leftGutter" | "startAdornment";
     /**
      * Use to apply selected styling.
      * @default false
@@ -68,7 +74,10 @@ export interface ListItemButtonTypeMap<P = {}, D extends React.ElementType = 'di
      * The variant to use.
      * @default 'plain'
      */
-    variant?: OverridableStringUnion<VariantProp, ListItemButtonPropsVariantOverrides>;
+    variant?: OverridableStringUnion<
+      VariantProp,
+      ListItemButtonPropsVariantOverrides
+    >;
     /**
      * The system prop that allows defining system overrides as well as additional CSS styles.
      */
@@ -76,24 +85,24 @@ export interface ListItemButtonTypeMap<P = {}, D extends React.ElementType = 'di
     /**
      * @default 0
      */
-    tabIndex?: NonNullable<React.HTMLAttributes<any>['tabIndex']>;
+    tabIndex?: NonNullable<React.HTMLAttributes<any>["tabIndex"]>;
   };
   defaultComponent: D;
 }
 
 export interface ExtendListItemButtonTypeMap<M extends OverridableTypeMap> {
-  props: M['props'] & ListItemButtonTypeMap['props'];
-  defaultComponent: M['defaultComponent'];
+  props: M["props"] & ListItemButtonTypeMap["props"];
+  defaultComponent: M["defaultComponent"];
 }
 
 export type ListItemButtonProps<
-  D extends React.ElementType = ListItemButtonTypeMap['defaultComponent'],
+  D extends React.ElementType = ListItemButtonTypeMap["defaultComponent"],
   P = {
     component?: React.ElementType;
-  },
+  }
 > = OverrideProps<ListItemButtonTypeMap<P, D>, D>;
 
 export type ExtendListItemButton<M extends OverridableTypeMap> = ((
-  props: OverrideProps<ExtendListItemButtonTypeMap<M>, 'a'>,
+  props: OverrideProps<ExtendListItemButtonTypeMap<M>, "a">
 ) => JSX.Element) &
   OverridableComponent<ExtendListItemButtonTypeMap<M>>;

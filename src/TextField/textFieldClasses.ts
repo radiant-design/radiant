@@ -1,4 +1,4 @@
-import { generateUtilityClass, generateUtilityClasses } from '@mui/base';
+import { generateUtilityClass, generateUtilityClasses } from "../className";
 
 export interface TextFieldClasses {
   /** Styles applied to the root element. */
@@ -40,27 +40,30 @@ export interface TextFieldClasses {
 export type TextFieldClassKey = keyof TextFieldClasses;
 
 export function getTextFieldUtilityClass(slot: string): string {
-  return generateUtilityClass('JoyTextField', slot);
+  return generateUtilityClass("JoyTextField", slot);
 }
 
-const textFieldClasses: TextFieldClasses = generateUtilityClasses('JoyTextField', [
-  'root',
-  'disabled',
-  'error',
-  'focused',
-  'colorPrimary',
-  'colorNeutral',
-  'colorDanger',
-  'colorInfo',
-  'colorSuccess',
-  'colorWarning',
-  'sizeSm',
-  'sizeMd',
-  'sizeLg',
-  'variantPlain',
-  'variantOutlined',
-  'variantSoft',
-  'fullWidth',
-]);
+const textFieldClasses: TextFieldClasses = generateUtilityClasses(
+  "JoyTextField",
+  [
+    "root",
+    "disabled",
+    "error",
+    "focused",
+    "colorPrimary",
+    "colorNeutral",
+    "colorDanger",
+    "colorInfo",
+    "colorSuccess",
+    "colorWarning",
+    "sizeSm",
+    "sizeMd",
+    "sizeLg",
+    "variantPlain",
+    "variantOutlined",
+    "variantSoft",
+    "fullWidth",
+  ]
+);
 
 export default textFieldClasses;

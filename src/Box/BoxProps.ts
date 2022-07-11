@@ -1,10 +1,10 @@
-import { OverrideProps } from '@mui/types';
-import { SxProps, SystemProps } from '@mui/system';
-import { Theme } from '../styles/types';
+import { OverrideProps } from "@mui/types";
+import { SxProps, SystemProps } from "@mui/system";
+import { Theme } from "../styles/types";
 
-export type BoxSlot = 'root';
+export type BoxSlot = "root";
 
-export interface BoxTypeMap<P = {}, D extends React.ElementType = 'div'> {
+export interface BoxTypeMap<P = {}, D extends React.ElementType = "div"> {
   props: P &
     SystemProps<Theme> & {
       children?: React.ReactNode;
@@ -23,6 +23,6 @@ export interface BoxTypeMap<P = {}, D extends React.ElementType = 'div'> {
 }
 
 export type BoxProps<
-  D extends React.ElementType = BoxTypeMap['defaultComponent'],
-  P = {},
+  D extends React.ElementType = BoxTypeMap["defaultComponent"],
+  P = {}
 > = OverrideProps<BoxTypeMap<P, D>, D>;

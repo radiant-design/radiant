@@ -1,49 +1,51 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { OverridableComponent } from '@mui/types';
-import composeClasses from '@mui/base/composeClasses';
-import { styled, useThemeProps } from '../styles';
-import { FormLabelProps, FormLabelTypeMap } from './FormLabelProps';
-import { getFormLabelUtilityClass } from './formLabelClasses';
+import * as React from "react";
+import PropTypes from "prop-types";
+import clsx from "clsx";
+import { OverridableComponent } from "@mui/types";
+import composeClasses from "@mui/base/composeClasses";
+import { styled, useThemeProps } from "../styles";
+import { FormLabelProps, FormLabelTypeMap } from "./FormLabelProps";
+import { getFormLabelUtilityClass } from "./formLabelClasses";
 
 const useUtilityClasses = () => {
   const slots = {
-    root: ['root'],
-    asterisk: ['asterisk'],
+    root: ["root"],
+    asterisk: ["asterisk"],
   };
 
   return composeClasses(slots, getFormLabelUtilityClass, {});
 };
 
-const FormLabelRoot = styled('label', {
-  name: 'JoyFormLabel',
-  slot: 'Root',
+const FormLabelRoot = styled("label", {
+  name: "JoyFormLabel",
+  slot: "Root",
   overridesResolver: (props, styles) => styles.root,
 })<{ ownerState: FormLabelProps }>(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  flexWrap: 'wrap',
+  display: "flex",
+  alignItems: "center",
+  flexWrap: "wrap",
   fontFamily: theme.vars.fontFamily.body,
   fontSize: `var(--FormLabel-fontSize, ${theme.vars.fontSize.sm})`,
   fontWeight: theme.vars.fontWeight.md,
   lineHeight: theme.vars.lineHeight.md,
   color: `var(--FormLabel-color, ${theme.vars.palette.text.primary})`,
-  margin: 'var(--FormLabel-margin, initial)',
+  margin: "var(--FormLabel-margin, initial)",
 }));
 
-const AsteriskComponent = styled('span', {
-  name: 'JoyFormLabel',
-  slot: 'Asterisk',
+const AsteriskComponent = styled("span", {
+  name: "JoyFormLabel",
+  slot: "Asterisk",
   overridesResolver: (props, styles) => styles.asterisk,
 })<{ ownerState: FormLabelProps }>({
-  color: 'var(--FormLabel-asterisk-color)',
+  color: "var(--FormLabel-asterisk-color)",
 });
 
 const FormLabel = React.forwardRef(function FormLabel(inProps, ref) {
-  const props = useThemeProps<typeof inProps & { component?: React.ElementType }>({
+  const props = useThemeProps<
+    typeof inProps & { component?: React.ElementType }
+  >({
     props: inProps,
-    name: 'JoyFormLabel',
+    name: "JoyFormLabel",
   });
 
   const { children, className, component, required = false, ...other } = props;
@@ -64,8 +66,12 @@ const FormLabel = React.forwardRef(function FormLabel(inProps, ref) {
     >
       {children}
       {required && (
-        <AsteriskComponent ownerState={ownerState} aria-hidden className={classes.asterisk}>
-          &thinsp;{'*'}
+        <AsteriskComponent
+          ownerState={ownerState}
+          aria-hidden
+          className={classes.asterisk}
+        >
+          &thinsp;{"*"}
         </AsteriskComponent>
       )}
     </FormLabelRoot>
@@ -98,7 +104,9 @@ FormLabel.propTypes /* remove-proptypes */ = {
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
   sx: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])),
+    PropTypes.arrayOf(
+      PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])
+    ),
     PropTypes.func,
     PropTypes.object,
   ]),

@@ -1,4 +1,4 @@
-import { OverridableStringUnion } from '@mui/types';
+import { OverridableStringUnion } from "@mui/types";
 
 /**
  * ====================================================
@@ -78,23 +78,30 @@ export interface PaletteVariant {
 
 export interface PaletteRangeOverrides {}
 export type ExtendedPaletteRange = OverridableStringUnion<
-  | '50'
-  | '100'
-  | '200'
-  | '300'
-  | '400'
-  | '500'
-  | '600'
-  | '700'
-  | '800'
-  | '900'
-  | 'mainChannel'
-  | 'lightChannel'
-  | 'darkChannel',
+  | "50"
+  | "100"
+  | "200"
+  | "300"
+  | "400"
+  | "500"
+  | "600"
+  | "700"
+  | "800"
+  | "900"
+  | "mainChannel"
+  | "lightChannel"
+  | "darkChannel",
   PaletteRangeOverrides
 >;
 
-export interface PaletteRange extends Record<ExtendedPaletteRange, string>, PaletteVariant {}
+export interface PaletteRange
+  extends Record<ExtendedPaletteRange, string>,
+    PaletteVariant {}
+
+export interface PaletteCommon {
+  white: string;
+  black: string;
+}
 
 export interface PaletteText {
   primary: string;
@@ -103,23 +110,22 @@ export interface PaletteText {
 }
 export interface PaletteBackground {
   body: string;
+  common: string;
   level1: string;
   level2: string;
   level3: string;
+  tooltip: string;
 }
 
 export interface ColorPalettePropOverrides {}
 
-/**
- * TODO: ColorPalette
- * primary
- * secondary
- * neutral
- * alert
- * success
- * warning
- */
-export type DefaultColorPalette = 'primary' | 'neutral' | 'danger' | 'info' | 'success' | 'warning';
+export type DefaultColorPalette =
+  | "primary"
+  | "neutral"
+  | "danger"
+  | "info"
+  | "success"
+  | "warning";
 
 export type ColorPaletteProp = OverridableStringUnion<
   DefaultColorPalette,
@@ -142,6 +148,7 @@ export interface Palette {
   info: PaletteInfo;
   success: PaletteSuccess;
   warning: PaletteWarning;
+  common: PaletteCommon;
   text: PaletteText;
   background: PaletteBackground;
   divider: string;
