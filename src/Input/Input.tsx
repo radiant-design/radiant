@@ -185,30 +185,28 @@ const InputStartDecorator = styled("span", {
   name: "JoyInput",
   slot: "StartDecorator",
   overridesResolver: (props, styles) => styles.startDecorator,
-})<{ ownerState: InputProps & InputUnstyledOwnerState }>(
-  ({ theme, ownerState }) => ({
-    "--Button-margin": "0 0 0 calc(var(--Input-decorator-childOffset) * -1)",
-    "--IconButton-margin":
-      "0 0 0 calc(var(--Input-decorator-childOffset) * -1)",
-    "--Icon-margin": "0 0 0 calc(var(--Input-paddingInline) / -4)",
-    pointerEvents: "none", // to make the input focused when click on the element because start element usually is an icon
-    display: "inherit",
-    alignItems: "center",
-    marginInlineEnd: "var(--Input-gap)",
-    // color: theme.vars.palette.text.tertiary,
-    // ...(ownerState.focused && {
-    //   color:
-    //     theme.vars.palette[ownerState.color!]?.[`${ownerState.variant!}Color`],
-    // }),
-  })
-);
+})<{ ownerState: InputProps & InputUnstyledOwnerState }>(() => ({
+  "--Button-margin": "0 0 0 calc(var(--Input-decorator-childOffset) * -1)",
+  "--IconButton-margin": "0 0 0 calc(var(--Input-decorator-childOffset) * -1)",
+  "--Icon-margin": "0 0 0 calc(var(--Input-paddingInline) / -4)",
+  pointerEvents: "none", // to make the input focused when click on the element because start element usually is an icon
+  display: "inherit",
+  alignItems: "center",
+  marginInlineEnd: "var(--Input-gap)",
+  // color: theme.vars.palette.text.tertiary,
+  // ...(ownerState.focused && {
+  //   color:
+  //     theme.vars.palette[ownerState.color!]?.[`${ownerState.variant!}Color`],
+  // }),
+}));
 
 const InputEndDecorator = styled("span", {
   name: "JoyInput",
   slot: "EndDecorator",
   overridesResolver: (props, styles) => styles.endDecorator,
 })<{ ownerState: InputProps & InputUnstyledOwnerState }>(
-  ({ theme, ownerState }) => ({
+  // ({ theme, ownerState }) => ({
+  () => ({
     "--Button-margin": "0 calc(var(--Input-decorator-childOffset) * -1) 0 0",
     "--IconButton-margin":
       "0 calc(var(--Input-decorator-childOffset) * -1) 0 0",
