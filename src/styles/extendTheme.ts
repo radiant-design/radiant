@@ -549,7 +549,7 @@ export default function extendTheme(themeOptions?: CssVarsThemeOptions): Theme {
       h6: {
         fontFamily: getCssVar("fontFamily-body"),
         fontWeight: getCssVar("fontWeight-md"),
-        fontSize: getCssVar("fontSize-sm"), //lg
+        fontSize: getCssVar("fontSize-xs"), //lg
         lineHeight: getCssVar("lineHeight-sm"), //md
         color: getCssVar("palette-text-primary"),
       },
