@@ -95,24 +95,26 @@ const LinkRoot = styled("a", {
       margin: 0, // Remove the margin in Safari
       borderRadius: theme.vars.radius.xs,
       padding: 0, // Remove the padding in Firefox
-      textDecorationColor: `rgba(${
-        theme.vars.palette[ownerState.color!]?.mainChannel
-      } / var(--Link-underlineOpacity, 0.72))`,
+      // textDecorationColor: `rgba(${
+      //   theme.vars.palette[ownerState.color!]?.mainChannel
+      // } / var(--Link-underlineOpacity, 0.72))`,
+      textDecorationColor: theme.vars.palette[ownerState.color!]?.solidBg,
+
       ...(ownerState.variant
         ? {
             paddingInline: "0.25em", // better than left, right because it also works with writing mode.
             marginInline: "-0.25em",
           }
         : {
-            color: `rgba(${
-              theme.vars.palette[ownerState.color!]?.mainChannel
-            } / 1)`,
+            // color: `rgba(${
+            //   theme.vars.palette[ownerState.color!]?.mainChannel
+            // } / 1)`,
+            color: theme.vars.palette[ownerState.color!]?.solidBg,
             cursor: "pointer",
             [`&.${linkClasses.disabled}`]: {
               pointerEvents: "none",
-              color: `rgba(${
-                theme.vars.palette[ownerState.color!]?.mainChannel
-              } / 0.6)`,
+              cursor: "not-allowed",
+              color: "#A1A1A1",
             },
           }),
       userSelect: "none",
@@ -319,6 +321,8 @@ Link.propTypes /* remove-proptypes */ = {
       "h4",
       "h5",
       "h6",
+      "subtitle1",
+      "subtitl2",
       "inherit",
     ]),
     PropTypes.string,
