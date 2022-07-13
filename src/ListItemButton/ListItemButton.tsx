@@ -116,7 +116,7 @@ const ListItemButtonRoot = styled("div", {
       theme.variants[`${ownerState.variant!}Disabled`]?.[ownerState.color!],
   },
 ]);
-//@ts-ignore
+
 const ListItemButton = React.forwardRef(function ListItemButton(inProps, ref) {
   const props = useThemeProps<
     typeof inProps & { component?: React.ElementType }
@@ -137,7 +137,7 @@ const ListItemButton = React.forwardRef(function ListItemButton(inProps, ref) {
     color = selected ? "primary" : "neutral",
     variant = "plain",
     ...other
-  } = props;
+  } = props as any;
 
   const buttonRef = React.useRef<HTMLElement | null>(null);
   const handleRef = useForkRef(buttonRef, ref);
@@ -184,7 +184,7 @@ const ListItemButton = React.forwardRef(function ListItemButton(inProps, ref) {
       {children}
     </ListItemButtonRoot>
   );
-}) as ExtendListItemButton<ListItemButtonTypeMap>;
+}) as unknown as ExtendListItemButton<ListItemButtonTypeMap>;
 
 ListItemButton.propTypes /* remove-proptypes */ = {
   // ----------------------------- Warning --------------------------------
