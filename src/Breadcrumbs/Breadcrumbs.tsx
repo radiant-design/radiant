@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
 import * as React from "react";
 import { useThemeProps } from "../styles";
 import styled from "../styles/styled";
-import BreadcrumbCollapsed from "./BreadcrumbCollapsed";
 import breadcrumbsClasses, {
   getBreadcrumbsUtilityClass,
 } from "./breadcrumbsClasses";
@@ -142,18 +141,6 @@ const Breadcrumbs = React.forwardRef(function Breadcrumbs(inProps, ref) {
   const classes = useUtilityClasses(ownerState);
 
   const listRef = React.useRef<HTMLOListElement>(null);
-  const renderItemsBeforeAndAfter = (allItems: React.ReactNode[]) => {
-    if (itemsBeforeCollapse + itemsAfterCollapse >= allItems.length) {
-      return allItems;
-    }
-
-    return [
-      ...allItems.slice(0, itemsBeforeCollapse),
-      <BreadcrumbCollapsed aria-label={expandText} key="ellipsis" />,
-      ...allItems.slice(allItems.length - itemsAfterCollapse, allItems.length),
-    ];
-  };
-
   const allItems = React.Children.toArray(children)
     .filter((child) => {
       return React.isValidElement(child);
