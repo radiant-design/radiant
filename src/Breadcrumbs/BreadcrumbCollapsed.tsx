@@ -1,4 +1,3 @@
-import { emphasize } from "@mui/system";
 import PropTypes from "prop-types";
 import * as React from "react";
 import Button from "../Button";

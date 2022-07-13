@@ -28,7 +28,7 @@ const useUtilityClasses = (ownerState: BreadcrumbsProps) => {
 const BreadcrumbsRoot = styled("nav", {
   name: "MuiBreadcrumbs",
   slot: "Root",
-  overridesResolver: (props, styles) => {
+  overridesResolver: (_props, styles) => {
     return [{ [`& .${breadcrumbsClasses.li}`]: styles.li }, styles.root];
   },
 })<{ ownerState: BreadcrumbsProps }>(({ theme, ownerState }) => {
@@ -57,8 +57,8 @@ const BreadcrumbsRoot = styled("nav", {
 const BreadcrumbsOl = styled("ol", {
   name: "MuiBreadcrumbs",
   slot: "Ol",
-  overridesResolver: (props, styles) => styles.ol,
-})<{ ownerState: BreadcrumbsProps }>(({ theme, ownerState }) => {
+  overridesResolver: (_props, styles) => styles.ol,
+})<{ ownerState: BreadcrumbsProps }>(() => {
   return [
     {
       display: "flex",
@@ -74,7 +74,7 @@ const BreadcrumbsOl = styled("ol", {
 const BreadcrumbsSeparator = styled("li", {
   name: "MuiBreadcrumbs",
   slot: "Separator",
-  overridesResolver: (props, styles) => styles.separator,
+  overridesResolver: (_props, styles) => styles.separator,
 })<{ ownerState: BreadcrumbsProps }>({
   display: "flex",
   userSelect: "none",
@@ -130,13 +130,9 @@ const Breadcrumbs = React.forwardRef(function Breadcrumbs(inProps, ref) {
     ...other
   } = props;
 
-  // const [expanded, setExpanded] = React.useState(false);
-
   const ownerState = {
     ...props,
     component,
-    // expanded,
-    // expandText,
     itemsAfterCollapse,
     itemsBeforeCollapse,
     separator,
@@ -147,34 +143,13 @@ const Breadcrumbs = React.forwardRef(function Breadcrumbs(inProps, ref) {
 
   const listRef = React.useRef<HTMLOListElement>(null);
   const renderItemsBeforeAndAfter = (allItems: React.ReactNode[]) => {
-    // const handleClickExpand = () => {
-    //   setExpanded(true);
-
-    //   // The clicked element received the focus but gets removed from the DOM.
-    //   // Let's keep the focus in the component after expanding.
-    //   // Moving it to the <ol> or <nav> does not cause any announcement in NVDA.
-    //   // By moving it to some link/button at least we have some announcement.
-    //   const focusable = listRef.current?.querySelector(
-    //     "a[href],button,[tabindex]"
-    //   );
-    //   if (focusable) {
-    //     (focusable as HTMLButtonElement).focus();
-    //   }
-    // };
-
-    // This defends against someone passing weird input, to ensure that if all
-    // items would be shown anyway, we just show all items without the EllipsisItem
     if (itemsBeforeCollapse + itemsAfterCollapse >= allItems.length) {
       return allItems;
     }
 
     return [
       ...allItems.slice(0, itemsBeforeCollapse),
-      <BreadcrumbCollapsed
-        aria-label={expandText}
-        key="ellipsis"
-        // onClick={handleClickExpand}
-      />,
+      <BreadcrumbCollapsed aria-label={expandText} key="ellipsis" />,
       ...allItems.slice(allItems.length - itemsAfterCollapse, allItems.length),
     ];
   };
@@ -201,13 +176,7 @@ const Breadcrumbs = React.forwardRef(function Breadcrumbs(inProps, ref) {
         ref={listRef}
         ownerState={ownerState}
       >
-        {insertSeparators(
-          // expanded ? allItems : renderItemsBeforeAndAfter(allItems),
-          allItems,
-          classes.separator,
-          separator,
-          ownerState
-        )}
+        {insertSeparators(allItems, classes.separator, separator, ownerState)}
       </BreadcrumbsOl>
     </BreadcrumbsRoot>
   );
