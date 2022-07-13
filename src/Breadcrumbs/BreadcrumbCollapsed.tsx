@@ -12,26 +12,7 @@ const BreadcrumbCollapsedButton = styled(Button)<{
   display: "flex",
   marginLeft: `calc(${theme.spacing(1)} * 0.5)`,
   marginRight: `calc(${theme.spacing(1)} * 0.5)`,
-  ...(theme.palette.mode === "light"
-    ? {
-        backgroundColor: theme.palette.background.body,
-        color: theme.palette.background.level3,
-      }
-    : {
-        backgroundColor: theme.palette.background.level3,
-        color: theme.palette.background.body,
-      }),
   borderRadius: 2,
-  "&:hover, &:focus": {
-    ...(theme.palette.mode === "light"
-      ? { backgroundColor: theme.palette.background.level1 }
-      : { backgroundColor: theme.palette.background.level3 }),
-  },
-  "&:active": {
-    ...(theme.palette.mode === "light"
-      ? { backgroundColor: emphasize(theme.palette.background.level1, 0.12) }
-      : { backgroundColor: emphasize(theme.palette.background.level3, 0.12) }),
-  },
 }));
 
 const BreadcrumbCollapsedIcon = styled(MoreHorizIcon)<{
@@ -44,6 +25,7 @@ const BreadcrumbCollapsedIcon = styled(MoreHorizIcon)<{
 /**
  * @ignore - internal component.
  */
+
 function BreadcrumbCollapsed(props: BreadcrumbsProps) {
   const ref = React.useRef<HTMLButtonElement>(null);
   const ownerState = props;

@@ -36,15 +36,15 @@ const BreadcrumbsRoot = styled("nav", {
     {
       ...(ownerState.size === "sm" && {
         fontSize: theme.vars.fontSize.sm,
-        padding: "0.5rem",
+        // padding: "0.5rem",
       }),
       ...(ownerState.size === "md" && {
         fontSize: theme.vars.fontSize.md,
-        padding: "0.75rem",
+        // padding: "0.75rem",
       }),
       ...(ownerState.size === "lg" && {
         fontSize: theme.vars.fontSize.lg,
-        padding: "1rem",
+        // padding: "1rem",
       }),
       lineHeight: 1,
     },
@@ -130,13 +130,13 @@ const Breadcrumbs = React.forwardRef(function Breadcrumbs(inProps, ref) {
     ...other
   } = props;
 
-  const [expanded, setExpanded] = React.useState(false);
+  // const [expanded, setExpanded] = React.useState(false);
 
   const ownerState = {
     ...props,
     component,
-    expanded,
-    expandText,
+    // expanded,
+    // expandText,
     itemsAfterCollapse,
     itemsBeforeCollapse,
     separator,
@@ -147,20 +147,20 @@ const Breadcrumbs = React.forwardRef(function Breadcrumbs(inProps, ref) {
 
   const listRef = React.useRef<HTMLOListElement>(null);
   const renderItemsBeforeAndAfter = (allItems: React.ReactNode[]) => {
-    const handleClickExpand = () => {
-      setExpanded(true);
+    // const handleClickExpand = () => {
+    //   setExpanded(true);
 
-      // The clicked element received the focus but gets removed from the DOM.
-      // Let's keep the focus in the component after expanding.
-      // Moving it to the <ol> or <nav> does not cause any announcement in NVDA.
-      // By moving it to some link/button at least we have some announcement.
-      const focusable = listRef.current?.querySelector(
-        "a[href],button,[tabindex]"
-      );
-      if (focusable) {
-        (focusable as HTMLButtonElement).focus();
-      }
-    };
+    //   // The clicked element received the focus but gets removed from the DOM.
+    //   // Let's keep the focus in the component after expanding.
+    //   // Moving it to the <ol> or <nav> does not cause any announcement in NVDA.
+    //   // By moving it to some link/button at least we have some announcement.
+    //   const focusable = listRef.current?.querySelector(
+    //     "a[href],button,[tabindex]"
+    //   );
+    //   if (focusable) {
+    //     (focusable as HTMLButtonElement).focus();
+    //   }
+    // };
 
     // This defends against someone passing weird input, to ensure that if all
     // items would be shown anyway, we just show all items without the EllipsisItem
@@ -173,7 +173,7 @@ const Breadcrumbs = React.forwardRef(function Breadcrumbs(inProps, ref) {
       <BreadcrumbCollapsed
         aria-label={expandText}
         key="ellipsis"
-        onClick={handleClickExpand}
+        // onClick={handleClickExpand}
       />,
       ...allItems.slice(allItems.length - itemsAfterCollapse, allItems.length),
     ];
@@ -202,7 +202,8 @@ const Breadcrumbs = React.forwardRef(function Breadcrumbs(inProps, ref) {
         ownerState={ownerState}
       >
         {insertSeparators(
-          expanded ? allItems : renderItemsBeforeAndAfter(allItems),
+          // expanded ? allItems : renderItemsBeforeAndAfter(allItems),
+          allItems,
           classes.separator,
           separator,
           ownerState
