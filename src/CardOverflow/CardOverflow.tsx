@@ -8,7 +8,7 @@ import { useThemeProps } from "../styles";
 import styled from "../styles/styled";
 import { getCardOverflowUtilityClass } from "./cardOverflowClasses";
 import { CardOverflowProps, CardOverflowTypeMap } from "./CardOverflowProps";
-import { CardRowContext } from "../Card/CardContext";
+import { CardRowContext } from "../Card/cardContext";
 
 const useUtilityClasses = (ownerState: CardOverflowProps) => {
   const { variant, color } = ownerState;

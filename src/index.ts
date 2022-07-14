@@ -7,6 +7,21 @@ export * from "./Avatar";
 export { default as AvatarGroup } from "./AvatarGroup";
 export * from "./AvatarGroup";
 
+export { default as AspectRatio } from "./AspectRatio";
+export * from "./AspectRatio";
+
+export { default as Card } from "./Card";
+export * from "./Card";
+
+export { default as CardContent } from "./CardContent";
+export * from "./CardContent";
+
+export { default as CardCover } from "./CardCover";
+export * from "./CardCover";
+
+export { default as CardOverflow } from "./CardOverflow";
+export * from "./CardOverflow";
+
 export { default as Breadcrumbs } from "./Breadcrumbs";
 export * from "./Breadcrumbs";
 

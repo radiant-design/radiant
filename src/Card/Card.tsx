@@ -9,7 +9,7 @@ import styled from "../styles/styled";
 import { getCardUtilityClass } from "./cardClasses";
 import { CardProps, CardTypeMap } from "./CardProps";
 import { resolveSxValue } from "../styles/styleUtils";
-import { CardRowContext } from "./CardContext";
+import { CardRowContext } from "./cardContext";
 
 const useUtilityClasses = (ownerState: CardProps) => {
   const { size, variant, color, row } = ownerState;
