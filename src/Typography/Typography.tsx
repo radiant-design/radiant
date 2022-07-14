@@ -114,6 +114,8 @@ const defaultVariantMapping: Record<string, string> = {
   body3: "span",
   body4: "span",
   body5: "span",
+  subtitle1: "p",
+  subtitle2: "p",
   inherit: "p",
 };
 
@@ -264,6 +266,8 @@ Typography.propTypes /* remove-proptypes */ = {
       "h4",
       "h5",
       "h6",
+      "subtitle1",
+      "subtitle2",
       "inherit",
     ]),
     PropTypes.string,
