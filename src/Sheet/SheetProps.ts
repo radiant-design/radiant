@@ -22,6 +22,7 @@ export interface SheetTypeMap<P = {}, D extends React.ElementType = "div"> {
      * The system prop that allows defining system overrides as well as additional CSS styles.
      */
     sx?: SxProps;
+    shadow?: OverridableStringUnion<"sm" | "md" | "lg">;
     /**
      * The variant to use.
      * @default 'plain'
