@@ -47,6 +47,8 @@ const SheetRoot = styled("div", {
       transition: "box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
       backgroundColor: theme.vars.palette.background.body,
       position: "relative",
+      boxShadow: theme.shadow[ownerState.shadow],
+      borderRadius: theme.vars.radius.xs, //4px
     },
     variantStyle,
   ];
@@ -63,6 +65,7 @@ const Sheet = React.forwardRef(function Sheet(inProps, ref) {
     color = "neutral",
     component = "div",
     variant = "plain",
+    shadow = "md",
     ...other
   } = props;
 
