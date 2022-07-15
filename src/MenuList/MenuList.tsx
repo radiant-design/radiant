@@ -24,7 +24,7 @@ const useUtilityClasses = () => {
 const MenuListRoot = styled(List, {
   name: "MuiMenuList",
   slot: "Root",
-  overridesResolver: (props, styles) => styles.root,
+  overridesResolver: (_props, styles) => styles.root,
 })<{ ownerState: MenuListProps; component?: React.ElementType }>({});
 
 const MenuList = React.forwardRef(function MenuList(inProps, ref) {

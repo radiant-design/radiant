@@ -29,7 +29,7 @@ const useUtilityClasses = (ownerState: MenuProps) => {
 const MenuRoot = styled(PopperUnstyled, {
   name: "JoyMenu",
   slot: "Root",
-  overridesResolver: (props, styles) => styles.root,
+  overridesResolver: (_props, styles) => styles.root,
 })<{ ownerState: MenuProps }>(({ theme, ownerState }) => ({
   "--Menu-radius": theme.vars.radius.sm,
   borderRadius: "var(--Menu-radius)",
@@ -52,7 +52,7 @@ const MenuRoot = styled(PopperUnstyled, {
 const MenuListbox = styled(List, {
   name: "JoyMenu",
   slot: "Listbox",
-  overridesResolver: (props, styles) => styles.listbox,
+  overridesResolver: (_props, styles) => styles.listbox,
 })({
   "--List-radius": "var(--Menu-radius)",
   "--List-padding": "var(--Menu-padding, 0px)",

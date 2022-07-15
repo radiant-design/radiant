@@ -28,15 +28,15 @@ const useUtilityClasses = (
     ],
   };
 
-  const composedClasses = composeClasses(slots, getMenuItemUtilityClass, {});
-
-  return composedClasses;
+  //   const composedClasses = composeClasses(slots, getMenuItemUtilityClass, {});
+  //   return composedClasses;
+  return composeClasses(slots, getMenuItemUtilityClass, {});
 };
 
 const MenuItemRoot = styled(ListItemButtonRoot, {
   name: "JoyMenuItem",
   slot: "Root",
-  overridesResolver: (props, styles) => styles.root,
+  overridesResolver: (_props, styles) => styles.root,
 })<{ ownerState: MenuItemProps }>({});
 
 const MenuItem = React.forwardRef(function MenuItem(inProps, ref) {
