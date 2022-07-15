@@ -28,8 +28,6 @@ const useUtilityClasses = (
     ],
   };
 
-  //   const composedClasses = composeClasses(slots, getMenuItemUtilityClass, {});
-  //   return composedClasses;
   return composeClasses(slots, getMenuItemUtilityClass, {});
 };
 
