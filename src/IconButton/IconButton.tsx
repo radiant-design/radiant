@@ -76,7 +76,7 @@ const IconButtonRoot = styled("button", {
         fontSize: theme.vars.fontSize.lg,
       }),
       "&.JoyIconButton-root.Joy-disabled": {
-        pointerEvents: "all",
+        pointerEvents: "none",
         cursor: "not-allowed !important",
       },
       padding: 0,

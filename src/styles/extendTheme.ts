@@ -360,9 +360,9 @@ export default function extendTheme(themeOptions?: CssVarsThemeOptions): Theme {
       xs: "0.6875rem", // 11px
       sm: "0.75rem", // 12px
       md: "0.875rem", // 14px
-      lg: "1rem", // 16px
-      xl: "1.25rem", // 20px
-      xl2: "1.5rem", // 24px
+      lg: "1rem", // 16px  //using this in SvgIcon
+      xl: "1.25rem", // 20px //using this in SvgIcon
+      xl2: "1.5rem", // 24px  //using this in SvgIcon
       xl3: "2rem", // 32px
 
       // xs: "0.75rem",
