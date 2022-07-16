@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync, readdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, writeFileSync, rmSync } from "node:fs";
 import { dirname, resolve as resolvePath } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import docgen from "react-docgen-typescript";
@@ -21,12 +21,10 @@ const __dirname = dirname(__filename);
     const __rootdir = resolvePath(__dirname, '../')
     const directories = readdirSync(resolvePath(__rootdir, 'src'))
     DIRECTORIES.forEach(dir => {
-        if (!existsSync(resolvePath(__dirname, dir))) {
-            mkdirSync(resolvePath(__dirname, dir));
-            console.log("Directory created: ", resolvePath(__dirname, dir));
-        } else {
-            console.log("Directory already exists: ", resolvePath(__dirname, dir));
-        }
+        const fullPath = resolvePath(__dirname, dir)
+        if(existsSync(fullPath)) rmSync(fullPath, { recursive: true, force: true })
+        mkdirSync(fullPath);
+        console.log("Directory created: ", fullPath);
     })
     directories.forEach(dir => {
         try {
