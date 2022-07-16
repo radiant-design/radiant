@@ -284,3 +284,7 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# scripts assets
+scripts/assets
+scripts/tmpf
