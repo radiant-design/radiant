@@ -54,7 +54,7 @@ const useUtilityClasses = (
   return composedClasses;
 };
 
-const ListItemButtonRoot = styled("div", {
+export const ListItemButtonRoot = styled("div", {
   name: "JoyListItemButton",
   slot: "Root",
   overridesResolver: (props, styles) => styles.root,
@@ -83,10 +83,9 @@ const ListItemButtonRoot = styled("div", {
     // account for the border width
     paddingBlock:
       "calc(var(--List-item-paddingY) - var(--variant-borderWidth))",
-    paddingInlineStart:
-      "calc(var(--List-item-paddingLeft) + var(--List-item-startActionWidth, var(--internal-startActionWidth, 0px)) - var(--variant-borderWidth))", // --internal variable makes it possible to customize the actionWidth from the top List
-    paddingInlineEnd:
-      "calc(var(--List-item-paddingRight) + var(--List-item-endActionWidth, var(--internal-endActionWidth, 0px)) - var(--variant-borderWidth))", // --internal variable makes it possible to customize the actionWidth from the top List
+    paddingInlineStart: "1rem", // "calc(var(--List-item-paddingLeft) + var(--List-item-startActionWidth, var(--internal-startActionWidth, 0px)) - var(--variant-borderWidth))", // --internal variable makes it possible to customize the actionWidth from the top List
+    paddingInlineEnd: "1rem",
+    //"calc(var(--List-item-paddingRight) + var(--List-item-endActionWidth, var(--internal-endActionWidth, 0px)) - var(--variant-borderWidth))", // --internal variable makes it possible to customize the actionWidth from the top List
     minBlockSize: "var(--List-item-minHeight)",
     border: "none",
     borderRadius: "var(--List-item-radius)",
