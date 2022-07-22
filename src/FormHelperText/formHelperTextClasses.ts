@@ -10,11 +10,11 @@ export interface FormHelperTextClasses {
 export type FormHelperTextClassKey = keyof FormHelperTextClasses;
 
 export function getFormHelperTextUtilityClass(slot: string): string {
-  return generateUtilityClass("JoyFormHelperText", slot);
+  return generateUtilityClass("RadFormHelperText", slot);
 }
 
 const formHelperTextClasses: FormHelperTextClasses = generateUtilityClasses(
-  "JoyFormHelperText",
+  "RadFormHelperText",
   ["root", "asterisk"]
 );
 

@@ -28,10 +28,10 @@ export interface SheetClasses {
 export type SheetClassKey = keyof SheetClasses;
 
 export function getSheetUtilityClass(slot: string): string {
-  return generateUtilityClass("JoySheet", slot);
+  return generateUtilityClass("RadSheet", slot);
 }
 
-const sheetClasses: SheetClasses = generateUtilityClasses("JoySheet", [
+const sheetClasses: SheetClasses = generateUtilityClasses("RadSheet", [
   "root",
   "colorPrimary",
   "colorNeutral",

@@ -53,7 +53,7 @@ function areEqualValues(a: unknown, b: unknown) {
 }
 
 const RadioRoot = styled("span", {
-  name: "JoyRadio",
+  name: "RadRadio",
   slot: "Root",
   overridesResolver: (props, styles) => styles.root,
 })<{
@@ -122,7 +122,7 @@ const RadioRoot = styled("span", {
 });
 
 const RadioRadio = styled("span", {
-  name: "JoyRadio",
+  name: "RadRadio",
   slot: "Radio",
   overridesResolver: (props, styles) => styles.radio,
 })<{ ownerState: RadioProps }>(({ ownerState, theme }) => [
@@ -174,7 +174,7 @@ const RadioRadio = styled("span", {
 ]);
 
 const RadioAction = styled("span", {
-  name: "JoyRadio",
+  name: "RadRadio",
   slot: "Action",
   overridesResolver: (props, styles) => styles.action,
 })<{ ownerState: RadioProps }>(({ theme, ownerState }) => [
@@ -216,7 +216,7 @@ const RadioAction = styled("span", {
 ]);
 
 const RadioInput = styled("input", {
-  name: "JoyRadio",
+  name: "RadRadio",
   slot: "Input",
   overridesResolver: (props, styles) => styles.input,
 })<{ ownerState: RadioProps }>(() => ({
@@ -229,7 +229,7 @@ const RadioInput = styled("input", {
 }));
 
 const RadioLabel = styled("label", {
-  name: "JoyRadio",
+  name: "RadRadio",
   slot: "Label",
   overridesResolver: (props, styles) => styles.label,
 })<{ ownerState: RadioProps }>(({ ownerState }) => ({
@@ -249,7 +249,7 @@ const RadioLabel = styled("label", {
  * internal component
  */
 const RadioIcon = styled("span", {
-  name: "JoyRadio",
+  name: "RadRadio",
   slot: "Icon",
   overridesResolver: (props, styles) => styles.icon,
 })<{ ownerState: RadioProps }>(({ ownerState }) => ({
@@ -268,7 +268,7 @@ const Radio = React.forwardRef(function Radio(inProps, ref) {
     typeof inProps & { component?: React.ElementType }
   >({
     props: inProps,
-    name: "JoyRadio",
+    name: "RadRadio",
   });
 
   const {

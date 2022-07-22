@@ -36,7 +36,7 @@ const useUtilityClasses = (ownerState: BadgeProps) => {
 };
 
 const BadgeRoot = styled("span", {
-  name: "JoyBadge",
+  name: "RadBadge",
   slot: "Root",
   overridesResolver: (props, styles) => styles.root,
 })<{ ownerState: BadgeProps }>(({ theme, ownerState }) => ({
@@ -74,7 +74,7 @@ const BadgeRoot = styled("span", {
 }));
 
 const BadgeBadge = styled("span", {
-  name: "JoyBadge",
+  name: "RadBadge",
   slot: "Badge",
   overridesResolver: (props, styles) => styles.badge,
 })<{ ownerState: BadgeProps }>(({ theme, ownerState }) => {
@@ -159,7 +159,7 @@ const BadgeBadge = styled("span", {
 const Badge = React.forwardRef(function Badge(inProps, ref) {
   const props = useThemeProps<typeof inProps & BadgeProps>({
     props: inProps,
-    name: "JoyBadge",
+    name: "RadBadge",
   });
   const {
     anchorOrigin: anchorOriginProp = {

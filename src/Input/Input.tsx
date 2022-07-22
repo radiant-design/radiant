@@ -34,7 +34,7 @@ const useUtilityClasses = (ownerState: InputProps) => {
 };
 
 const InputRoot = styled("div", {
-  name: "JoyInput",
+  name: "RadInput",
   slot: "Root",
   overridesResolver: (props, styles) => styles.root,
 })<{ ownerState: InputProps & InputUnstyledOwnerState }>(
@@ -142,7 +142,7 @@ const InputRoot = styled("div", {
 );
 
 const InputInput = styled("input", {
-  name: "JoyInput",
+  name: "RadInput",
   slot: "Input",
   overridesResolver: (props, styles) => styles.input,
 })<{ ownerState: InputProps & InputUnstyledOwnerState }>(
@@ -182,7 +182,7 @@ const InputInput = styled("input", {
 );
 
 const InputStartDecorator = styled("span", {
-  name: "JoyInput",
+  name: "RadInput",
   slot: "StartDecorator",
   overridesResolver: (props, styles) => styles.startDecorator,
 })<{ ownerState: InputProps & InputUnstyledOwnerState }>(() => ({
@@ -201,7 +201,7 @@ const InputStartDecorator = styled("span", {
 }));
 
 const InputEndDecorator = styled("span", {
-  name: "JoyInput",
+  name: "RadInput",
   slot: "EndDecorator",
   overridesResolver: (props, styles) => styles.endDecorator,
 })<{ ownerState: InputProps & InputUnstyledOwnerState }>(
@@ -224,7 +224,7 @@ const Input = React.forwardRef(function Input(inProps, ref) {
     typeof inProps & { component?: React.ElementType }
   >({
     props: inProps,
-    name: "JoyInput",
+    name: "RadInput",
   });
 
   const {

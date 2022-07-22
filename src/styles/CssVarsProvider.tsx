@@ -8,9 +8,9 @@ const shouldSkipGeneratingVar = (keys: string[]) =>
 const { CssVarsProvider, useColorScheme, getInitColorSchemeScript } =
   createCssVarsProvider<DefaultColorScheme | ExtendedColorScheme>({
     theme: extendTheme(),
-    attribute: "data-joy-color-scheme",
-    modeStorageKey: "joy-mode",
-    colorSchemeStorageKey: "joy-color-scheme",
+    attribute: "data-rad-color-scheme",
+    modeStorageKey: "rad-mode",
+    colorSchemeStorageKey: "rad-color-scheme",
     defaultColorScheme: {
       light: "light",
       dark: "dark",

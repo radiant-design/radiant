@@ -14,11 +14,11 @@ export interface ListDividerClasses {
 export type ListDividerClassKey = keyof ListDividerClasses;
 
 export function getListDividerUtilityClass(slot: string): string {
-  return generateUtilityClass("JoyListDivider", slot);
+  return generateUtilityClass("RadListDivider", slot);
 }
 
 const listDividerClasses: ListDividerClasses = generateUtilityClasses(
-  "JoyListDivider",
+  "RadListDivider",
   ["root", "insetGutter", "insetStartDecorator", "insetStartContent"]
 );
 

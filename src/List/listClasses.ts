@@ -18,10 +18,10 @@ export interface ListClasses {
 export type ListClassKey = keyof ListClasses;
 
 export function getListUtilityClass(slot: string): string {
-  return generateUtilityClass("JoyList", slot);
+  return generateUtilityClass("RadList", slot);
 }
 
-const listClasses: ListClasses = generateUtilityClasses("JoyList", [
+const listClasses: ListClasses = generateUtilityClasses("RadList", [
   "root",
   "nesting",
   "row",

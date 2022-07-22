@@ -54,11 +54,11 @@ export interface TypographyClasses {
 export type TypographyClassKey = keyof TypographyClasses;
 
 export function getTypographyUtilityClass(slot: string): string {
-  return generateUtilityClass("JoyTypography", slot);
+  return generateUtilityClass("RadTypography", slot);
 }
 
 const typographyClasses: TypographyClasses = generateUtilityClasses(
-  "JoyTypography",
+  "RadTypography",
   [
     "root",
     "h1",

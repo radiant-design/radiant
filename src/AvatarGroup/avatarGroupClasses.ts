@@ -8,11 +8,11 @@ export interface AvatarGroupClasses {
 export type AvatarGroupClassKey = keyof AvatarGroupClasses;
 
 export function getAvatarGroupUtilityClass(slot: string): string {
-  return generateUtilityClass("JoyAvatarGroup", slot);
+  return generateUtilityClass("RadAvatarGroup", slot);
 }
 
 const avatarGroupClasses: AvatarGroupClasses = generateUtilityClasses(
-  "JoyAvatarGroup",
+  "RadAvatarGroup",
   ["root"]
 );
 

@@ -81,7 +81,7 @@ export type OverridesStyleRules<
 >;
 export interface Components<Theme = unknown> {
   // alphabetical order
-  JoyAspectRatio?: {
+  RadAspectRatio?: {
     defaultProps?: Partial<AspectRatioProps>;
     styleOverrides?: OverridesStyleRules<
       AspectRatioSlot,
@@ -89,11 +89,11 @@ export interface Components<Theme = unknown> {
       Theme
     >;
   };
-  JoyAvatar?: {
+  RadAvatar?: {
     defaultProps?: Partial<AvatarProps>;
     styleOverrides?: OverridesStyleRules<AvatarSlot, AvatarProps, Theme>;
   };
-  JoyAvatarGroup?: {
+  RadAvatarGroup?: {
     defaultProps?: Partial<AvatarGroupProps>;
     styleOverrides?: OverridesStyleRules<
       AvatarGroupSlot,
@@ -101,23 +101,23 @@ export interface Components<Theme = unknown> {
       Theme
     >;
   };
-  JoyBadge?: {
+  RadBadge?: {
     defaultProps?: Partial<BadgeProps>;
     styleOverrides?: OverridesStyleRules<BadgeSlot, BadgeProps, Theme>;
   };
-  JoyBox?: {
+  RadBox?: {
     defaultProps?: Partial<BoxProps>;
     styleOverrides?: OverridesStyleRules<BoxSlot, BoxProps, Theme>;
   };
-  JoyButton?: {
+  RadButton?: {
     defaultProps?: Partial<ButtonProps>;
     styleOverrides?: OverridesStyleRules<ButtonSlot, ButtonProps, Theme>;
   };
-  JoyCard?: {
+  RadCard?: {
     defaultProps?: Partial<CardProps>;
     styleOverrides?: OverridesStyleRules<CardSlot, CardProps, Theme>;
   };
-  JoyCardContent?: {
+  RadCardContent?: {
     defaultProps?: Partial<CardContentProps>;
     styleOverrides?: OverridesStyleRules<
       CardContentSlot,
@@ -125,11 +125,11 @@ export interface Components<Theme = unknown> {
       Theme
     >;
   };
-  JoyCardCover?: {
+  RadCardCover?: {
     defaultProps?: Partial<CardCoverProps>;
     styleOverrides?: OverridesStyleRules<CardCoverSlot, CardCoverProps, Theme>;
   };
-  JoyCardOverflow?: {
+  RadCardOverflow?: {
     defaultProps?: Partial<CardOverflowProps>;
     styleOverrides?: OverridesStyleRules<
       CardOverflowSlot,
@@ -137,15 +137,15 @@ export interface Components<Theme = unknown> {
       Theme
     >;
   };
-  JoyCheckbox?: {
+  RadCheckbox?: {
     defaultProps?: Partial<CheckboxProps>;
     styleOverrides?: OverridesStyleRules<CheckboxSlot, CheckboxProps, Theme>;
   };
-  JoyChip?: {
+  RadChip?: {
     defaultProps?: Partial<ChipProps>;
     styleOverrides?: OverridesStyleRules<ChipSlot, ChipProps, Theme>;
   };
-  JoyChipDelete?: {
+  RadChipDelete?: {
     defaultProps?: Partial<ChipDeleteProps>;
     styleOverrides?: OverridesStyleRules<
       ChipDeleteSlot,
@@ -153,11 +153,11 @@ export interface Components<Theme = unknown> {
       Theme
     >;
   };
-  JoyContainer?: {
+  RadContainer?: {
     defaultProps?: Partial<ContainerProps>;
     styleOverrides?: OverridesStyleRules<ContainerSlot, ContainerProps, Theme>;
   };
-  JoyFormHelperText?: {
+  RadFormHelperText?: {
     defaultProps?: Partial<FormHelperTextProps>;
     styleOverrides?: OverridesStyleRules<
       FormHelperTextSlot,
@@ -165,11 +165,11 @@ export interface Components<Theme = unknown> {
       Theme
     >;
   };
-  JoyFormLabel?: {
+  RadFormLabel?: {
     defaultProps?: Partial<FormLabelProps>;
     styleOverrides?: OverridesStyleRules<FormLabelSlot, FormLabelProps, Theme>;
   };
-  JoyIconButton?: {
+  RadIconButton?: {
     defaultProps?: Partial<IconButtonProps>;
     styleOverrides?: OverridesStyleRules<
       IconButtonSlot,
@@ -177,19 +177,19 @@ export interface Components<Theme = unknown> {
       Theme
     >;
   };
-  JoyInput?: {
+  RadInput?: {
     defaultProps?: Partial<InputProps>;
     styleOverrides?: OverridesStyleRules<InputSlot, InputProps, Theme>;
   };
-  JoyLink?: {
+  RadLink?: {
     defaultProps?: Partial<LinkProps>;
     styleOverrides?: OverridesStyleRules<LinkSlot, LinkProps, Theme>;
   };
-  JoyList?: {
+  RadList?: {
     defaultProps: Partial<ListProps>;
     styleOverrides?: OverridesStyleRules<ListSlot, ListProps, Theme>;
   };
-  JoyListDivider?: {
+  RadListDivider?: {
     defaultProps: Partial<ListDividerProps>;
     styleOverrides?: OverridesStyleRules<
       ListDividerSlot,
@@ -197,11 +197,11 @@ export interface Components<Theme = unknown> {
       Theme
     >;
   };
-  JoyListItem?: {
+  RadListItem?: {
     defaultProps: Partial<ListItemProps>;
     styleOverrides?: OverridesStyleRules<ListItemSlot, ListItemProps, Theme>;
   };
-  JoyListItemButton?: {
+  RadListItemButton?: {
     defaultProps: Partial<ListItemButtonProps>;
     styleOverrides?: OverridesStyleRules<
       ListItemButtonSlot,
@@ -209,7 +209,7 @@ export interface Components<Theme = unknown> {
       Theme
     >;
   };
-  JoyListItemContent?: {
+  RadListItemContent?: {
     defaultProps: Partial<ListItemContentProps>;
     styleOverrides?: OverridesStyleRules<
       ListItemContentSlot,
@@ -217,7 +217,7 @@ export interface Components<Theme = unknown> {
       Theme
     >;
   };
-  JoyListItemDecorator?: {
+  RadListItemDecorator?: {
     defaultProps: Partial<ListItemDecoratorProps>;
     styleOverrides?: OverridesStyleRules<
       ListItemDecoratorSlot,
@@ -225,11 +225,11 @@ export interface Components<Theme = unknown> {
       Theme
     >;
   };
-  JoyRadio?: {
+  RadRadio?: {
     defaultProps?: Partial<RadioProps>;
     styleOverrides?: OverridesStyleRules<RadioSlot, RadioProps, Theme>;
   };
-  JoyRadioGroup?: {
+  RadRadioGroup?: {
     defaultProps?: Partial<RadioGroupProps>;
     styleOverrides?: OverridesStyleRules<
       RadioGroupSlot,
@@ -237,11 +237,11 @@ export interface Components<Theme = unknown> {
       Theme
     >;
   };
-  JoySheet?: {
+  RadSheet?: {
     defaultProps?: Partial<SheetProps>;
     styleOverrides?: OverridesStyleRules<SheetSlot, SheetProps, Theme>;
   };
-  JoySwitch?: {
+  RadSwitch?: {
     defaultProps?: Partial<SwitchProps>;
     styleOverrides?: OverridesStyleRules<SwitchSlot, SwitchProps, Theme>;
   };
@@ -250,19 +250,19 @@ export interface Components<Theme = unknown> {
     defaultProps?: Partial<SvgIconProps>;
     styleOverrides?: OverridesStyleRules<SvgIconSlot, SvgIconProps, Theme>;
   };
-  JoySvgIcon?: {
+  RadSvgIcon?: {
     defaultProps?: Partial<SvgIconProps>;
     styleOverrides?: OverridesStyleRules<SvgIconSlot, SvgIconProps, Theme>;
   };
-  JoySlider?: {
+  RadSlider?: {
     defaultProps?: Partial<SliderProps>;
     styleOverrides?: OverridesStyleRules<SliderSlot, SliderProps, Theme>;
   };
-  JoyTextField?: {
+  RadTextField?: {
     defaultProps?: Partial<TextFieldProps>;
     styleOverrides?: OverridesStyleRules<TextFieldSlot, TextFieldProps, Theme>;
   };
-  JoyTypography?: {
+  RadTypography?: {
     defaultProps?: Partial<TypographyProps>;
     styleOverrides?: OverridesStyleRules<
       TypographySlot,

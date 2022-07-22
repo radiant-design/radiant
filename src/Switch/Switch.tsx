@@ -61,7 +61,7 @@ const switchColorVariables =
   };
 
 const SwitchRoot = styled("span", {
-  name: "JoySwitch",
+  name: "RadSwitch",
   slot: "Root",
   overridesResolver: (props, styles) => styles.root,
 })<{ ownerState: SwitchProps }>(({ theme, ownerState }) => {
@@ -131,7 +131,7 @@ const SwitchRoot = styled("span", {
 });
 
 const SwitchAction = styled("div", {
-  name: "JoySwitch",
+  name: "RadSwitch",
   slot: "Action",
   overridesResolver: (props, styles) => styles.action,
 })<{ ownerState: SwitchProps }>(({ theme }) => ({
@@ -145,7 +145,7 @@ const SwitchAction = styled("div", {
 }));
 
 const SwitchInput = styled("input", {
-  name: "JoySwitch",
+  name: "RadSwitch",
   slot: "Input",
   overridesResolver: (props, styles) => styles.input,
 })<{ ownerState: SwitchProps }>({
@@ -158,7 +158,7 @@ const SwitchInput = styled("input", {
 });
 
 const SwitchTrack = styled("span", {
-  name: "JoySwitch",
+  name: "RadSwitch",
   slot: "Track",
   overridesResolver: (props, styles) => styles.track,
 })<{ ownerState: SwitchProps & { focusVisible: boolean } }>(
@@ -192,7 +192,7 @@ const SwitchTrack = styled("span", {
 );
 
 const SwitchThumb = styled("span", {
-  name: "JoySwitch",
+  name: "RadSwitch",
   slot: "Thumb",
   overridesResolver: (props, styles) => styles.thumb,
 })<{ ownerState: SwitchProps }>({
@@ -218,7 +218,7 @@ const SwitchThumb = styled("span", {
 });
 
 const SwitchStartDecorator = styled("span", {
-  name: "JoySwitch",
+  name: "RadSwitch",
   slot: "StartDecorator",
   overridesResolver: (props, styles) => styles.startDecorator,
 })<{ ownerState: SwitchProps }>({
@@ -227,7 +227,7 @@ const SwitchStartDecorator = styled("span", {
 });
 
 const SwitchEndDecorator = styled("span", {
-  name: "JoySwitch",
+  name: "RadSwitch",
   slot: "EndDecorator",
   overridesResolver: (props, styles) => styles.endDecorator,
 })<{ ownerState: SwitchProps }>({

@@ -30,11 +30,11 @@ export interface AspectRatioClasses {
 export type AspectRatioClassKey = keyof AspectRatioClasses;
 
 export function getAspectRatioUtilityClass(slot: string): string {
-  return generateUtilityClass("JoyAspectRatio", slot);
+  return generateUtilityClass("RadAspectRatio", slot);
 }
 
 const aspectRatioClasses: AspectRatioClasses = generateUtilityClasses(
-  "JoyAspectRatio",
+  "RadAspectRatio",
   [
     "root",
     "content",

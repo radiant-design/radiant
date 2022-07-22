@@ -17,7 +17,7 @@ const useUtilityClasses = () => {
 };
 
 const CardCoverRoot = styled("div", {
-  name: "JoyCardCover",
+  name: "RadCardCover",
   slot: "Root",
   overridesResolver: (props, styles) => styles.root,
 })<{ ownerState: CardCoverProps }>({
@@ -53,7 +53,7 @@ const CardCoverRoot = styled("div", {
 const CardCover = React.forwardRef(function CardCover(inProps, ref) {
   const props = useThemeProps<typeof inProps & CardCoverProps>({
     props: inProps,
-    name: "JoyCardCover",
+    name: "RadCardCover",
   });
 
   const { className, component = "div", children, ...other } = props;

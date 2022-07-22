@@ -48,10 +48,10 @@ export interface ChipClasses {
 export type ChipClassKey = keyof ChipClasses;
 
 export function getChipUtilityClass(slot: string): string {
-  return generateUtilityClass("JoyChip", slot);
+  return generateUtilityClass("RadChip", slot);
 }
 
-const chipClasses: ChipClasses = generateUtilityClasses("JoyChip", [
+const chipClasses: ChipClasses = generateUtilityClasses("RadChip", [
   "root",
   "clickable",
   "colorPrimary",

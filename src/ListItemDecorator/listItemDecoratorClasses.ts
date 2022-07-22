@@ -8,10 +8,10 @@ export interface ListItemDecoratorClasses {
 export type ListItemDecoratorClassKey = keyof ListItemDecoratorClasses;
 
 export function getListItemDecoratorUtilityClass(slot: string): string {
-  return generateUtilityClass("JoyListItemDecorator", slot);
+  return generateUtilityClass("RadListItemDecorator", slot);
 }
 
 const listItemDecoratorClasses: ListItemDecoratorClasses =
-  generateUtilityClasses("JoyListItemDecorator", ["root"]);
+  generateUtilityClasses("RadListItemDecorator", ["root"]);
 
 export default listItemDecoratorClasses;

@@ -30,11 +30,11 @@ export interface ChipDeleteClasses {
 }
 
 export function getChipDeleteUtilityClass(slot: string): string {
-  return generateUtilityClass("JoyChipDelete", slot);
+  return generateUtilityClass("RadChipDelete", slot);
 }
 
 const chipDeleteClasses: ChipDeleteClasses = generateUtilityClasses(
-  "JoyChipDelete",
+  "RadChipDelete",
   [
     "root",
     "disabled",

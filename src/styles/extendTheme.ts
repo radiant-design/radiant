@@ -50,7 +50,7 @@ export interface ColorSystemOptions extends Partial3Level<ColorSystem> {}
 export interface CssVarsThemeOptions extends Partial2Level<ThemeScales> {
   /**
    * Prefix of the generated CSS variables
-   * @default 'joy'
+   * @default 'rad'
    * @example extendTheme({ cssVarPrefix: 'foo-bar' })
    * // { ..., typography: { body1: { fontSize: 'var(--foo-bar-fontSize-md)' } }, ... }
    *
@@ -70,12 +70,12 @@ export interface CssVarsThemeOptions extends Partial2Level<ThemeScales> {
   >;
 }
 
-export const createGetCssVar = (cssVarPrefix = "joy") =>
+export const createGetCssVar = (cssVarPrefix = "rad") =>
   systemCreateGetCssVar<ThemeCSSVar>(cssVarPrefix);
 
 export default function extendTheme(themeOptions?: CssVarsThemeOptions): Theme {
   const {
-    cssVarPrefix = "joy",
+    cssVarPrefix = "rad",
     breakpoints,
     spacing,
     components: componentsInput,
@@ -460,33 +460,6 @@ export default function extendTheme(themeOptions?: CssVarsThemeOptions): Theme {
       sm: "0px 4px 8px rgba(26, 26, 26, 0.2)",
       md: "0px 12px 32px rgba(26, 26, 26, 0.24)",
       lg: "0px 24px 40px rgba(26, 26, 26, 0.16)",
-      // sm: `${getCssVar("shadowRing")}, 0.3px 0.8px 1.1px rgba(${getCssVar(
-      //   "shadowChannel"
-      // )} / 0.11), 0.5px 1.3px 1.8px -0.6px rgba(${getCssVar(
-      //   "shadowChannel"
-      // )} / 0.18), 1.1px 2.7px 3.8px -1.2px rgba(${getCssVar(
-      //   "shadowChannel"
-      // )} / 0.26)`,
-      // md: `${getCssVar("shadowRing")}, 0.3px 0.8px 1.1px rgba(${getCssVar(
-      //   "shadowChannel"
-      // )} / 0.12), 1.1px 2.8px 3.9px -0.4px rgba(${getCssVar(
-      //   "shadowChannel"
-      // )} / 0.17), 2.4px 6.1px 8.6px -0.8px rgba(${getCssVar(
-      //   "shadowChannel"
-      // )} / 0.23), 5.3px 13.3px 18.8px -1.2px rgba(${getCssVar(
-      //   "shadowChannel"
-      // )} / 0.29)`,
-      // lg: `${getCssVar("shadowRing")}, 0.3px 0.8px 1.1px rgba(${getCssVar(
-      //   "shadowChannel"
-      // )} / 0.11), 1.8px 4.5px 6.4px -0.2px rgba(${getCssVar(
-      //   "shadowChannel"
-      // )} / 0.13), 3.2px 7.9px 11.2px -0.4px rgba(${getCssVar(
-      //   "shadowChannel"
-      // )} / 0.16), 4.8px 12px 17px -0.5px rgba(${getCssVar(
-      //   "shadowChannel"
-      // )} / 0.19), 7px 17.5px 24.7px -0.7px rgba(${getCssVar(
-      //   "shadowChannel"
-      // )} / 0.21)`,
 
       // TODO: remove once all occurrence are removed form component
       xs: `${getCssVar("shadowRing")}, 0 1px 2px 0 rgba(${getCssVar(

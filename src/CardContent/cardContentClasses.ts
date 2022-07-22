@@ -8,11 +8,11 @@ export interface CardContentClasses {
 export type CardContentClassKey = keyof CardContentClasses;
 
 export function getCardContentUtilityClass(slot: string): string {
-  return generateUtilityClass("JoyCardContent", slot);
+  return generateUtilityClass("RadCardContent", slot);
 }
 
 const cardClasses: CardContentClasses = generateUtilityClasses(
-  "JoyCardContent",
+  "RadCardContent",
   ["root"]
 );
 

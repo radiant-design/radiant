@@ -48,10 +48,10 @@ export interface InputClasses {
 export type InputClassKey = keyof InputClasses;
 
 export function getInputUtilityClass(slot: string): string {
-  return generateUtilityClass("JoyInput", slot);
+  return generateUtilityClass("RadInput", slot);
 }
 
-const inputClasses: InputClasses = generateUtilityClasses("JoyInput", [
+const inputClasses: InputClasses = generateUtilityClasses("RadInput", [
   "root",
   "input",
   "formControl",

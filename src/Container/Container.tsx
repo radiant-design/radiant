@@ -7,14 +7,14 @@ import styled from "../styles/styled";
 import { useThemeProps } from "../styles";
 
 const Container = createContainer<Theme>({
-  componentName: "JoyContainer",
+  componentName: "RadContainer",
   createStyledComponent: styled("div", {
-    name: "JoyContainer",
+    name: "RadContainer",
     slot: "Root",
     overridesResolver: (props, styles) => styles.root,
   }),
   useThemeProps: (inProps) =>
-    useThemeProps({ props: inProps, name: "JoyContainer" }),
+    useThemeProps({ props: inProps, name: "RadContainer" }),
 }) as OverridableComponent<ContainerTypeMap>;
 
 Container.propTypes /* remove-proptypes */ = {

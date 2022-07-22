@@ -48,7 +48,7 @@ const useUtilityClasses = (
 };
 
 const ButtonStartIcon = styled("span", {
-  name: "JoyButton",
+  name: "RadButton",
   slot: "StartIcon",
   overridesResolver: (props, styles) => styles.startIcon,
 })<{ ownerState: ButtonProps }>({
@@ -58,7 +58,7 @@ const ButtonStartIcon = styled("span", {
 });
 
 const ButtonEndIcon = styled("span", {
-  name: "JoyButton",
+  name: "RadButton",
   slot: "EndIcon",
   overridesResolver: (props, styles) => styles.endIcon,
 })<{ ownerState: ButtonProps }>({
@@ -68,7 +68,7 @@ const ButtonEndIcon = styled("span", {
 });
 
 const ButtonRoot = styled("button", {
-  name: "JoyButton",
+  name: "RadButton",
   slot: "Root",
   overridesResolver: (props, styles) => styles.root,
 })<{ ownerState: ButtonProps }>(({ theme, ownerState }) => {
@@ -144,7 +144,7 @@ const Button = React.forwardRef(function Button(inProps, ref) {
     typeof inProps & { component?: React.ElementType }
   >({
     props: inProps,
-    name: "JoyButton",
+    name: "RadButton",
   });
 
   const {

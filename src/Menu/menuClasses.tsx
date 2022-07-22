@@ -10,10 +10,10 @@ export interface MenuClasses {
 export type MenuClassKey = keyof MenuClasses;
 
 export function getMenuUtilityClass(slot: string): string {
-  return generateUtilityClass("JoyMenu", slot);
+  return generateUtilityClass("RadMenu", slot);
 }
 
-const menuClasses: MenuClasses = generateUtilityClasses("JoyMenu", [
+const menuClasses: MenuClasses = generateUtilityClasses("RadMenu", [
   "root",
   "listbox",
 ]);

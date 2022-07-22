@@ -19,7 +19,7 @@ const useUtilityClasses = () => {
 };
 
 const ListItemContentRoot = styled("div", {
-  name: "JoyListItemContent",
+  name: "RadListItemContent",
   slot: "Root",
   overridesResolver: (props, styles) => styles.root,
 })<{ ownerState: ListItemContentProps }>({
@@ -35,7 +35,7 @@ const ListItemContent = React.forwardRef(function ListItemContent(
     typeof inProps & { component?: React.ElementType }
   >({
     props: inProps,
-    name: "JoyListItemContent",
+    name: "RadListItemContent",
   });
 
   const { component, className, children, ...other } = props;

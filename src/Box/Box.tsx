@@ -8,7 +8,7 @@ import styleFunctionSx from "../styles/styleFunctionSx";
 
 const Box = createBox({
   defaultTheme,
-  defaultClassName: "JoyBox-root",
+  defaultClassName: "RadBox-root",
   generateClassName: ClassNameGenerator.generate,
   styleFunctionSx,
 }) as OverridableComponent<BoxTypeMap>;

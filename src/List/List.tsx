@@ -26,7 +26,7 @@ const useUtilityClasses = (ownerState: ListProps & { nesting: boolean }) => {
 };
 
 const ListRoot = styled("ul", {
-  name: "JoyList",
+  name: "RadList",
   slot: "Root",
   overridesResolver: (props, styles) => styles.root,
 })<{
@@ -123,7 +123,7 @@ const List = React.forwardRef(function List(inProps, ref) {
     typeof inProps & { component?: React.ElementType }
   >({
     props: inProps,
-    name: "JoyList",
+    name: "RadList",
   });
 
   const {
