@@ -42,7 +42,7 @@ const useUtilityClasses = (
 };
 
 const ChipRoot = styled("div", {
-  name: "JoyChip",
+  name: "RadChip",
   slot: "Root",
   overridesResolver: (props, styles) => styles.root,
 })<{ ownerState: ChipProps & { clickable: boolean } }>(
@@ -81,12 +81,12 @@ const ChipRoot = styled("div", {
           fontSize: theme.vars.fontSize.md, //sm
         }),
         ...(ownerState.size === "lg" && {
-          "--Chip-gap": "0rem",
-          "--Chip-paddingInline": "1rem",
+          "--Chip-gap": "0.25rem",
+          "--Chip-paddingInline": "1.25rem",
           "--Chip-decorator-childHeight": "min(2rem, var(--Chip-minHeight))",
           "--Icon-fontSize": "1.25rem",
-          "--Chip-minHeight": "2.5rem",
-          fontSize: theme.vars.fontSize.md,
+          "--Chip-minHeight": "3rem",
+          fontSize: theme.vars.fontSize.lg,
         }),
         minHeight: "var(--Chip-minHeight)",
         paddingInline: "var(--Chip-paddingInline)",
@@ -134,7 +134,7 @@ const ChipRoot = styled("div", {
 );
 
 const ChipLabel = styled("span", {
-  name: "JoyChip",
+  name: "RadChip",
   slot: "Label",
   overridesResolver: (props, styles) => styles.label,
 })<{ ownerState: ChipProps & { clickable: boolean } }>(({ ownerState }) => ({
@@ -149,7 +149,7 @@ const ChipLabel = styled("span", {
 }));
 
 const ChipAction = styled("button", {
-  name: "JoyChip",
+  name: "RadChip",
   slot: "Action",
   overridesResolver: (props, styles) => styles.action,
 })<{ ownerState: ChipProps }>(({ theme, ownerState }) => [
@@ -186,7 +186,7 @@ const ChipAction = styled("button", {
 ]);
 
 const ChipStartDecorator = styled("span", {
-  name: "JoyChip",
+  name: "RadChip",
   slot: "StartDecorator",
   overridesResolver: (props, styles) => styles.startDecorator,
 })<{ ownerState: ChipProps & { clickable: boolean } }>({
@@ -202,7 +202,7 @@ const ChipStartDecorator = styled("span", {
 });
 
 const ChipEndDecorator = styled("span", {
-  name: "JoyChip",
+  name: "RadChip",
   slot: "EndDecorator",
   overridesResolver: (props, styles) => styles.endDecorator,
 })<{ ownerState: ChipProps & { clickable: boolean } }>({
@@ -222,7 +222,7 @@ const ChipEndDecorator = styled("span", {
 const Chip = React.forwardRef(function Chip(inProps, ref) {
   const props = useThemeProps<typeof inProps & ChipProps>({
     props: inProps,
-    name: "JoyChip",
+    name: "RadChip",
   });
   const {
     children,

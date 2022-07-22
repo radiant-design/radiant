@@ -22,7 +22,7 @@ const useUtilityClasses = (ownerState: RadioGroupProps) => {
 };
 
 const RadioGroupRoot = styled("div", {
-  name: "JoyRadioGroup",
+  name: "RadRadioGroup",
   slot: "Root",
   overridesResolver: (props, styles) => styles.root,
 })<{ ownerState: RadioGroupProps }>(({ ownerState }) => ({
@@ -44,7 +44,7 @@ const RadioGroup = React.forwardRef(function RadioGroup(inProps, ref) {
     typeof inProps & { component?: React.ElementType }
   >({
     props: inProps,
-    name: "JoyRadioGroup",
+    name: "RadRadioGroup",
   });
 
   const {

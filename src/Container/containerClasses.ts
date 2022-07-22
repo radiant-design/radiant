@@ -5,11 +5,11 @@ export type { ContainerClassKey } from "@mui/system";
 export type { ContainerClasses };
 
 export function getContainerUtilityClass(slot: string): string {
-  return generateUtilityClass("JoyContainer", slot);
+  return generateUtilityClass("RadContainer", slot);
 }
 
 const containerClasses: ContainerClasses = generateUtilityClasses(
-  "JoyContainer",
+  "RadContainer",
   [
     "root",
     "disableGutters",

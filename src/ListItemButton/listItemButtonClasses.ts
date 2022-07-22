@@ -36,11 +36,11 @@ export interface ListItemButtonClasses {
 export type ListItemButtonClassKey = keyof ListItemButtonClasses;
 
 export function getListItemButtonUtilityClass(slot: string): string {
-  return generateUtilityClass("JoyListItemButton", slot);
+  return generateUtilityClass("RadListItemButton", slot);
 }
 
 const listItemButtonClasses: ListItemButtonClasses = generateUtilityClasses(
-  "JoyListItemButton",
+  "RadListItemButton",
   [
     "root",
     "colorPrimary",

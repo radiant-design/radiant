@@ -32,7 +32,7 @@ const useUtilityClasses = (ownerState: TypographyProps) => {
 };
 
 const StartDecorator = styled("span", {
-  name: "JoyTypography",
+  name: "RadTypography",
   slot: "StartDecorator",
   overridesResolver: (props, styles) => styles.startDecorator,
 })<{ ownerState: TypographyProps & { nested: boolean } }>(({ ownerState }) => ({
@@ -44,7 +44,7 @@ const StartDecorator = styled("span", {
 }));
 
 const EndDecorator = styled("span", {
-  name: "JoyTypography",
+  name: "RadTypography",
   slot: "endDecorator",
   overridesResolver: (props, styles) => styles.endDecorator,
 })<{ ownerState: TypographyProps & { nested: boolean } }>(({ ownerState }) => ({
@@ -56,7 +56,7 @@ const EndDecorator = styled("span", {
 }));
 
 const TypographyRoot = styled("span", {
-  name: "JoyTypography",
+  name: "RadTypography",
   slot: "Root",
   overridesResolver: (props, styles) => styles.root,
 })<{ ownerState: TypographyProps & { nested: boolean } }>(
@@ -126,7 +126,7 @@ const Typography = React.forwardRef(function Typography(inProps, ref) {
     ...themeProps
   } = useThemeProps<typeof inProps & { component?: React.ElementType }>({
     props: inProps,
-    name: "JoyTypography",
+    name: "RadTypography",
   });
 
   const nested = React.useContext(TypographyContext);

@@ -25,7 +25,7 @@ const useUtilityClasses = (ownerState: AspectRatioProps) => {
 
 // Use to control the width of the content, usually in a flexbox row container
 const AspectRatioRoot = styled("div", {
-  name: "JoyAspectRatio",
+  name: "RadAspectRatio",
   slot: "Root",
   overridesResolver: (props, styles) => styles.root,
 })<{ ownerState: AspectRatioProps }>(({ ownerState }) => {
@@ -51,7 +51,7 @@ const AspectRatioRoot = styled("div", {
 });
 
 const AspectRatioContent = styled("div", {
-  name: "JoyAspectRatio",
+  name: "RadAspectRatio",
   slot: "Content",
   overridesResolver: (props, styles) => styles.root,
 })<{ ownerState: AspectRatioProps }>(({ theme, ownerState }) => [
@@ -89,7 +89,7 @@ const AspectRatioContent = styled("div", {
 const AspectRatio = React.forwardRef(function AspectRatio(inProps, ref) {
   const props = useThemeProps<typeof inProps & AspectRatioProps>({
     props: inProps,
-    name: "JoyAspectRatio",
+    name: "RadAspectRatio",
   });
 
   const {

@@ -37,7 +37,7 @@ const useUtilityClasses = (ownerState: LinkProps) => {
 };
 
 const StartDecorator = styled("span", {
-  name: "JoyLink",
+  name: "RadLink",
   slot: "StartDecorator",
   overridesResolver: (props, styles) => styles.startDecorator,
 })<{ ownerState: LinkProps }>({
@@ -46,7 +46,7 @@ const StartDecorator = styled("span", {
 });
 
 const EndDecorator = styled("span", {
-  name: "JoyLink",
+  name: "RadLink",
   slot: "endDecorator",
   overridesResolver: (props, styles) => styles.endDecorator,
 })<{ ownerState: LinkProps }>({
@@ -55,7 +55,7 @@ const EndDecorator = styled("span", {
 });
 
 const LinkRoot = styled("a", {
-  name: "JoyLink",
+  name: "RadLink",
   slot: "Root",
   overridesResolver: (props, styles) => styles.root,
 })<{ ownerState: LinkProps }>(({ theme, ownerState }) => {
@@ -165,7 +165,7 @@ const Link = React.forwardRef(function Link(inProps, ref) {
     ...themeProps
   } = useThemeProps<typeof inProps & LinkProps>({
     props: inProps,
-    name: "JoyLink",
+    name: "RadLink",
   });
 
   const nested = React.useContext(TypographyContext);

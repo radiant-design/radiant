@@ -6,9 +6,9 @@ import {
 export { unstable_ClassNameGenerator } from "@mui/utils";
 
 export const generateUtilityClass = (componentName: string, slot: string) =>
-  unstable_generateUtilityClass(componentName, slot, "Joy");
+  unstable_generateUtilityClass(componentName, slot, "Rad");
 
 export const generateUtilityClasses = <T extends string>(
   componentName: string,
   slots: Array<T>
-) => unstable_generateUtilityClasses(componentName, slots, "Joy");
+) => unstable_generateUtilityClasses(componentName, slots, "Rad");

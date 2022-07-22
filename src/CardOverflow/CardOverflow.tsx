@@ -24,7 +24,7 @@ const useUtilityClasses = (ownerState: CardOverflowProps) => {
 };
 
 const CardOverflowRoot = styled("div", {
-  name: "JoyCardOverflow",
+  name: "RadCardOverflow",
   slot: "Root",
   overridesResolver: (props, styles) => styles.root,
 })<{
@@ -87,7 +87,7 @@ const CardOverflowRoot = styled("div", {
 const CardOverflow = React.forwardRef(function CardOverflow(inProps, ref) {
   const props = useThemeProps<typeof inProps & CardOverflowProps>({
     props: inProps,
-    name: "JoyCardOverflow",
+    name: "RadCardOverflow",
   });
 
   const row = React.useContext(CardRowContext);

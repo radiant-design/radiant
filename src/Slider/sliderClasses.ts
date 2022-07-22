@@ -54,10 +54,10 @@ export interface SliderClasses {
 export type SliderClassKey = keyof SliderClasses;
 
 export function getSliderUtilityClass(slot: string): string {
-  return generateUtilityClass("JoySlider", slot);
+  return generateUtilityClass("RadSlider", slot);
 }
 
-const sliderClasses: SliderClasses = generateUtilityClasses("JoySlider", [
+const sliderClasses: SliderClasses = generateUtilityClasses("RadSlider", [
   "root",
   "disabled",
   "dragging",

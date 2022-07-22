@@ -21,7 +21,7 @@ const useUtilityClasses = () => {
 };
 
 const AvatarGroupGroupRoot = styled("div", {
-  name: "JoyAvatarGroup",
+  name: "RadAvatarGroup",
   slot: "Root",
   overridesResolver: (props, styles) => styles.root,
 })<{ ownerState: AvatarGroupProps }>(({ ownerState, theme }) => ({
@@ -46,7 +46,7 @@ const AvatarGroupGroupRoot = styled("div", {
 const AvatarGroup = React.forwardRef(function AvatarGroup(inProps, ref) {
   const props = useThemeProps<typeof inProps & AvatarGroupProps>({
     props: inProps,
-    name: "JoyAvatarGroup",
+    name: "RadAvatarGroup",
   });
 
   const {

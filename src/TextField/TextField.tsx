@@ -9,7 +9,7 @@ import {
 import composeClasses from "@mui/base/composeClasses";
 import FormLabel from "../FormLabel";
 import FormHelperText from "../FormHelperText";
-import JoyInput from "../Input";
+import RadInput from "../Input";
 import { styled, useThemeProps } from "../styles";
 import { TextFieldProps, TextFieldTypeMap } from "./TextFieldProps";
 import textFieldClasses, { getTextFieldUtilityClass } from "./textFieldClasses";
@@ -32,7 +32,7 @@ const useUtilityClasses = (ownerState: TextFieldProps) => {
 };
 
 const TextFieldRoot = styled("div", {
-  name: "JoyTextField",
+  name: "RadTextField",
   slot: "Root",
   overridesResolver: (props, styles) => styles.root,
 })<{ ownerState: TextFieldProps }>(({ theme, ownerState }) => ({
@@ -65,7 +65,7 @@ const TextField = React.forwardRef(function TextField(inProps, ref) {
     typeof inProps & { component?: React.ElementType }
   >({
     props: inProps,
-    name: "JoyTextField",
+    name: "RadTextField",
   });
 
   const {
@@ -120,7 +120,7 @@ const TextField = React.forwardRef(function TextField(inProps, ref) {
 
   const classes = useUtilityClasses(ownerState);
 
-  const Input = components.Input || JoyInput;
+  const Input = components.Input || RadInput;
 
   return (
     <TextFieldRoot

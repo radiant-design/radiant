@@ -10,11 +10,11 @@ export interface RadioGroupClasses {
 export type RadioGroupClassKey = keyof RadioGroupClasses;
 
 export function getRadioGroupUtilityClass(slot: string): string {
-  return generateUtilityClass("JoyRadioGroup", slot);
+  return generateUtilityClass("RadRadioGroup", slot);
 }
 
 const radioGroupClasses: RadioGroupClasses = generateUtilityClasses(
-  "JoyRadioGroup",
+  "RadRadioGroup",
   ["root", "row"]
 );
 

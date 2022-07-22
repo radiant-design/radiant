@@ -1,7 +1,7 @@
 import { OverridableStringUnion } from "@mui/types";
 
 /**
- * default Joy color-schemes
+ * default Rad color-schemes
  */
 export type DefaultColorScheme = "light" | "dark";
 

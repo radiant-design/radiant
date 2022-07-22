@@ -60,10 +60,10 @@ export interface LinkClasses {
 export type LinkClassKey = keyof LinkClasses;
 
 export function getLinkUtilityClass(slot: string): string {
-  return generateUtilityClass("JoyLink", slot);
+  return generateUtilityClass("RadLink", slot);
 }
 
-const linkClasses: LinkClasses = generateUtilityClasses("JoyLink", [
+const linkClasses: LinkClasses = generateUtilityClasses("RadLink", [
   "root",
   "disabled",
   "focusVisible",

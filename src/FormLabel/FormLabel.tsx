@@ -17,7 +17,7 @@ const useUtilityClasses = () => {
 };
 
 const FormLabelRoot = styled("label", {
-  name: "JoyFormLabel",
+  name: "RadFormLabel",
   slot: "Root",
   overridesResolver: (props, styles) => styles.root,
 })<{ ownerState: FormLabelProps }>(({ theme }) => ({
@@ -33,7 +33,7 @@ const FormLabelRoot = styled("label", {
 }));
 
 const AsteriskComponent = styled("span", {
-  name: "JoyFormLabel",
+  name: "RadFormLabel",
   slot: "Asterisk",
   overridesResolver: (props, styles) => styles.asterisk,
 })<{ ownerState: FormLabelProps }>({
@@ -45,7 +45,7 @@ const FormLabel = React.forwardRef(function FormLabel(inProps, ref) {
     typeof inProps & { component?: React.ElementType }
   >({
     props: inProps,
-    name: "JoyFormLabel",
+    name: "RadFormLabel",
   });
 
   const { children, className, component, required = false, ...other } = props;

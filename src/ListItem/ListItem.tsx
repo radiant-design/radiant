@@ -35,7 +35,7 @@ const useUtilityClasses = (
 };
 
 const ListItemRoot = styled("li", {
-  name: "JoyListItem",
+  name: "RadListItem",
   slot: "Root",
   overridesResolver: (props, styles) => styles.root,
 })<{
@@ -100,7 +100,7 @@ const ListItemRoot = styled("li", {
 ]);
 
 const ListItemStartAction = styled("div", {
-  name: "JoyListItem",
+  name: "RadListItem",
   slot: "StartAction",
   overridesResolver: (props, styles) => styles.startAction,
 })<{ ownerState: ListItemProps }>(({ ownerState }) => ({
@@ -112,7 +112,7 @@ const ListItemStartAction = styled("div", {
 }));
 
 const ListItemEndAction = styled("div", {
-  name: "JoyListItem",
+  name: "RadListItem",
   slot: "StartAction",
   overridesResolver: (props, styles) => styles.startAction,
 })<{ ownerState: ListItemProps }>(({ ownerState }) => ({
@@ -128,7 +128,7 @@ const ListItem = React.forwardRef(function ListItem(inProps, ref) {
     typeof inProps & { component?: React.ElementType }
   >({
     props: inProps,
-    name: "JoyListItem",
+    name: "RadListItem",
   });
 
   const listComponent = React.useContext(ComponentListContext);

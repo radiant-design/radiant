@@ -28,11 +28,11 @@ export interface CardOverflowClasses {
 export type CardOverflowClassKey = keyof CardOverflowClasses;
 
 export function getCardOverflowUtilityClass(slot: string): string {
-  return generateUtilityClass("JoyCardOverflow", slot);
+  return generateUtilityClass("RadCardOverflow", slot);
 }
 
 const aspectRatioClasses: CardOverflowClasses = generateUtilityClasses(
-  "JoyCardOverflow",
+  "RadCardOverflow",
   [
     "root",
     "colorPrimary",

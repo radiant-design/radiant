@@ -32,7 +32,7 @@ const useUtilityClasses = (
 };
 
 const MenuItemRoot = styled(ListItemButtonRoot, {
-  name: "JoyMenuItem",
+  name: "RadMenuItem",
   slot: "Root",
   overridesResolver: (_props, styles) => styles.root,
 })<{ ownerState: MenuItemProps }>({});
@@ -40,7 +40,7 @@ const MenuItemRoot = styled(ListItemButtonRoot, {
 const MenuItem = React.forwardRef(function MenuItem(inProps, ref) {
   const props = useThemeProps({
     props: inProps,
-    name: "JoyMenuItem",
+    name: "RadMenuItem",
   });
 
   const row = React.useContext(RowListContext);

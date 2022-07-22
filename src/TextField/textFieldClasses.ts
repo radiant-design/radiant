@@ -40,11 +40,11 @@ export interface TextFieldClasses {
 export type TextFieldClassKey = keyof TextFieldClasses;
 
 export function getTextFieldUtilityClass(slot: string): string {
-  return generateUtilityClass("JoyTextField", slot);
+  return generateUtilityClass("RadTextField", slot);
 }
 
 const textFieldClasses: TextFieldClasses = generateUtilityClasses(
-  "JoyTextField",
+  "RadTextField",
   [
     "root",
     "disabled",

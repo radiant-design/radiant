@@ -18,7 +18,7 @@ const useUtilityClasses = (ownerState: ListDividerProps) => {
 };
 
 const ListDividerRoot = styled("li", {
-  name: "JoyListDivider",
+  name: "RadListDivider",
   slot: "Root",
   overridesResolver: (props, styles) => styles.root,
 })<{
@@ -61,7 +61,7 @@ const ListDivider = React.forwardRef(function ListDivider(inProps, ref) {
     typeof inProps & { component?: React.ElementType }
   >({
     props: inProps,
-    name: "JoyListDivider",
+    name: "RadListDivider",
   });
 
   const row = React.useContext(RowListContext);

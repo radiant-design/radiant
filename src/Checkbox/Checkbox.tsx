@@ -45,7 +45,7 @@ const useUtilityClasses = (
 };
 
 const CheckboxRoot = styled("span", {
-  name: "JoyCheckbox",
+  name: "RadCheckbox",
   slot: "Root",
   overridesResolver: (props, styles) => styles.root,
 })<{ ownerState: CheckboxProps }>(({ ownerState, theme }) => ({
@@ -90,7 +90,7 @@ const CheckboxRoot = styled("span", {
 }));
 
 const CheckboxCheckbox = styled("span", {
-  name: "JoyCheckbox",
+  name: "RadCheckbox",
   slot: "Checkbox",
   overridesResolver: (props, styles) => styles.checkbox,
 })<{ ownerState: CheckboxProps }>(({ theme, ownerState }) => [
@@ -138,7 +138,7 @@ const CheckboxCheckbox = styled("span", {
 ]);
 
 const CheckboxAction = styled("span", {
-  name: "JoyCheckbox",
+  name: "RadCheckbox",
   slot: "Action",
   overridesResolver: (props, styles) => styles.action,
 })<{ ownerState: CheckboxProps }>(({ theme, ownerState }) => [
@@ -179,7 +179,7 @@ const CheckboxAction = styled("span", {
 ]);
 
 const CheckboxInput = styled("input", {
-  name: "JoyCheckbox",
+  name: "RadCheckbox",
   slot: "Input",
   overridesResolver: (props, styles) => styles.input,
 })<{ ownerState: CheckboxProps }>(() => ({
@@ -192,7 +192,7 @@ const CheckboxInput = styled("input", {
 }));
 
 const CheckboxLabel = styled("label", {
-  name: "JoyCheckbox",
+  name: "RadCheckbox",
   slot: "Label",
   overridesResolver: (props, styles) => styles.label,
 })<{ ownerState: CheckboxProps }>(({ ownerState }) => ({
@@ -216,7 +216,7 @@ const Checkbox = React.forwardRef(function Checkbox(inProps, ref) {
     typeof inProps & { component?: React.ElementType }
   >({
     props: inProps,
-    name: "JoyCheckbox",
+    name: "RadCheckbox",
   });
 
   const {

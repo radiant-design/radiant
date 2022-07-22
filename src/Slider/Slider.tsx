@@ -66,7 +66,7 @@ const sliderColorVariables =
   };
 
 const SliderRoot = styled("span", {
-  name: "JoySlider",
+  name: "RadSlider",
   slot: "Root",
   overridesResolver: (props, styles) => styles.root,
 })<{ ownerState: SliderOwnerState }>(({ theme, ownerState }) => {
@@ -136,7 +136,7 @@ const SliderRoot = styled("span", {
 });
 
 const SliderRail = styled("span", {
-  name: "JoySlider",
+  name: "RadSlider",
   slot: "Rail",
   overridesResolver: (props, styles) => styles.rail,
 })<{ ownerState: SliderOwnerState }>(({ ownerState }) => [
@@ -169,7 +169,7 @@ const SliderRail = styled("span", {
 ]);
 
 const SliderTrack = styled("span", {
-  name: "JoySlider",
+  name: "RadSlider",
   slot: "Track",
   overridesResolver: (props, styles) => styles.track,
 })<{ ownerState: SliderOwnerState }>(({ ownerState }) => {
@@ -207,7 +207,7 @@ const SliderTrack = styled("span", {
 });
 
 const SliderThumb = styled("span", {
-  name: "JoySlider",
+  name: "RadSlider",
   slot: "Thumb",
   overridesResolver: (props, styles) => styles.thumb,
 })<{ ownerState: SliderOwnerState }>(({ ownerState, theme }) => ({
@@ -240,7 +240,7 @@ const SliderThumb = styled("span", {
 }));
 
 const SliderMark = styled("span", {
-  name: "JoySlider",
+  name: "RadSlider",
   slot: "Mark",
   overridesResolver: (props, styles) => styles.mark,
 })<{ ownerState: SliderOwnerState & { percent: number } }>(({ ownerState }) => {
@@ -274,7 +274,7 @@ const SliderMark = styled("span", {
 });
 
 const SliderValueLabel = styled("span", {
-  name: "JoySlider",
+  name: "RadSlider",
   slot: "ValueLabel",
   overridesResolver: (props, styles) => styles.valueLabel,
 })<{ ownerState: SliderOwnerState }>(({ theme, ownerState }) => ({
@@ -334,7 +334,7 @@ const SliderValueLabel = styled("span", {
 }));
 
 const SliderMarkLabel = styled("span", {
-  name: "JoySlider",
+  name: "RadSlider",
   slot: "MarkLabel",
   overridesResolver: (props, styles) => styles.markLabel,
 })<{ ownerState: SliderOwnerState }>(({ theme, ownerState }) => ({
@@ -362,7 +362,7 @@ const SliderMarkLabel = styled("span", {
 }));
 
 const SliderInput = styled("input", {
-  name: "JoySlider",
+  name: "RadSlider",
   slot: "Input",
   overridesResolver: (props, styles) => styles.input,
 })<{ ownerState?: SliderOwnerState }>({});
@@ -372,7 +372,7 @@ const Slider = React.forwardRef(function Slider(inProps, ref) {
     typeof inProps & { component?: React.ElementType }
   >({
     props: inProps,
-    name: "JoySlider",
+    name: "RadSlider",
   });
 
   const {

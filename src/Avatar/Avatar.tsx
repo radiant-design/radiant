@@ -29,7 +29,7 @@ const useUtilityClasses = (ownerState: AvatarProps) => {
 };
 
 const AvatarRoot = styled("div", {
-  name: "JoyAvatar",
+  name: "RadAvatar",
   slot: "Root",
   overridesResolver: (props, styles) => styles.root,
 })<{ ownerState: AvatarProps }>(({ theme, ownerState }) => {
@@ -69,7 +69,7 @@ const AvatarRoot = styled("div", {
 });
 
 const AvatarImg = styled("img", {
-  name: "JoyAvatar",
+  name: "RadAvatar",
   slot: "Img",
   overridesResolver: (props, styles) => styles.img,
 })<{ ownerState: AvatarProps }>({
@@ -85,7 +85,7 @@ const AvatarImg = styled("img", {
 });
 
 const AvatarFallback = styled(Person, {
-  name: "JoyAvatar",
+  name: "RadAvatar",
   slot: "Fallback",
   overridesResolver: (props, styles) => styles.fallback,
 })<{ ownerState: AvatarProps }>({
@@ -149,7 +149,7 @@ function useLoaded({
 const Avatar = React.forwardRef(function Avatar(inProps, ref) {
   const props = useThemeProps<typeof inProps & AvatarProps>({
     props: inProps,
-    name: "JoyAvatar",
+    name: "RadAvatar",
   });
 
   const groupContext = React.useContext(AvatarGroupContext);

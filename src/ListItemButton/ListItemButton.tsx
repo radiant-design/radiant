@@ -55,7 +55,7 @@ const useUtilityClasses = (
 };
 
 export const ListItemButtonRoot = styled("div", {
-  name: "JoyListItemButton",
+  name: "RadListItemButton",
   slot: "Root",
   overridesResolver: (props, styles) => styles.root,
 })<{
@@ -121,7 +121,7 @@ const ListItemButton = React.forwardRef(function ListItemButton(inProps, ref) {
     typeof inProps & { component?: React.ElementType }
   >({
     props: inProps,
-    name: "JoyListItemButton",
+    name: "RadListItemButton",
   });
 
   const row = React.useContext(RowListContext);

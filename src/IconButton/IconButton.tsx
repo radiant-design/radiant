@@ -50,7 +50,7 @@ const useUtilityClasses = (
 };
 
 const IconButtonRoot = styled("button", {
-  name: "JoyIconButton",
+  name: "RadIconButton",
   slot: "Root",
   overridesResolver: (props, styles) => styles.root,
 })<{ ownerState: IconButtonProps & { instanceSize: IconButtonProps["size"] } }>(
@@ -75,7 +75,7 @@ const IconButtonRoot = styled("button", {
         minHeight: "var(--IconButton-size, 3rem)",
         fontSize: theme.vars.fontSize.lg,
       }),
-      "&.JoyIconButton-root.Joy-disabled": {
+      "&.RadIconButton-root.Rad-disabled": {
         pointerEvents: "none",
         cursor: "not-allowed !important",
       },
@@ -116,7 +116,7 @@ const IconButton = React.forwardRef(function IconButton(inProps, ref) {
     typeof inProps & { component?: React.ElementType }
   >({
     props: inProps,
-    name: "JoyIconButton",
+    name: "RadIconButton",
   });
 
   const {
