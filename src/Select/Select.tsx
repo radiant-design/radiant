@@ -10,10 +10,8 @@ import PopperUnstyled, { PopperUnstyledProps } from "@mui/base/PopperUnstyled";
 import {
   useSelect,
   SelectUnstyledContext,
-  //@ts-ignore
-  // flattenOptionGroups,
-  //@ts-ignore
-  // getOptionsFromChildren,
+  flattenOptionGroups,
+  getOptionsFromChildren,
 } from "@mui/base/SelectUnstyled";
 import type { SelectChild, SelectOption } from "@mui/base/SelectUnstyled";
 import { useSlotProps } from "@mui/base/utils";
@@ -68,7 +66,7 @@ const useUtilityClasses = (ownerState: SelectOwnerState<any>) => {
 const SelectRoot = styled("div", {
   name: "RadSelect",
   slot: "Root",
-  overridesResolver: (props, styles) => styles.root,
+  overridesResolver: (_props, styles) => styles.root,
 })<{ ownerState: SelectStaticProps }>(({ theme, ownerState }) => [
   {
     "--Select-radius": theme.vars.radius.xs, //sm radius is used by the decorator children
@@ -137,7 +135,7 @@ const SelectRoot = styled("div", {
       right: 0,
       bottom: 0,
       zIndex: 1,
-      borderRadius: "0.25rem", //"inherit",
+      borderRadius: "inherit",
       margin: "calc(var(--variant-borderWidth) * -1)", // for outlined variant
     },
     [`&.${selectClasses.focusVisible}`]: {
@@ -169,7 +167,7 @@ const SelectRoot = styled("div", {
 const SelectButton = styled("button", {
   name: "RadSelect",
   slot: "Button",
-  overridesResolver: (props, styles) => styles.button,
+  overridesResolver: (_props, styles) => styles.button,
 })<{ ownerState: SelectOwnerState<any> }>(({ ownerState }) => ({
   // reset user-agent button style
   border: 0,
@@ -202,7 +200,7 @@ const SelectListbox = styled(ListRoot, {
     ...(!variantStyle.backgroundColor && {
       backgroundColor: theme.vars.palette.background.body,
     }),
-    "--List-radius": theme.vars.radius.sm,
+    "--List-radius": theme.vars.radius.xs, //sm
     "--List-item-stickyBackground":
       variantStyle?.backgroundColor ||
       variantStyle?.background ||
@@ -213,7 +211,7 @@ const SelectListbox = styled(ListRoot, {
 const SelectStartDecorator = styled("span", {
   name: "RadSelect",
   slot: "StartDecorator",
-  overridesResolver: (props, styles) => styles.startDecorator,
+  overridesResolver: (_props, styles) => styles.startDecorator,
 })<{ ownerState: SelectOwnerState<any> }>(({ theme, ownerState }) => ({
   "--Button-margin": "0 0 0 calc(var(--Select-decorator-childOffset) * -1)",
   "--IconButton-margin": "0 0 0 calc(var(--Select-decorator-childOffset) * -1)",
@@ -231,7 +229,7 @@ const SelectStartDecorator = styled("span", {
 const SelectEndDecorator = styled("span", {
   name: "RadSelect",
   slot: "EndDecorator",
-  overridesResolver: (props, styles) => styles.endDecorator,
+  overridesResolver: (_props, styles) => styles.endDecorator,
 })<{ ownerState: SelectOwnerState<any> }>(({ theme, ownerState }) => ({
   "--Button-margin": "0 calc(var(--Select-decorator-childOffset) * -1) 0 0",
   "--IconButton-margin": "0 calc(var(--Select-decorator-childOffset) * -1) 0 0",
@@ -308,11 +306,11 @@ const Select = React.forwardRef(function Select<TValue>(
   const [groupedOptions, setGroupedOptions] = React.useState<
     SelectChild<TValue>[]
   >([]);
-  // const options = React.useMemo(
-  //   () => flattenOptionGroups(groupedOptions),
-  //   [groupedOptions]
-  // );
-  const options = [];
+  const options = React.useMemo(
+    () => flattenOptionGroups(groupedOptions),
+    [groupedOptions]
+  );
+
   const [listboxOpen, setListboxOpen] = useControlled({
     controlled: listboxOpenProp,
     default: defaultListboxOpen,
@@ -337,7 +335,7 @@ const Select = React.forwardRef(function Select<TValue>(
   );
 
   React.useEffect(() => {
-    // setGroupedOptions(getOptionsFromChildren(children));
+    setGroupedOptions(getOptionsFromChildren(children));
   }, [children]);
 
   React.useEffect(() => {
@@ -464,6 +462,7 @@ const Select = React.forwardRef(function Select<TValue>(
     className: classes.button,
   });
   //@ts-ignore
+
   const { component: listboxComponent, ...externalListboxProps } =
     componentsProps.listbox || {};
   const listboxProps = useSlotProps({
