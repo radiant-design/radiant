@@ -76,7 +76,7 @@
   resolved "https://registry.npmjs.org/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@mui/base@5.0.0-alpha.90":
+"@mui/base@^5.0.0-alpha.90":
   version "5.0.0-alpha.90"
   resolved "https://registry.yarnpkg.com/@mui/base/-/base-5.0.0-alpha.90.tgz#73700ba74e5c75096ee5d0bfe3ba4a3b3b81beef"
   integrity sha512-hNKwzr+RkiuGsGrakz8Q2i5ezr4Dz4b4Qsdipt9SiMrhuFAra/i501VSaEIzwec9LC4G+vtW4fE7yJBB0XaAYw==

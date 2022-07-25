@@ -11,15 +11,15 @@ import {
   useSelect,
   SelectUnstyledContext,
   //@ts-ignore
-  flattenOptionGroups,
+  // flattenOptionGroups,
   //@ts-ignore
-  getOptionsFromChildren,
+  // getOptionsFromChildren,
 } from "@mui/base/SelectUnstyled";
 import type { SelectChild, SelectOption } from "@mui/base/SelectUnstyled";
 import { useSlotProps } from "@mui/base/utils";
 import composeClasses from "@mui/base/composeClasses";
 import { ListRoot } from "../List/List";
-import Unfold from "../internal/svg-icons/Unfold";
+import SelectIcon from "../internal/svg-icons/Select";
 import { styled, useThemeProps } from "../styles";
 import {
   SelectOwnProps,
@@ -66,38 +66,38 @@ const useUtilityClasses = (ownerState: SelectOwnerState<any>) => {
 };
 
 const SelectRoot = styled("div", {
-  name: "JoySelect",
+  name: "RadSelect",
   slot: "Root",
   overridesResolver: (props, styles) => styles.root,
 })<{ ownerState: SelectStaticProps }>(({ theme, ownerState }) => [
   {
-    "--Select-radius": theme.vars.radius.sm, // radius is used by the decorator children
+    "--Select-radius": theme.vars.radius.xs, //sm radius is used by the decorator children
     "--Select-gap": "0.5rem",
     "--Select-placeholderOpacity": 0.5,
-    "--Select-focusedThickness": "calc(var(--variant-borderWidth, 1px) + 1px)",
+    "--Select-focusedThickness": "0.5px", // "calc(var(--variant-borderWidth, 1px) + 1px)",
     "--Select-focusedHighlight":
       theme.vars.palette[
         ownerState.color === "neutral" ? "primary" : ownerState.color!
       ]?.[500],
-    "--Select-indicator-color": theme.vars.palette.text.tertiary,
+    "--Select-indicator-color": theme.vars.palette.text.primary,
     ...(ownerState.size === "sm" && {
       "--Select-minHeight": "2rem",
-      "--Select-paddingInline": "0.5rem",
+      "--Select-paddingInline": "1rem", //0.5
       "--Select-decorator-childHeight": "min(1.5rem, var(--Select-minHeight))",
-      "--Icon-fontSize": "1.25rem",
+      "--Icon-fontSize": "1rem", //1.25
     }),
     ...(ownerState.size === "md" && {
       "--Select-minHeight": "2.5rem",
-      "--Select-paddingInline": "0.75rem",
+      "--Select-paddingInline": "1rem", //0.75
       "--Select-decorator-childHeight": "min(2rem, var(--Select-minHeight))",
-      "--Icon-fontSize": "1.5rem",
+      "--Icon-fontSize": "1.25rem", //1.5
     }),
     ...(ownerState.size === "lg" && {
       "--Select-minHeight": "3rem",
       "--Select-paddingInline": "1rem",
       "--Select-decorator-childHeight":
         "min(2.375rem, var(--Select-minHeight))",
-      "--Icon-fontSize": "1.75rem",
+      "--Icon-fontSize": "1.5rem", //1.75rem",
     }),
     // variables for controlling child components
     "--Select-decorator-childOffset":
@@ -137,7 +137,7 @@ const SelectRoot = styled("div", {
       right: 0,
       bottom: 0,
       zIndex: 1,
-      borderRadius: "inherit",
+      borderRadius: "0.25rem", //"inherit",
       margin: "calc(var(--variant-borderWidth) * -1)", // for outlined variant
     },
     [`&.${selectClasses.focusVisible}`]: {
@@ -150,8 +150,8 @@ const SelectRoot = styled("div", {
   {
     // apply global variant styles
     ...theme.variants[`${ownerState.variant!}`]?.[ownerState.color!],
-    "&:hover":
-      theme.variants[`${ownerState.variant!}Hover`]?.[ownerState.color!],
+    // "&:hover":
+    //   theme.variants[`${ownerState.variant!}Hover`]?.[ownerState.color!],
     [`&.${selectClasses.disabled}`]:
       theme.variants[`${ownerState.variant!}Disabled`]?.[ownerState.color!],
   },
@@ -167,7 +167,7 @@ const SelectRoot = styled("div", {
 ]);
 
 const SelectButton = styled("button", {
-  name: "JoySelect",
+  name: "RadSelect",
   slot: "Button",
   overridesResolver: (props, styles) => styles.button,
 })<{ ownerState: SelectOwnerState<any> }>(({ ownerState }) => ({
@@ -190,7 +190,7 @@ const SelectButton = styled("button", {
 }));
 
 const SelectListbox = styled(ListRoot, {
-  name: "JoySelect",
+  name: "RadSelect",
   slot: "Listbox",
   overridesResolver: (props, styles) => styles.listbox,
 })<{ ownerState: SelectOwnerState<any> }>(({ theme, ownerState }) => {
@@ -211,7 +211,7 @@ const SelectListbox = styled(ListRoot, {
 });
 
 const SelectStartDecorator = styled("span", {
-  name: "JoySelect",
+  name: "RadSelect",
   slot: "StartDecorator",
   overridesResolver: (props, styles) => styles.startDecorator,
 })<{ ownerState: SelectOwnerState<any> }>(({ theme, ownerState }) => ({
@@ -229,7 +229,7 @@ const SelectStartDecorator = styled("span", {
 }));
 
 const SelectEndDecorator = styled("span", {
-  name: "JoySelect",
+  name: "RadSelect",
   slot: "EndDecorator",
   overridesResolver: (props, styles) => styles.endDecorator,
 })<{ ownerState: SelectOwnerState<any> }>(({ theme, ownerState }) => ({
@@ -243,7 +243,7 @@ const SelectEndDecorator = styled("span", {
 }));
 
 const SelectIndicator = styled("span", {
-  name: "JoySelect",
+  name: "RadSelect",
   slot: "Indicator",
 })<{ ownerState: SelectOwnerState<any> }>({
   color: "var(--Select-indicator-color)",
@@ -251,6 +251,7 @@ const SelectIndicator = styled("span", {
   alignItems: "center",
   marginInlineStart: "var(--Select-gap)",
   marginInlineEnd: "calc(var(--Select-paddingInline) / -4)",
+  marginTop: "auto",
 });
 
 const Select = React.forwardRef(function Select<TValue>(
@@ -259,7 +260,7 @@ const Select = React.forwardRef(function Select<TValue>(
 ) {
   const props = useThemeProps({
     props: inProps,
-    name: "JoySelect",
+    name: "RadSelect",
   });
 
   const {
@@ -283,7 +284,7 @@ const Select = React.forwardRef(function Select<TValue>(
     color = "neutral",
     startDecorator,
     endDecorator,
-    indicator = <Unfold />,
+    indicator = <SelectIcon />,
     // props to forward to the button (all handlers should go through componentsProps.button)
     "aria-describedby": ariaDescribedby,
     "aria-label": ariaLabel,
@@ -307,10 +308,11 @@ const Select = React.forwardRef(function Select<TValue>(
   const [groupedOptions, setGroupedOptions] = React.useState<
     SelectChild<TValue>[]
   >([]);
-  const options = React.useMemo(
-    () => flattenOptionGroups(groupedOptions),
-    [groupedOptions]
-  );
+  // const options = React.useMemo(
+  //   () => flattenOptionGroups(groupedOptions),
+  //   [groupedOptions]
+  // );
+  const options = [];
   const [listboxOpen, setListboxOpen] = useControlled({
     controlled: listboxOpenProp,
     default: defaultListboxOpen,
@@ -335,7 +337,7 @@ const Select = React.forwardRef(function Select<TValue>(
   );
 
   React.useEffect(() => {
-    setGroupedOptions(getOptionsFromChildren(children));
+    // setGroupedOptions(getOptionsFromChildren(children));
   }, [children]);
 
   React.useEffect(() => {
@@ -493,7 +495,6 @@ const Select = React.forwardRef(function Select<TValue>(
     listboxRef,
     color,
   };
-
   return (
     <React.Fragment>
       <SelectRoot {...rootProps}>
@@ -623,6 +624,12 @@ Select.propTypes /* remove-proptypes */ = {
    *    ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
    */
   indicator: PropTypes.node,
+  components: PropTypes.shape({
+    HelperText: PropTypes.elementType,
+    Input: PropTypes.elementType,
+    Label: PropTypes.elementType,
+    Root: PropTypes.elementType,
+  }),
   /**
    * Callback fired when an option is selected.
    */

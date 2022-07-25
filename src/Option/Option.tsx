@@ -31,7 +31,7 @@ const useUtilityClasses = (ownerState: OptionProps & OptionState) => {
 };
 
 const OptionRoot = styled(ListItemButtonRoot as unknown as "button", {
-  name: "JoyOption",
+  name: "RadOption",
   slot: "Root",
   overridesResolver: (props, styles) => styles.root,
 })<{ ownerState: OptionProps & OptionState }>(({ theme, ownerState }) => ({
@@ -46,7 +46,7 @@ const Option = React.forwardRef(function Option(inProps, ref) {
     typeof inProps & { component?: React.ElementType }
   >({
     props: inProps,
-    name: "JoyOption",
+    name: "RadOption",
   });
 
   const {
