@@ -38,7 +38,7 @@ const useUtilityClasses = (ownerState: MenuProps) => {
 const MenuRoot = styled(ListRoot, {
   name: "RadMenu",
   slot: "Root",
-  overridesResolver: (props, styles) => styles.root,
+  overridesResolver: (_props, styles) => styles.root,
 })<{ ownerState: MenuProps }>(({ theme, ownerState }) => {
   const variantStyle = theme.variants[ownerState.variant!]?.[ownerState.color!];
   return {
