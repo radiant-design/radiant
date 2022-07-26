@@ -118,6 +118,7 @@ const SelectRoot = styled("div", {
     paddingInline: `var(--Select-paddingInline)`,
     fontFamily: theme.vars.fontFamily.body,
     fontSize: theme.vars.fontSize.md,
+    backgroundColor: "#fff",
     ...(ownerState.size === "sm" && {
       fontSize: theme.vars.fontSize.sm,
     }),
@@ -143,6 +144,7 @@ const SelectRoot = styled("div", {
     },
     [`&.${selectClasses.disabled}`]: {
       "--Select-indicator-color": "inherit",
+      backgroundColor: "#F2F2F2",
     },
   },
   {
@@ -175,7 +177,7 @@ const SelectButton = styled("button", {
   background: "none",
   padding: 0,
   fontSize: "inherit",
-  color: "inherit",
+  color: "#000", // "inherit",
   alignSelf: "stretch",
   // make children horizontally aligned
   display: "flex",
@@ -190,11 +192,12 @@ const SelectButton = styled("button", {
 const SelectListbox = styled(ListRoot, {
   name: "RadSelect",
   slot: "Listbox",
-  overridesResolver: (props, styles) => styles.listbox,
+  overridesResolver: (_props, styles) => styles.listbox,
 })<{ ownerState: SelectOwnerState<any> }>(({ theme, ownerState }) => {
   const variantStyle = theme.variants[ownerState.variant!]?.[ownerState.color!];
   return {
     outline: "none",
+    border: "none",
     boxShadow: theme.vars.shadow.md,
     zIndex: 1000,
     ...(!variantStyle.backgroundColor && {
@@ -245,6 +248,7 @@ const SelectIndicator = styled("span", {
   slot: "Indicator",
 })<{ ownerState: SelectOwnerState<any> }>({
   color: "var(--Select-indicator-color)",
+  zIndex: "auto",
   display: "inherit",
   alignItems: "center",
   marginInlineStart: "var(--Select-gap)",

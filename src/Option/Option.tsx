@@ -33,9 +33,10 @@ const useUtilityClasses = (ownerState: OptionProps & OptionState) => {
 const OptionRoot = styled(ListItemButtonRoot as unknown as "button", {
   name: "RadOption",
   slot: "Root",
-  overridesResolver: (props, styles) => styles.root,
+  overridesResolver: (_props, styles) => styles.root,
 })<{ ownerState: OptionProps & OptionState }>(({ theme, ownerState }) => ({
   [`&.${optionClasses.highlighted}`]: {
+    color: "#000", //added by me - don't remove
     backgroundColor:
       theme.vars.palette[ownerState.color!]?.[`${ownerState.variant!}HoverBg`],
   },
