@@ -295,7 +295,6 @@ const Select = React.forwardRef(function Select<TValue>(
     "aria-describedby"?: string;
     "aria-label"?: string;
     "aria-labelledby"?: string;
-    listboxId?: any;
     id?: string;
     name?: string;
   };
@@ -623,12 +622,6 @@ Select.propTypes /* remove-proptypes */ = {
    *    ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
    */
   indicator: PropTypes.node,
-  components: PropTypes.shape({
-    HelperText: PropTypes.elementType,
-    Input: PropTypes.elementType,
-    Label: PropTypes.elementType,
-    Root: PropTypes.elementType,
-  }),
   /**
    * Callback fired when an option is selected.
    */

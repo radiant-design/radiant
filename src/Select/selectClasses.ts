@@ -52,10 +52,10 @@ export interface SelectClasses {
 export type SelectClassKey = keyof SelectClasses;
 
 export function getSelectUtilityClass(slot: string): string {
-  return generateUtilityClass("JoySelect", slot);
+  return generateUtilityClass("RadSelect", slot);
 }
 
-const selectClasses: SelectClasses = generateUtilityClasses("JoySelect", [
+const selectClasses: SelectClasses = generateUtilityClasses("RadSelect", [
   "root",
   "button",
   "indicator",

@@ -36,7 +36,7 @@ const useUtilityClasses = (ownerState: MenuProps) => {
 };
 
 const MenuRoot = styled(ListRoot, {
-  name: "JoyMenu",
+  name: "RadMenu",
   slot: "Root",
   overridesResolver: (props, styles) => styles.root,
 })<{ ownerState: MenuProps }>(({ theme, ownerState }) => {
@@ -58,7 +58,7 @@ const MenuRoot = styled(ListRoot, {
 const Menu = React.forwardRef(function Menu(inProps, ref) {
   const props = useThemeProps<typeof inProps>({
     props: inProps,
-    name: "JoyMenu",
+    name: "RadMenu",
   });
 
   const {
@@ -76,7 +76,7 @@ const Menu = React.forwardRef(function Menu(inProps, ref) {
     variant = "outlined",
     size = "md",
     ...other
-  } = props;
+  } = props as any;
 
   // cache the modifiers to prevent Popper from being recreated when React rerenders menu.
   const cachedModifiers = React.useMemo(
