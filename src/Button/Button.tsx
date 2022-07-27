@@ -67,10 +67,10 @@ const ButtonEndIcon = styled("span", {
   marginLeft: "var(--Button-gap)",
 });
 
-const ButtonRoot = styled("button", {
+export const ButtonRoot = styled("button", {
   name: "RadButton",
   slot: "Root",
-  overridesResolver: (props, styles) => styles.root,
+  overridesResolver: (_props, styles) => styles.root,
 })<{ ownerState: ButtonProps }>(({ theme, ownerState }) => {
   return [
     {

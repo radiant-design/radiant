@@ -37,6 +37,12 @@ export * from "./Typography";
 export { default as Switch } from "./Switch";
 export * from "./Switch";
 
+export { default as Select } from "./Select";
+export * from "./Select";
+
+export { default as Option } from "./Option";
+export * from "./Option";
+
 export { default as SvgIcon } from "./SvgIcon";
 export * from "./SvgIcon";
 
