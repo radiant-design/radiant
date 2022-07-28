@@ -161,7 +161,14 @@ const Menu = React.forwardRef(function Menu(inProps, ref) {
     <PopperUnstyled {...rootProps}>
       <MenuUnstyledContext.Provider value={contextValue}>
         <RowListContext.Provider value={false}>
-          {children}
+          {React.Children.map(children, (child, index) =>
+            React.isValidElement(child)
+              ? React.cloneElement(child, {
+                  // to let MenuItem knows when to apply margin(Inline|Block)Start
+                  ...(index === 0 && { "data-first-child": "" }),
+                })
+              : child
+          )}
         </RowListContext.Provider>
       </MenuUnstyledContext.Provider>
     </PopperUnstyled>
