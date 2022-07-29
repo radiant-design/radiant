@@ -38,8 +38,8 @@ const TabListRoot = styled(ListRoot, {
   slot: "Root",
   overridesResolver: (_props, styles) => styles.root,
 })<{ ownerState: TabListProps }>({
-  "--List-gap": "var(--Tabs-gap)",
-  "--List-padding": "var(--Tabs-gap)",
+  "--List-gap": "0px",
+  "--List-padding": "0px",
   "--List-divider-gap": "0px",
   flexGrow: "initial",
 });

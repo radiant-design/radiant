@@ -30,18 +30,23 @@ const useUtilityClasses = (ownerState: TabsOwnerState) => {
 const TabsRoot = styled(SheetRoot, {
   name: "RadTabs",
   slot: "Root",
-  overridesResolver: (props, styles) => styles.root,
+  overridesResolver: (_props, styles) => styles.root,
 })<{ ownerState: TabsOwnerState }>(({ ownerState, theme }) => ({
+  "--Tabs-gap": "0px",
   ...(ownerState.size === "sm" && {
-    "--Tabs-gap": "3px",
+    fontWeight: theme.fontWeight.md,
+    fontSize: theme.fontSize.sm,
   }),
   ...(ownerState.size === "md" && {
-    "--Tabs-gap": "4px",
+    fontWeight: theme.fontWeight.lg,
+    fontSize: theme.fontSize.lg,
   }),
   ...(ownerState.size === "lg" && {
-    "--Tabs-gap": "0.5rem",
+    fontWeight: theme.fontWeight.lg,
+    fontSize: theme.fontSize.xl,
   }),
-  "--List-radius": theme.vars.radius.md, // targets TabList which reuses styles from List.
+  // "--List-radius": theme.vars.radius.md, // targets TabList which reuses styles from List.
+  fontFamily: theme.fontFamily.display,
   display: "flex",
   flexDirection: "column",
   ...(ownerState.orientation === "vertical" && {

@@ -14,6 +14,7 @@ import styled from "../styles/styled";
 import { getTabUtilityClass } from "./tabClasses";
 import { TabOwnerState, TabTypeMap } from "./TabProps";
 import RowListContext from "../List/RowListContext";
+import { kMaxLength } from "buffer";
 
 const useUtilityClasses = (ownerState: TabOwnerState) => {
   const { selected, disabled, focusVisible, variant, color } = ownerState;
@@ -35,22 +36,21 @@ const useUtilityClasses = (ownerState: TabOwnerState) => {
 const TabRoot = styled(ListItemButtonRoot, {
   name: "RadTab",
   slot: "Root",
-  overridesResolver: (props, styles) => styles.root,
-})<{ ownerState: TabOwnerState }>(({ theme, ownerState }) => {
-  const variantStyle = theme.variants[ownerState.variant!]?.[ownerState.color!];
+  overridesResolver: (_props, styles) => styles.root,
+})<{ ownerState: TabOwnerState }>(({ theme, ownerState }: any) => {
+  // const variantStyle = theme.variants[ownerState.variant!]?.[ownerState.color!];
   return {
     justifyContent: "center",
     flexGrow: 1,
-    position: "relative", // TODO: check if this can be in the ListItemButtonRoot
     ...(ownerState.selected && {
-      boxShadow: theme.vars.shadow.sm,
+      color: theme.vars.palette[ownerState.color!]?.solidBg,
       fontWeight: "initial",
-      ...(!variantStyle.backgroundColor && {
-        backgroundColor: theme.vars.palette.background.body,
-        "&:hover": {
-          backgroundColor: theme.vars.palette.background.body,
-        },
-      }),
+      // ...(!variantStyle.backgroundColor && {
+      //   backgroundColor: theme.vars.palette.background.body,
+      //   "&:hover": {
+      //     backgroundColor: theme.vars.palette.background.body,
+      //   },
+      // }),
     }),
   };
 });

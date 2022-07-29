@@ -62,10 +62,6 @@ export interface ListItemButtonTypeMap<
      */
     focusVisibleClassName?: string;
     /**
-     * The empty space on the side(s) of the separator.
-     */
-    inset?: "gutter" | "leftGutter" | "startAdornment";
-    /**
      * Use to apply selected styling.
      * @default false
      */
