@@ -79,6 +79,7 @@ export const ButtonRoot = styled("button", {
         "--Icon-fontSize": "1rem", //1.25
         "--Button-gap": "0.25rem", //0.375
         minHeight: "var(--Button-minHeight, 2rem)",
+        minWidth: "var(--Button-minWidth, 6.125rem)", //98px
         fontSize: theme.vars.fontSize.xs, //sm -->since xs is 11px
         paddingBlock: "2px",
         paddingInline: "1rem", //0.75
@@ -87,6 +88,7 @@ export const ButtonRoot = styled("button", {
         "--Icon-fontSize": "1.25rem", // 1.5 // control the SvgIcon font-size
         "--Button-gap": "0.25rem", //0.5
         minHeight: "var(--Button-minHeight, 2.5rem)", // use min-height instead of height to make the button resilient to its content
+        minWidth: "var(--Button-minWidth, 7.5rem)", //120px
         fontSize: theme.vars.fontSize.sm, //sm -- 12px
         paddingBlock: "0.25rem", // the padding-block act as a minimum spacing between content and root element
         paddingInline: "1.5rem", //1
@@ -95,6 +97,7 @@ export const ButtonRoot = styled("button", {
         "--Icon-fontSize": "1.5rem", //1.75
         "--Button-gap": "0.5rem", //0.75
         minHeight: "var(--Button-minHeight, 3rem)", //48px
+        minWidth: "var(--Button-minWidth, 10.0625rem)", //161px
         fontSize: theme.vars.fontSize.lg, //md
         paddingBlock: "0.375rem",
         paddingInline: "2rem", //1.5
