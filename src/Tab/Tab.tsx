@@ -14,7 +14,6 @@ import styled from "../styles/styled";
 import { getTabUtilityClass } from "./tabClasses";
 import { TabOwnerState, TabTypeMap } from "./TabProps";
 import RowListContext from "../List/RowListContext";
-import { kMaxLength } from "buffer";
 
 const useUtilityClasses = (ownerState: TabOwnerState) => {
   const { selected, disabled, focusVisible, variant, color } = ownerState;
