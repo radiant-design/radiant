@@ -36,8 +36,8 @@ const TabRoot = styled(ListItemButtonRoot, {
   name: "RadTab",
   slot: "Root",
   overridesResolver: (_props, styles) => styles.root,
-})<{ ownerState: TabOwnerState }>(({ theme, ownerState }: any) => {
-  // const variantStyle = theme.variants[ownerState.variant!]?.[ownerState.color!];
+})<{ ownerState: TabOwnerState }>(({ theme, ownerState }) => {
+  const variantStyle = theme.variants[ownerState.variant!]?.[ownerState.color!];
   return {
     justifyContent: "center",
     flexGrow: 1,

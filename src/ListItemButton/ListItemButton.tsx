@@ -69,6 +69,7 @@ export const ListItemButtonRoot = styled("div", {
       "--List-decorator-color": "initial",
     }),
     boxSizing: "border-box",
+    position: "relative",
     display: "flex",
     alignItems: "center",
     textAlign: "initial",
@@ -254,10 +255,7 @@ ListItemButton.propTypes /* remove-proptypes */ = {
    * if needed.
    */
   focusVisibleClassName: PropTypes.string,
-  /**
-   * The empty space on the side(s) of the separator.
-   */
-  inset: PropTypes.oneOf(["gutter", "leftGutter", "startAdornment"]),
+
   /**
    * @ignore
    */
