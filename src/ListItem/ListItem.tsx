@@ -134,6 +134,7 @@ const ListItemEndAction = styled("div", {
   top: ownerState.nested ? "calc(var(--List-item-minHeight) / 2)" : "50%",
   right: 0,
   transform: "translate(var(--List-item-endActionTranslateX), -50%)",
+  zIndex: 1, // to stay on top of ListItemButton (default `position: relative`).
 }));
 
 const ListItem = React.forwardRef(function ListItem(inProps, ref) {

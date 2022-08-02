@@ -43,6 +43,18 @@ export * from "./Select";
 export { default as Option } from "./Option";
 export * from "./Option";
 
+export { default as Tab } from "./Tab";
+export * from "./Tab";
+
+export { default as TabList } from "./TabList";
+export * from "./TabList";
+
+export { default as TabPanel } from "./TabPanel";
+export * from "./TabPanel";
+
+export { default as Tabs } from "./Tabs";
+export * from "./Tabs";
+
 export { default as SvgIcon } from "./SvgIcon";
 export * from "./SvgIcon";
 

@@ -60,6 +60,22 @@ import { ChipDeleteProps, ChipDeleteSlot } from "../ChipDelete/ChipDeleteProps";
 import { SliderProps, SliderSlot } from "../Slider/SliderProps";
 import { RadioProps, RadioSlot } from "../Radio/RadioProps";
 import { RadioGroupProps, RadioGroupSlot } from "../RadioGroup/RadioGroupProps";
+import { GridProps, GridSlot } from "../Grid/GridProps";
+import { MenuProps, MenuSlot } from "../Menu/MenuProps";
+import { MenuListProps, MenuListSlot } from "../MenuList/MenuListProps";
+import { MenuItemProps, MenuItemSlot } from "../MenuItem/MenuItemProps";
+import { TabsProps, TabsOwnerState, TabsSlot } from "../Tabs/TabsProps";
+import {
+  TabListProps,
+  TabListOwnerState,
+  TabListSlot,
+} from "../TabList/TabListProps";
+import { TabProps, TabOwnerState, TabSlot } from "../Tab/TabProps";
+import {
+  TabPanelProps,
+  TabPanelOwnerState,
+  TabPanelSlot,
+} from "../TabPanel/TabPanelProps";
 
 export type OverridesStyleRules<
   ClassKey extends string = string,
@@ -169,6 +185,10 @@ export interface Components<Theme = unknown> {
     defaultProps?: Partial<FormLabelProps>;
     styleOverrides?: OverridesStyleRules<FormLabelSlot, FormLabelProps, Theme>;
   };
+  RadGrid?: {
+    defaultProps?: Partial<GridProps>;
+    styleOverrides?: OverridesStyleRules<GridSlot, GridProps, Theme>;
+  };
   RadIconButton?: {
     defaultProps?: Partial<IconButtonProps>;
     styleOverrides?: OverridesStyleRules<
@@ -258,6 +278,26 @@ export interface Components<Theme = unknown> {
     defaultProps?: Partial<SliderProps>;
     styleOverrides?: OverridesStyleRules<SliderSlot, SliderProps, Theme>;
   };
+  RadTabs?: {
+    defaultProps?: Partial<TabsProps>;
+    styleOverrides?: OverridesStyleRules<TabsSlot, TabsOwnerState, Theme>;
+  };
+  RadTabList?: {
+    defaultProps?: Partial<TabListProps>;
+    styleOverrides?: OverridesStyleRules<TabListSlot, TabListOwnerState, Theme>;
+  };
+  RadTab?: {
+    defaultProps?: Partial<TabProps>;
+    styleOverrides?: OverridesStyleRules<TabSlot, TabOwnerState, Theme>;
+  };
+  RadTabPanel?: {
+    defaultProps?: Partial<TabPanelProps>;
+    styleOverrides?: OverridesStyleRules<
+      TabPanelSlot,
+      TabPanelOwnerState,
+      Theme
+    >;
+  };
   RadTextField?: {
     defaultProps?: Partial<TextFieldProps>;
     styleOverrides?: OverridesStyleRules<TextFieldSlot, TextFieldProps, Theme>;
@@ -269,5 +309,17 @@ export interface Components<Theme = unknown> {
       TypographyProps,
       Theme
     >;
+  };
+  RadMenu?: {
+    defaultProps?: Partial<MenuProps>;
+    styleOverrides?: OverridesStyleRules<MenuSlot, MenuProps, Theme>;
+  };
+  RadMenuList?: {
+    defaultProps?: Partial<MenuListProps>;
+    styleOverrides?: OverridesStyleRules<MenuListSlot, MenuListProps, Theme>;
+  };
+  RadMenuItem?: {
+    defaultProps?: Partial<MenuItemProps>;
+    styleOverrides?: OverridesStyleRules<MenuItemSlot, MenuItemProps, Theme>;
   };
 }

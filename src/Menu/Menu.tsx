@@ -45,13 +45,13 @@ const MenuRoot = styled(ListRoot, {
     boxShadow: theme.vars.shadow.md,
     zIndex: 1000,
     ...(!variantStyle.backgroundColor && {
-      backgroundColor: theme.vars.palette.background.body,
+      backgroundColor: theme.vars.palette.background.surface,
     }),
     "--List-radius": theme.vars.radius.sm,
     "--List-item-stickyBackground":
       variantStyle?.backgroundColor ||
       variantStyle?.background ||
-      theme.vars.palette.background.body, // for sticky List
+      theme.vars.palette.background.surface,
   };
 });
 
@@ -161,7 +161,14 @@ const Menu = React.forwardRef(function Menu(inProps, ref) {
     <PopperUnstyled {...rootProps}>
       <MenuUnstyledContext.Provider value={contextValue}>
         <RowListContext.Provider value={false}>
-          {children}
+          {React.Children.map(children, (child, index) =>
+            React.isValidElement(child)
+              ? React.cloneElement(child, {
+                  // to let MenuItem knows when to apply margin(Inline|Block)Start
+                  ...(index === 0 && { "data-first-child": "" }),
+                })
+              : child
+          )}
         </RowListContext.Provider>
       </MenuUnstyledContext.Provider>
     </PopperUnstyled>
