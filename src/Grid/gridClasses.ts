@@ -4,7 +4,7 @@ import { GridClasses } from "@mui/system/Unstable_Grid";
 export type GridClassKey = keyof GridClasses;
 
 export function getGridUtilityClass(slot: string): string {
-  return generateUtilityClass("JoyGrid", slot);
+  return generateUtilityClass("RadGrid", slot);
 }
 
 const SPACINGS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] as const;
@@ -27,7 +27,7 @@ const GRID_SIZES = [
   12,
 ] as const;
 
-const gridClasses: GridClasses = generateUtilityClasses("JoyGrid", [
+const gridClasses: GridClasses = generateUtilityClasses("RadGrid", [
   "root",
   "container",
   "item",

@@ -37,7 +37,7 @@ const TabRoot = styled(ListItemButtonRoot, {
   slot: "Root",
   overridesResolver: (_props, styles) => styles.root,
 })<{ ownerState: TabOwnerState }>(({ theme, ownerState }) => {
-  const variantStyle = theme.variants[ownerState.variant!]?.[ownerState.color!];
+  // const variantStyle = theme.variants[ownerState.variant!]?.[ownerState.color!];
   return {
     justifyContent: "center",
     flexGrow: 1,
