@@ -1,6 +1,6 @@
 {
   "name": "@intugine-technologies/radiant",
-  "version": "2.0.0-beta.1",
+  "version": "2.0.0-beta.3",
   "description": "Radiant design library",
   "type": "module",
   "repository": "http://github.com/navneetlal/radiant-design-system",
