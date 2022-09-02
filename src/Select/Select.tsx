@@ -118,6 +118,7 @@ const SelectRoot = styled("div", {
     borderRadius: "var(--Select-radius)",
     paddingInline: `var(--Select-paddingInline)`,
     fontFamily: theme.vars.fontFamily.body,
+    cursor: "pointer",
     fontSize: theme.vars.fontSize.md,
     backgroundColor: "#fff",
     ...(ownerState.size === "sm" && {
@@ -177,7 +178,8 @@ const SelectButton = styled("button", {
   background: "none",
   padding: 0,
   fontSize: "inherit",
-  color: "#000", // "inherit",
+  // color: "#000", // "inherit",
+  color: ownerState.disabled ? "#A1A1A1" : "#000000",
   alignSelf: "stretch",
   // make children horizontally aligned
   display: "flex",
@@ -252,7 +254,7 @@ const SelectIndicator = styled("span", {
   display: "inherit",
   alignItems: "center",
   marginInlineStart: "var(--Select-gap)",
-  marginInlineEnd: "calc(var(--Select-paddingInline) / -4)",
+  marginInlineEnd: "-0.8rem",
   marginTop: "auto",
 });
 
