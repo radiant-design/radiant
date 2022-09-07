@@ -8,10 +8,10 @@ import { useThemeProps } from "../styles";
 import styled from "../styles/styled";
 import Person from "../internal/svg-icons/Person";
 import { getAvatarUtilityClass } from "./avatarClasses";
-import { AvatarProps, AvatarTypeMap } from "./AvatarProps";
+import { AvatarProps, AvatarOwnerState, AvatarTypeMap } from "./AvatarProps";
 import { AvatarGroupContext } from "../AvatarGroup/AvatarGroup";
 
-const useUtilityClasses = (ownerState: AvatarProps) => {
+const useUtilityClasses = (ownerState: AvatarOwnerState) => {
   const { size, variant, color, src, srcSet } = ownerState;
 
   const slots = {
@@ -31,8 +31,8 @@ const useUtilityClasses = (ownerState: AvatarProps) => {
 const AvatarRoot = styled("div", {
   name: "RadAvatar",
   slot: "Root",
-  overridesResolver: (props, styles) => styles.root,
-})<{ ownerState: AvatarProps }>(({ theme, ownerState }) => {
+  overridesResolver: (_props, styles) => styles.root,
+})<{ ownerState: AvatarOwnerState }>(({ theme, ownerState }) => {
   return [
     {
       ...(ownerState.size === "sm" && {
@@ -71,8 +71,8 @@ const AvatarRoot = styled("div", {
 const AvatarImg = styled("img", {
   name: "RadAvatar",
   slot: "Img",
-  overridesResolver: (props, styles) => styles.img,
-})<{ ownerState: AvatarProps }>({
+  overridesResolver: (_props, styles) => styles.img,
+})<{ ownerState: AvatarOwnerState }>({
   width: "100%",
   height: "100%",
   textAlign: "center",
@@ -87,8 +87,8 @@ const AvatarImg = styled("img", {
 const AvatarFallback = styled(Person, {
   name: "RadAvatar",
   slot: "Fallback",
-  overridesResolver: (props, styles) => styles.fallback,
-})<{ ownerState: AvatarProps }>({
+  overridesResolver: (_props, styles) => styles.fallback,
+})<{ ownerState: AvatarOwnerState }>({
   width: "64%",
   height: "64%",
 });

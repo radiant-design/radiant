@@ -30,7 +30,7 @@ const useUtilityClasses = (ownerState: CardProps) => {
 const CardRoot = styled("div", {
   name: "RadCard",
   slot: "Root",
-  overridesResolver: (props, styles) => styles.root,
+  overridesResolver: (_props, styles) => styles.root,
 })<{ ownerState: CardProps }>(({ theme, ownerState }) => [
   {
     // a context variable for any child component
@@ -123,10 +123,14 @@ const Card = React.forwardRef(function Card(inProps, ref) {
             return child;
           }
           if (index === 0) {
-            return React.cloneElement(child, { "data-first-child": "" });
+            return React.cloneElement(child, {
+              "data-first-child": "",
+            } as Record<string, string>);
           }
           if (index === React.Children.count(children) - 1) {
-            return React.cloneElement(child, { "data-last-child": "" });
+            return React.cloneElement(child, {
+              "data-last-child": "",
+            } as Record<string, string>);
           }
           return child;
         })}
@@ -176,7 +180,7 @@ Card.propTypes /* remove-proptypes */ = {
   row: PropTypes.bool,
   /**
    * The size of the component.
-   * It accepts theme values between 'xs' and 'xl'.
+   * It accepts theme values between 'sm' and 'lg'.
    * @default 'md'
    */
   size: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([

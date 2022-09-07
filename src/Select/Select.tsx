@@ -17,8 +17,8 @@ import type { SelectChild, SelectOption } from "@mui/base/SelectUnstyled";
 import { useSlotProps } from "@mui/base/utils";
 import composeClasses from "@mui/base/composeClasses";
 import { ListRoot } from "../List/List";
+import ListProvider, { scopedVariables } from "../List/ListProvider";
 import SelectIcon from "../internal/svg-icons/Select";
-import RowListContext from "../List/RowListContext";
 import { styled, useThemeProps } from "../styles";
 import {
   SelectOwnProps,
@@ -27,6 +27,7 @@ import {
   SelectTypeMap,
 } from "./SelectProps";
 import selectClasses, { getSelectUtilityClass } from "./selectClasses";
+import { ListOwnerState } from "../List";
 
 function defaultRenderSingleValue<TValue>(
   selectedOption: SelectOption<TValue> | null
@@ -68,104 +69,110 @@ const SelectRoot = styled("div", {
   name: "RadSelect",
   slot: "Root",
   overridesResolver: (_props, styles) => styles.root,
-})<{ ownerState: SelectStaticProps }>(({ theme, ownerState }) => [
-  {
-    "--Select-radius": theme.vars.radius.xs, //sm radius is used by the decorator children
-    "--Select-gap": "0.5rem",
-    "--Select-placeholderOpacity": 0.5,
-    "--Select-focusedThickness": "0.5px", // "calc(var(--variant-borderWidth, 1px) + 1px)",
-    "--Select-focusedHighlight":
-      theme.vars.palette[
-        ownerState.color === "neutral" ? "primary" : ownerState.color!
-      ]?.[500],
-    "--Select-indicator-color": theme.vars.palette.text.primary,
-    ...(ownerState.size === "sm" && {
-      "--Select-minHeight": "2rem",
-      "--Select-paddingInline": "1rem", //0.5
-      "--Select-decorator-childHeight": "min(1.5rem, var(--Select-minHeight))",
-      "--Icon-fontSize": "1rem", //1.25
-    }),
-    ...(ownerState.size === "md" && {
-      "--Select-minHeight": "2.5rem",
-      "--Select-paddingInline": "1rem", //0.75
-      "--Select-decorator-childHeight": "min(2rem, var(--Select-minHeight))",
-      "--Icon-fontSize": "1.25rem", //1.5
-    }),
-    ...(ownerState.size === "lg" && {
-      "--Select-minHeight": "3rem",
-      "--Select-paddingInline": "1rem",
-      "--Select-decorator-childHeight":
-        "min(2.375rem, var(--Select-minHeight))",
-      "--Icon-fontSize": "1.5rem", //1.75rem",
-    }),
-    // variables for controlling child components
-    "--Select-decorator-childOffset":
-      "min(calc(var(--Select-paddingInline) - (var(--Select-minHeight) - 2 * var(--variant-borderWidth) - var(--Select-decorator-childHeight)) / 2), var(--Select-paddingInline))",
-    "--internal-paddingBlock":
-      "max((var(--Select-minHeight) - 2 * var(--variant-borderWidth) - var(--Select-decorator-childHeight)) / 2, 0px)",
-    "--Select-decorator-childRadius":
-      "max((var(--Select-radius) - var(--variant-borderWidth)) - var(--internal-paddingBlock), min(var(--internal-paddingBlock) / 2, (var(--Select-radius) - var(--variant-borderWidth)) / 2))",
-    "--Button-minHeight": "var(--Select-decorator-childHeight)",
-    "--IconButton-size": "var(--Select-decorator-childHeight)",
-    "--Button-radius": "var(--Select-decorator-childRadius)",
-    "--IconButton-radius": "var(--Select-decorator-childRadius)",
-    boxSizing: "border-box",
-    minWidth: 0, // forces the Select to stay inside a container by default
-    minHeight: "var(--Select-minHeight)",
-    position: "relative",
-    display: "flex",
-    alignItems: "center",
-    borderRadius: "var(--Select-radius)",
-    paddingInline: `var(--Select-paddingInline)`,
-    fontFamily: theme.vars.fontFamily.body,
-    cursor: "pointer",
-    fontSize: theme.vars.fontSize.md,
-    backgroundColor: "#fff",
-    ...(ownerState.size === "sm" && {
-      fontSize: theme.vars.fontSize.sm,
-    }),
-    transition:
-      "background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
-    "&:before": {
+})<{ ownerState: SelectStaticProps }>(({ theme, ownerState }) => {
+  const variantStyle =
+    theme.variants[`${ownerState.variant!}`]?.[ownerState.color!];
+  return [
+    {
+      "--Select-radius": theme.vars.radius.xs, //sm radius is used by the decorator children
+      "--Select-gap": "0.5rem",
+      "--Select-placeholderOpacity": 0.5,
+      "--Select-focusedThickness": "0.5px", // "calc(var(--variant-borderWidth, 1px) + 1px)",
+      "--Select-focusedHighlight":
+        theme.vars.palette[
+          ownerState.color === "neutral" ? "primary" : ownerState.color!
+        ]?.[500],
+      "--Select-indicator-color": theme.vars.palette.text.primary,
+      ...(ownerState.size === "sm" && {
+        "--Select-minHeight": "2rem",
+        "--Select-paddingInline": "1rem", //0.5
+        "--Select-decorator-childHeight":
+          "min(1.5rem, var(--Select-minHeight))",
+        "--Icon-fontSize": "1rem", //1.25
+      }),
+      ...(ownerState.size === "md" && {
+        "--Select-minHeight": "2.5rem",
+        "--Select-paddingInline": "1rem", //0.75
+        "--Select-decorator-childHeight": "min(2rem, var(--Select-minHeight))",
+        "--Icon-fontSize": "1.25rem", //1.5
+      }),
+      ...(ownerState.size === "lg" && {
+        "--Select-minHeight": "3rem",
+        "--Select-paddingInline": "1rem",
+        "--Select-decorator-childHeight":
+          "min(2.375rem, var(--Select-minHeight))",
+        "--Icon-fontSize": "1.5rem", //1.75rem",
+      }),
+      // variables for controlling child components
+      "--Select-decorator-childOffset":
+        "min(calc(var(--Select-paddingInline) - (var(--Select-minHeight) - 2 * var(--variant-borderWidth) - var(--Select-decorator-childHeight)) / 2), var(--Select-paddingInline))",
+      "--internal-paddingBlock":
+        "max((var(--Select-minHeight) - 2 * var(--variant-borderWidth) - var(--Select-decorator-childHeight)) / 2, 0px)",
+      "--Select-decorator-childRadius":
+        "max((var(--Select-radius) - var(--variant-borderWidth)) - var(--internal-paddingBlock), min(var(--internal-paddingBlock) / 2, (var(--Select-radius) - var(--variant-borderWidth)) / 2))",
+      "--Button-minHeight": "var(--Select-decorator-childHeight)",
+      "--IconButton-size": "var(--Select-decorator-childHeight)",
+      "--Button-radius": "var(--Select-decorator-childRadius)",
+      "--IconButton-radius": "var(--Select-decorator-childRadius)",
       boxSizing: "border-box",
-      content: '""',
-      display: "block",
-      position: "absolute",
-      pointerEvents: "none",
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      zIndex: 1,
-      borderRadius: "inherit",
-      margin: "calc(var(--variant-borderWidth) * -1)", // for outlined variant
-    },
-    [`&.${selectClasses.focusVisible}`]: {
-      "--Select-indicator-color": "var(--Select-focusedHighlight)",
-    },
-    [`&.${selectClasses.disabled}`]: {
-      "--Select-indicator-color": "inherit",
-      backgroundColor: "#F2F2F2",
-    },
-  },
-  {
-    // apply global variant styles
-    ...theme.variants[`${ownerState.variant!}`]?.[ownerState.color!],
-    // "&:hover":
-    //   theme.variants[`${ownerState.variant!}Hover`]?.[ownerState.color!],
-    [`&.${selectClasses.disabled}`]:
-      theme.variants[`${ownerState.variant!}Disabled`]?.[ownerState.color!],
-  },
-  ownerState.variant !== "solid" && {
-    // This style has to come after the global variant to set the background to initial
-    [`&.${selectClasses.focusVisible}`]: {
-      backgroundColor: "initial",
+      minWidth: 0, // forces the Select to stay inside a container by default
+      minHeight: "var(--Select-minHeight)",
+      position: "relative",
+      display: "flex",
+      alignItems: "center",
+      borderRadius: "var(--Select-radius)",
+      paddingInline: `var(--Select-paddingInline)`,
+      fontFamily: theme.vars.fontFamily.body,
+      cursor: "pointer",
+      fontSize: theme.vars.fontSize.md,
+      backgroundColor: "#fff",
+      ...(ownerState.size === "sm" && {
+        fontSize: theme.vars.fontSize.sm,
+      }),
+      // TODO: discuss the transition approach in a separate PR.
+      transition:
+        "background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
       "&:before": {
-        boxShadow: `inset 0 0 0 var(--Select-focusedThickness) var(--Select-focusedHighlight)`,
+        boxSizing: "border-box",
+        content: '""',
+        display: "block",
+        position: "absolute",
+        pointerEvents: "none",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        zIndex: 1,
+        borderRadius: "inherit",
+        margin: "calc(var(--variant-borderWidth) * -1)", // for outlined variant
+      },
+      [`&.${selectClasses.focusVisible}`]: {
+        "--Select-indicator-color": "var(--Select-focusedHighlight)",
+      },
+      [`&.${selectClasses.disabled}`]: {
+        "--Select-indicator-color": "inherit",
+        backgroundColor: "#F2F2F2",
       },
     },
-  },
-]);
+    {
+      // apply global variant styles
+      ...theme.variants[`${ownerState.variant!}`]?.[ownerState.color!],
+      // "&:hover":
+      //   theme.variants[`${ownerState.variant!}Hover`]?.[ownerState.color!],
+      [`&.${selectClasses.disabled}`]:
+        theme.variants[`${ownerState.variant!}Disabled`]?.[ownerState.color!],
+    },
+    ownerState.variant !== "solid" && {
+      // This style has to come after the global variant to set the background to initial
+      [`&.${selectClasses.focusVisible}`]: {
+        backgroundColor: "initial",
+        "&:before": {
+          boxShadow: `inset 0 0 0 var(--Select-focusedThickness) var(--Select-focusedHighlight)`,
+        },
+      },
+    },
+  ];
+});
 
 const SelectButton = styled("button", {
   name: "RadSelect",
@@ -250,7 +257,6 @@ const SelectIndicator = styled("span", {
   slot: "Indicator",
 })<{ ownerState: SelectOwnerState<any> }>({
   color: "var(--Select-indicator-color)",
-  zIndex: "auto",
   display: "inherit",
   alignItems: "center",
   marginInlineStart: "var(--Select-gap)",
@@ -258,7 +264,7 @@ const SelectIndicator = styled("span", {
   marginTop: "auto",
 });
 
-const Select = React.forwardRef(function Select<TValue>(
+const Select = React.forwardRef(function Select<TValue extends {}>(
   inProps: SelectOwnProps<TValue>,
   ref: React.ForwardedRef<any>
 ) {
@@ -315,7 +321,6 @@ const Select = React.forwardRef(function Select<TValue>(
     () => flattenOptionGroups(groupedOptions),
     [groupedOptions]
   );
-
   const [listboxOpen, setListboxOpen] = useControlled({
     controlled: listboxOpenProp,
     default: defaultListboxOpen,
@@ -360,30 +365,6 @@ const Select = React.forwardRef(function Select<TValue>(
       onClose?.();
     }
   };
-
-  // cache the modifiers to prevent Popper from being recreated when React rerenders menu.
-  const cachedModifiers = React.useMemo<PopperUnstyledProps["modifiers"]>(
-    () => [
-      {
-        name: "offset",
-        options: {
-          offset: [0, 4],
-        },
-      },
-      {
-        // popper will have the same width as root element when open
-        name: "equalWidth",
-        enabled: true,
-        phase: "beforeWrite",
-        requires: ["computeStyles"],
-        fn: ({ state }) => {
-          state.styles.popper.width = `${state.rects.reference.width}px`;
-        },
-      },
-      ...(componentsProps.listbox?.modifiers || []),
-    ],
-    [componentsProps.listbox?.modifiers]
-  );
 
   const {
     buttonActive,
@@ -466,31 +447,75 @@ const Select = React.forwardRef(function Select<TValue>(
     ownerState,
     className: classes.button,
   });
-  //@ts-ignore
 
-  const { component: listboxComponent, ...externalListboxProps } =
-    componentsProps.listbox || {};
-  const listboxProps = useSlotProps({
+  const resolveListboxProps =
+    typeof componentsProps.listbox === "function"
+      ? componentsProps.listbox(ownerState)
+      : componentsProps.listbox;
+  // cache the modifiers to prevent Popper from being recreated when React rerenders menu.
+  const cachedModifiers = React.useMemo<PopperUnstyledProps["modifiers"]>(
+    () => [
+      {
+        name: "offset",
+        options: {
+          offset: [0, 4],
+        },
+      },
+      {
+        // popper will have the same width as root element when open
+        name: "equalWidth",
+        enabled: true,
+        phase: "beforeWrite",
+        requires: ["computeStyles"],
+        fn: ({ state }) => {
+          state.styles.popper.width = `${state.rects.reference.width}px`;
+        },
+      },
+      ...(resolveListboxProps?.modifiers || []),
+    ],
+    [resolveListboxProps?.modifiers]
+  );
+
+  const { component: listboxComponent, ...listboxProps } = useSlotProps({
     elementType: SelectListbox,
     getSlotProps: getListboxProps,
-    externalSlotProps: externalListboxProps,
+    externalSlotProps: componentsProps.listbox,
     additionalProps: {
       ref: listboxRef,
       anchorEl,
       disablePortal: true,
       open: listboxOpen,
       placement: "bottom" as const,
-      component: SelectListbox,
-      as: listboxComponent,
       modifiers: cachedModifiers,
     },
     ownerState: {
       ...ownerState,
       nesting: false,
-      scoped: true,
       row: false,
-    },
+      wrap: false,
+    } as SelectOwnerState<any> & ListOwnerState,
     className: classes.listbox,
+  });
+
+  const startDecoratorProps = useSlotProps({
+    elementType: SelectStartDecorator,
+    externalSlotProps: componentsProps.startDecorator,
+    ownerState,
+    className: classes.startDecorator,
+  });
+
+  const endDecoratorProps = useSlotProps({
+    elementType: SelectEndDecorator,
+    externalSlotProps: componentsProps.endDecorator,
+    ownerState,
+    className: classes.endDecorator,
+  });
+
+  const indicatorProps = useSlotProps({
+    elementType: SelectIndicator,
+    externalSlotProps: componentsProps.indicator,
+    ownerState,
+    className: classes.indicator,
   });
 
   const context = {
@@ -499,14 +524,12 @@ const Select = React.forwardRef(function Select<TValue>(
     listboxRef,
     color,
   };
+
   return (
     <React.Fragment>
       <SelectRoot {...rootProps}>
         {startDecorator && (
-          <SelectStartDecorator
-            className={classes.startDecorator}
-            ownerState={ownerState}
-          >
+          <SelectStartDecorator {...startDecoratorProps}>
             {startDecorator}
           </SelectStartDecorator>
         )}
@@ -515,36 +538,25 @@ const Select = React.forwardRef(function Select<TValue>(
           {selectedOptions ? renderValue(selectedOptions) : placeholder}
         </SelectButton>
         {endDecorator && (
-          <SelectEndDecorator
-            className={classes.endDecorator}
-            ownerState={ownerState}
-          >
+          <SelectEndDecorator {...endDecoratorProps}>
             {endDecorator}
           </SelectEndDecorator>
         )}
 
         {indicator && (
-          <SelectIndicator
-            className={classes.indicator}
-            ownerState={ownerState}
-          >
-            {indicator}
-          </SelectIndicator>
+          <SelectIndicator {...indicatorProps}>{indicator}</SelectIndicator>
         )}
       </SelectRoot>
       {anchorEl && (
-        <PopperUnstyled {...listboxProps}>
+        // @ts-ignore internal logic: `listboxComponent` should not replace `SelectListbox`.
+        <PopperUnstyled
+          {...listboxProps}
+          as={listboxComponent}
+          component={SelectListbox}
+        >
           <SelectUnstyledContext.Provider value={context}>
-            <RowListContext.Provider value={false}>
-              {React.Children.map(children, (child, index) =>
-                React.isValidElement(child)
-                  ? React.cloneElement(child, {
-                      // to let Option knows when to apply margin(Inline|Block)Start
-                      ...(index === 0 && { "data-first-child": "" }),
-                    })
-                  : child
-              )}
-            </RowListContext.Provider>
+            {/* for building grouped options */}
+            <ListProvider nested>{children}</ListProvider>
           </SelectUnstyledContext.Provider>
         </PopperUnstyled>
       )}
@@ -609,13 +621,16 @@ Select.propTypes /* remove-proptypes */ = {
    */
   component: PropTypes.elementType,
   /**
-   * The props used for each slot inside the Input.
+   * The props used for each slot inside the component.
    * @default {}
    */
   componentsProps: PropTypes.shape({
-    button: PropTypes.object,
-    listbox: PropTypes.object,
-    root: PropTypes.object,
+    button: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+    endDecorator: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+    indicator: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+    listbox: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+    root: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+    startDecorator: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   }),
   /**
    * The default selected value. Use when the component is not controlled.

@@ -52,7 +52,7 @@ const useUtilityClasses = (
 const IconButtonRoot = styled("button", {
   name: "RadIconButton",
   slot: "Root",
-  overridesResolver: (props, styles) => styles.root,
+  overridesResolver: (_props, styles) => styles.root,
 })<{ ownerState: IconButtonProps & { instanceSize: IconButtonProps["size"] } }>(
   ({ theme, ownerState }) => [
     {

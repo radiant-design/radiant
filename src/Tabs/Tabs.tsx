@@ -30,23 +30,18 @@ const useUtilityClasses = (ownerState: TabsOwnerState) => {
 const TabsRoot = styled(SheetRoot, {
   name: "RadTabs",
   slot: "Root",
-  overridesResolver: (_props, styles) => styles.root,
+  overridesResolver: (props, styles) => styles.root,
 })<{ ownerState: TabsOwnerState }>(({ ownerState, theme }) => ({
-  "--Tabs-gap": "0px",
   ...(ownerState.size === "sm" && {
-    fontWeight: theme.fontWeight.md,
-    fontSize: theme.fontSize.sm,
+    "--Tabs-gap": "3px",
   }),
   ...(ownerState.size === "md" && {
-    fontWeight: theme.fontWeight.lg,
-    fontSize: theme.fontSize.lg,
+    "--Tabs-gap": "4px",
   }),
   ...(ownerState.size === "lg" && {
-    fontWeight: theme.fontWeight.lg,
-    fontSize: theme.fontSize.xl,
+    "--Tabs-gap": "0.5rem",
   }),
-  // "--List-radius": theme.vars.radius.md, // targets TabList which reuses styles from List.
-  fontFamily: theme.fontFamily.display,
+  "--List-radius": theme.vars.radius.md, // targets TabList which reuses styles from List.
   display: "flex",
   flexDirection: "column",
   ...(ownerState.orientation === "vertical" && {
@@ -77,7 +72,7 @@ const Tabs = React.forwardRef(function Tabs(inProps, ref) {
     ...other
   } = props;
 
-  const { tabsContextValue } = useTabs(props);
+  const { tabsContextValue } = useTabs({ ...props, orientation });
 
   const ownerState = {
     ...props,

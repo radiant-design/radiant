@@ -34,7 +34,7 @@ const useUtilityClasses = (ownerState: TextFieldProps) => {
 const TextFieldRoot = styled("div", {
   name: "RadTextField",
   slot: "Root",
-  overridesResolver: (props, styles) => styles.root,
+  overridesResolver: (_props, styles) => styles.root,
 })<{ ownerState: TextFieldProps }>(({ theme, ownerState }) => ({
   "--FormLabel-margin": "0 0 0.25rem 0",
   "--FormHelperText-margin": "0.25rem 0 0 0",
@@ -189,13 +189,11 @@ TextField.propTypes /* remove-proptypes */ = {
   // |     To update them edit TypeScript types and run "yarn proptypes"  |
   // ----------------------------------------------------------------------
   /**
-   * This prop helps users to fill forms faster, especially on mobile devices.
-   * The name can be confusing, as it's more like an autofill.
-   * You can learn more about it [following the specification](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill).
+   * @ignore
    */
   autoComplete: PropTypes.string,
   /**
-   * If `true`, the `input` element is focused during the first mount.
+   * @ignore
    */
   autoFocus: PropTypes.bool,
   /**
@@ -245,12 +243,15 @@ TextField.propTypes /* remove-proptypes */ = {
     root: PropTypes.object,
   }),
   /**
-   * The default value. Use when the component is not controlled.
+   * @ignore
    */
-  defaultValue: PropTypes.any,
+  defaultValue: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.string),
+    PropTypes.number,
+    PropTypes.string,
+  ]),
   /**
-   * If `true`, the component is disabled.
-   * The prop defaults to the value (`false`) inherited from the parent FormControl component.
+   * @ignore
    */
   disabled: PropTypes.bool,
   /**
@@ -301,8 +302,7 @@ TextField.propTypes /* remove-proptypes */ = {
    */
   placeholder: PropTypes.string,
   /**
-   * If `true`, the `input` element is required.
-   * The prop defaults to the value (`false`) inherited from the parent FormControl component.
+   * @ignore
    */
   required: PropTypes.bool,
   /**
@@ -318,14 +318,40 @@ TextField.propTypes /* remove-proptypes */ = {
    */
   startDecorator: PropTypes.node,
   /**
-   * Type of the `input` element. It should be [a valid HTML5 input type](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types).
-   * @default 'plain'
+   * @ignore
    */
-  type: PropTypes.string,
+  type: PropTypes /* @typescript-to-proptypes-ignore */.oneOf([
+    "button",
+    "checkbox",
+    "color",
+    "date",
+    "datetime-local",
+    "email",
+    "file",
+    "hidden",
+    "image",
+    "month",
+    "number",
+    "password",
+    "radio",
+    "range",
+    "reset",
+    "search",
+    "submit",
+    "tel",
+    "text",
+    "time",
+    "url",
+    "week",
+  ]),
   /**
-   * The value of the `input` element, required for a controlled component.
+   * @ignore
    */
-  value: PropTypes.any,
+  value: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.string),
+    PropTypes.number,
+    PropTypes.string,
+  ]),
   /**
    * The variant to use.
    * @default 'outlined'
