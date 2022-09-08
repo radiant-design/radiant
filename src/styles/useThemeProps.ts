@@ -5,7 +5,7 @@ export default function useThemeProps<T extends {}>({
   props,
   name,
 }: {
-  props: T & {};
+  props: T;
   name: string;
 }) {
   return systemUseThemeProps({

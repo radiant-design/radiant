@@ -70,8 +70,8 @@ const SelectRoot = styled("div", {
   slot: "Root",
   overridesResolver: (_props, styles) => styles.root,
 })<{ ownerState: SelectStaticProps }>(({ theme, ownerState }) => {
-  const variantStyle =
-    theme.variants[`${ownerState.variant!}`]?.[ownerState.color!];
+  // const variantStyle =
+  //   theme.variants[`${ownerState.variant!}`]?.[ownerState.color!];
   return [
     {
       "--Select-radius": theme.vars.radius.xs, //sm radius is used by the decorator children
@@ -129,7 +129,6 @@ const SelectRoot = styled("div", {
       ...(ownerState.size === "sm" && {
         fontSize: theme.vars.fontSize.sm,
       }),
-      // TODO: discuss the transition approach in a separate PR.
       transition:
         "background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
       "&:before": {
@@ -212,6 +211,7 @@ const SelectListbox = styled(ListRoot, {
     ...(!variantStyle.backgroundColor && {
       backgroundColor: theme.vars.palette.background.surface,
     }),
+    ...scopedVariables,
     "--List-radius": theme.vars.radius.xs, //sm
     "--List-item-stickyBackground":
       variantStyle?.backgroundColor ||
