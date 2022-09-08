@@ -7,24 +7,24 @@ import composeClasses from "@mui/base/composeClasses";
 import { MenuUnstyledContext } from "@mui/base/MenuUnstyled";
 import { SelectUnstyledContext } from "@mui/base/SelectUnstyled";
 import { styled, useThemeProps } from "../styles";
-import { ListProps, ListTypeMap } from "./ListProps";
+import { ListProps, ListOwnerState, ListTypeMap } from "./ListProps";
 import { getListUtilityClass } from "./listClasses";
 import NestedListContext from "./NestedListContext";
 import RowListContext from "./RowListContext";
 import WrapListContext from "./WrapListContext";
 import ComponentListContext from "./ComponentListContext";
 
-const useUtilityClasses = (ownerState: ListProps & { nesting: boolean }) => {
-  const { variant, color, size, nesting, row, scoped } = ownerState;
+const useUtilityClasses = (ownerState: ListOwnerState) => {
+  const { variant, color, size, nesting, row, instanceSize } = ownerState;
   const slots = {
     root: [
       "root",
       variant && `variant${capitalize(variant)}`,
       color && `color${capitalize(color)}`,
-      size && `size${capitalize(size)}`,
+      !instanceSize && !nesting && size && `size${capitalize(size)}`,
+      instanceSize && `size${capitalize(instanceSize)}`,
       nesting && "nesting",
       row && "row",
-      scoped && "scoped",
     ],
   };
 
@@ -34,10 +34,8 @@ const useUtilityClasses = (ownerState: ListProps & { nesting: boolean }) => {
 export const ListRoot = styled("ul", {
   name: "RadList",
   slot: "Root",
-  overridesResolver: (props, styles) => styles.root,
-})<{
-  ownerState: ListProps & { nesting: boolean; instanceSize: ListProps["size"] };
-}>(({ theme, ownerState }) => {
+  overridesResolver: (_props, styles) => styles.root,
+})<{ ownerState: ListOwnerState }>(({ theme, ownerState }) => {
   function applySizeVars(size: ListProps["size"]) {
     if (size === "sm") {
       return {
@@ -75,23 +73,23 @@ export const ListRoot = styled("ul", {
     return {};
   }
   return [
-    ownerState.nesting &&
-      !ownerState.scoped && {
-        // instanceSize is the specified size of the rendered element <List size="sm" />
-        // only apply size variables if instanceSize is provided so that the variables can be pass down to children by default.
-        ...applySizeVars(ownerState.instanceSize),
-        "--List-item-paddingRight": "var(--List-item-paddingX)",
-        "--List-item-paddingLeft": "var(--NestedList-item-paddingLeft)",
-        // reset ListItem, ListItemButton negative margin (caused by NestedListItem)
-        "--List-itemButton-marginBlock": "0px",
-        "--List-itemButton-marginInline": "0px",
-        "--List-item-marginBlock": "0px",
-        "--List-item-marginInline": "0px",
-        padding: 0,
-        marginInlineStart: "var(--NestedList-marginLeft)",
-        marginInlineEnd: "var(--NestedList-marginRight)",
-        marginBlockStart: "var(--List-gap)",
-      },
+    ownerState.nesting && {
+      // instanceSize is the specified size of the rendered element <List size="sm" />
+      // only apply size variables if instanceSize is provided so that the variables can be pass down to children by default.
+      ...applySizeVars(ownerState.instanceSize),
+      "--List-item-paddingRight": "var(--List-item-paddingX)",
+      "--List-item-paddingLeft": "var(--NestedList-item-paddingLeft)",
+      // reset ListItem, ListItemButton negative margin (caused by NestedListItem)
+      "--List-itemButton-marginBlock": "0px",
+      "--List-itemButton-marginInline": "0px",
+      "--List-item-marginBlock": "0px",
+      "--List-item-marginInline": "0px",
+      padding: 0,
+      marginInlineStart: "var(--NestedList-marginLeft)",
+      marginInlineEnd: "var(--NestedList-marginRight)",
+      marginBlockStart: "var(--List-gap)",
+      marginBlockEnd: "initial", // reset user agent stylesheet.
+    },
     !ownerState.nesting && {
       ...applySizeVars(ownerState.size),
       "--List-gap": "0px",
@@ -99,12 +97,6 @@ export const ListRoot = styled("ul", {
       "--List-nestedInsetStart": "0px",
       "--List-item-paddingLeft": "var(--List-item-paddingX)",
       "--List-item-paddingRight": "var(--List-item-paddingX)",
-      ...(ownerState.scoped && {
-        "--List-itemButton-marginBlock": "0px",
-        "--List-itemButton-marginInline": "0px",
-        "--List-item-marginBlock": "0px",
-        "--List-item-marginInline": "0px",
-      }),
       "--internal-child-radius":
         "max(var(--List-radius, 0px) - var(--List-padding), min(var(--List-padding) / 2, var(--List-radius, 0px) / 2))",
       // If --List-padding is 0, the --List-item-radius will be 0.
@@ -168,7 +160,6 @@ const List = React.forwardRef(function List(inProps, ref) {
     size = "md",
     row = false,
     wrap = false,
-    scoped = false,
     variant = "plain",
     color = "neutral",
     role: roleProp,
@@ -179,7 +170,6 @@ const List = React.forwardRef(function List(inProps, ref) {
     instanceSize: inProps.size,
     size,
     nesting,
-    scoped,
     row,
     wrap,
     variant,
