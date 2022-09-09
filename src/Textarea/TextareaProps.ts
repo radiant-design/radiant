@@ -3,6 +3,9 @@ import { OverridableStringUnion, OverrideProps } from "@mui/types";
 import { SlotComponentProps } from "@mui/base/utils";
 import { FormControlUnstyledState } from "@mui/base/FormControlUnstyled";
 import { ColorPaletteProp, VariantProp, SxProps } from "../styles/types";
+import { FormHelperTextProps } from "../FormHelperText/FormHelperTextProps";
+import { FormLabelProps } from "../FormLabel/FormLabelProps";
+import { InputProps } from "../Input/InputProps";
 
 export type TextareaSlot =
   | "root"
@@ -33,28 +36,49 @@ interface ComponentsProps {
     { sx?: SxProps },
     TextareaOwnerState
   >;
+  label?: FormLabelProps;
+  input?: Omit<InputProps, InputRootKeys>;
+  helperText?: FormHelperTextProps;
 }
-
+type InputRootKeys =
+  | "autoComplete"
+  | "autoFocus"
+  | "onClick"
+  | "color"
+  | "onChange"
+  | "onKeyDown"
+  | "onKeyUp"
+  | "onFocus"
+  | "onBlur"
+  | "defaultValue"
+  | "value"
+  | "placeholder"
+  | "readOnly"
+  | "required"
+  | "name"
+  | "id"
+  | "disabled";
 export interface TextareaTypeMap<P = {}, D extends React.ElementType = "div"> {
   props: P &
     Pick<
       React.TextareaHTMLAttributes<HTMLTextAreaElement>,
-      | "autoComplete"
-      | "autoFocus"
-      | "onClick"
-      | "onChange"
-      | "onKeyDown"
-      | "onKeyUp"
-      | "onFocus"
-      | "onBlur"
-      | "defaultValue"
-      | "value"
-      | "placeholder"
-      | "readOnly"
-      | "required"
-      | "name"
-      | "id"
-      | "disabled"
+      InputRootKeys
+      // | "autoComplete"
+      // | "autoFocus"
+      // | "onClick"
+      // | "onChange"
+      // | "onKeyDown"
+      // | "onKeyUp"
+      // | "onFocus"
+      // | "onBlur"
+      // | "defaultValue"
+      // | "value"
+      // | "placeholder"
+      // | "readOnly"
+      // | "required"
+      // | "name"
+      // | "id"
+      // | "disabled"
     > & {
       /**
        * The color of the component. It supports those theme colors that make sense for this component.
@@ -68,7 +92,19 @@ export interface TextareaTypeMap<P = {}, D extends React.ElementType = "div"> {
        * The props used for each slot inside the component.
        * @default {}
        */
+      components?: {
+        Root?: React.ElementType;
+        Label?: React.ElementType;
+        Input?: React.ElementType;
+        HelperText?: React.ElementType;
+      };
       componentsProps?: ComponentsProps;
+      // componentsProps?: {
+      //   root?: React.ComponentPropsWithRef<"div">;
+      //   label?: FormLabelProps;
+      //   input?: Omit<InputProps, InputRootKeys>;
+      //   helperText?: FormHelperTextProps;
+      // };
       /**
        * Trailing adornment for this input.
        */
@@ -77,6 +113,15 @@ export interface TextareaTypeMap<P = {}, D extends React.ElementType = "div"> {
        * If `true`, the `input` will indicate an error.
        * The prop defaults to the value (`false`) inherited from the parent FormControl component.
        */
+      /**
+       * The id of the `input` element.
+       * Use this prop to make `label` and `helperText` accessible for screen readers.
+       */
+      id?: string;
+      /**
+       * The label content.
+       */
+      label?: React.ReactNode;
       error?: boolean;
       /**
        * Maximum number of rows to display.
@@ -95,14 +140,12 @@ export interface TextareaTypeMap<P = {}, D extends React.ElementType = "div"> {
        * The size of the component.
        * @default 'md'
        */
-      size?: OverridableStringUnion<
-        "sm" | "md" | "lg",
-        TextareaPropsSizeOverrides
-      >;
+      size?: OverridableStringUnion<"sm", TextareaPropsSizeOverrides>;
       /**
        * The system prop that allows defining system overrides as well as additional CSS styles.
        */
       sx?: SxProps;
+      helperText?: React.ReactNode;
       /**
        * The variant to use.
        * @default 'outlined'

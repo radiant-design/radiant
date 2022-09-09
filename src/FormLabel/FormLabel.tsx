@@ -1,11 +1,12 @@
 import * as React from "react";
 import PropTypes from "prop-types";
-import clsx from "clsx";
 import { OverridableComponent } from "@mui/types";
 import composeClasses from "@mui/base/composeClasses";
+import { useSlotProps } from "@mui/base/utils";
 import { styled, useThemeProps } from "../styles";
 import { FormLabelProps, FormLabelTypeMap } from "./FormLabelProps";
 import { getFormLabelUtilityClass } from "./formLabelClasses";
+import formLabelClasses from "./formLabelClasses";
 
 const useUtilityClasses = () => {
   const slots = {
@@ -19,8 +20,8 @@ const useUtilityClasses = () => {
 const FormLabelRoot = styled("label", {
   name: "RadFormLabel",
   slot: "Root",
-  overridesResolver: (props, styles) => styles.root,
-})<{ ownerState: FormLabelProps }>(({ theme }) => ({
+  overridesResolver: (_props, styles) => styles.root,
+})<{ ownerState: FormLabelProps }>(({ theme, ownerState }) => ({
   display: "flex",
   alignItems: "center",
   flexWrap: "wrap",
@@ -28,16 +29,23 @@ const FormLabelRoot = styled("label", {
   fontSize: `var(--FormLabel-fontSize, ${theme.vars.fontSize.sm})`,
   fontWeight: theme.vars.fontWeight.md,
   lineHeight: theme.vars.lineHeight.md,
-  color: `var(--FormLabel-color, ${theme.vars.palette.text.primary})`,
+  // color: `var(--FormLabel-color, ${theme.vars.palette.text.primary})`,
+  color: ownerState.disabled
+    ? theme.vars.palette[ownerState.color || "neutral"]?.plainDisabledColor
+    : `var(--FormLabel-color, ${theme.vars.palette.text.primary})`,
   margin: "var(--FormLabel-margin, 0 0 0.25rem 0)",
+  [`&.${formLabelClasses.disabled}`]: {
+    "--FormLabel-color":
+      theme.vars.palette[ownerState.color || "neutral"]?.plainDisabledColor,
+  },
 }));
 
 const AsteriskComponent = styled("span", {
   name: "RadFormLabel",
   slot: "Asterisk",
-  overridesResolver: (props, styles) => styles.asterisk,
+  overridesResolver: (_props, styles) => styles.asterisk,
 })<{ ownerState: FormLabelProps }>({
-  color: "var(--FormLabel-asterisk-color)",
+  color: "#FF5757",
 });
 
 const FormLabel = React.forwardRef(function FormLabel(inProps, ref) {
@@ -48,31 +56,49 @@ const FormLabel = React.forwardRef(function FormLabel(inProps, ref) {
     name: "RadFormLabel",
   });
 
-  const { children, className, component, required = false, ...other } = props;
+  const {
+    children,
+    component = "label",
+    componentsProps = {},
+    required = false,
+    disabled = false,
+    ...other
+  } = props;
 
   const ownerState = {
     ...props,
+    required,
+    disabled,
   };
 
   const classes = useUtilityClasses();
+  const rootProps = useSlotProps({
+    elementType: FormLabelRoot,
+    externalSlotProps: componentsProps.root,
+    externalForwardedProps: other,
+    ownerState,
+    additionalProps: {
+      ref,
+      as: component,
+    },
+    className: classes.root,
+  });
+
+  const asteriskProps = useSlotProps({
+    elementType: AsteriskComponent,
+    externalSlotProps: componentsProps.asterisk,
+    ownerState,
+    additionalProps: {
+      "aria-hidden": true,
+    },
+    className: classes.asterisk,
+  });
 
   return (
-    <FormLabelRoot
-      ref={ref}
-      as={component}
-      className={clsx(classes.root, className)}
-      ownerState={ownerState}
-      {...other}
-    >
+    <FormLabelRoot {...rootProps}>
       {children}
       {required && (
-        <AsteriskComponent
-          ownerState={ownerState}
-          aria-hidden
-          className={classes.asterisk}
-        >
-          &thinsp;{"*"}
-        </AsteriskComponent>
+        <AsteriskComponent {...asteriskProps}>&thinsp;{"*"}</AsteriskComponent>
       )}
     </FormLabelRoot>
   );
@@ -100,6 +126,7 @@ FormLabel.propTypes /* remove-proptypes */ = {
    * The asterisk is added if required=`true`
    */
   required: PropTypes.bool,
+  disabled: PropTypes.bool,
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */

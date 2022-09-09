@@ -1,9 +1,14 @@
 import * as React from "react";
 import PropTypes from "prop-types";
-import { unstable_capitalize as capitalize } from "@mui/utils";
+import {
+  unstable_useId as useId,
+  unstable_capitalize as capitalize,
+} from "@mui/utils";
 import { OverridableComponent } from "@mui/types";
 import { useSlotProps, EventHandlers } from "@mui/base/utils";
 import composeClasses from "@mui/base/composeClasses";
+import FormLabel from "../FormLabel";
+import FormHelperText from "../FormHelperText";
 import TextareaAutosize from "@mui/base/TextareaAutosize";
 import { styled, useThemeProps } from "../styles";
 import {
@@ -37,11 +42,30 @@ const TextareaRoot = styled("div", {
   name: "RadTextarea",
   slot: "Root",
   overridesResolver: (_props, styles) => styles.root,
-})<{ ownerState: TextareaOwnerState }>(({ theme, ownerState }) => {
+})<{ ownerState: TextareaProps }>(({ theme, ownerState }) => {
   const variantStyle =
     theme.variants[`${ownerState.variant!}`]?.[ownerState.color!];
   return [
     {
+      ...variantStyle,
+      "--FormLabel-margin": "0 0 0.25rem 0",
+      "--FormHelperText-margin": "0.25rem 0 0 0",
+      "--FormLabel-asterisk-color": theme.vars.palette.danger[500],
+      "--FormHelperText-color": theme.vars.palette[ownerState.color!]?.[500],
+      ...(ownerState.size === "sm" && {
+        "--FormHelperText-fontSize": theme.vars.fontSize.xs,
+        "--FormLabel-fontSize": theme.vars.fontSize.xs,
+      }),
+      [`&.${textareaClasses.error}`]: {
+        "--FormHelperText-color": theme.vars.palette.danger[500],
+      },
+      [`&.${textareaClasses.disabled}`]: {
+        "--FormLabel-color":
+          theme.vars.palette[ownerState.color || "neutral"]
+            ?.plainDisabledColor + " !important",
+        "--FormHelperText-color":
+          theme.vars.palette[ownerState.color || "neutral"]?.plainDisabledColor,
+      },
       "--Textarea-radius": theme.vars.radius.xs, //sm
       "--Textarea-gap": "0.5rem",
       "--Textarea-placeholderOpacity": 0.5,
@@ -234,25 +258,35 @@ const Textarea = React.forwardRef(function Textarea(inProps, ref) {
     getRootProps,
     getInputProps,
     component,
+    components = {},
     componentsProps = {},
+    label,
+    helperText,
+    id: idOverride,
     focused,
     formControlContext,
     error: errorState,
-    disabled: disabledState,
+    disabled = false,
     size = "sm",
     color = "neutral",
     variant = "outlined",
     startDecorator,
     endDecorator,
+    required = false,
     minRows,
     maxRows,
     ...other
   } = useForwardedInput<TextareaProps>(props, textareaClasses);
+  const id = useId(idOverride);
+  const helperTextId = helperText && id ? `${id}-helper-text` : undefined;
+  const formLabelId = label && id ? `${id}-label` : undefined;
 
   const ownerState = {
     ...props,
+    label,
+    helperText,
     color: errorState ? "danger" : color,
-    disabled: disabledState,
+    disabled,
     error: errorState,
     focused,
     formControlContext: formControlContext!,
@@ -288,27 +322,55 @@ const Textarea = React.forwardRef(function Textarea(inProps, ref) {
   });
 
   return (
-    <TextareaRoot {...rootProps}>
-      {startDecorator && (
-        <TextareaStartDecorator
-          className={classes.startDecorator}
-          ownerState={ownerState}
+    <>
+      {label && (
+        <FormLabel
+          {...rootProps}
+          htmlFor={id}
+          id={formLabelId}
+          disabled={disabled}
+          required={ownerState.required}
+          {...componentsProps.label}
+          {...(components.Label && {
+            component: components.Label,
+          })}
         >
-          {startDecorator}
-        </TextareaStartDecorator>
+          {label}
+        </FormLabel>
       )}
+      <TextareaRoot {...rootProps}>
+        {startDecorator && (
+          <TextareaStartDecorator
+            className={classes.startDecorator}
+            ownerState={ownerState}
+          >
+            {startDecorator}
+          </TextareaStartDecorator>
+        )}
 
-      {/* @ts-ignore onChange conflicts with html input */}
-      <TextareaInput {...textareaProps} />
-      {endDecorator && (
-        <TextareaEndDecorator
-          className={classes.endDecorator}
-          ownerState={ownerState}
+        {/* @ts-ignore onChange conflicts with html input */}
+        <TextareaInput {...textareaProps} />
+        {endDecorator && (
+          <TextareaEndDecorator
+            className={classes.endDecorator}
+            ownerState={ownerState}
+          >
+            {endDecorator}
+          </TextareaEndDecorator>
+        )}
+      </TextareaRoot>
+      {helperText && (
+        <FormHelperText
+          id={helperTextId}
+          {...componentsProps.helperText}
+          {...(components.HelperText && {
+            component: components.HelperText,
+          })}
         >
-          {endDecorator}
-        </TextareaEndDecorator>
+          {helperText}
+        </FormHelperText>
       )}
-    </TextareaRoot>
+    </>
   );
 }) as OverridableComponent<TextareaTypeMap>;
 
