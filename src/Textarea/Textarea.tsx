@@ -42,42 +42,42 @@ const TextareaRoot = styled("div", {
     theme.variants[`${ownerState.variant!}`]?.[ownerState.color!];
   return [
     {
-      "--Textarea-radius": theme.vars.radius.sm,
+      "--Textarea-radius": theme.vars.radius.xs, //sm
       "--Textarea-gap": "0.5rem",
       "--Textarea-placeholderOpacity": 0.5,
-      "--Textarea-focusedThickness": "2px",
+      "--Textarea-focusedThickness": "0.5px", //2px
       "--Textarea-focusedHighlight":
         theme.vars.palette[
           ownerState.color === "neutral" ? "primary" : ownerState.color!
         ]?.[500],
       ...(ownerState.size === "sm" && {
-        "--Textarea-minHeight": "2rem",
+        "--Textarea-minHeight": "4rem", //2rem
         "--Textarea-paddingBlock":
           "calc(0.5rem - var(--variant-borderWidth, 0px))", // to match Input because <textarea> does not center the text at the middle like <input>
-        "--Textarea-paddingInline": "0.5rem",
+        "--Textarea-paddingInline": "0.75rem", //"0.5rem",
         "--Textarea-decorator-childHeight":
           "min(1.5rem, var(--Textarea-minHeight))",
-        "--Icon-fontSize": "1.25rem",
+        "--Icon-fontSize": "1rem", //1.25
       }),
-      ...(ownerState.size === "md" && {
-        "--Textarea-minHeight": "2.5rem",
-        "--Textarea-paddingBlock":
-          "calc(0.5rem - var(--variant-borderWidth, 0px))",
-        "--Textarea-paddingInline": "0.75rem",
-        "--Textarea-decorator-childHeight":
-          "min(2rem, var(--Textarea-minHeight))",
-        "--Icon-fontSize": "1.5rem",
-      }),
-      ...(ownerState.size === "lg" && {
-        "--Textarea-minHeight": "3rem",
-        "--Textarea-paddingBlock":
-          "calc(0.75rem - var(--variant-borderWidth, 0px))",
-        "--Textarea-paddingInline": "1rem",
-        "--Textarea-gap": "0.75rem",
-        "--Textarea-decorator-childHeight":
-          "min(2.375rem, var(--Textarea-minHeight))",
-        "--Icon-fontSize": "1.75rem",
-      }),
+      // ...(ownerState.size === "md" && {
+      //   "--Textarea-minHeight": "2.5rem",
+      //   "--Textarea-paddingBlock":
+      //     "calc(0.5rem - var(--variant-borderWidth, 0px))",
+      //   "--Textarea-paddingInline": "0.75rem",
+      //   "--Textarea-decorator-childHeight":
+      //     "min(2rem, var(--Textarea-minHeight))",
+      //   "--Icon-fontSize": "1.5rem",
+      // }),
+      // ...(ownerState.size === "lg" && {
+      //   "--Textarea-minHeight": "3rem",
+      //   "--Textarea-paddingBlock":
+      //     "calc(0.75rem - var(--variant-borderWidth, 0px))",
+      //   "--Textarea-paddingInline": "1rem",
+      //   "--Textarea-gap": "0.75rem",
+      //   "--Textarea-decorator-childHeight":
+      //     "min(2.375rem, var(--Textarea-minHeight))",
+      //   "--Icon-fontSize": "1.75rem",
+      // }),
       // variables for controlling child components
       "--internal-paddingBlock":
         "max((var(--Textarea-minHeight) - 2 * var(--variant-borderWidth) - var(--Textarea-decorator-childHeight)) / 2, 0px)",
@@ -97,16 +97,16 @@ const TextareaRoot = styled("div", {
       paddingInlineStart: `var(--Textarea-paddingInline)`, // the paddingInlineEnd is added to the textarea. It looks better when the scrollbar appears.
       paddingBlock: "var(--Textarea-paddingBlock)",
       borderRadius: "var(--Textarea-radius)",
-      ...(!variantStyle?.backgroundColor && {
-        backgroundColor: theme.vars.palette.background.surface,
-      }),
+      // ...(!variantStyle?.backgroundColor && {
+      //   backgroundColor: theme.vars.palette.background.surface,
+      // }),
       fontFamily: theme.vars.fontFamily.body,
-      fontSize: theme.vars.fontSize.md,
-      lineHeight: theme.vars.lineHeight.md,
-      ...(ownerState.size === "sm" && {
-        fontSize: theme.vars.fontSize.sm,
-        lineHeight: theme.vars.lineHeight.sm,
-      }),
+      fontSize: theme.vars.fontSize.sm, //md
+      lineHeight: theme.vars.lineHeight.sm, //md
+      // ...(ownerState.size === "sm" && {
+      //   fontSize: theme.vars.fontSize.sm,
+      //   lineHeight: theme.vars.lineHeight.sm,
+      // }),
       // TODO: discuss the transition approach in a separate PR. This value is copied from mui-material Button.
       transition:
         "background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
@@ -125,24 +125,28 @@ const TextareaRoot = styled("div", {
         margin: "calc(var(--variant-borderWidth) * -1)", // for outlined variant
       },
     },
+    theme.variants[`${ownerState.variant!}`]?.[ownerState.color!],
     {
       // variant styles
       ...variantStyle,
-      "&:hover": {
-        ...theme.variants[`${ownerState.variant!}Hover`]?.[ownerState.color!],
-        cursor: "text",
-      },
+      // "&:hover": {
+      //   ...theme.variants[`${ownerState.variant!}Hover`]?.[ownerState.color!],
+      //   cursor: "text",
+      // },
       [`&.${textareaClasses.disabled}`]:
         theme.variants[`${ownerState.variant!}Disabled`]?.[ownerState.color!],
     },
     // This style has to come after the global variant to set the background to surface
     ownerState.variant !== "solid" && {
       [`&.${textareaClasses.focused}`]: {
-        backgroundColor: theme.vars.palette.background.surface,
+        backgroundColor: "initial", //theme.vars.palette.background.surface,
         "&:before": {
           boxShadow: `inset 0 0 0 var(--Textarea-focusedThickness) var(--Textarea-focusedHighlight)`,
         },
       },
+    },
+    ownerState.disabled && {
+      backgroundColor: theme.vars.palette.neutral[50],
     },
   ];
 });
@@ -160,10 +164,9 @@ const TextareaInput = styled(TextareaAutosize, {
   paddingInlineEnd: `var(--Textarea-paddingInline)`,
   flex: "auto",
   alignSelf: "stretch",
-  color: "inherit",
+  color: "#1A1A1A", //"inherit",
   backgroundColor: "transparent",
-  fontFamily: "inherit",
-  fontSize: "inherit",
+  fontFamily: theme.vars.fontFamily.body,
   fontStyle: "inherit",
   fontWeight: "inherit",
   lineHeight: "inherit",
@@ -174,19 +177,19 @@ const TextareaInput = styled(TextareaAutosize, {
   },
   "&::-webkit-input-placeholder": {
     opacity: "var(--Textarea-placeholderOpacity)",
-    color: "inherit",
+    color: "#666666", //"inherit",
   },
   "&::-moz-placeholder": {
     opacity: "var(--Textarea-placeholderOpacity)",
-    color: "inherit",
+    color: "#666666", // "inherit",
   }, // Firefox 19+
   "&:-ms-input-placeholder": {
     opacity: "var(--Textarea-placeholderOpacity)",
-    color: "inherit",
+    color: "#666666", // "inherit",
   }, // IE11
   "&::-ms-input-placeholder": {
     opacity: "var(--Textarea-placeholderOpacity)",
-    color: "inherit",
+    color: "#666666", // "inherit",
   }, // Edge
 }));
 
@@ -200,7 +203,7 @@ const TextareaStartDecorator = styled("div", {
     "calc(var(--Textarea-paddingBlock) - var(--Textarea-paddingInline))",
   marginInlineEnd: "var(--Textarea-paddingBlock)",
   marginBlockEnd: "var(--Textarea-gap)",
-  color: theme.vars.palette.text.tertiary,
+  // color: theme.vars.palette.text.tertiary,
 }));
 
 const TextareaEndDecorator = styled("div", {
@@ -213,7 +216,7 @@ const TextareaEndDecorator = styled("div", {
     "calc(var(--Textarea-paddingBlock) - var(--Textarea-paddingInline))",
   marginInlineEnd: "var(--Textarea-paddingBlock)",
   marginBlockStart: "var(--Textarea-gap)",
-  color: theme.vars.palette.text.tertiary,
+  // color: theme.vars.palette.text.tertiary,
 }));
 
 const Textarea = React.forwardRef(function Textarea(inProps, ref) {
@@ -236,7 +239,7 @@ const Textarea = React.forwardRef(function Textarea(inProps, ref) {
     formControlContext,
     error: errorState,
     disabled: disabledState,
-    size = "md",
+    size = "sm",
     color = "neutral",
     variant = "outlined",
     startDecorator,
