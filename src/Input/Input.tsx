@@ -36,7 +36,7 @@ const useUtilityClasses = (ownerState: InputProps) => {
 const InputRoot = styled("div", {
   name: "RadInput",
   slot: "Root",
-  overridesResolver: (props, styles) => styles.root,
+  overridesResolver: (_props, styles) => styles.root,
 })<{ ownerState: InputProps & InputUnstyledOwnerState }>(
   ({ theme, ownerState }) => [
     {
@@ -144,7 +144,7 @@ const InputRoot = styled("div", {
 const InputInput = styled("input", {
   name: "RadInput",
   slot: "Input",
-  overridesResolver: (props, styles) => styles.input,
+  overridesResolver: (_props, styles) => styles.input,
 })<{ ownerState: InputProps & InputUnstyledOwnerState }>(
   ({ theme, ownerState }) => ({
     border: "none", // remove the native input width
@@ -184,7 +184,7 @@ const InputInput = styled("input", {
 const InputStartDecorator = styled("span", {
   name: "RadInput",
   slot: "StartDecorator",
-  overridesResolver: (props, styles) => styles.startDecorator,
+  overridesResolver: (_props, styles) => styles.startDecorator,
 })<{ ownerState: InputProps & InputUnstyledOwnerState }>(() => ({
   "--Button-margin": "0 0 0 calc(var(--Input-decorator-childOffset) * -1)",
   "--IconButton-margin": "0 0 0 calc(var(--Input-decorator-childOffset) * -1)",
@@ -203,7 +203,7 @@ const InputStartDecorator = styled("span", {
 const InputEndDecorator = styled("span", {
   name: "RadInput",
   slot: "EndDecorator",
-  overridesResolver: (props, styles) => styles.endDecorator,
+  overridesResolver: (_props, styles) => styles.endDecorator,
 })<{ ownerState: InputProps & InputUnstyledOwnerState }>(
   // ({ theme, ownerState }) => ({
   () => ({

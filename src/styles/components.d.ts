@@ -76,6 +76,11 @@ import {
   TabPanelOwnerState,
   TabPanelSlot,
 } from "../TabPanel/TabPanelProps";
+import {
+  TextareaProps,
+  TextareaOwnerState,
+  TextareaSlot,
+} from "../Textarea/TextareaProps";
 
 export type OverridesStyleRules<
   ClassKey extends string = string,
@@ -321,5 +326,13 @@ export interface Components<Theme = unknown> {
   RadMenuItem?: {
     defaultProps?: Partial<MenuItemProps>;
     styleOverrides?: OverridesStyleRules<MenuItemSlot, MenuItemProps, Theme>;
+  };
+  RadTextarea?: {
+    defaultProps?: Partial<TextareaProps>;
+    styleOverrides?: OverridesStyleRules<
+      TextareaSlot,
+      TextareaOwnerState,
+      Theme
+    >;
   };
 }
