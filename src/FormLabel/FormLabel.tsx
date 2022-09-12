@@ -5,8 +5,7 @@ import composeClasses from "@mui/base/composeClasses";
 import { useSlotProps } from "@mui/base/utils";
 import { styled, useThemeProps } from "../styles";
 import { FormLabelProps, FormLabelTypeMap } from "./FormLabelProps";
-import { getFormLabelUtilityClass } from "./formLabelClasses";
-import formLabelClasses from "./formLabelClasses";
+import formLabelClasses, { getFormLabelUtilityClass } from "./formLabelClasses";
 
 const useUtilityClasses = () => {
   const slots = {

@@ -131,7 +131,6 @@ const TextareaRoot = styled("div", {
       //   fontSize: theme.vars.fontSize.sm,
       //   lineHeight: theme.vars.lineHeight.sm,
       // }),
-      // TODO: discuss the transition approach in a separate PR. This value is copied from mui-material Button.
       transition:
         "background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
       "&:before": {
