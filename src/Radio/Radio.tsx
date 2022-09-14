@@ -1,22 +1,21 @@
 import * as React from "react";
 import PropTypes from "prop-types";
-import clsx from "clsx";
 import { OverridableComponent } from "@mui/types";
 import {
   unstable_capitalize as capitalize,
   unstable_useId as useId,
 } from "@mui/utils";
 import { unstable_composeClasses as composeClasses } from "@mui/base";
+import { useSlotProps } from "@mui/base/utils";
 import { useSwitch } from "@mui/base/SwitchUnstyled";
 import { styled, useThemeProps } from "../styles";
 import radioClasses, { getRadioUtilityClass } from "./radioClasses";
-import { RadioProps, RadioTypeMap } from "./RadioProps";
+import { RadioOwnerState, RadioTypeMap } from "./RadioProps";
 import RadioGroupContext from "../RadioGroup/RadioGroupContext";
 import { TypographyContext } from "../Typography/Typography";
+import FormControlContext from "../FormControl/FormControlContext";
 
-const useUtilityClasses = (
-  ownerState: RadioProps & { focusVisible: boolean }
-) => {
+const useUtilityClasses = (ownerState: RadioOwnerState) => {
   const { checked, disabled, disableIcon, focusVisible, color, variant, size } =
     ownerState;
 
@@ -30,12 +29,14 @@ const useUtilityClasses = (
       color && `color${capitalize(color)}`,
       size && `size${capitalize(size)}`,
     ],
-    radio: ["radio", disabled && "disabled"], // disabled class is necessary for displaying global variant
+    radio: ["radio", checked && "checked", disabled && "disabled"], // disabled class is necessary for displaying global variant
+    icon: ["icon"],
     action: [
       "action",
-      disableIcon && disabled && "disabled",
+      checked && "checked",
+      disableIcon && disabled && "disabled", // add disabled class to action element for displaying global variant
       focusVisible && "focusVisible",
-    ], // add disabled class to action element for displaying global variant
+    ],
     input: ["input"],
     label: ["label"],
   };
@@ -55,31 +56,24 @@ function areEqualValues(a: unknown, b: unknown) {
 const RadioRoot = styled("span", {
   name: "RadRadio",
   slot: "Root",
-  overridesResolver: (props, styles) => styles.root,
-})<{
-  ownerState: RadioProps & {
-    "data-first-child"?: string;
-    "data-parent"?: string;
-    row?: boolean;
-  };
-}>(({ ownerState, theme }) => {
+  overridesResolver: (_props, styles) => styles.root,
+})<{ ownerState: RadioOwnerState }>(({ ownerState, theme }) => {
   return [
     {
       "--Icon-fontSize": "var(--Radio-size)",
       ...(ownerState.size === "sm" && {
-        "--Radio-size": "0.75rem", //1
-        "--Radio-gap": "0.25rem", //0.375
+        "--Radio-size": "0.75rem", // '1rem',
+        "--Radio-gap": "0.25rem", // 0.375rem',
         fontSize: theme.vars.fontSize.sm,
       }),
       ...(ownerState.size === "md" && {
-        "--Radio-size": "1rem", //1.25
+        "--Radio-size": "1rem", //'1.25rem',
         "--Radio-gap": "0.5rem",
         fontSize: theme.vars.fontSize.md,
       }),
-
       ...(ownerState.size === "lg" && {
-        "--Radio-size": "1.25rem", //1.5
-        "--Radio-gap": "0.75rem", //0.625
+        "--Radio-size": "1.25", //'1.5rem',
+        "--Radio-gap": "0.75", //"0.725"
         fontSize: theme.vars.fontSize.lg,
       }),
       position: ownerState.overlay ? "initial" : "relative",
@@ -87,12 +81,8 @@ const RadioRoot = styled("span", {
       boxSizing: "border-box",
       minWidth: 0,
       fontFamily: theme.vars.fontFamily.body,
-      "&:active span": {
-        borderColor:
-          theme.vars.palette[ownerState.color!]?.solidBg + " !important",
-      },
-
       lineHeight: "var(--Radio-size)", // prevent label from having larger height than the checkbox
+      color: theme.vars.palette.text.primary,
       [`&.${radioClasses.disabled}`]: {
         color: theme.vars.palette[ownerState.color!]?.plainDisabledColor,
       },
@@ -124,8 +114,8 @@ const RadioRoot = styled("span", {
 const RadioRadio = styled("span", {
   name: "RadRadio",
   slot: "Radio",
-  overridesResolver: (props, styles) => styles.radio,
-})<{ ownerState: RadioProps }>(({ ownerState, theme }) => [
+  overridesResolver: (_props, styles) => styles.radio,
+})<{ ownerState: RadioOwnerState }>(({ ownerState, theme }) => [
   {
     margin: 0,
     boxSizing: "border-box",
@@ -140,7 +130,6 @@ const RadioRadio = styled("span", {
       borderColor:
         theme.vars.palette[ownerState.color!]?.solidBg + " !important",
     },
-
     display: "inline-flex",
     justifyContent: "center",
     alignItems: "center",
@@ -176,8 +165,8 @@ const RadioRadio = styled("span", {
 const RadioAction = styled("span", {
   name: "RadRadio",
   slot: "Action",
-  overridesResolver: (props, styles) => styles.action,
-})<{ ownerState: RadioProps }>(({ theme, ownerState }) => [
+  overridesResolver: (_props, styles) => styles.action,
+})<{ ownerState: RadioOwnerState }>(({ theme, ownerState }) => [
   {
     position: "absolute",
     borderRadius: `var(--Radio-action-radius, ${
@@ -218,8 +207,8 @@ const RadioAction = styled("span", {
 const RadioInput = styled("input", {
   name: "RadRadio",
   slot: "Input",
-  overridesResolver: (props, styles) => styles.input,
-})<{ ownerState: RadioProps }>(() => ({
+  overridesResolver: (_props, styles) => styles.input,
+})<{ ownerState: RadioOwnerState }>(() => ({
   margin: 0,
   opacity: 0,
   position: "absolute",
@@ -231,8 +220,8 @@ const RadioInput = styled("input", {
 const RadioLabel = styled("label", {
   name: "RadRadio",
   slot: "Label",
-  overridesResolver: (props, styles) => styles.label,
-})<{ ownerState: RadioProps }>(({ ownerState }) => ({
+  overridesResolver: (_props, styles) => styles.label,
+})<{ ownerState: RadioOwnerState }>(({ ownerState }) => ({
   flex: 1,
   minWidth: 0,
   ...(ownerState.disableIcon
@@ -251,8 +240,8 @@ const RadioLabel = styled("label", {
 const RadioIcon = styled("span", {
   name: "RadRadio",
   slot: "Icon",
-  overridesResolver: (props, styles) => styles.icon,
-})<{ ownerState: RadioProps }>(({ ownerState }) => ({
+  overridesResolver: (_props, styles) => styles.icon,
+})<{ ownerState: RadioOwnerState }>(({ ownerState }) => ({
   width: "50%",
   height: "50%",
   borderRadius: "inherit",
@@ -274,7 +263,6 @@ const Radio = React.forwardRef(function Radio(inProps, ref) {
   const {
     checked: checkedProp,
     checkedIcon,
-    className,
     component,
     componentsProps = {},
     defaultChecked,
@@ -289,33 +277,51 @@ const Radio = React.forwardRef(function Radio(inProps, ref) {
     onFocus,
     onFocusVisible,
     required,
-    color: colorProp,
-    variant: variantProp = "outlined",
+    color,
+    variant = "outlined",
     size: sizeProp = "md",
     uncheckedIcon,
     value,
-    ...otherProps
+    ...other
   } = props;
-  const id = useId(idOverride);
+
+  const formControl = React.useContext(FormControlContext);
+
+  if (process.env.NODE_ENV !== "production") {
+    const registerEffect = formControl?.registerEffect;
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    React.useEffect(() => {
+      if (registerEffect) {
+        return registerEffect();
+      }
+
+      return undefined;
+    }, [registerEffect]);
+  }
+
+  const id = useId(idOverride ?? formControl?.htmlFor);
   const radioGroup = React.useContext(RadioGroupContext);
-  const color = inProps.color || radioGroup.color || colorProp;
-  const activeColor = color || "primary";
-  const inactiveColor = color || "neutral";
-  const variant = inProps.variant || radioGroup.variant || variantProp;
-  const size = inProps.size || radioGroup.size || sizeProp;
-  const name = inProps.name || radioGroup.name || nameProp;
+  const activeColor = formControl?.error
+    ? "danger"
+    : inProps.color ?? formControl?.color ?? color ?? "primary";
+  const inactiveColor = formControl?.error
+    ? "danger"
+    : inProps.color ?? formControl?.color ?? color ?? "neutral";
+  const size =
+    inProps.size || formControl?.size || radioGroup?.size || sizeProp;
+  const name = inProps.name || radioGroup?.name || nameProp;
   const disableIcon =
-    inProps.disableIcon || radioGroup.disableIcon || disableIconProp;
-  const overlay = inProps.overlay || radioGroup.overlay || overlayProp;
+    inProps.disableIcon || radioGroup?.disableIcon || disableIconProp;
+  const overlay = inProps.overlay || radioGroup?.overlay || overlayProp;
 
   const radioChecked =
     typeof checkedProp === "undefined" && !!value
-      ? areEqualValues(radioGroup.value, value)
+      ? areEqualValues(radioGroup?.value, value)
       : checkedProp;
   const useRadioProps = {
     checked: radioChecked,
     defaultChecked,
-    disabled: disabledProp,
+    disabled: disabledProp ?? formControl?.disabled,
     onBlur,
     onChange,
     onFocus,
@@ -335,55 +341,83 @@ const Radio = React.forwardRef(function Radio(inProps, ref) {
     size,
     disableIcon,
     overlay,
-    row: radioGroup.row,
+    row: radioGroup?.row,
   };
 
   const classes = useUtilityClasses(ownerState);
 
+  const rootProps = useSlotProps({
+    elementType: RadioRoot,
+    externalForwardedProps: other,
+    externalSlotProps: componentsProps.root,
+    additionalProps: {
+      as: component,
+      ref,
+    },
+    className: classes.root,
+    ownerState,
+  });
+
+  const radioProps = useSlotProps({
+    elementType: RadioRadio,
+    externalSlotProps: componentsProps.radio,
+    className: classes.radio,
+    ownerState,
+  });
+
+  const radioIconProps = useSlotProps({
+    elementType: RadioIcon,
+    externalSlotProps: componentsProps.icon,
+    className: classes.icon,
+    ownerState,
+  });
+
+  const radioActionProps = useSlotProps({
+    elementType: RadioAction,
+    externalSlotProps: componentsProps.action,
+    className: classes.action,
+    ownerState,
+  });
+
+  const radioInputProps = useSlotProps({
+    elementType: RadioInput,
+    getSlotProps: () => getInputProps({ onChange: radioGroup?.onChange }),
+    externalSlotProps: componentsProps.input,
+    className: classes.input,
+    additionalProps: {
+      type: "radio",
+      id,
+      name,
+      value: String(value),
+      "aria-describedby": formControl?.["aria-describedby"],
+    },
+    ownerState,
+  });
+
+  const radioLabelProps = useSlotProps({
+    elementType: RadioLabel,
+    externalSlotProps: componentsProps.label,
+    className: classes.label,
+    ownerState,
+    additionalProps: {
+      htmlFor: id,
+    },
+  });
+
   return (
-    <RadioRoot
-      ref={ref}
-      {...otherProps}
-      as={component}
-      ownerState={ownerState}
-      className={clsx(classes.root, className)}
-    >
-      <RadioRadio
-        {...componentsProps?.radio}
-        ownerState={ownerState}
-        className={clsx(classes.radio, componentsProps?.radio?.className)}
-      >
+    <RadioRoot {...rootProps}>
+      <RadioRadio {...radioProps}>
         {checked && !disableIcon && checkedIcon}
         {!checked && !disableIcon && uncheckedIcon}
         {!checkedIcon && !uncheckedIcon && !disableIcon && (
-          <RadioIcon ownerState={ownerState} />
+          <RadioIcon {...radioIconProps} />
         )}
-        <RadioAction
-          {...componentsProps?.action}
-          ownerState={ownerState}
-          className={clsx(classes.action, componentsProps?.action?.className)}
-        >
-          <RadioInput
-            ownerState={ownerState}
-            {...getInputProps({
-              ...componentsProps.input,
-              onChange: radioGroup.onChange,
-            })}
-            type="radio"
-            id={id}
-            name={name}
-            value={String(value)}
-            className={clsx(classes.input, componentsProps.input?.className)}
-          />
+        <RadioAction {...radioActionProps}>
+          <RadioInput {...radioInputProps} />
         </RadioAction>
       </RadioRadio>
       {label && (
-        <RadioLabel
-          {...componentsProps?.label}
-          htmlFor={id}
-          ownerState={ownerState}
-          className={clsx(classes.label, componentsProps?.label?.className)}
-        >
+        <RadioLabel {...radioLabelProps}>
           {/* Automatically adjust the Typography to render `span` */}
           <TypographyContext.Provider value>{label}</TypographyContext.Provider>
         </RadioLabel>
@@ -427,15 +461,16 @@ Radio.propTypes /* remove-proptypes */ = {
    */
   component: PropTypes.elementType,
   /**
-   * The props used for each slot inside the Input.
+   * The props used for each slot inside the component.
    * @default {}
    */
   componentsProps: PropTypes.shape({
-    action: PropTypes.object,
-    input: PropTypes.object,
-    label: PropTypes.object,
-    radio: PropTypes.object,
-    root: PropTypes.object,
+    action: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+    icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+    input: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+    label: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+    radio: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+    root: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   }),
   /**
    * The default checked state. Use when the component is not controlled.

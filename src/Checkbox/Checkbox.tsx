@@ -14,6 +14,7 @@ import { CheckboxProps, CheckboxTypeMap } from "./CheckboxProps";
 import CheckIcon from "../internal/svg-icons/Check";
 import IndeterminateIcon from "../internal/svg-icons/HorizontalRule";
 import { TypographyContext } from "../Typography/Typography";
+import FormControlContext from "../FormControl/FormControlContext";
 
 const useUtilityClasses = (
   ownerState: CheckboxProps & { focusVisible: boolean }
@@ -47,7 +48,7 @@ const useUtilityClasses = (
 const CheckboxRoot = styled("span", {
   name: "RadCheckbox",
   slot: "Root",
-  overridesResolver: (props, styles) => styles.root,
+  overridesResolver: (_props, styles) => styles.root,
 })<{ ownerState: CheckboxProps }>(({ ownerState, theme }) => ({
   "--Icon-fontSize": "var(--Checkbox-size)",
   ...(ownerState.size === "sm" && {
@@ -92,7 +93,7 @@ const CheckboxRoot = styled("span", {
 const CheckboxCheckbox = styled("span", {
   name: "RadCheckbox",
   slot: "Checkbox",
-  overridesResolver: (props, styles) => styles.checkbox,
+  overridesResolver: (_props, styles) => styles.checkbox,
 })<{ ownerState: CheckboxProps }>(({ theme, ownerState }) => [
   {
     boxSizing: "border-box",
@@ -140,7 +141,7 @@ const CheckboxCheckbox = styled("span", {
 const CheckboxAction = styled("span", {
   name: "RadCheckbox",
   slot: "Action",
-  overridesResolver: (props, styles) => styles.action,
+  overridesResolver: (_props, styles) => styles.action,
 })<{ ownerState: CheckboxProps }>(({ theme, ownerState }) => [
   {
     borderRadius: `var(--Checkbox-action-radius, ${
@@ -181,7 +182,7 @@ const CheckboxAction = styled("span", {
 const CheckboxInput = styled("input", {
   name: "RadCheckbox",
   slot: "Input",
-  overridesResolver: (props, styles) => styles.input,
+  overridesResolver: (_props, styles) => styles.input,
 })<{ ownerState: CheckboxProps }>(() => ({
   margin: 0,
   opacity: 0,
@@ -228,7 +229,7 @@ const Checkbox = React.forwardRef(function Checkbox(inProps, ref) {
     component,
     componentsProps = {},
     defaultChecked,
-    disabled: disabledProp,
+    disabled: disabledExternalProp,
     disableIcon = false,
     overlay,
     id: idOverride,
@@ -240,12 +241,34 @@ const Checkbox = React.forwardRef(function Checkbox(inProps, ref) {
     onFocus,
     onFocusVisible,
     required,
-    color,
+    color: colorProp,
     variant,
-    size = "md",
+    size: sizeProp = "md",
     ...otherProps
   } = props;
-  const id = useId(idOverride);
+
+  const formControl = React.useContext(FormControlContext);
+  const disabledProp =
+    inProps.disabled ?? formControl?.disabled ?? disabledExternalProp;
+  const size = inProps.size ?? formControl?.size ?? sizeProp;
+  const color = formControl?.error
+    ? "danger"
+    : inProps.color ?? formControl?.color ?? colorProp;
+
+  if (process.env.NODE_ENV !== "production") {
+    const registerEffect = formControl?.registerEffect;
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    React.useEffect(() => {
+      if (registerEffect) {
+        return registerEffect();
+      }
+
+      return undefined;
+    }, [registerEffect]);
+  }
+
+  // const id = useId(idOverride);
+  const id = useId(idOverride ?? formControl?.htmlFor);
 
   const useCheckboxProps = {
     checked: checkedProp,
