@@ -72,8 +72,8 @@ const SelectRoot = styled("div", {
   slot: "Root",
   overridesResolver: (_props, styles) => styles.root,
 })<{ ownerState: SelectStaticProps }>(({ theme, ownerState }) => {
-  const variantStyle =
-    theme.variants[`${ownerState.variant!}`]?.[ownerState.color!];
+  // const variantStyle =
+  //   theme.variants[`${ownerState.variant!}`]?.[ownerState.color!];
   return [
     {
       "--Select-radius": theme.vars.radius.xs, //sm radius is used by the decorator children
