@@ -106,6 +106,9 @@ export * from "./FormHelperText";
 export { default as TextField } from "./TextField";
 export * from "./TextField";
 
+export { default as Textarea } from "./Textarea";
+export * from "./Textarea";
+
 export { default as Box } from "./Box";
 export * from "./Box";
 

@@ -5,6 +5,7 @@ export interface FormLabelClasses {
   root: string;
   /** Styles applied to the asterisk element. */
   asterisk: string;
+  disabled: string;
 }
 
 export type FormLabelClassKey = keyof FormLabelClasses;
@@ -15,7 +16,7 @@ export function getFormLabelUtilityClass(slot: string): string {
 
 const formLabelClasses: FormLabelClasses = generateUtilityClasses(
   "RadFormLabel",
-  ["root", "asterisk"]
+  ["root", "asterisk", "disabled"]
 );
 
 export default formLabelClasses;

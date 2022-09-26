@@ -19,6 +19,7 @@ import composeClasses from "@mui/base/composeClasses";
 import { ListRoot } from "../List/List";
 import ListProvider, { scopedVariables } from "../List/ListProvider";
 import SelectIcon from "../internal/svg-icons/Select";
+
 import { styled, useThemeProps } from "../styles";
 import {
   SelectOwnProps,
@@ -28,6 +29,7 @@ import {
 } from "./SelectProps";
 import selectClasses, { getSelectUtilityClass } from "./selectClasses";
 import { ListOwnerState } from "../List";
+import FormControlContext from "../FormControl/FormControlContext";
 
 function defaultRenderSingleValue<TValue>(
   selectedOption: SelectOption<TValue> | null
@@ -192,7 +194,7 @@ const SelectButton = styled("button", {
   alignItems: "center",
   flex: 1,
   cursor: "pointer",
-  ...(!ownerState.value && {
+  ...((ownerState.value === null || ownerState.value === undefined) && {
     opacity: "var(--Select-placeholderOpacity)",
   }),
 }));
@@ -280,7 +282,7 @@ const Select = React.forwardRef(function Select<TValue extends {}>(
     componentsProps = {},
     defaultValue,
     defaultListboxOpen = false,
-    disabled: disabledProp,
+    disabled: disabledExternalProp,
     placeholder,
     listboxId,
     listboxOpen: listboxOpenProp,
@@ -289,9 +291,9 @@ const Select = React.forwardRef(function Select<TValue extends {}>(
     onClose,
     renderValue: renderValueProp,
     value: valueProp,
-    size = "md",
+    size: sizeProp = "md",
     variant = "outlined",
-    color = "neutral",
+    color: colorProp = "neutral",
     startDecorator,
     endDecorator,
     indicator = <SelectIcon />,
@@ -310,6 +312,27 @@ const Select = React.forwardRef(function Select<TValue extends {}>(
     id?: string;
     name?: string;
   };
+
+  const formControl = React.useContext(FormControlContext);
+
+  if (process.env.NODE_ENV !== "production") {
+    const registerEffect = formControl?.registerEffect;
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    React.useEffect(() => {
+      if (registerEffect) {
+        return registerEffect();
+      }
+
+      return undefined;
+    }, [registerEffect]);
+  }
+
+  const disabledProp =
+    inProps.disabled ?? formControl?.disabled ?? disabledExternalProp;
+  const size = inProps.size ?? formControl?.size ?? sizeProp;
+  const color = formControl?.error
+    ? "danger"
+    : inProps.color ?? formControl?.color ?? colorProp;
 
   const renderValue = renderValueProp ?? defaultRenderSingleValue;
   const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
@@ -381,6 +404,7 @@ const Select = React.forwardRef(function Select<TValue extends {}>(
     disabled: disabledProp,
     listboxId,
     multiple: false,
+    //@ts-ignore
     onChange,
     onOpenChange: handleOpenChange,
     open: listboxOpen,
@@ -438,10 +462,10 @@ const Select = React.forwardRef(function Select<TValue extends {}>(
     getSlotProps: getButtonProps,
     externalSlotProps: componentsProps.button,
     additionalProps: {
-      "aria-describedby": ariaDescribedby,
+      "aria-describedby": ariaDescribedby ?? formControl?.["aria-describedby"],
       "aria-label": ariaLabel,
       "aria-labelledby": ariaLabelledby,
-      id,
+      id: id ?? formControl?.htmlFor,
       name,
     },
     ownerState,
@@ -635,7 +659,7 @@ Select.propTypes /* remove-proptypes */ = {
   /**
    * The default selected value. Use when the component is not controlled.
    */
-  defaultValue: PropTypes /* @typescript-to-proptypes-ignore */.any,
+  defaultValue: PropTypes.any,
   /**
    * If `true`, the component is disabled.
    * @default false
@@ -693,7 +717,7 @@ Select.propTypes /* remove-proptypes */ = {
    * The selected value.
    * Set to `null` to deselect all options.
    */
-  value: PropTypes /* @typescript-to-proptypes-ignore */.any,
+  value: PropTypes.any,
   /**
    * The variant to use.
    * @default 'solid'
