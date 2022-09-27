@@ -29,8 +29,8 @@
     "preinstall": "npx only-allow yarn"
   },
   "dependencies": {
-    "@mui/base": "^5.0.0-alpha.98",
-    "@mui/system": "^5.10.6",
+    "@mui/base": "^5.0.0-alpha.99",
+    "@mui/system": "^5.10.7",
     "@mui/types": "^7.2.0",
     "@mui/utils": "^5.10.6",
     "clsx": "^1.2.1",
