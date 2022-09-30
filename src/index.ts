@@ -97,6 +97,9 @@ export * from "./Chip";
 export { default as ChipDelete } from "./ChipDelete";
 export * from "./ChipDelete";
 
+export { default as Divider } from "./Divider";
+export * from "./Divider";
+
 export { default as FormLabel } from "./FormLabel";
 export * from "./FormLabel";
 

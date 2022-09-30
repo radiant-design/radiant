@@ -25,6 +25,11 @@ import {
 import { CheckboxProps, CheckboxSlot } from "../Checkbox/CheckboxProps";
 import { ContainerProps, ContainerSlot } from "../Container/ContainerProps";
 import {
+  DividerProps,
+  DividerOwnerState,
+  DividerSlot,
+} from "../Divider/DividerProps";
+import {
   FormHelperTextProps,
   FormHelperTextSlot,
 } from "../FormHelperText/FormHelperTextProps";
@@ -177,6 +182,10 @@ export interface Components<Theme = unknown> {
   RadContainer?: {
     defaultProps?: Partial<ContainerProps>;
     styleOverrides?: OverridesStyleRules<ContainerSlot, ContainerProps, Theme>;
+  };
+  RadDivider?: {
+    defaultProps?: Partial<DividerProps>;
+    styleOverrides?: OverridesStyleRules<DividerSlot, DividerOwnerState, Theme>;
   };
   RadFormHelperText?: {
     defaultProps?: Partial<FormHelperTextProps>;
