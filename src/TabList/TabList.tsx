@@ -36,7 +36,7 @@ const useUtilityClasses = (ownerState: TabListOwnerState) => {
 const TabListRoot = styled(ListRoot, {
   name: "RadTabList",
   slot: "Root",
-  overridesResolver: (props, styles) => styles.root,
+  overridesResolver: (_props, styles) => styles.root,
 })<{ ownerState: TabListOwnerState }>({
   flexGrow: "initial",
   "--List-gap": "var(--Tabs-gap)",

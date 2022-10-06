@@ -1,16 +1,8 @@
 import { generateUtilityClass, generateUtilityClasses } from "../className";
 
-export interface ListItemClasses {
+export interface ListSubheaderClasses {
   /** Styles applied to the root element. */
   root: string;
-  /** Styles applied to the component element if `startAction` element is provided. */
-  startAction: string;
-  /** Styles applied to the component element if `endAction` element is provided. */
-  endAction: string;
-  /** Styles applied to the root element, if nested={true}. */
-  nested: string;
-  /** Styles applied to the root element, if it is under a nested list item. */
-  nesting: string;
   /** Styles applied to the root element, if sticky={true}. */
   sticky: string;
   /** Styles applied to the root element if `color="primary"`. */
@@ -35,29 +27,28 @@ export interface ListItemClasses {
   variantSolid: string;
 }
 
-export type ListItemClassKey = keyof ListItemClasses;
+export type ListSubheaderClassKey = keyof ListSubheaderClasses;
 
-export function getListItemUtilityClass(slot: string): string {
-  return generateUtilityClass("RadListItem", slot);
+export function getListSubheaderUtilityClass(slot: string): string {
+  return generateUtilityClass("RadListSubheader", slot);
 }
 
-const listItemClasses: ListItemClasses = generateUtilityClasses("RadListItem", [
-  "root",
-  "startAction",
-  "endAction",
-  "nested",
-  "nesting",
-  "sticky",
-  "colorPrimary",
-  "colorNeutral",
-  "colorDanger",
-  "colorInfo",
-  "colorSuccess",
-  "colorWarning",
-  "variantPlain",
-  "variantSoft",
-  "variantOutlined",
-  "variantSolid",
-]);
+const listSubheaderClasses: ListSubheaderClasses = generateUtilityClasses(
+  "RadListSubheader",
+  [
+    "root",
+    "sticky",
+    "colorPrimary",
+    "colorNeutral",
+    "colorDanger",
+    "colorInfo",
+    "colorSuccess",
+    "colorWarning",
+    "variantPlain",
+    "variantSoft",
+    "variantOutlined",
+    "variantSolid",
+  ]
+);
 
-export default listItemClasses;
+export default listSubheaderClasses;

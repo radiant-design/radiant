@@ -108,7 +108,7 @@ export interface ButtonOwnerState extends ButtonProps {
   /**
    * If `true`, the button's focus is visible.
    */
-  focusVisible: boolean;
+  focusVisible?: boolean;
 }
 
 export type ExtendButton<M extends OverridableTypeMap> = ((

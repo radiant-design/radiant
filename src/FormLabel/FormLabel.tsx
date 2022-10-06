@@ -21,6 +21,8 @@ const FormLabelRoot = styled("label", {
   slot: "Root",
   overridesResolver: (_props, styles) => styles.root,
 })<{ ownerState: FormLabelProps }>(({ theme, ownerState }) => ({
+  WebkitTapHighlightColor: "transparent",
+  alignSelf: "var(--FormLabel-alignSelf)",
   display: "flex",
   alignItems: "center",
   flexWrap: "wrap",

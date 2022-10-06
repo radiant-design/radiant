@@ -73,6 +73,9 @@ export * from "./ListDivider";
 export { default as ListItem } from "./ListItem";
 export * from "./ListItem";
 
+export { default as ListSubheader } from "./ListSubheader";
+export * from "./ListSubheader";
+
 export { default as ListItemDecorator } from "./ListItemDecorator";
 export * from "./ListItemDecorator";
 
