@@ -12,9 +12,6 @@ import { getListUtilityClass } from "./listClasses";
 import NestedListContext from "./NestedListContext";
 import ListProvider from "./ListProvider";
 import RadioGroupContext from "../RadioGroup/RadioGroupContext";
-
-import RowListContext from "./RowListContext";
-import WrapListContext from "./WrapListContext";
 import ComponentListContext from "./ComponentListContext";
 
 const useUtilityClasses = (ownerState: ListOwnerState) => {
