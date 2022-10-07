@@ -103,6 +103,7 @@ export const ButtonRoot = styled("button", {
         paddingBlock: "0.375rem",
         paddingInline: "2rem", //1.5
       }),
+      WebkitTapHighlightColor: "transparent",
       borderRadius: `var(--Button-radius, ${theme.vars.radius.xs})`, // to be controlled by other components, eg. Input
       margin: `var(--Button-margin)`, // to be controlled by other components, eg. Input
       border: "none",

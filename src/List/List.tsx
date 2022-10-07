@@ -10,8 +10,8 @@ import { styled, useThemeProps } from "../styles";
 import { ListProps, ListOwnerState, ListTypeMap } from "./ListProps";
 import { getListUtilityClass } from "./listClasses";
 import NestedListContext from "./NestedListContext";
-import RowListContext from "./RowListContext";
-import WrapListContext from "./WrapListContext";
+import ListProvider from "./ListProvider";
+import RadioGroupContext from "../RadioGroup/RadioGroupContext";
 import ComponentListContext from "./ComponentListContext";
 
 const useUtilityClasses = (ownerState: ListOwnerState) => {
@@ -97,11 +97,14 @@ export const ListRoot = styled("ul", {
       "--List-nestedInsetStart": "0px",
       "--List-item-paddingLeft": "var(--List-item-paddingX)",
       "--List-item-paddingRight": "var(--List-item-paddingX)",
+      // Automatic radius adjustment kicks in only if '--List-padding' and '--List-radius' are provided.
       "--internal-child-radius":
-        "max(var(--List-radius, 0px) - var(--List-padding), min(var(--List-padding) / 2, var(--List-radius, 0px) / 2))",
-      // If --List-padding is 0, the --List-item-radius will be 0.
-      "--List-item-radius":
-        "min(calc(var(--List-padding) * 999), var(--internal-child-radius))",
+        //   "max(var(--List-radius, 0px) - var(--List-padding), min(var(--List-padding) / 2, var(--List-radius, 0px) / 2))",
+        // // If --List-padding is 0, the --List-item-radius will be 0.
+        // "--List-item-radius":
+        //   "min(calc(var(--List-padding) * 999), var(--internal-child-radius))",
+        "max(var(--List-radius) - var(--List-padding), min(var(--List-padding) / 2, var(--List-radius) / 2))",
+      "--List-item-radius": "var(--internal-child-radius)",
       // by default, The ListItem & ListItemButton use automatic radius adjustment based on the parent List.
       "--List-item-startActionTranslateX":
         "calc(0.5 * var(--List-item-paddingLeft))",
@@ -128,6 +131,7 @@ export const ListRoot = styled("ul", {
           }),
     },
     {
+      boxSizing: "border-box",
       borderRadius: "var(--List-radius)",
       listStyle: "none",
       display: "flex",
@@ -146,6 +150,7 @@ const List = React.forwardRef(function List(inProps, ref) {
   const nesting = React.useContext(NestedListContext);
   const menuContext = React.useContext(MenuUnstyledContext);
   const selectContext = React.useContext(SelectUnstyledContext);
+  const radioGroupContext = React.useContext(RadioGroupContext);
   const props = useThemeProps<
     typeof inProps & { component?: React.ElementType }
   >({
@@ -166,7 +171,19 @@ const List = React.forwardRef(function List(inProps, ref) {
     ...other
   } = props;
 
+  let role;
+  if (menuContext || selectContext) {
+    role = "group";
+  }
+  if (radioGroupContext) {
+    role = "presentation";
+  }
+  if (roleProp) {
+    role = roleProp;
+  }
+
   const ownerState = {
+    ...props,
     instanceSize: inProps.size,
     size,
     nesting,
@@ -174,40 +191,31 @@ const List = React.forwardRef(function List(inProps, ref) {
     wrap,
     variant,
     color,
-    ...props,
+    role,
   };
 
   const classes = useUtilityClasses(ownerState);
 
-  const role = roleProp ?? (menuContext || selectContext ? "group" : undefined);
   return (
-    <RowListContext.Provider value={row}>
-      <WrapListContext.Provider value={wrap}>
-        <ComponentListContext.Provider
-          value={`${typeof component === "string" ? component : ""}:${
-            role || ""
-          }`}
-        >
-          <ListRoot
-            ref={ref}
-            as={component}
-            className={clsx(classes.root, className)}
-            ownerState={ownerState}
-            role={role}
-            {...other}
-          >
-            {React.Children.map(children, (child, index) =>
-              React.isValidElement(child)
-                ? React.cloneElement(child, {
-                    // to let List(Item|ItemButton) knows when to apply margin(Inline|Block)Start
-                    ...(index === 0 && { "data-first-child": "" }),
-                  })
-                : child
-            )}
-          </ListRoot>
-        </ComponentListContext.Provider>
-      </WrapListContext.Provider>
-    </RowListContext.Provider>
+    <ListRoot
+      ref={ref}
+      as={component}
+      className={clsx(classes.root, className)}
+      ownerState={ownerState}
+      role={role}
+      aria-labelledby={typeof nesting === "string" ? nesting : undefined}
+      {...other}
+    >
+      <ComponentListContext.Provider
+        value={`${typeof component === "string" ? component : ""}:${
+          role || ""
+        }`}
+      >
+        <ListProvider row={row} wrap={wrap}>
+          {children}
+        </ListProvider>
+      </ComponentListContext.Provider>
+    </ListRoot>
   );
 }) as OverridableComponent<ListTypeMap>;
 
@@ -253,12 +261,6 @@ List.propTypes /* remove-proptypes */ = {
    * @default false
    */
   row: PropTypes.bool,
-  /**
-   * If `true`, this list creates new list CSS variables scope to prevent the children from inheriting variables from the upper parent.
-   * This props is used in the listbox of Menu, Select.
-   * @default false
-   */
-  scoped: PropTypes.bool,
   /**
    * The size of the component (affect other nested list* components).
    * @default 'md'

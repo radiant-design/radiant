@@ -38,7 +38,7 @@ const useUtilityClasses = (ownerState: TabOwnerState) => {
 const TabRoot = styled(ListItemButtonRoot, {
   name: "RadTab",
   slot: "Root",
-  overridesResolver: (props, styles) => styles.root,
+  overridesResolver: (_props, styles) => styles.root,
 })<{ ownerState: TabOwnerState }>(({ theme, ownerState }) => {
   const variantStyle = theme.variants[ownerState.variant!]?.[ownerState.color!];
   return {

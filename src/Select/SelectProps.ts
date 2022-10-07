@@ -151,7 +151,7 @@ export interface SelectOwnerState<TValue extends {}>
   /**
    * If `true`, the select button's focus is visible.
    */
-  focusVisible: boolean;
+  focusVisible?: boolean;
   /**
    * If `true`, the select dropdown is open.
    */

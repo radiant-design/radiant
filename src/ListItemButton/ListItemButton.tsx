@@ -68,6 +68,7 @@ export const ListItemButtonRoot = styled("div", {
     ...(ownerState.selected && {
       "--List-decorator-color": "initial",
     }),
+    WebkitTapHighlightColor: "transparent",
     boxSizing: "border-box",
     position: "relative",
     display: "flex",

@@ -30,7 +30,7 @@ const useUtilityClasses = (ownerState: TabsOwnerState) => {
 const TabsRoot = styled(SheetRoot, {
   name: "RadTabs",
   slot: "Root",
-  overridesResolver: (props, styles) => styles.root,
+  overridesResolver: (_props, styles) => styles.root,
 })<{ ownerState: TabsOwnerState }>(({ ownerState, theme }) => ({
   ...(ownerState.size === "sm" && {
     "--Tabs-gap": "3px",
@@ -200,5 +200,4 @@ Tabs.propTypes /* remove-proptypes */ = {
     PropTypes.string,
   ]),
 } as any;
-
 export default Tabs;

@@ -73,6 +73,9 @@ export * from "./ListDivider";
 export { default as ListItem } from "./ListItem";
 export * from "./ListItem";
 
+export { default as ListSubheader } from "./ListSubheader";
+export * from "./ListSubheader";
+
 export { default as ListItemDecorator } from "./ListItemDecorator";
 export * from "./ListItemDecorator";
 
@@ -96,6 +99,9 @@ export * from "./Chip";
 
 export { default as ChipDelete } from "./ChipDelete";
 export * from "./ChipDelete";
+
+export { default as Divider } from "./Divider";
+export * from "./Divider";
 
 export { default as FormLabel } from "./FormLabel";
 export * from "./FormLabel";

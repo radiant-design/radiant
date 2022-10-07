@@ -236,8 +236,9 @@ export default function extendTheme(themeOptions?: CssVarsThemeOptions): Theme {
         level2: getCssVar("palette-neutral-100"),
         level3: getCssVar("palette-neutral-200"),
         tooltip: getCssVar("palette-neutral-800"),
+        backdrop: "rgba(255 255 255 / 0.5)",
       },
-      divider: getCssVar("palette-neutral-200"),
+      divider: `rgba(${getCssVar("palette-neutral-mainChannel")} / 0.28)`,
       focusVisible: getCssVar("palette-primary-200"),
     },
     shadowRing: "0 0 #000",
@@ -333,8 +334,9 @@ export default function extendTheme(themeOptions?: CssVarsThemeOptions): Theme {
         level2: getCssVar("palette-neutral-700"),
         level3: getCssVar("palette-neutral-600"),
         tooltip: getCssVar("palette-neutral-600"),
+        backdrop: `rgba(${getCssVar("palette-neutral-darkChannel")} / 0.5)`,
       },
-      divider: getCssVar("palette-neutral-800"),
+      divider: `rgba(${getCssVar("palette-neutral-mainChannel")} / 0.24)`,
       focusVisible: getCssVar("palette-primary-500"),
     },
     shadowRing: "0 0 #000",
@@ -410,13 +412,18 @@ export default function extendTheme(themeOptions?: CssVarsThemeOptions): Theme {
       xl3: 900,
     },
     focus: {
+      thickness: "2px",
       selector: `&.${generateUtilityClass(
         "",
         "focusVisible"
       )}, &:focus-visible`,
       default: {
-        outlineOffset: getCssVar("focus-outlineOffset", "0px"), // reset user agent stylesheet
-        outline: `4px solid ${getCssVar("palette-focusVisible")}`,
+        outlineOffset: `var(--focus-outline-offset, ${getCssVar(
+          "focus-thickness"
+        )})`,
+        outline: `${getCssVar("focus-thickness")} solid ${getCssVar(
+          "palette-focusVisible"
+        )}`,
       },
     },
     lineHeight: {
@@ -686,7 +693,7 @@ export default function extendTheme(themeOptions?: CssVarsThemeOptions): Theme {
       const channelMapping = {
         // Need type casting due to module augmentation inside the repo
         main: "500" as keyof PaletteRange,
-        light: "100" as keyof PaletteRange,
+        light: "200" as keyof PaletteRange,
         dark: "900" as keyof PaletteRange,
       };
       if (!palette[key].mainChannel && palette[key][channelMapping.main]) {

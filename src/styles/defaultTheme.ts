@@ -8,6 +8,7 @@ export const getThemeWithVars = (
 ) => {
   const {
     colorSchemes,
+    focus,
     fontFamily,
     fontSize,
     fontWeight,
@@ -29,6 +30,7 @@ export const getThemeWithVars = (
   } = colorSchemePalette as RuntimeColorSystem["palette"];
 
   return {
+    focus,
     fontFamily,
     fontSize,
     fontWeight,
@@ -47,6 +49,7 @@ export const getThemeWithVars = (
       colorScheme,
     },
     vars: {
+      focus,
       fontFamily,
       fontSize,
       fontWeight,
