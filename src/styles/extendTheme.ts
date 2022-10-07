@@ -412,13 +412,18 @@ export default function extendTheme(themeOptions?: CssVarsThemeOptions): Theme {
       xl3: 900,
     },
     focus: {
+      thickness: "2px",
       selector: `&.${generateUtilityClass(
         "",
         "focusVisible"
       )}, &:focus-visible`,
       default: {
-        outlineOffset: getCssVar("focus-outlineOffset", "0px"), // reset user agent stylesheet
-        outline: `4px solid ${getCssVar("palette-focusVisible")}`,
+        outlineOffset: `var(--focus-outline-offset, ${getCssVar(
+          "focus-thickness"
+        )})`,
+        outline: `${getCssVar("focus-thickness")} solid ${getCssVar(
+          "palette-focusVisible"
+        )}`,
       },
     },
     lineHeight: {
@@ -688,7 +693,7 @@ export default function extendTheme(themeOptions?: CssVarsThemeOptions): Theme {
       const channelMapping = {
         // Need type casting due to module augmentation inside the repo
         main: "500" as keyof PaletteRange,
-        light: "100" as keyof PaletteRange,
+        light: "200" as keyof PaletteRange,
         dark: "900" as keyof PaletteRange,
       };
       if (!palette[key].mainChannel && palette[key][channelMapping.main]) {

@@ -121,5 +121,5 @@ export interface CheckboxOwnerState extends CheckboxProps {
   /**
    * If `true`, the checkbox's focus is visible.
    */
-  focusVisible: boolean;
+  focusVisible?: boolean;
 }

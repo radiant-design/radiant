@@ -42,6 +42,11 @@ import {
   ListDividerProps,
   ListDividerSlot,
 } from "../ListDivider/ListDividerProps";
+import {
+  ListSubheaderProps,
+  ListSubheaderOwnerState,
+  ListSubheaderSlot,
+} from "../ListSubheader/ListSubheaderProps";
 import { ListItemProps, ListItemSlot } from "../ListItem/ListItemProps";
 import {
   ListItemButtonProps,
@@ -234,6 +239,15 @@ export interface Components<Theme = unknown> {
   RadListItem?: {
     defaultProps: Partial<ListItemProps>;
     styleOverrides?: OverridesStyleRules<ListItemSlot, ListItemProps, Theme>;
+  };
+
+  RadListSubheader?: {
+    defaultProps?: Partial<ListSubheaderProps>;
+    styleOverrides?: OverridesStyleRules<
+      ListSubheaderSlot,
+      ListSubheaderOwnerState,
+      Theme
+    >;
   };
   RadListItemButton?: {
     defaultProps: Partial<ListItemButtonProps>;

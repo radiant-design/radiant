@@ -62,6 +62,11 @@ export interface ListItemButtonTypeMap<
      */
     focusVisibleClassName?: string;
     /**
+     * The content direction flow.
+     * @default 'horizontal'
+     */
+    orientation?: "horizontal" | "vertical";
+    /**
      * Use to apply selected styling.
      * @default false
      */
@@ -97,6 +102,23 @@ export type ListItemButtonProps<
     component?: React.ElementType;
   }
 > = OverrideProps<ListItemButtonTypeMap<P, D>, D>;
+
+export interface ListItemButtonOwnerState extends ListItemButtonProps {
+  /**
+   * If `true`, the element's focus is visible.
+   */
+  focusVisible?: boolean;
+  /**
+   * If `true`, the element is rendered in a horizontal list.
+   * @internal
+   */
+  row?: boolean;
+  /**
+   * @internal
+   * The internal prop for controlling CSS margin of the element.
+   */
+  "data-first-child"?: boolean;
+}
 
 export type ExtendListItemButton<M extends OverridableTypeMap> = ((
   props: OverrideProps<ExtendListItemButtonTypeMap<M>, "a">
