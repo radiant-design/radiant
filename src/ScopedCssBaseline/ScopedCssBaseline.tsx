@@ -24,7 +24,7 @@ const useUtilityClasses = () => {
 const ScopedCssBaselineRoot = styled("div", {
   name: "RadScopedCssBaseline",
   slot: "Root",
-  overridesResolver: (props, styles) => styles.root,
+  overridesResolver: (_props, styles) => styles.root,
 })<{ ownerState: ScopedCssBaselineOwnerState }>(({ theme, ownerState }) => {
   const colorSchemeStyles: Record<string, any> = {};
   if (!ownerState.disableColorScheme && theme.colorSchemes) {
@@ -49,7 +49,7 @@ const ScopedCssBaselineRoot = styled("div", {
     // Fix font resize problem in iOS
     WebkitTextSizeAdjust: "100%",
     color: theme.vars.palette.text.primary,
-    ...(theme.typography.body1 as any),
+    ...theme.typography.body1,
     backgroundColor: theme.vars.palette.background.body,
     "@media print": {
       // Save printer ink.
