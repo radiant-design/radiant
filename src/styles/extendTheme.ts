@@ -17,7 +17,7 @@ import {
 import { Focus } from "./types/focus";
 import { TypographySystem, FontSize } from "./types/typography";
 import { Variants } from "./types/variants";
-import { Theme, ThemeCSSVar, ThemeScales } from "./types";
+import { Theme, ThemeCssVar, ThemeScales } from "./types";
 import { Components } from "./components";
 import { generateUtilityClass } from "../className";
 import {
@@ -71,7 +71,7 @@ export interface CssVarsThemeOptions extends Partial2Level<ThemeScales> {
 }
 
 export const createGetCssVar = (cssVarPrefix = "rad") =>
-  systemCreateGetCssVar<ThemeCSSVar>(cssVarPrefix);
+  systemCreateGetCssVar<ThemeCssVar>(cssVarPrefix);
 
 export default function extendTheme(themeOptions?: CssVarsThemeOptions): Theme {
   const {
@@ -152,6 +152,7 @@ export default function extendTheme(themeOptions?: CssVarsThemeOptions): Theme {
 
   const lightColorSystem = {
     palette: {
+      mode: "light",
       primary: {
         ...colors.blue,
         ...createLightModeVariantVariables("primary"),
@@ -250,6 +251,7 @@ export default function extendTheme(themeOptions?: CssVarsThemeOptions): Theme {
   };
   const darkColorSystem = {
     palette: {
+      mode: "dark",
       primary: {
         ...colors.blue,
         ...createDarkModeVariantVariables("primary"),

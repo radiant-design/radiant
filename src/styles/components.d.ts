@@ -25,6 +25,11 @@ import {
 import { CheckboxProps, CheckboxSlot } from "../Checkbox/CheckboxProps";
 import { ContainerProps, ContainerSlot } from "../Container/ContainerProps";
 import {
+  CircularProgressProps,
+  CircularProgressOwnerState,
+  CircularProgressSlot,
+} from "../CircularProgress/CircularProgressProps";
+import {
   DividerProps,
   DividerOwnerState,
   DividerSlot,
@@ -63,6 +68,11 @@ import {
 import { SheetProps, SheetSlot } from "../Sheet/SheetProps";
 import { SvgIconProps, SvgIconSlot } from "../SvgIcon/SvgIconProps";
 import { SwitchProps, SwitchSlot } from "../Switch/SwitchProps";
+import {
+  ScopedCssBaselineProps,
+  ScopedCssBaselineOwnerState,
+  ScopedCssBaselineSlot,
+} from "../ScopedCssBaseline/ScopedCssBaselineProps";
 import { TextFieldProps, TextFieldSlot } from "../TextField/TextFieldProps";
 import { TypographyProps, TypographySlot } from "../Typography/TypographyProps";
 import { ChipProps, ChipSlot } from "../Chip/ChipProps";
@@ -181,6 +191,14 @@ export interface Components<Theme = unknown> {
     styleOverrides?: OverridesStyleRules<
       ChipDeleteSlot,
       ChipDeleteProps,
+      Theme
+    >;
+  };
+  RadCircularProgress?: {
+    defaultProps?: Partial<CircularProgressProps>;
+    styleOverrides?: OverridesStyleRules<
+      CircularProgressSlot,
+      CircularProgressOwnerState,
       Theme
     >;
   };
@@ -355,6 +373,14 @@ export interface Components<Theme = unknown> {
     styleOverrides?: OverridesStyleRules<
       TextareaSlot,
       TextareaOwnerState,
+      Theme
+    >;
+  };
+  RadScopedCssBaseline?: {
+    defaultProps?: Partial<ScopedCssBaselineProps>;
+    styleOverrides?: OverridesStyleRules<
+      ScopedCssBaselineSlot,
+      ScopedCssBaselineOwnerState,
       Theme
     >;
   };
