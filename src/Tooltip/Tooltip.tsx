@@ -56,27 +56,27 @@ const TooltipRoot = styled("div", {
     ...(ownerState.size === "sm" && {
       "--Icon-fontSize": "1rem",
       "--Tooltip-arrow-size": "8px",
-      padding: theme.spacing(0.5, 0.625),
-      fontSize: theme.vars.fontSize.xs,
+      padding: "4px 8px !important", //theme.spacing(0.5, 0.625),
+      fontSize: theme.vars.fontSize.sm, //xs
     }),
     ...(ownerState.size === "md" && {
       "--Icon-fontSize": "1.125rem",
       "--Tooltip-arrow-size": "10px",
-      padding: theme.spacing(0.625, 0.75),
-      fontSize: theme.vars.fontSize.sm,
+      padding: "8px 16px !important", // theme.spacing(0.625, 0.75),
+      fontSize: theme.vars.fontSize.md, //sm
     }),
     ...(ownerState.size === "lg" && {
       "--Icon-fontSize": "1.25rem",
       "--Tooltip-arrow-size": "12px",
       padding: theme.spacing(0.75, 1),
-      fontSize: theme.vars.fontSize.md,
+      fontSize: theme.vars.fontSize.lg, //md
     }),
     zIndex: 1500,
     pointerEvents: "none",
     borderRadius: theme.vars.radius.xs,
-    boxShadow: theme.vars.shadow.sm,
+    // boxShadow: theme.vars.shadow.sm,
     fontFamily: theme.vars.fontFamily.body,
-    fontWeight: theme.vars.fontWeight.md,
+    fontWeight: theme.vars.fontWeight.sm, //md
     lineHeight: theme.vars.lineHeight.sm,
     wordWrap: "break-word",
     position: "relative",
@@ -239,7 +239,7 @@ const Tooltip = React.forwardRef(function Tooltip(inProps, ref) {
     open: openProp,
     placement = "bottom",
     title,
-    color = "neutral",
+    color = "primary",
     variant = "solid",
     size = "md",
     ...other
