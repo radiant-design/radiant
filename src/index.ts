@@ -22,6 +22,9 @@ export * from "./CardCover";
 export { default as CardOverflow } from "./CardOverflow";
 export * from "./CardOverflow";
 
+export { default as CircularProgress } from "./CircularProgress";
+export * from "./CircularProgress";
+
 export { default as Breadcrumbs } from "./Breadcrumbs";
 export * from "./Breadcrumbs";
 
@@ -33,6 +36,12 @@ export * from "./IconButton";
 
 export { default as Typography } from "./Typography";
 export * from "./Typography";
+
+export { default as CssBaseline } from "./CssBaseline";
+export * from "./CssBaseline";
+
+export { default as ScopedCssBaseline } from "./ScopedCssBaseline";
+export * from "./ScopedCssBaseline";
 
 export { default as Switch } from "./Switch";
 export * from "./Switch";
@@ -115,6 +124,9 @@ export * from "./TextField";
 export { default as Textarea } from "./Textarea";
 export * from "./Textarea";
 
+export { default as Tooltip } from "./Tooltip";
+export * from "./Tooltip";
+
 export { default as Box } from "./Box";
 export * from "./Box";
 
@@ -137,3 +149,6 @@ export * from "./MenuItem";
 
 export { default as MenuList } from "./MenuList";
 export * from "./MenuList";
+
+export { default as Grid } from "./Grid";
+export * from "./Grid";
