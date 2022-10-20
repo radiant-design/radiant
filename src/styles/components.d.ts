@@ -75,6 +75,11 @@ import {
 } from "../ScopedCssBaseline/ScopedCssBaselineProps";
 import { TextFieldProps, TextFieldSlot } from "../TextField/TextFieldProps";
 import { TypographyProps, TypographySlot } from "../Typography/TypographyProps";
+import {
+  TooltipProps,
+  TooltipOwnerState,
+  TooltipSlot,
+} from "../Tooltip/TooltipProps";
 import { ChipProps, ChipSlot } from "../Chip/ChipProps";
 import { ChipDeleteProps, ChipDeleteSlot } from "../ChipDelete/ChipDeleteProps";
 import { SliderProps, SliderSlot } from "../Slider/SliderProps";
@@ -355,6 +360,10 @@ export interface Components<Theme = unknown> {
       TypographyProps,
       Theme
     >;
+  };
+  RadTooltip?: {
+    defaultProps?: Partial<TooltipProps>;
+    styleOverrides?: OverridesStyleRules<TooltipSlot, TooltipOwnerState, Theme>;
   };
   RadMenu?: {
     defaultProps?: Partial<MenuProps>;
