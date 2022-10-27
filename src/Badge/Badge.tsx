@@ -165,7 +165,8 @@ const Badge = React.forwardRef(function Badge(inProps, ref) {
     badgeInset: badgeInsetProp = 0,
     className,
     component = "span",
-    components = {},
+    //@ts-ignore
+    components = {}, //@ts-ignore
     componentsProps = {},
     size: sizeProp = "md",
     color: colorProp = "primary",
@@ -224,6 +225,7 @@ const Badge = React.forwardRef(function Badge(inProps, ref) {
       : badgeContentProp;
 
   return (
+    //@ts-ignore
     <BadgeUnstyled
       ref={ref}
       invisible={invisibleProp}
@@ -358,7 +360,10 @@ Badge.propTypes /* remove-proptypes */ = {
    * The size of the component.
    * @default 'md'
    */
-  size: PropTypes.oneOf(["sm", "md", "lg"]),
+  size: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([
+    PropTypes.oneOf(["sm", "md", "lg"]),
+    PropTypes.string,
+  ]),
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */

@@ -76,10 +76,10 @@
   resolved "https://registry.npmjs.org/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@mui/base@^5.0.0-alpha.102":
-  version "5.0.0-alpha.102"
-  resolved "https://registry.yarnpkg.com/@mui/base/-/base-5.0.0-alpha.102.tgz#53b07d0b73d3afe1d2a3feb3b43c8188bb821796"
-  integrity sha512-5e/qAIP+DlkrZxIt/cwnDw/A3ii22WkoEoWKHyu4+oeGs3/1Flh7qLaN4h5EAIBB9TvTEZEUzvmsTInmIj6ghg==
+"@mui/base@^5.0.0-alpha.103":
+  version "5.0.0-alpha.103"
+  resolved "https://registry.yarnpkg.com/@mui/base/-/base-5.0.0-alpha.103.tgz#90a91d1eba29ffa0bb243b25e6b1db3a9b4beeda"
+  integrity sha512-fJIyB2df3CHn7D26WHnutnY7vew6aytTlhmRJz6GX7ag19zU2GcOUhJAzY5qwWcrXKnlYgzimhEjaEnuiUWU4g==
   dependencies:
     "@babel/runtime" "^7.19.0"
     "@emotion/is-prop-valid" "^1.2.0"
