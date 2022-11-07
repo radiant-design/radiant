@@ -1,4 +1,7 @@
-import { generateUtilityClass, generateUtilityClasses } from "@mui/base";
+import {
+  unstable_generateUtilityClass as generateUtilityClass,
+  unstable_generateUtilityClasses as generateUtilityClasses,
+} from "@mui/utils";
 
 export interface BreadcrumbsClasses {
   /** Styles applied to the root element. */
@@ -9,6 +12,12 @@ export interface BreadcrumbsClasses {
   li: string;
   /** Styles applied to the separator element. */
   separator: string;
+  /** Styles applied to the root element if `size="sm"`. */
+  sizeSm: string;
+  /** Styles applied to the root element if `size="md"`. */
+  sizeMd: string;
+  /** Styles applied to the root element if `size="lg"`. */
+  sizeLg: string;
 }
 
 export type BreadcrumbsClassKey = keyof BreadcrumbsClasses;
@@ -19,7 +28,7 @@ export function getBreadcrumbsUtilityClass(slot: string): string {
 
 const breadcrumbsClasses: BreadcrumbsClasses = generateUtilityClasses(
   "MuiBreadcrumbs",
-  ["root", "ol", "li", "separator"]
+  ["root", "ol", "li", "separator", "sizeSm", "sizeMd", "sizeLg"]
 );
 
 export default breadcrumbsClasses;

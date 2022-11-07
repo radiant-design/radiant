@@ -1,6 +1,11 @@
 import { OverridableStringUnion, OverrideProps } from "@mui/types";
 import * as React from "react";
-import { ColorPaletteProp, FontSize, SxProps } from "../styles/types";
+import {
+  ColorPaletteProp,
+  FontSize,
+  SxProps,
+  ApplyColorInversion,
+} from "../styles/types";
 import { SvgIconClasses } from "./svgIconClasses";
 
 export type SvgIconSlot = "root";
@@ -32,7 +37,10 @@ export interface SvgIconTypeMap<P = {}, D extends React.ElementType = "svg"> {
      * The fontSize applied to the icon. Defaults to 1rem, but can be configure to inherit font size.
      * @default 'xl'
      */
-    fontSize?: OverridableStringUnion<"inherit" | "lg" | "xl" | "xl2">;
+    fontSize?: OverridableStringUnion<
+      "inherit" | keyof FontSize,
+      SvgIconPropsSizeOverrides
+    >;
     /**
      * Applies a color attribute to the SVG element.
      */
@@ -79,3 +87,10 @@ export type SvgIconProps<
     component?: React.ElementType;
   }
 > = OverrideProps<SvgIconTypeMap<P, D>, D>;
+
+export interface SvgIconOwnerState extends ApplyColorInversion<SvgIconProps> {
+  /**
+   * The `size` specified explicitly on the instance.
+   */
+  instanceFontSize: SvgIconProps["fontSize"];
+}
