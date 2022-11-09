@@ -7,9 +7,13 @@ import * as React from "react";
 import styled from "../styles/styled";
 import useThemeProps from "../styles/useThemeProps";
 import { getSvgIconUtilityClass } from "./svgIconClasses";
-import { SvgIconProps, SvgIconTypeMap } from "./SvgIconProps";
+import {
+  SvgIconProps,
+  SvgIconTypeMap,
+  SvgIconOwnerState,
+} from "./SvgIconProps";
 
-const useUtilityClasses = (ownerState: SvgIconProps) => {
+const useUtilityClasses = (ownerState: SvgIconOwnerState) => {
   const { color, fontSize, classes } = ownerState;
 
   const slots = {
@@ -26,35 +30,34 @@ const useUtilityClasses = (ownerState: SvgIconProps) => {
 const SvgIconRoot = styled("svg", {
   name: "RadSvgIcon",
   slot: "Root",
-  overridesResolver: (props, styles) => styles.root,
-})<{
-  ownerState: SvgIconProps & { instanceFontSize: SvgIconProps["fontSize"] };
-}>(({ theme, ownerState }) => {
-  return {
-    ...(ownerState.instanceFontSize &&
-      ownerState.instanceFontSize !== "inherit" && {
-        "--Icon-fontSize": theme.vars.fontSize[ownerState.instanceFontSize],
-      }),
-    userSelect: "none",
-    margin: "var(--Icon-margin)",
-    width: "1em",
-    height: "1em",
-    display: "inline-block",
-    fill: "currentColor",
-    flexShrink: 0,
-    transition: "fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
-    ...(ownerState.fontSize &&
-      ownerState.fontSize !== "inherit" && {
-        fontSize: `var(--Icon-fontSize, ${
-          theme.fontSize[ownerState.fontSize]
-        })`,
-      }),
-    color:
-      ownerState.color !== "inherit" && theme.vars.palette[ownerState.color!]
-        ? theme.vars.palette[ownerState.color!].plainColor
-        : "var(--Icon-color)",
-  };
-});
+  overridesResolver: (_props, styles) => styles.root,
+})<{ ownerState: SvgIconOwnerState }>(({ theme, ownerState }) => ({
+  ...(ownerState.instanceFontSize &&
+    ownerState.instanceFontSize !== "inherit" && {
+      "--Icon-fontSize": theme.vars.fontSize[ownerState.instanceFontSize],
+    }),
+  userSelect: "none",
+  margin: "var(--Icon-margin)",
+  width: "1em",
+  height: "1em",
+  display: "inline-block",
+  fill: "currentColor",
+  flexShrink: 0,
+  transition: "fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+  ...(ownerState.fontSize &&
+    ownerState.fontSize !== "inherit" && {
+      fontSize: `var(--Icon-fontSize, ${theme.fontSize[ownerState.fontSize]})`,
+    }),
+  color: "var(--Icon-color)",
+  ...(ownerState.color !== "inherit" &&
+    ownerState.color !== "context" &&
+    theme.vars.palette[ownerState.color!] && {
+      color: theme.vars.palette[ownerState.color!].plainColor,
+    }),
+  ...(ownerState.color === "context" && {
+    color: theme.variants.plain?.[ownerState.color!]?.color,
+  }),
+}));
 
 const SvgIcon = React.forwardRef(function SvgIcon(inProps, ref) {
   const props = useThemeProps<typeof inProps & SvgIconProps>({
@@ -91,7 +94,6 @@ const SvgIcon = React.forwardRef(function SvgIcon(inProps, ref) {
     <SvgIconRoot
       as={component}
       className={clsx(classes.root, className)}
-      ownerState={ownerState}
       focusable="false"
       color={htmlColor}
       aria-hidden={titleAccess ? undefined : true}
@@ -99,6 +101,7 @@ const SvgIcon = React.forwardRef(function SvgIcon(inProps, ref) {
       ref={ref}
       {...other}
       {...(!inheritViewBox && { viewBox })}
+      ownerState={ownerState}
     >
       {children}
       {titleAccess ? <title>{titleAccess}</title> : null}
@@ -149,7 +152,22 @@ SvgIcon.propTypes /* remove-proptypes */ = {
    * The fontSize applied to the icon. Defaults to 1rem, but can be configure to inherit font size.
    * @default 'xl'
    */
-  fontSize: PropTypes.oneOf(["lg", "xl", "xl2"]),
+  fontSize: PropTypes.oneOf([
+    "inherit",
+    "lg",
+    "md",
+    "sm",
+    "xl",
+    "xl2",
+    "xl3",
+    "xl4",
+    "xl5",
+    "xl6",
+    "xl7",
+    "xs",
+    "xs2",
+    "xs3",
+  ]),
   /**
    * Applies a color attribute to the SVG element.
    */

@@ -195,8 +195,7 @@ const TextareaInput = styled(TextareaAutosize, {
   lineHeight: "inherit",
   "&:-webkit-autofill": {
     WebkitBackgroundClip: "text", // remove autofill background
-    WebkitTextFillColor:
-      theme.vars.palette[ownerState.color!]?.overrideTextPrimary,
+    WebkitTextFillColor: "currentColor",
   },
   "&::-webkit-input-placeholder": {
     opacity: "var(--Textarea-placeholderOpacity)",

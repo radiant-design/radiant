@@ -19,15 +19,20 @@ export interface SheetTypeMap<P = {}, D extends React.ElementType = "div"> {
      */
     color?: OverridableStringUnion<ColorPaletteProp, SheetPropsColorOverrides>;
     /**
+     * If `true`, the children with an implicit color prop invert their colors to match the component's variant and color.
+     * @default false
+     */
+    invertedColors?: boolean;
+    /**
      * The system prop that allows defining system overrides as well as additional CSS styles.
      */
     sx?: SxProps;
-    shadow?: OverridableStringUnion<"sm" | "md" | "lg">;
     /**
      * The variant to use.
      * @default 'plain'
      */
     variant?: OverridableStringUnion<VariantProp, SheetPropsVariantOverrides>;
+    shadow?: "sm" | "md" | "lg";
   };
   defaultComponent: D;
 }
@@ -36,3 +41,5 @@ export type SheetProps<
   D extends React.ElementType = SheetTypeMap["defaultComponent"],
   P = { component?: React.ElementType }
 > = OverrideProps<SheetTypeMap<P, D>, D>;
+
+export interface SheetOwnerState extends SheetProps {}

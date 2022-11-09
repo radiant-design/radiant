@@ -16,15 +16,15 @@ import {
 } from "./types/colorSystem";
 import { Focus } from "./types/focus";
 import { TypographySystem, FontSize } from "./types/typography";
-import { Variants } from "./types/variants";
+import {
+  Variants,
+  VariantOverrides,
+  ColorInversionConfig,
+} from "./types/variants";
 import { Theme, ThemeCssVar, ThemeScales } from "./types";
 import { Components } from "./components";
 import { generateUtilityClass } from "../className";
-import {
-  createVariant,
-  createTextOverrides,
-  createContainedOverrides,
-} from "./variantUtils";
+import { createVariant } from "./variantUtils";
 
 type Partial2Level<T> = {
   [K in keyof T]?: T[K] extends Record<any, any>
@@ -62,6 +62,8 @@ export interface CssVarsThemeOptions extends Partial2Level<ThemeScales> {
   focus?: Partial<Focus>;
   typography?: Partial<TypographySystem>;
   variants?: Partial2Level<Variants>;
+  colorInversion?: Partial2Level<VariantOverrides>;
+  colorInversionConfig?: ColorInversionConfig;
   breakpoints?: BreakpointsOptions;
   spacing?: SpacingOptions;
   components?: Components<Theme>;
@@ -112,9 +114,9 @@ export default function extendTheme(themeOptions?: CssVarsThemeOptions): Theme {
     solidDisabledColor: `#A1A1A1`, // `#fff`,
     solidDisabledBg: `#F2F2F2`, // getCssVar(`palette-${color}-200`),
 
-    overrideTextPrimary: getCssVar(`palette-${color}-700`),
-    overrideTextSecondary: getCssVar(`palette-${color}-500`),
-    overrideTextTertiary: getCssVar(`palette-${color}-400`),
+    // overrideTextPrimary: getCssVar(`palette-${color}-700`),
+    // overrideTextSecondary: getCssVar(`palette-${color}-500`),
+    // overrideTextTertiary: getCssVar(`palette-${color}-400`),
   });
 
   const createDarkModeVariantVariables = (color: ColorPaletteProp) => ({
@@ -145,9 +147,9 @@ export default function extendTheme(themeOptions?: CssVarsThemeOptions): Theme {
     solidDisabledColor: `#fff`,
     solidDisabledBg: getCssVar(`palette-${color}-300`),
 
-    overrideTextPrimary: getCssVar(`palette-${color}-200`),
-    overrideTextSecondary: getCssVar(`palette-${color}-400`),
-    overrideTextTertiary: getCssVar(`palette-${color}-500`),
+    // overrideTextPrimary: getCssVar(`palette-${color}-200`),
+    // overrideTextSecondary: getCssVar(`palette-${color}-400`),
+    // overrideTextTertiary: getCssVar(`palette-${color}-500`),
   });
 
   const lightColorSystem = {
@@ -189,9 +191,9 @@ export default function extendTheme(themeOptions?: CssVarsThemeOptions): Theme {
         solidDisabledColor: getCssVar(`palette-neutral-300`),
         solidDisabledBg: getCssVar(`palette-neutral-100`), //50
 
-        overrideTextPrimary: getCssVar(`palette-neutral-700`),
-        overrideTextSecondary: getCssVar(`palette-neutral-500`),
-        overrideTextTertiary: getCssVar(`palette-neutral-400`),
+        // overrideTextPrimary: getCssVar(`palette-neutral-700`),
+        // overrideTextSecondary: getCssVar(`palette-neutral-500`),
+        // overrideTextTertiary: getCssVar(`palette-neutral-400`),
       },
       danger: {
         ...colors.red,
@@ -288,9 +290,9 @@ export default function extendTheme(themeOptions?: CssVarsThemeOptions): Theme {
         solidDisabledColor: getCssVar(`palette-neutral-700`),
         solidDisabledBg: getCssVar(`palette-neutral-900`),
 
-        overrideTextPrimary: getCssVar(`palette-neutral-200`),
-        overrideTextSecondary: getCssVar(`palette-neutral-400`),
-        overrideTextTertiary: getCssVar(`palette-neutral-500`),
+        // overrideTextPrimary: getCssVar(`palette-neutral-200`),
+        // overrideTextSecondary: getCssVar(`palette-neutral-400`),
+        // overrideTextTertiary: getCssVar(`palette-neutral-500`),
       },
       danger: {
         ...colors.red,
@@ -609,7 +611,7 @@ export default function extendTheme(themeOptions?: CssVarsThemeOptions): Theme {
     Object.entries(colorSchemes)[0][1];
   const variantInput = {
     palette: firstColorSchemePalette,
-    prefix: cssVarPrefix,
+    cssVarPrefix,
     getCssVar,
   };
 
@@ -639,9 +641,14 @@ export default function extendTheme(themeOptions?: CssVarsThemeOptions): Theme {
                     })`,
                   }),
                 ...(ownerState.color &&
-                  ownerState.color !== "inherit" && {
-                    color: themeProp.vars.palette[ownerState.color]?.plainColor,
+                  ownerState.color !== "inherit" &&
+                  ownerState.color !== "context" &&
+                  themeProp.vars.palette[ownerState.color!] && {
+                    color: themeProp.vars.palette[ownerState.color].plainColor,
                   }),
+                ...(ownerState.color === "context" && {
+                  color: theme.variants.plain?.context?.color,
+                }),
                 ...(instanceFontSize &&
                   instanceFontSize !== "inherit" && {
                     "--Icon-fontSize":
@@ -673,16 +680,20 @@ export default function extendTheme(themeOptions?: CssVarsThemeOptions): Theme {
         solidActive: createVariant("solidActive", variantInput),
         solidDisabled: createVariant("solidDisabled", variantInput),
         // variant overrides
-        plainOverrides: createTextOverrides(variantInput),
-        outlinedOverrides: createTextOverrides(variantInput),
-        softOverrides: createTextOverrides(variantInput),
-        solidOverrides: createContainedOverrides(variantInput),
+        // plainOverrides: createTextOverrides(variantInput),
+        // outlinedOverrides: createTextOverrides(variantInput),
+        // softOverrides: createTextOverrides(variantInput),
+        // solidOverrides: createContainedOverrides(variantInput),
       },
       variantsInput
     ),
     cssVarPrefix,
     getCssVar,
     spacing: createSpacing(spacing),
+    colorInversionConfig: {
+      soft: ["plain", "outlined", "soft", "solid"],
+      solid: ["plain", "outlined", "soft", "solid"],
+    },
   } as unknown as Theme; // Need type casting due to module augmentation inside the repo
 
   /**
@@ -696,7 +707,7 @@ export default function extendTheme(themeOptions?: CssVarsThemeOptions): Theme {
         // Need type casting due to module augmentation inside the repo
         main: "500" as keyof PaletteRange,
         light: "200" as keyof PaletteRange,
-        dark: "900" as keyof PaletteRange,
+        dark: "800" as keyof PaletteRange,
       };
       if (!palette[key].mainChannel && palette[key][channelMapping.main]) {
         palette[key].mainChannel = colorChannel(

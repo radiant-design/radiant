@@ -8,6 +8,7 @@ import {
   unstable_useForkRef as useForkRef,
 } from "@mui/utils";
 import { styled, useThemeProps } from "../styles";
+import { useColorInversion } from "../styles/ColorInversion";
 import CircularProgress from "../CircularProgress";
 import buttonClasses, { getButtonUtilityClass } from "./buttonClasses";
 import { ButtonOwnerState, ButtonTypeMap, ExtendButton } from "./ButtonProps";
@@ -185,7 +186,7 @@ const Button = React.forwardRef(function Button(inProps, ref) {
     action,
     component = "button",
     componentsProps = {},
-    color = "primary",
+    color: colorProp = "primary",
     variant = "solid",
     size = "md",
     fullWidth = false,
@@ -197,14 +198,18 @@ const Button = React.forwardRef(function Button(inProps, ref) {
     disabled,
     ...other
   } = props as any;
+  const { getColor } = useColorInversion(variant); //@ts-ignore
+  const color = getColor(inProps.color, colorProp);
 
   const buttonRef = React.useRef<HTMLElement | null>(null);
   const handleRef = useForkRef(buttonRef, ref);
 
   const { focusVisible, setFocusVisible, getRootProps } = useButton({
     ...props,
+    disabled: disabled || loading,
     ref: handleRef,
   });
+
   const loadingIndicator = loadingIndicatorProp ?? (
     <CircularProgress
       color={color}
@@ -287,6 +292,7 @@ const Button = React.forwardRef(function Button(inProps, ref) {
           {loadingIndicator}
         </ButtonLoadingCenter>
       )}
+
       {(endDecorator || (loading && loadingPosition === "end")) && (
         <ButtonEndDecorator {...endDecoratorProps}>
           {loading && loadingPosition === "end"
