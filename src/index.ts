@@ -76,6 +76,9 @@ export * from "./Link";
 export { default as List } from "./List";
 export * from "./List";
 
+export { default as LinearProgress } from "./LinearProgress";
+export * from "./LinearProgress";
+
 export { default as ListDivider } from "./ListDivider";
 export * from "./ListDivider";
 
