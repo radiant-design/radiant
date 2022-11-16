@@ -1,5 +1,4 @@
-import { OverridableStringUnion } from "@mui/types";
-
+import { OverridableStringUnion, Simplify } from "@mui/types";
 /**
  * ====================================================
  * Developer facing types, they can augment these types.
@@ -71,9 +70,9 @@ export interface PaletteVariant {
   solidDisabledBorder: string;
 
   // override palette.text
-  overrideTextPrimary: string;
-  overrideTextSecondary: string;
-  overrideTextTertiary: string;
+  // overrideTextPrimary: string;
+  // overrideTextSecondary: string;
+  // overrideTextTertiary: string;
 }
 
 export interface PaletteRangeOverrides {}
@@ -162,3 +161,11 @@ export interface ColorSystem {
   shadowRing: string;
   shadowChannel: string;
 }
+
+export type ApplyColorInversion<
+  T extends { color?: ColorPaletteProp | "inherit" }
+> = Simplify<
+  Omit<T, "color"> & {
+    color: T["color"] | "context";
+  }
+>;

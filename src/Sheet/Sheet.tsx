@@ -9,6 +9,10 @@ import styled from "../styles/styled";
 import { resolveSxValue } from "../styles/styleUtils";
 import { getSheetUtilityClass } from "./sheetClasses";
 import { SheetProps, SheetTypeMap } from "./SheetProps";
+import {
+  ColorInversionProvider,
+  useColorInversion,
+} from "../styles/ColorInversion";
 
 const useUtilityClasses = (ownerState: SheetProps) => {
   const { variant, color } = ownerState;
@@ -27,7 +31,7 @@ const useUtilityClasses = (ownerState: SheetProps) => {
 export const SheetRoot = styled("div", {
   name: "RadSheet",
   slot: "Root",
-  overridesResolver: (props, styles) => styles.root,
+  overridesResolver: (_props, styles) => styles.root,
 })<{ ownerState: SheetProps }>(({ theme, ownerState }) => {
   const variantStyle = theme.variants[ownerState.variant!]?.[ownerState.color!];
   const childRadius = resolveSxValue({ theme, ownerState }, "borderRadius");
@@ -62,23 +66,26 @@ const Sheet = React.forwardRef(function Sheet(inProps, ref) {
 
   const {
     className,
-    color = "neutral",
+    color: colorProp = "neutral",
     component = "div",
     variant = "plain",
-    shadow = "md",
+    invertedColors = false,
     ...other
   } = props;
+  const { getColor } = useColorInversion(variant);
+  const color = getColor(inProps.color, colorProp);
 
   const ownerState = {
     ...props,
     color,
     component,
+    invertedColors,
     variant,
   };
 
   const classes = useUtilityClasses(ownerState);
 
-  return (
+  const result = (
     <SheetRoot
       as={component}
       ownerState={ownerState}
@@ -87,6 +94,14 @@ const Sheet = React.forwardRef(function Sheet(inProps, ref) {
       {...other}
     />
   );
+  if (invertedColors) {
+    return (
+      <ColorInversionProvider variant={variant}>
+        {result}
+      </ColorInversionProvider>
+    );
+  }
+  return result;
 }) as OverridableComponent<SheetTypeMap>;
 
 Sheet.propTypes /* remove-proptypes */ = {
@@ -123,6 +138,11 @@ Sheet.propTypes /* remove-proptypes */ = {
    */
   component: PropTypes.elementType,
   /**
+   * If `true`, the children with an implicit color prop invert their colors to match the component's variant and color.
+   * @default false
+   */
+  invertedColors: PropTypes.bool,
+  /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
   sx: PropTypes.oneOfType([
@@ -140,6 +160,9 @@ Sheet.propTypes /* remove-proptypes */ = {
     PropTypes.oneOf(["outlined", "plain", "soft", "solid"]),
     PropTypes.string,
   ]),
+  shadow: PropTypes.oneOfType([
+    PropTypes.oneOf(["sm", "md", "lg"]),
+    PropTypes.string,
+  ]),
 } as any;
-
 export default Sheet;

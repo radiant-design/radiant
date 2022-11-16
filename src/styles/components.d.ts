@@ -41,6 +41,11 @@ import {
 import { FormLabelProps, FormLabelSlot } from "../FormLabel/FormLabelProps";
 import { IconButtonProps, IconButtonSlot } from "../IconButton/IconButtonProps";
 import { InputProps, InputSlot } from "../Input/InputProps";
+import {
+  LinearProgressProps,
+  LinearProgressOwnerState,
+  LinearProgressSlot,
+} from "../LinearProgress/LinearProgressProps";
 import { LinkProps, LinkSlot } from "../Link/LinkProps";
 import { ListProps, ListSlot } from "../List/ListProps";
 import {
@@ -246,6 +251,14 @@ export interface Components<Theme = unknown> {
   RadLink?: {
     defaultProps?: Partial<LinkProps>;
     styleOverrides?: OverridesStyleRules<LinkSlot, LinkProps, Theme>;
+  };
+  RadCircularProgress?: {
+    defaultProps?: Partial<LinearProgressProps>;
+    styleOverrides?: OverridesStyleRules<
+      LinearProgressSlot,
+      LinearProgressOwnerState,
+      Theme
+    >;
   };
   RadList?: {
     defaultProps: Partial<ListProps>;

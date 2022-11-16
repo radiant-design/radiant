@@ -159,8 +159,7 @@ const InputInput = styled("input", {
     fontSize: "0.875rem", //inherit
     "&:-webkit-autofill": {
       WebkitBackgroundClip: "text", // remove autofill background
-      WebkitTextFillColor:
-        theme.vars.palette[ownerState.color!]?.overrideTextPrimary,
+      WebkitTextFillColor: "currentColor",
     },
     "&::-webkit-input-placeholder": {
       opacity: "var(--Input-placeholderOpacity)",

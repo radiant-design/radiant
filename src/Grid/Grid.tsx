@@ -11,7 +11,7 @@ const Grid = createGrid({
   }),
   componentName: "RadGrid",
   useThemeProps: (inProps) =>
-    useThemeProps({ props: inProps, name: "RadGrid" }),
+    useThemeProps({ props: inProps, name: "JoyGrid" }),
 }) as OverridableComponent<GridTypeMap>;
 
 Grid.propTypes /* remove-proptypes */ = {
