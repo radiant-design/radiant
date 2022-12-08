@@ -18,6 +18,16 @@ const __dirname = dirname(__filename);
             }
         }
     `
+    const sampleComponent2 = `
+        import React, { Component } from 'react';
+        import { ButtonTypeMap } from '../../src/Button/ButtonProps';
+    
+        export class Button extends Component<ButtonTypeMap<{}>['props'], {}> {
+            render() {
+                return <div>Test</div>;
+            }
+        }
+    `
     const __rootdir = resolvePath(__dirname, '../')
     const directories = readdirSync(resolvePath(__rootdir, 'src'))
     DIRECTORIES.forEach(dir => {
@@ -31,7 +41,9 @@ const __dirname = dirname(__filename);
             const files = readdirSync(resolvePath(__rootdir, 'src', dir))
             if (files.includes(`${dir}Props.ts`)) {
                 const filepath = resolvePath(__dirname, 'tmpf', `${dir}.tsx`)
-                writeFileSync(filepath, sampleComponent.replaceAll('Button', dir))
+                if(dir === "Select") writeFileSync(filepath, sampleComponent2.replaceAll('Button', dir))
+                else writeFileSync(filepath, sampleComponent.replaceAll('Button', dir))
+                // writeFileSync(filepath, sampleComponent.replaceAll('Button', dir))
                 const doc = docgen.parse(filepath)
                 writeFileSync(resolvePath(__dirname, `assets/${dir}.json`), JSON.stringify(doc[0], null, 1))
             }
