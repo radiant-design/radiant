@@ -1,7 +1,5 @@
-import {
-  unstable_generateUtilityClass as generateUtilityClass,
-  unstable_generateUtilityClasses as generateUtilityClasses,
-} from "@mui/utils";
+import { generateUtilityClass, generateUtilityClasses } from "../className";
+
 
 export interface BreadcrumbsClasses {
   /** Styles applied to the root element. */
