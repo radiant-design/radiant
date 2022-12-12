@@ -185,7 +185,7 @@ export default function extendTheme(themeOptions?: CssVarsThemeOptions): Theme {
         softDisabledBg: getCssVar(`palette-neutral-50`),
 
         solidColor: getCssVar(`palette-common-white`),
-        solidBg: getCssVar(`palette-neutral-100`), //600
+        solidBg: getCssVar(`palette-neutral-600`), //600
         solidHoverBg: getCssVar(`palette-neutral-700`),
         solidActiveBg: getCssVar(`palette-neutral-800`),
         solidDisabledColor: getCssVar(`palette-neutral-300`),

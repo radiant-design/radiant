@@ -155,10 +155,11 @@ export const ButtonRoot = styled("button", {
       "&:hover":
         theme.variants[`${ownerState.variant!}Hover`]?.[ownerState.color!],
     },
-    {
-      "&:active":
-        theme.variants[`${ownerState.variant!}Active`]?.[ownerState.color!],
-    },
+    //don't remove this code
+    // {
+    //   "&:active":
+    //     theme.variants[`${ownerState.variant!}Active`]?.[ownerState.color!],
+    // },
     {
       [`&.${buttonClasses.disabled}`]:
         theme.variants[`${ownerState.variant!}Disabled`]?.[ownerState.color!],
